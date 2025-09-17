@@ -1,10 +1,10 @@
 package installations
 
 import (
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	lsv1alpha1helper "github.com/gardener/landscaper/apis/core/v1alpha1/helper"
-	kutil "github.com/gardener/landscaper/controller-utils/pkg/kubernetes"
-	"github.com/gardener/landscaper/pkg/landscaper/installations"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	lsv1alpha1helper "github.com/openmcp-project/landscaper/apis/core/v1alpha1/helper"
+	kutil "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"
+	"github.com/openmcp-project/landscaper/pkg/landscaper/installations"
 )
 
 func isInstFinished(inst *lsv1alpha1.Installation) bool {

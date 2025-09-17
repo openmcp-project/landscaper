@@ -11,9 +11,9 @@ import (
 	. "github.com/onsi/gomega"
 	. "github.com/onsi/gomega/gstruct"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	"github.com/gardener/landscaper/pkg/components/model/componentoverwrites"
-	testutils "github.com/gardener/landscaper/test/utils"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	"github.com/openmcp-project/landscaper/pkg/components/model/componentoverwrites"
+	testutils "github.com/openmcp-project/landscaper/test/utils"
 )
 
 func TestConfig(t *testing.T) {

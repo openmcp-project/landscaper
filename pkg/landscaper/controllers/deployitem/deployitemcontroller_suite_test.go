@@ -9,12 +9,12 @@ import (
 	"testing"
 	"time"
 
-	lscore "github.com/gardener/landscaper/apis/core"
+	lscore "github.com/openmcp-project/landscaper/apis/core"
 
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 
-	"github.com/gardener/landscaper/test/utils/envtest"
+	"github.com/openmcp-project/landscaper/test/utils/envtest"
 )
 
 func TestConfig(t *testing.T) {

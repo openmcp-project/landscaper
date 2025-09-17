@@ -32,13 +32,13 @@ import (
 	"k8s.io/client-go/tools/clientcmd"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	utils2 "github.com/gardener/landscaper/hack/testcluster/pkg/utils"
-	lsscheme "github.com/gardener/landscaper/pkg/api"
-	utils3 "github.com/gardener/landscaper/pkg/utils"
-	"github.com/gardener/landscaper/test/utils"
-	"github.com/gardener/landscaper/test/utils/envtest"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	utils2 "github.com/openmcp-project/landscaper/hack/testcluster/pkg/utils"
+	lsscheme "github.com/openmcp-project/landscaper/pkg/api"
+	utils3 "github.com/openmcp-project/landscaper/pkg/utils"
+	"github.com/openmcp-project/landscaper/test/utils"
+	"github.com/openmcp-project/landscaper/test/utils/envtest"
 )
 
 var (

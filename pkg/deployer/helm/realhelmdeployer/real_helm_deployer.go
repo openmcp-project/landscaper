@@ -30,16 +30,16 @@ import (
 	"k8s.io/client-go/rest"
 	"sigs.k8s.io/yaml"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	helmv1alpha1 "github.com/gardener/landscaper/apis/deployer/helm/v1alpha1"
-	"github.com/gardener/landscaper/apis/deployer/utils/managedresource"
-	lserrors "github.com/gardener/landscaper/apis/errors"
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	lc "github.com/gardener/landscaper/controller-utils/pkg/logging/constants"
-	"github.com/gardener/landscaper/pkg/deployer/lib"
-	"github.com/gardener/landscaper/pkg/deployer/lib/readinesscheck"
-	"github.com/gardener/landscaper/pkg/deployer/lib/resourcemanager"
-	"github.com/gardener/landscaper/pkg/deployer/lib/timeout"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	helmv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/helm/v1alpha1"
+	"github.com/openmcp-project/landscaper/apis/deployer/utils/managedresource"
+	lserrors "github.com/openmcp-project/landscaper/apis/errors"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	lc "github.com/openmcp-project/landscaper/controller-utils/pkg/logging/constants"
+	"github.com/openmcp-project/landscaper/pkg/deployer/lib"
+	"github.com/openmcp-project/landscaper/pkg/deployer/lib/readinesscheck"
+	"github.com/openmcp-project/landscaper/pkg/deployer/lib/resourcemanager"
+	"github.com/openmcp-project/landscaper/pkg/deployer/lib/timeout"
 )
 
 const (

@@ -7,15 +7,15 @@ package app
 import (
 	goflag "flag"
 
-	"github.com/gardener/landscaper/apis/core"
+	"github.com/openmcp-project/landscaper/apis/core"
 
 	flag "github.com/spf13/pflag"
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	webhooklib "github.com/gardener/landscaper/controller-utils/pkg/webhook"
-	webhook "github.com/gardener/landscaper/pkg/utils/webhook"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	webhooklib "github.com/openmcp-project/landscaper/controller-utils/pkg/webhook"
+	webhook "github.com/openmcp-project/landscaper/pkg/utils/webhook"
 )
 
 var landscaperSkipValidationSelector = &metav1.LabelSelector{

@@ -10,9 +10,9 @@ import (
 
 	"github.com/spf13/cobra"
 
-	lc "github.com/gardener/landscaper/controller-utils/pkg/logging/constants"
-	containerctlr "github.com/gardener/landscaper/pkg/deployer/container"
-	"github.com/gardener/landscaper/pkg/version"
+	lc "github.com/openmcp-project/landscaper/controller-utils/pkg/logging/constants"
+	containerctlr "github.com/openmcp-project/landscaper/pkg/deployer/container"
+	"github.com/openmcp-project/landscaper/pkg/version"
 )
 
 func NewContainerDeployerControllerCommand(ctx context.Context) *cobra.Command {

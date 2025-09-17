@@ -9,11 +9,11 @@ import (
 	"k8s.io/apimachinery/pkg/conversion"
 	"k8s.io/apimachinery/pkg/runtime"
 
-	"github.com/gardener/landscaper/apis/deployer/utils/managedresource"
+	"github.com/openmcp-project/landscaper/apis/deployer/utils/managedresource"
 
-	lscore "github.com/gardener/landscaper/apis/core"
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	manifestcore "github.com/gardener/landscaper/apis/deployer/manifest"
+	lscore "github.com/openmcp-project/landscaper/apis/core"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	manifestcore "github.com/openmcp-project/landscaper/apis/deployer/manifest"
 )
 
 // Convert_v1alpha1_ProviderConfiguration_To_manifest_ProviderConfiguration is an manual conversion function.

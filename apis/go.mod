@@ -1,4 +1,4 @@
-module github.com/gardener/landscaper/apis
+module github.com/openmcp-project/landscaper/apis
 
 go 1.25.1
 

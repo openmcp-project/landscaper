@@ -15,7 +15,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/gardener/landscaper/pkg/components/model"
+	"github.com/openmcp-project/landscaper/pkg/components/model"
 
 	cdv2 "github.com/gardener/component-spec/bindings-go/apis/v2"
 	. "github.com/onsi/ginkgo/v2"
@@ -25,14 +25,14 @@ import (
 	"ocm.software/ocm/api/ocm"
 	"ocm.software/ocm/api/utils/runtime"
 
-	"github.com/gardener/landscaper/apis/config"
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	helmv1alpha1 "github.com/gardener/landscaper/apis/deployer/helm/v1alpha1"
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	"github.com/gardener/landscaper/pkg/components/registries"
-	"github.com/gardener/landscaper/pkg/landscaper/installations/executions/template/gotemplate"
-	"github.com/gardener/landscaper/pkg/utils/blueprints"
-	utils "github.com/gardener/landscaper/test/utils"
+	"github.com/openmcp-project/landscaper/apis/config"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	helmv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/helm/v1alpha1"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	"github.com/openmcp-project/landscaper/pkg/components/registries"
+	"github.com/openmcp-project/landscaper/pkg/landscaper/installations/executions/template/gotemplate"
+	"github.com/openmcp-project/landscaper/pkg/utils/blueprints"
+	utils "github.com/openmcp-project/landscaper/test/utils"
 )
 
 var (

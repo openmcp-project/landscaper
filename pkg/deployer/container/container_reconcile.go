@@ -13,7 +13,7 @@ import (
 
 	"github.com/distribution/reference"
 
-	"github.com/gardener/landscaper/pkg/components/model"
+	"github.com/openmcp-project/landscaper/pkg/components/model"
 
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
@@ -30,22 +30,22 @@ import (
 	"k8s.io/utils/ptr"
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	lsv1alpha1helper "github.com/gardener/landscaper/apis/core/v1alpha1/helper"
-	"github.com/gardener/landscaper/apis/deployer/container"
-	containerv1alpha1 "github.com/gardener/landscaper/apis/deployer/container/v1alpha1"
-	lserrors "github.com/gardener/landscaper/apis/errors"
-	kutil "github.com/gardener/landscaper/controller-utils/pkg/kubernetes"
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	lc "github.com/gardener/landscaper/controller-utils/pkg/logging/constants"
-	"github.com/gardener/landscaper/pkg/api"
-	"github.com/gardener/landscaper/pkg/components/registries"
-	"github.com/gardener/landscaper/pkg/deployer/lib"
-	"github.com/gardener/landscaper/pkg/deployer/lib/timeout"
-	"github.com/gardener/landscaper/pkg/deployerlegacy"
-	"github.com/gardener/landscaper/pkg/landscaper/blueprints"
-	"github.com/gardener/landscaper/pkg/utils"
-	"github.com/gardener/landscaper/pkg/utils/read_write_layer"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	lsv1alpha1helper "github.com/openmcp-project/landscaper/apis/core/v1alpha1/helper"
+	"github.com/openmcp-project/landscaper/apis/deployer/container"
+	containerv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/container/v1alpha1"
+	lserrors "github.com/openmcp-project/landscaper/apis/errors"
+	kutil "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	lc "github.com/openmcp-project/landscaper/controller-utils/pkg/logging/constants"
+	"github.com/openmcp-project/landscaper/pkg/api"
+	"github.com/openmcp-project/landscaper/pkg/components/registries"
+	"github.com/openmcp-project/landscaper/pkg/deployer/lib"
+	"github.com/openmcp-project/landscaper/pkg/deployer/lib/timeout"
+	"github.com/openmcp-project/landscaper/pkg/deployerlegacy"
+	"github.com/openmcp-project/landscaper/pkg/landscaper/blueprints"
+	"github.com/openmcp-project/landscaper/pkg/utils"
+	"github.com/openmcp-project/landscaper/pkg/utils/read_write_layer"
 )
 
 // Reconcile handles the reconcile flow for a container deploy item.

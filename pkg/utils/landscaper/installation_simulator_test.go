@@ -20,15 +20,15 @@ import (
 	"ocm.software/ocm/api/ocm"
 	"sigs.k8s.io/yaml"
 
-	"github.com/gardener/landscaper/apis/config"
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	"github.com/gardener/landscaper/apis/core/v1alpha1/targettypes"
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	"github.com/gardener/landscaper/pkg/components/model"
-	"github.com/gardener/landscaper/pkg/components/model/types"
-	"github.com/gardener/landscaper/pkg/components/registries"
-	"github.com/gardener/landscaper/pkg/utils/blueprints"
-	lsutils "github.com/gardener/landscaper/pkg/utils/landscaper"
+	"github.com/openmcp-project/landscaper/apis/config"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	"github.com/openmcp-project/landscaper/apis/core/v1alpha1/targettypes"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	"github.com/openmcp-project/landscaper/pkg/components/model"
+	"github.com/openmcp-project/landscaper/pkg/components/model/types"
+	"github.com/openmcp-project/landscaper/pkg/components/registries"
+	"github.com/openmcp-project/landscaper/pkg/utils/blueprints"
+	lsutils "github.com/openmcp-project/landscaper/pkg/utils/landscaper"
 )
 
 type TestSimulatorCallbacks struct {

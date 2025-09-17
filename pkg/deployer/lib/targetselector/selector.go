@@ -9,7 +9,7 @@ import (
 
 	"k8s.io/apimachinery/pkg/labels"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 )
 
 // MatchAll checks if the given targets matches all selectors.

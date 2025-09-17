@@ -9,12 +9,12 @@ import (
 	"errors"
 	"time"
 
-	"github.com/gardener/landscaper/hack/testcluster/pkg/utils"
+	"github.com/openmcp-project/landscaper/hack/testcluster/pkg/utils"
 
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 
-	"github.com/gardener/landscaper/hack/testcluster/pkg"
+	"github.com/openmcp-project/landscaper/hack/testcluster/pkg"
 )
 
 func NewCreateShootClusterCommand(ctx context.Context) *cobra.Command {

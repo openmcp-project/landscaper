@@ -10,13 +10,13 @@ import (
 
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	"github.com/gardener/landscaper/apis/deployer/container"
-	containerv1alpha1 "github.com/gardener/landscaper/apis/deployer/container/v1alpha1"
-	crval "github.com/gardener/landscaper/apis/deployer/utils/continuousreconcile/validation"
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	cr "github.com/gardener/landscaper/pkg/deployer/lib/continuousreconcile"
-	"github.com/gardener/landscaper/pkg/deployer/lib/extension"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	"github.com/openmcp-project/landscaper/apis/deployer/container"
+	containerv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/container/v1alpha1"
+	crval "github.com/openmcp-project/landscaper/apis/deployer/utils/continuousreconcile/validation"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	cr "github.com/openmcp-project/landscaper/pkg/deployer/lib/continuousreconcile"
+	"github.com/openmcp-project/landscaper/pkg/deployer/lib/extension"
 )
 
 const (

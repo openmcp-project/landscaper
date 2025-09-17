@@ -9,7 +9,7 @@ import (
 
 	"k8s.io/apimachinery/pkg/util/sets"
 
-	"github.com/gardener/landscaper/pkg/utils/dependencies/queue"
+	"github.com/openmcp-project/landscaper/pkg/utils/dependencies/queue"
 )
 
 type graph struct {

@@ -9,11 +9,11 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/gardener/landscaper/hack/testcluster/pkg/utils"
+	"github.com/openmcp-project/landscaper/hack/testcluster/pkg/utils"
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	"github.com/gardener/landscaper/apis/core/v1alpha1"
+	"github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 
 	appsv1 "k8s.io/api/apps/v1"
 	corev1 "k8s.io/api/core/v1"
@@ -22,7 +22,7 @@ import (
 	"k8s.io/apimachinery/pkg/util/wait"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	kutil "github.com/gardener/landscaper/controller-utils/pkg/kubernetes"
+	kutil "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"
 )
 
 // WaitForObjectDeletion waits until the given object is deleted

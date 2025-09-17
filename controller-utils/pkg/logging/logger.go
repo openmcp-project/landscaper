@@ -12,7 +12,7 @@ import (
 	"github.com/go-logr/logr"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 
-	lc "github.com/gardener/landscaper/controller-utils/pkg/logging/constants"
+	lc "github.com/openmcp-project/landscaper/controller-utils/pkg/logging/constants"
 )
 
 type Logger struct {

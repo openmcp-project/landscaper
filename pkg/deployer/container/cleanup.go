@@ -8,8 +8,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	"github.com/gardener/landscaper/pkg/utils/read_write_layer"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	"github.com/openmcp-project/landscaper/pkg/utils/read_write_layer"
 
 	corev1 "k8s.io/api/core/v1"
 	rbacv1 "k8s.io/api/rbac/v1"
@@ -17,12 +17,12 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 
-	"github.com/gardener/landscaper/apis/deployer/container"
-	lserrors "github.com/gardener/landscaper/apis/errors"
+	"github.com/openmcp-project/landscaper/apis/deployer/container"
+	lserrors "github.com/openmcp-project/landscaper/apis/errors"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	lsv1alpha1helper "github.com/gardener/landscaper/apis/core/v1alpha1/helper"
-	"github.com/gardener/landscaper/pkg/deployer/container/state"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	lsv1alpha1helper "github.com/openmcp-project/landscaper/apis/core/v1alpha1/helper"
+	"github.com/openmcp-project/landscaper/pkg/deployer/container/state"
 )
 
 // CleanupPod cleans up a pod that was started with the container deployer.

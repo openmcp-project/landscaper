@@ -9,8 +9,8 @@ import (
 	"k8s.io/apimachinery/pkg/util/validation/field"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	kutil "github.com/gardener/landscaper/controller-utils/pkg/kubernetes"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	kutil "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"
 )
 
 // This is the attempt to create a common interface for all imports to not always have big switch-case-statements when working with them.

@@ -17,14 +17,14 @@ import (
 	kubernetesscheme "k8s.io/client-go/kubernetes/scheme"
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	install "github.com/gardener/landscaper/apis/core/install"
-	"github.com/gardener/landscaper/pkg/version"
+	install "github.com/openmcp-project/landscaper/apis/core/install"
+	"github.com/openmcp-project/landscaper/pkg/version"
 
 	ctrlwebhook "sigs.k8s.io/controller-runtime/pkg/webhook"
 
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	lc "github.com/gardener/landscaper/controller-utils/pkg/logging/constants"
-	webhooklib "github.com/gardener/landscaper/controller-utils/pkg/webhook"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	lc "github.com/openmcp-project/landscaper/controller-utils/pkg/logging/constants"
+	webhooklib "github.com/openmcp-project/landscaper/controller-utils/pkg/webhook"
 )
 
 func NewLandscaperWebhooksCommand(ctx context.Context) *cobra.Command {

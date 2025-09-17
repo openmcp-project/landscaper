@@ -10,8 +10,8 @@ import (
 	v1 "k8s.io/api/core/v1"
 	"k8s.io/utils/ptr"
 
-	"github.com/gardener/landscaper/apis/core"
-	"github.com/gardener/landscaper/apis/core/v1alpha1"
+	"github.com/openmcp-project/landscaper/apis/core"
+	"github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 )
 
 // KubernetesClusterTargetType defines the landscaper kubernetes cluster target.

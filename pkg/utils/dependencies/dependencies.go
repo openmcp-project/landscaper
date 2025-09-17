@@ -11,7 +11,7 @@ import (
 
 	"k8s.io/apimachinery/pkg/util/sets"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 )
 
 func FetchPredecessorsFromInstallation(installation *lsv1alpha1.Installation,

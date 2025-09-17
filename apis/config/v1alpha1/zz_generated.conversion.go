@@ -16,9 +16,9 @@ import (
 	conversion "k8s.io/apimachinery/pkg/conversion"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 
-	config "github.com/gardener/landscaper/apis/config"
-	core "github.com/gardener/landscaper/apis/core"
-	corev1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
+	config "github.com/openmcp-project/landscaper/apis/config"
+	core "github.com/openmcp-project/landscaper/apis/core"
+	corev1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 )
 
 func init() {

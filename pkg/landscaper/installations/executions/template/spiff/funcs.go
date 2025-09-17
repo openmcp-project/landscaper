@@ -21,15 +21,15 @@ import (
 	"ocm.software/ocm/api/utils/runtime"
 	"sigs.k8s.io/yaml"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	"github.com/gardener/landscaper/controller-utils/pkg/landscaper/targetresolver"
-	"github.com/gardener/landscaper/pkg/components/model"
-	"github.com/gardener/landscaper/pkg/components/model/types"
-	"github.com/gardener/landscaper/pkg/components/ocmlib"
-	"github.com/gardener/landscaper/pkg/landscaper/installations/executions/template"
-	"github.com/gardener/landscaper/pkg/landscaper/installations/executions/template/common"
-	"github.com/gardener/landscaper/pkg/utils/blueprints"
-	"github.com/gardener/landscaper/pkg/utils/clusters"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/landscaper/targetresolver"
+	"github.com/openmcp-project/landscaper/pkg/components/model"
+	"github.com/openmcp-project/landscaper/pkg/components/model/types"
+	"github.com/openmcp-project/landscaper/pkg/components/ocmlib"
+	"github.com/openmcp-project/landscaper/pkg/landscaper/installations/executions/template"
+	"github.com/openmcp-project/landscaper/pkg/landscaper/installations/executions/template/common"
+	"github.com/openmcp-project/landscaper/pkg/utils/blueprints"
+	"github.com/openmcp-project/landscaper/pkg/utils/clusters"
 )
 
 func LandscaperSpiffFuncs(blueprint *blueprints.Blueprint, functions spiffing.Functions, componentVersion model.ComponentVersion, componentVersions *model.ComponentVersionList, targetResolver targetresolver.TargetResolver) error {

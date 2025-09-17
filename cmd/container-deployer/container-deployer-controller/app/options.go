@@ -7,9 +7,9 @@ package app
 import (
 	flag "github.com/spf13/pflag"
 
-	containerv1alpha1 "github.com/gardener/landscaper/apis/deployer/container/v1alpha1"
-	"github.com/gardener/landscaper/pkg/deployer/container"
-	deployercmd "github.com/gardener/landscaper/pkg/deployer/lib/cmd"
+	containerv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/container/v1alpha1"
+	"github.com/openmcp-project/landscaper/pkg/deployer/container"
+	deployercmd "github.com/openmcp-project/landscaper/pkg/deployer/lib/cmd"
 )
 
 type options struct {

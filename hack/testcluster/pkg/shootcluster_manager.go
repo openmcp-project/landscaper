@@ -28,7 +28,7 @@ import (
 	"k8s.io/client-go/util/jsonpath"
 	"sigs.k8s.io/yaml"
 
-	"github.com/gardener/landscaper/hack/testcluster/pkg/utils"
+	"github.com/openmcp-project/landscaper/hack/testcluster/pkg/utils"
 )
 
 var (

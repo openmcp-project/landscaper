@@ -12,7 +12,7 @@ import (
 
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 
-	utils2 "github.com/gardener/landscaper/pkg/utils"
+	utils2 "github.com/openmcp-project/landscaper/pkg/utils"
 
 	corev1 "k8s.io/api/core/v1"
 
@@ -22,10 +22,10 @@ import (
 
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	lscutils "github.com/gardener/landscaper/controller-utils/pkg/landscaper"
-	"github.com/gardener/landscaper/test/utils"
-	"github.com/gardener/landscaper/test/utils/envtest"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	lscutils "github.com/openmcp-project/landscaper/controller-utils/pkg/landscaper"
+	"github.com/openmcp-project/landscaper/test/utils"
+	"github.com/openmcp-project/landscaper/test/utils/envtest"
 )
 
 func TestConfig(t *testing.T) {

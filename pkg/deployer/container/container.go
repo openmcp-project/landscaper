@@ -9,15 +9,15 @@ import (
 	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	lserrors "github.com/gardener/landscaper/apis/errors"
+	lserrors "github.com/openmcp-project/landscaper/apis/errors"
 
-	"github.com/gardener/landscaper/pkg/api"
-	"github.com/gardener/landscaper/pkg/utils"
+	"github.com/openmcp-project/landscaper/pkg/api"
+	"github.com/openmcp-project/landscaper/pkg/utils"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	containerinstall "github.com/gardener/landscaper/apis/deployer/container/install"
-	containerv1alpha1 "github.com/gardener/landscaper/apis/deployer/container/v1alpha1"
-	container1alpha1validation "github.com/gardener/landscaper/apis/deployer/container/v1alpha1/validation"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	containerinstall "github.com/openmcp-project/landscaper/apis/deployer/container/install"
+	containerv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/container/v1alpha1"
+	container1alpha1validation "github.com/openmcp-project/landscaper/apis/deployer/container/v1alpha1/validation"
 )
 
 const (

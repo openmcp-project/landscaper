@@ -7,9 +7,9 @@ package crdmanager
 import (
 	"sigs.k8s.io/controller-runtime/pkg/manager"
 
-	"github.com/gardener/landscaper/apis/config"
-	"github.com/gardener/landscaper/apis/crds"
-	"github.com/gardener/landscaper/controller-utils/pkg/crdmanager"
+	"github.com/openmcp-project/landscaper/apis/config"
+	"github.com/openmcp-project/landscaper/apis/crds"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/crdmanager"
 )
 
 const (

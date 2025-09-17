@@ -5,7 +5,7 @@
 package imports
 
 import (
-	"github.com/gardener/landscaper/pkg/landscaper/installations"
+	"github.com/openmcp-project/landscaper/pkg/landscaper/installations"
 )
 
 // Constructor is a struct that contains all values

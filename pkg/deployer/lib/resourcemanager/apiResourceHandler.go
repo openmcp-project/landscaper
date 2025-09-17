@@ -9,8 +9,8 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/client-go/kubernetes"
 
-	"github.com/gardener/landscaper/apis/core/v1alpha1"
-	lserror "github.com/gardener/landscaper/apis/errors"
+	"github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	lserror "github.com/openmcp-project/landscaper/apis/errors"
 )
 
 type ApiResourceHandler struct {

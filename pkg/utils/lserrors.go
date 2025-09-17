@@ -1,8 +1,8 @@
 package utils
 
 import (
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	lserrors "github.com/gardener/landscaper/apis/errors"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	lserrors "github.com/openmcp-project/landscaper/apis/errors"
 )
 
 func IsRecoverableError(err error) bool {

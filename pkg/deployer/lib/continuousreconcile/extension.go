@@ -11,10 +11,10 @@ import (
 
 	"github.com/robfig/cron/v3"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	cr "github.com/gardener/landscaper/apis/deployer/utils/continuousreconcile"
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	"github.com/gardener/landscaper/pkg/deployer/lib/extension"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	cr "github.com/openmcp-project/landscaper/apis/deployer/utils/continuousreconcile"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	"github.com/openmcp-project/landscaper/pkg/deployer/lib/extension"
 )
 
 // ContinuousReconcileActiveAnnotation can be used to deactivate continuous reconciliation on a deploy item without changing its spec.

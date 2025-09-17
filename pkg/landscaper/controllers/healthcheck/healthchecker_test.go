@@ -12,11 +12,11 @@ import (
 	. "github.com/onsi/gomega"
 	"k8s.io/apimachinery/pkg/types"
 
-	"github.com/gardener/landscaper/apis/config"
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	"github.com/gardener/landscaper/pkg/landscaper/controllers/healthcheck"
-	"github.com/gardener/landscaper/test/utils/envtest"
+	"github.com/openmcp-project/landscaper/apis/config"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	"github.com/openmcp-project/landscaper/pkg/landscaper/controllers/healthcheck"
+	"github.com/openmcp-project/landscaper/test/utils/envtest"
 )
 
 var _ = Describe("Reconcile", func() {

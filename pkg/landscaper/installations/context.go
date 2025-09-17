@@ -9,20 +9,20 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/gardener/landscaper/pkg/utils"
+	"github.com/openmcp-project/landscaper/pkg/utils"
 
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	lserrors "github.com/gardener/landscaper/apis/errors"
-	kutil "github.com/gardener/landscaper/controller-utils/pkg/kubernetes"
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	"github.com/gardener/landscaper/pkg/components/model/componentoverwrites"
+	lserrors "github.com/openmcp-project/landscaper/apis/errors"
+	kutil "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	"github.com/openmcp-project/landscaper/pkg/components/model/componentoverwrites"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	lsv1alpha1helper "github.com/gardener/landscaper/apis/core/v1alpha1/helper"
-	lc "github.com/gardener/landscaper/controller-utils/pkg/logging/constants"
-	"github.com/gardener/landscaper/pkg/utils/read_write_layer"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	lsv1alpha1helper "github.com/openmcp-project/landscaper/apis/core/v1alpha1/helper"
+	lc "github.com/openmcp-project/landscaper/controller-utils/pkg/logging/constants"
+	"github.com/openmcp-project/landscaper/pkg/utils/read_write_layer"
 )
 
 // Scope contains the visible installations of a specific installation.

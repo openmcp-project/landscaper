@@ -10,15 +10,15 @@ import (
 	"os"
 	"path/filepath"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 
 	"github.com/golang/mock/gomock"
 	"github.com/pkg/errors"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/client/fake"
 
-	mock_client "github.com/gardener/landscaper/controller-utils/pkg/kubernetes/mock"
-	"github.com/gardener/landscaper/pkg/api"
+	mock_client "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes/mock"
+	"github.com/openmcp-project/landscaper/pkg/api"
 )
 
 // NewFakeClientFromPath reads all landscaper related files from the given path adds them to the controller runtime's fake client.

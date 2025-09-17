@@ -17,12 +17,12 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"sigs.k8s.io/yaml"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	"github.com/gardener/landscaper/pkg/components/model"
-	"github.com/gardener/landscaper/pkg/components/model/types"
-	"github.com/gardener/landscaper/pkg/landscaper/installations/executions/template"
-	"github.com/gardener/landscaper/pkg/landscaper/installations/executions/template/gotemplate"
-	"github.com/gardener/landscaper/pkg/utils/blueprints"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	"github.com/openmcp-project/landscaper/pkg/components/model"
+	"github.com/openmcp-project/landscaper/pkg/components/model/types"
+	"github.com/openmcp-project/landscaper/pkg/landscaper/installations/executions/template"
+	"github.com/openmcp-project/landscaper/pkg/landscaper/installations/executions/template/gotemplate"
+	"github.com/openmcp-project/landscaper/pkg/utils/blueprints"
 )
 
 const (

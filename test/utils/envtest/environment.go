@@ -15,7 +15,7 @@ import (
 	"path/filepath"
 	"time"
 
-	utils2 "github.com/gardener/landscaper/pkg/utils"
+	utils2 "github.com/openmcp-project/landscaper/pkg/utils"
 
 	appsv1 "k8s.io/api/apps/v1"
 
@@ -29,11 +29,11 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/envtest"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	lsv1alpha1helper "github.com/gardener/landscaper/apis/core/v1alpha1/helper"
-	"github.com/gardener/landscaper/hack/testcluster/pkg/utils"
-	"github.com/gardener/landscaper/pkg/api"
-	"github.com/gardener/landscaper/pkg/landscaper/installations"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	lsv1alpha1helper "github.com/openmcp-project/landscaper/apis/core/v1alpha1/helper"
+	"github.com/openmcp-project/landscaper/hack/testcluster/pkg/utils"
+	"github.com/openmcp-project/landscaper/pkg/api"
+	"github.com/openmcp-project/landscaper/pkg/landscaper/installations"
 )
 
 // Environment is a internal landscaper test environment

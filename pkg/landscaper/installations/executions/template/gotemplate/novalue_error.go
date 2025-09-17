@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/gardener/landscaper/pkg/landscaper/installations/executions/template"
+	"github.com/openmcp-project/landscaper/pkg/landscaper/installations/executions/template"
 )
 
 const (

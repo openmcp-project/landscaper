@@ -8,25 +8,25 @@ import (
 	"context"
 	"time"
 
-	lc "github.com/gardener/landscaper/controller-utils/pkg/logging/constants"
+	lc "github.com/openmcp-project/landscaper/controller-utils/pkg/logging/constants"
 
-	"github.com/gardener/landscaper/pkg/utils/read_write_layer"
+	"github.com/openmcp-project/landscaper/pkg/utils/read_write_layer"
 
 	corev1 "k8s.io/api/core/v1"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	lsv1alpha1helper "github.com/gardener/landscaper/apis/core/v1alpha1/helper"
-	mockv1alpha1 "github.com/gardener/landscaper/apis/deployer/mock/v1alpha1"
-	crval "github.com/gardener/landscaper/apis/deployer/utils/continuousreconcile/validation"
-	kubernetesutil "github.com/gardener/landscaper/controller-utils/pkg/kubernetes"
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	"github.com/gardener/landscaper/pkg/api"
-	deployerlib "github.com/gardener/landscaper/pkg/deployer/lib"
-	cr "github.com/gardener/landscaper/pkg/deployer/lib/continuousreconcile"
-	"github.com/gardener/landscaper/pkg/deployer/lib/extension"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	lsv1alpha1helper "github.com/openmcp-project/landscaper/apis/core/v1alpha1/helper"
+	mockv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/mock/v1alpha1"
+	crval "github.com/openmcp-project/landscaper/apis/deployer/utils/continuousreconcile/validation"
+	kubernetesutil "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	"github.com/openmcp-project/landscaper/pkg/api"
+	deployerlib "github.com/openmcp-project/landscaper/pkg/deployer/lib"
+	cr "github.com/openmcp-project/landscaper/pkg/deployer/lib/continuousreconcile"
+	"github.com/openmcp-project/landscaper/pkg/deployer/lib/extension"
 )
 
 // NewDeployer creates a new deployer that reconciles deploy items of type mock.

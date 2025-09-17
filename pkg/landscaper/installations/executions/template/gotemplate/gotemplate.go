@@ -15,11 +15,11 @@ import (
 	"github.com/pkg/errors"
 	"sigs.k8s.io/yaml"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	"github.com/gardener/landscaper/controller-utils/pkg/landscaper/targetresolver"
-	"github.com/gardener/landscaper/pkg/components/model"
-	lstmpl "github.com/gardener/landscaper/pkg/landscaper/installations/executions/template"
-	"github.com/gardener/landscaper/pkg/utils/blueprints"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/landscaper/targetresolver"
+	"github.com/openmcp-project/landscaper/pkg/components/model"
+	lstmpl "github.com/openmcp-project/landscaper/pkg/landscaper/installations/executions/template"
+	"github.com/openmcp-project/landscaper/pkg/utils/blueprints"
 )
 
 const (

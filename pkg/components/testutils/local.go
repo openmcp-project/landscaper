@@ -15,8 +15,8 @@ import (
 	"github.com/mandelsoft/vfs/pkg/vfs"
 	"github.com/opencontainers/go-digest"
 
-	"github.com/gardener/landscaper/pkg/components/model/tar"
-	"github.com/gardener/landscaper/pkg/components/model/types"
+	"github.com/openmcp-project/landscaper/pkg/components/model/tar"
+	"github.com/openmcp-project/landscaper/pkg/components/model/types"
 )
 
 // LocalRepositoryType defines the local repository context type.

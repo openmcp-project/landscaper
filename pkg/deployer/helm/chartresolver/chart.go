@@ -23,21 +23,21 @@ import (
 	"ocm.software/ocm/api/utils/runtime"
 	"sigs.k8s.io/yaml"
 
-	lserrors "github.com/gardener/landscaper/apis/errors"
-	kutil "github.com/gardener/landscaper/controller-utils/pkg/kubernetes"
-	"github.com/gardener/landscaper/pkg/components/model"
-	"github.com/gardener/landscaper/pkg/components/ocmlib"
-	"github.com/gardener/landscaper/pkg/deployer/lib"
+	lserrors "github.com/openmcp-project/landscaper/apis/errors"
+	kutil "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"
+	"github.com/openmcp-project/landscaper/pkg/components/model"
+	"github.com/openmcp-project/landscaper/pkg/components/ocmlib"
+	"github.com/openmcp-project/landscaper/pkg/deployer/lib"
 
 	"helm.sh/helm/v3/pkg/chart"
 	chartloader "helm.sh/helm/v3/pkg/chart/loader"
 	corev1 "k8s.io/api/core/v1"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	"github.com/gardener/landscaper/apis/config"
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	helmv1alpha1 "github.com/gardener/landscaper/apis/deployer/helm/v1alpha1"
-	"github.com/gardener/landscaper/pkg/components/registries"
+	"github.com/openmcp-project/landscaper/apis/config"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	helmv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/helm/v1alpha1"
+	"github.com/openmcp-project/landscaper/pkg/components/registries"
 )
 
 // NoChartDefinedError is the error that is returned if no Helm chart was provided

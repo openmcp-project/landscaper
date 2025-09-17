@@ -20,11 +20,11 @@ import (
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	"github.com/gardener/landscaper/apis/core/v1alpha1"
-	"github.com/gardener/landscaper/apis/deployer/container"
-	mock_client "github.com/gardener/landscaper/controller-utils/pkg/kubernetes/mock"
-	"github.com/gardener/landscaper/pkg/components/model/types"
-	"github.com/gardener/landscaper/test/utils"
+	"github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	"github.com/openmcp-project/landscaper/apis/deployer/container"
+	mock_client "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes/mock"
+	"github.com/openmcp-project/landscaper/pkg/components/model/types"
+	"github.com/openmcp-project/landscaper/test/utils"
 )
 
 func TestConfig(t *testing.T) {

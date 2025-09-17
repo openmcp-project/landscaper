@@ -5,8 +5,8 @@
 package registries
 
 import (
-	"github.com/gardener/landscaper/pkg/components/model"
-	"github.com/gardener/landscaper/pkg/components/ocmlib"
+	"github.com/openmcp-project/landscaper/pkg/components/model"
+	"github.com/openmcp-project/landscaper/pkg/components/ocmlib"
 )
 
 var (

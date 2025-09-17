@@ -16,23 +16,23 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes/scheme"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	containerv1alpha1 "github.com/gardener/landscaper/apis/deployer/container/v1alpha1"
-	helmv1alpha1 "github.com/gardener/landscaper/apis/deployer/helm/v1alpha1"
-	manifestv1alpha2 "github.com/gardener/landscaper/apis/deployer/manifest/v1alpha2"
-	mockv1alpha1 "github.com/gardener/landscaper/apis/deployer/mock/v1alpha1"
-	"github.com/gardener/landscaper/apis/deployer/utils/managedresource"
-	kutil "github.com/gardener/landscaper/controller-utils/pkg/kubernetes"
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	"github.com/gardener/landscaper/pkg/deployer/container"
-	"github.com/gardener/landscaper/pkg/deployer/helm"
-	"github.com/gardener/landscaper/pkg/deployer/manifest"
-	"github.com/gardener/landscaper/pkg/deployer/mock"
-	commonutils "github.com/gardener/landscaper/pkg/utils"
-	lsutils "github.com/gardener/landscaper/pkg/utils/landscaper"
-	"github.com/gardener/landscaper/test/framework"
-	"github.com/gardener/landscaper/test/utils"
-	"github.com/gardener/landscaper/test/utils/envtest"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	containerv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/container/v1alpha1"
+	helmv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/helm/v1alpha1"
+	manifestv1alpha2 "github.com/openmcp-project/landscaper/apis/deployer/manifest/v1alpha2"
+	mockv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/mock/v1alpha1"
+	"github.com/openmcp-project/landscaper/apis/deployer/utils/managedresource"
+	kutil "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	"github.com/openmcp-project/landscaper/pkg/deployer/container"
+	"github.com/openmcp-project/landscaper/pkg/deployer/helm"
+	"github.com/openmcp-project/landscaper/pkg/deployer/manifest"
+	"github.com/openmcp-project/landscaper/pkg/deployer/mock"
+	commonutils "github.com/openmcp-project/landscaper/pkg/utils"
+	lsutils "github.com/openmcp-project/landscaper/pkg/utils/landscaper"
+	"github.com/openmcp-project/landscaper/test/framework"
+	"github.com/openmcp-project/landscaper/test/utils"
+	"github.com/openmcp-project/landscaper/test/utils/envtest"
 )
 
 func DeployerBlueprintTests(f *framework.Framework) {
@@ -71,7 +71,7 @@ func DeployerBlueprintTests(f *framework.Framework) {
 		It("MockDeployer should deploy a deployer with its blueprint", func() {
 			td := &testDefinition{
 				Name:                    "MockDeployer",
-				ComponentDescriptorName: "github.com/gardener/landscaper/mock-deployer",
+				ComponentDescriptorName: "github.com/openmcp-project/landscaper/mock-deployer",
 				BlueprintResourceName:   "mock-deployer-blueprint",
 				DeployItemBuilder: mock.NewDeployItemBuilder().
 					ProviderConfig(&mockv1alpha1.ProviderConfiguration{
@@ -84,7 +84,7 @@ func DeployerBlueprintTests(f *framework.Framework) {
 		It("ManifestDeployer should deploy a deployer with its blueprint", func() {
 			td := &testDefinition{
 				Name:                    "ManifestDeployer",
-				ComponentDescriptorName: "github.com/gardener/landscaper/manifest-deployer",
+				ComponentDescriptorName: "github.com/openmcp-project/landscaper/manifest-deployer",
 				BlueprintResourceName:   "manifest-deployer-blueprint",
 				DeployItem: func(state *envtest.State, target *lsv1alpha1.Target) (*lsv1alpha1.DeployItem, error) {
 					secret, _ := kutil.ConvertToRawExtension(&corev1.Secret{
@@ -112,7 +112,7 @@ func DeployerBlueprintTests(f *framework.Framework) {
 		It("ContainerDeployer should deploy a deployer with its blueprint", func() {
 			td := &testDefinition{
 				Name:                    "ContainerDeployer",
-				ComponentDescriptorName: "github.com/gardener/landscaper/container-deployer",
+				ComponentDescriptorName: "github.com/openmcp-project/landscaper/container-deployer",
 				BlueprintResourceName:   "container-deployer-blueprint",
 				DeployItemBuilder: container.NewDeployItemBuilder().
 					ProviderConfig(&containerv1alpha1.ProviderConfiguration{
@@ -127,7 +127,7 @@ func DeployerBlueprintTests(f *framework.Framework) {
 		It("HelmDeployer should deploy a deployer with its blueprint", func() {
 			td := &testDefinition{
 				Name:                    "HelmDeployer",
-				ComponentDescriptorName: "github.com/gardener/landscaper/helm-deployer",
+				ComponentDescriptorName: "github.com/openmcp-project/landscaper/helm-deployer",
 				BlueprintResourceName:   "helm-deployer-blueprint",
 				DeployItem: func(state *envtest.State, target *lsv1alpha1.Target) (*lsv1alpha1.DeployItem, error) {
 					ref := "europe-docker.pkg.dev/sap-gcp-cp-k8s-stable-hub/landscaper-examples/integration-tests/charts/hello-world:1.0.0"

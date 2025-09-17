@@ -11,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	lserrors "github.com/gardener/landscaper/apis/errors"
+	lserrors "github.com/openmcp-project/landscaper/apis/errors"
 
 	"github.com/cloudflare/cfssl/log"
 	"github.com/shirou/gopsutil/v4/process"
@@ -20,9 +20,9 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	"github.com/gardener/landscaper/apis/core/v1alpha1"
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	"github.com/gardener/landscaper/pkg/utils/read_write_layer"
+	"github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	"github.com/openmcp-project/landscaper/pkg/utils/read_write_layer"
 )
 
 const separator = " ***** "

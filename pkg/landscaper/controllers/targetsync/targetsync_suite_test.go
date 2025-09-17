@@ -11,7 +11,7 @@ import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 
-	"github.com/gardener/landscaper/test/utils/envtest"
+	"github.com/openmcp-project/landscaper/test/utils/envtest"
 )
 
 func TestConfig(t *testing.T) {

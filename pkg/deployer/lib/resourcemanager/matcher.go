@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"slices"
 
-	"github.com/gardener/landscaper/apis/deployer/utils/managedresource"
+	"github.com/openmcp-project/landscaper/apis/deployer/utils/managedresource"
 )
 
 type Matcher interface {

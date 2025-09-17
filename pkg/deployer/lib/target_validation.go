@@ -7,9 +7,9 @@ import (
 	"k8s.io/client-go/tools/clientcmd"
 	"sigs.k8s.io/yaml"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	"github.com/gardener/landscaper/apis/core/v1alpha1/targettypes"
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	"github.com/openmcp-project/landscaper/apis/core/v1alpha1/targettypes"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 )
 
 func ValidateTarget(ctx context.Context, resolvedTarget *lsv1alpha1.ResolvedTarget) error {

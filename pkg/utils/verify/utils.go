@@ -9,14 +9,14 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	"github.com/gardener/landscaper/pkg/utils"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	"github.com/openmcp-project/landscaper/pkg/utils"
 
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	"github.com/gardener/landscaper/apis/config"
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	lutil "github.com/gardener/landscaper/controller-utils/pkg/landscaper"
+	"github.com/openmcp-project/landscaper/apis/config"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	lutil "github.com/openmcp-project/landscaper/controller-utils/pkg/landscaper"
 )
 
 type PublicKeyData []byte

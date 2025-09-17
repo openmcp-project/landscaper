@@ -7,8 +7,8 @@ package model
 import (
 	"context"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	"github.com/gardener/landscaper/pkg/components/model/componentoverwrites"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	"github.com/openmcp-project/landscaper/pkg/components/model/componentoverwrites"
 )
 
 type RegistryAccess interface {

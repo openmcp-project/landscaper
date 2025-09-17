@@ -1,9 +1,9 @@
 package execution
 
 import (
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	lsv1alpha1helper "github.com/gardener/landscaper/apis/core/v1alpha1/helper"
-	kutil "github.com/gardener/landscaper/controller-utils/pkg/kubernetes"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	lsv1alpha1helper "github.com/openmcp-project/landscaper/apis/core/v1alpha1/helper"
+	kutil "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"
 )
 
 func isExecFinished(exec *lsv1alpha1.Execution) bool {

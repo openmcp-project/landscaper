@@ -8,7 +8,7 @@ import (
 	"context"
 	"fmt"
 
-	lsv1alpha1helper "github.com/gardener/landscaper/apis/core/v1alpha1/helper"
+	lsv1alpha1helper "github.com/openmcp-project/landscaper/apis/core/v1alpha1/helper"
 
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -16,12 +16,12 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 	"sigs.k8s.io/yaml"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	lserrors "github.com/gardener/landscaper/apis/errors"
-	kutil "github.com/gardener/landscaper/controller-utils/pkg/kubernetes"
-	"github.com/gardener/landscaper/controller-utils/pkg/landscaper/targetresolver/secret"
-	"github.com/gardener/landscaper/pkg/utils/clusters"
-	"github.com/gardener/landscaper/pkg/utils/read_write_layer"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	lserrors "github.com/openmcp-project/landscaper/apis/errors"
+	kutil "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/landscaper/targetresolver/secret"
+	"github.com/openmcp-project/landscaper/pkg/utils/clusters"
+	"github.com/openmcp-project/landscaper/pkg/utils/read_write_layer"
 )
 
 const clusterNameAnnotation = "landscaper.gardener.cloud/clustername"

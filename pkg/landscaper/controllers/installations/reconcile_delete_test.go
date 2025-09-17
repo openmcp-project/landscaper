@@ -22,17 +22,17 @@ import (
 	metricsserver "sigs.k8s.io/controller-runtime/pkg/metrics/server"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 
-	"github.com/gardener/landscaper/apis/config"
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	kutil "github.com/gardener/landscaper/controller-utils/pkg/kubernetes"
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	"github.com/gardener/landscaper/pkg/api"
-	installationsctl "github.com/gardener/landscaper/pkg/landscaper/controllers/installations"
-	lsoperation "github.com/gardener/landscaper/pkg/landscaper/operation"
-	lsutils "github.com/gardener/landscaper/pkg/utils"
-	"github.com/gardener/landscaper/pkg/utils/simplelogger"
-	testutils "github.com/gardener/landscaper/test/utils"
-	"github.com/gardener/landscaper/test/utils/envtest"
+	"github.com/openmcp-project/landscaper/apis/config"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	kutil "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	"github.com/openmcp-project/landscaper/pkg/api"
+	installationsctl "github.com/openmcp-project/landscaper/pkg/landscaper/controllers/installations"
+	lsoperation "github.com/openmcp-project/landscaper/pkg/landscaper/operation"
+	lsutils "github.com/openmcp-project/landscaper/pkg/utils"
+	"github.com/openmcp-project/landscaper/pkg/utils/simplelogger"
+	testutils "github.com/openmcp-project/landscaper/test/utils"
+	"github.com/openmcp-project/landscaper/test/utils/envtest"
 )
 
 var _ = Describe("Delete", func() {

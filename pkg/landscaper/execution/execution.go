@@ -8,24 +8,24 @@ import (
 	"context"
 	"fmt"
 
-	lc "github.com/gardener/landscaper/controller-utils/pkg/logging/constants"
+	lc "github.com/openmcp-project/landscaper/controller-utils/pkg/logging/constants"
 
-	"github.com/gardener/landscaper/pkg/utils"
+	"github.com/openmcp-project/landscaper/pkg/utils"
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	lsv1alpha1helper "github.com/gardener/landscaper/apis/core/v1alpha1/helper"
-	lserrors "github.com/gardener/landscaper/apis/errors"
-	kutil "github.com/gardener/landscaper/controller-utils/pkg/kubernetes"
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	"github.com/gardener/landscaper/pkg/api"
-	"github.com/gardener/landscaper/pkg/landscaper/dataobjects"
-	"github.com/gardener/landscaper/pkg/landscaper/operation"
-	"github.com/gardener/landscaper/pkg/utils/clusters"
-	"github.com/gardener/landscaper/pkg/utils/read_write_layer"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	lsv1alpha1helper "github.com/openmcp-project/landscaper/apis/core/v1alpha1/helper"
+	lserrors "github.com/openmcp-project/landscaper/apis/errors"
+	kutil "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	"github.com/openmcp-project/landscaper/pkg/api"
+	"github.com/openmcp-project/landscaper/pkg/landscaper/dataobjects"
+	"github.com/openmcp-project/landscaper/pkg/landscaper/operation"
+	"github.com/openmcp-project/landscaper/pkg/utils/clusters"
+	"github.com/openmcp-project/landscaper/pkg/utils/read_write_layer"
 )
 
 // Operation contains all execution operations

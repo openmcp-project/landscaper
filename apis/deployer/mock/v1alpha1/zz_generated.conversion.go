@@ -15,9 +15,9 @@ import (
 	conversion "k8s.io/apimachinery/pkg/conversion"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 
-	corev1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	mock "github.com/gardener/landscaper/apis/deployer/mock"
-	continuousreconcile "github.com/gardener/landscaper/apis/deployer/utils/continuousreconcile"
+	corev1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	mock "github.com/openmcp-project/landscaper/apis/deployer/mock"
+	continuousreconcile "github.com/openmcp-project/landscaper/apis/deployer/utils/continuousreconcile"
 )
 
 func init() {

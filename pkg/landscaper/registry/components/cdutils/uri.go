@@ -14,10 +14,10 @@ import (
 
 	v1 "ocm.software/ocm/api/ocm/compdesc/meta/v1"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	"github.com/gardener/landscaper/pkg/components/model"
-	"github.com/gardener/landscaper/pkg/components/model/componentoverwrites"
-	"github.com/gardener/landscaper/pkg/components/model/types"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	"github.com/openmcp-project/landscaper/pkg/components/model"
+	"github.com/openmcp-project/landscaper/pkg/components/model/componentoverwrites"
+	"github.com/openmcp-project/landscaper/pkg/components/model/types"
 )
 
 const Scheme = "cd"

@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/gardener/landscaper/cmd/manifest-deployer-controller/app"
+	"github.com/openmcp-project/landscaper/cmd/manifest-deployer-controller/app"
 )
 
 func main() {

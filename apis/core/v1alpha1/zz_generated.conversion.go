@@ -20,7 +20,7 @@ import (
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	selection "k8s.io/apimachinery/pkg/selection"
 
-	core "github.com/gardener/landscaper/apis/core"
+	core "github.com/openmcp-project/landscaper/apis/core"
 )
 
 func init() {

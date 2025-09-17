@@ -11,9 +11,9 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	ctrlwebhook "sigs.k8s.io/controller-runtime/pkg/webhook"
 
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	lc "github.com/gardener/landscaper/controller-utils/pkg/logging/constants"
-	"github.com/gardener/landscaper/controller-utils/pkg/webhook/certificates"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	lc "github.com/openmcp-project/landscaper/controller-utils/pkg/logging/constants"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/webhook/certificates"
 )
 
 // WebhookNaming is a helper struct which stores naming rules for Validating-/MutatingWebhookConfigurations and their webhooks.

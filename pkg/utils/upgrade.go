@@ -1,8 +1,8 @@
 package utils
 
 import (
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	"github.com/gardener/landscaper/controller-utils/pkg/kubernetes"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"
 )
 
 // this file contains methods which are only required during upgrade situations and could be removed

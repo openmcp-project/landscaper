@@ -8,20 +8,20 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	"github.com/gardener/landscaper/pkg/utils"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	"github.com/openmcp-project/landscaper/pkg/utils"
 
-	lserror "github.com/gardener/landscaper/apis/errors"
+	lserror "github.com/openmcp-project/landscaper/apis/errors"
 
 	"k8s.io/apimachinery/pkg/util/sets"
 
-	"github.com/gardener/landscaper/pkg/utils/dependencies"
+	"github.com/openmcp-project/landscaper/pkg/utils/dependencies"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	lsv1alpha1helper "github.com/gardener/landscaper/apis/core/v1alpha1/helper"
-	kutil "github.com/gardener/landscaper/controller-utils/pkg/kubernetes"
-	"github.com/gardener/landscaper/pkg/landscaper/installations"
-	"github.com/gardener/landscaper/pkg/landscaper/installations/imports"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	lsv1alpha1helper "github.com/openmcp-project/landscaper/apis/core/v1alpha1/helper"
+	kutil "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"
+	"github.com/openmcp-project/landscaper/pkg/landscaper/installations"
+	"github.com/openmcp-project/landscaper/pkg/landscaper/installations/imports"
 )
 
 type ReconcileHelper struct {

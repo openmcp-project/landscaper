@@ -5,11 +5,11 @@
 package deployers
 
 import (
-	"github.com/gardener/landscaper/test/framework"
-	"github.com/gardener/landscaper/test/integration/deployers/blueprints"
-	"github.com/gardener/landscaper/test/integration/deployers/container"
-	"github.com/gardener/landscaper/test/integration/deployers/helmcharts"
-	"github.com/gardener/landscaper/test/integration/deployers/helmdeployer"
+	"github.com/openmcp-project/landscaper/test/framework"
+	"github.com/openmcp-project/landscaper/test/integration/deployers/blueprints"
+	"github.com/openmcp-project/landscaper/test/integration/deployers/container"
+	"github.com/openmcp-project/landscaper/test/integration/deployers/helmcharts"
+	"github.com/openmcp-project/landscaper/test/integration/deployers/helmdeployer"
 )
 
 // RegisterTests registers all tests of this package

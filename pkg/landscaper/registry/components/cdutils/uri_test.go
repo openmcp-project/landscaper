@@ -10,7 +10,7 @@ import (
 	"ocm.software/ocm/api/datacontext"
 	"ocm.software/ocm/api/ocm"
 
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 
 	cdv2 "github.com/gardener/component-spec/bindings-go/apis/v2"
 	"github.com/mandelsoft/vfs/pkg/memoryfs"
@@ -18,14 +18,14 @@ import (
 	. "github.com/onsi/gomega"
 	"ocm.software/ocm/api/utils/runtime"
 
-	"github.com/gardener/landscaper/apis/config"
-	"github.com/gardener/landscaper/pkg/components/registries"
+	"github.com/openmcp-project/landscaper/apis/config"
+	"github.com/openmcp-project/landscaper/pkg/components/registries"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	"github.com/gardener/landscaper/pkg/components/model"
-	"github.com/gardener/landscaper/pkg/components/model/types"
-	"github.com/gardener/landscaper/pkg/landscaper/registry/components/cdutils"
-	testutils "github.com/gardener/landscaper/test/utils"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	"github.com/openmcp-project/landscaper/pkg/components/model"
+	"github.com/openmcp-project/landscaper/pkg/components/model/types"
+	"github.com/openmcp-project/landscaper/pkg/landscaper/registry/components/cdutils"
+	testutils "github.com/openmcp-project/landscaper/test/utils"
 )
 
 var _ = Describe("URI", func() {

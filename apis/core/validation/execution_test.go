@@ -10,8 +10,8 @@ import (
 	. "github.com/onsi/gomega/gstruct"
 	"k8s.io/apimachinery/pkg/util/validation/field"
 
-	"github.com/gardener/landscaper/apis/core"
-	"github.com/gardener/landscaper/apis/core/validation"
+	"github.com/openmcp-project/landscaper/apis/core"
+	"github.com/openmcp-project/landscaper/apis/core/validation"
 )
 
 var _ = Describe("Execution", func() {

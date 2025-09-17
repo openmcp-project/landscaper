@@ -9,11 +9,11 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	"github.com/gardener/landscaper/pkg/utils"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	"github.com/openmcp-project/landscaper/pkg/utils"
 
-	"github.com/gardener/landscaper/pkg/components/model/componentoverwrites"
-	"github.com/gardener/landscaper/pkg/components/model/types"
+	"github.com/openmcp-project/landscaper/pkg/components/model/componentoverwrites"
+	"github.com/openmcp-project/landscaper/pkg/components/model/types"
 )
 
 // GetTransitiveComponentReferences returns a list of ComponentVersions that consists of the current one

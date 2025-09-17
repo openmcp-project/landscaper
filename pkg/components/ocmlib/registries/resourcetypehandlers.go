@@ -10,7 +10,7 @@ import (
 
 	"ocm.software/ocm/api/ocm"
 
-	"github.com/gardener/landscaper/pkg/components/model"
+	"github.com/openmcp-project/landscaper/pkg/components/model"
 )
 
 var Registry = New()

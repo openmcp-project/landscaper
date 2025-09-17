@@ -1,6 +1,6 @@
 package deployerlegacy
 
-import lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
+import lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 
 func GetReferenceFromComponentDescriptorDefinition(cdDef *lsv1alpha1.ComponentDescriptorDefinition) *lsv1alpha1.ComponentDescriptorReference {
 	if cdDef == nil {

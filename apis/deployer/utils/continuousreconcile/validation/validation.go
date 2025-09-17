@@ -9,9 +9,9 @@ import (
 
 	cron "github.com/robfig/cron/v3"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	helper "github.com/gardener/landscaper/apis/core/validation"
-	cr "github.com/gardener/landscaper/apis/deployer/utils/continuousreconcile"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	helper "github.com/openmcp-project/landscaper/apis/core/validation"
+	cr "github.com/openmcp-project/landscaper/apis/deployer/utils/continuousreconcile"
 )
 
 // ValidateContinuousReconcileSpec validates a continuous reconciliation spec.

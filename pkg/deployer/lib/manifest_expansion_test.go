@@ -3,7 +3,7 @@ package lib
 import (
 	"encoding/json"
 
-	"github.com/gardener/landscaper/apis/deployer/utils/managedresource"
+	"github.com/openmcp-project/landscaper/apis/deployer/utils/managedresource"
 
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"

@@ -13,9 +13,9 @@ import (
 	"k8s.io/apimachinery/pkg/selection"
 	"k8s.io/apimachinery/pkg/util/validation/field"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	"github.com/gardener/landscaper/apis/deployer/utils/readinesschecks"
-	"github.com/gardener/landscaper/apis/deployer/utils/readinesschecks/validation"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	"github.com/openmcp-project/landscaper/apis/deployer/utils/readinesschecks"
+	"github.com/openmcp-project/landscaper/apis/deployer/utils/readinesschecks/validation"
 )
 
 func TestConfig(t *testing.T) {

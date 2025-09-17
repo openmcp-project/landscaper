@@ -16,7 +16,7 @@ import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 
-	"github.com/gardener/landscaper/pkg/landscaper/installations/executions/template"
+	"github.com/openmcp-project/landscaper/pkg/landscaper/installations/executions/template"
 )
 
 var _ = Describe("TemplateInputFormatter", func() {

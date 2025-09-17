@@ -6,9 +6,9 @@ import (
 	"k8s.io/client-go/rest"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	"github.com/gardener/landscaper/apis/deployer/utils/managedresource"
-	"github.com/gardener/landscaper/pkg/deployer/lib/interruption"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	"github.com/openmcp-project/landscaper/apis/deployer/utils/managedresource"
+	"github.com/openmcp-project/landscaper/pkg/deployer/lib/interruption"
 )
 
 func DeleteManagedResources(

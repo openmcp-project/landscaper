@@ -11,7 +11,7 @@ import (
 	"k8s.io/apimachinery/pkg/util/validation/field"
 	"k8s.io/client-go/util/jsonpath"
 
-	"github.com/gardener/landscaper/apis/deployer/utils/readinesschecks"
+	"github.com/openmcp-project/landscaper/apis/deployer/utils/readinesschecks"
 )
 
 // ValidateReadinessCheckConfiguration validates a readiness check configuration

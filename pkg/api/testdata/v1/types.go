@@ -10,7 +10,7 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	"github.com/gardener/landscaper/pkg/api/testdata"
+	"github.com/openmcp-project/landscaper/pkg/api/testdata"
 )
 
 type SomeType struct {

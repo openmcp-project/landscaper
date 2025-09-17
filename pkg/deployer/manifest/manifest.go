@@ -11,14 +11,14 @@ import (
 	"k8s.io/client-go/rest"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	manifestinstall "github.com/gardener/landscaper/apis/deployer/manifest/install"
-	manifestv1alpha2 "github.com/gardener/landscaper/apis/deployer/manifest/v1alpha2"
-	manifestvalidation "github.com/gardener/landscaper/apis/deployer/manifest/validation"
-	lserrors "github.com/gardener/landscaper/apis/errors"
-	"github.com/gardener/landscaper/pkg/api"
-	"github.com/gardener/landscaper/pkg/deployer/lib"
-	"github.com/gardener/landscaper/pkg/utils"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	manifestinstall "github.com/openmcp-project/landscaper/apis/deployer/manifest/install"
+	manifestv1alpha2 "github.com/openmcp-project/landscaper/apis/deployer/manifest/v1alpha2"
+	manifestvalidation "github.com/openmcp-project/landscaper/apis/deployer/manifest/validation"
+	lserrors "github.com/openmcp-project/landscaper/apis/errors"
+	"github.com/openmcp-project/landscaper/pkg/api"
+	"github.com/openmcp-project/landscaper/pkg/deployer/lib"
+	"github.com/openmcp-project/landscaper/pkg/utils"
 )
 
 const (

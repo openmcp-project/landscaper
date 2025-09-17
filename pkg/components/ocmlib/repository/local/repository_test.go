@@ -17,8 +17,8 @@ import (
 
 	"ocm.software/ocm/api/ocm/selectors/rscsel"
 
-	"github.com/gardener/landscaper/pkg/components/ocmlib/repository"
-	"github.com/gardener/landscaper/pkg/components/ocmlib/repository/local"
+	"github.com/openmcp-project/landscaper/pkg/components/ocmlib/repository"
+	"github.com/openmcp-project/landscaper/pkg/components/ocmlib/repository/local"
 
 	tenv "ocm.software/ocm/api/helper/env"
 	"ocm.software/ocm/api/utils/runtime"

@@ -7,7 +7,7 @@ package installations
 import (
 	"fmt"
 
-	lserror "github.com/gardener/landscaper/apis/errors"
+	lserror "github.com/openmcp-project/landscaper/apis/errors"
 )
 
 // ErrorReason describes specific import error reasons

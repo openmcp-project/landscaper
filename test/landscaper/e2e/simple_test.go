@@ -8,11 +8,11 @@ import (
 	"context"
 	"path/filepath"
 
-	"github.com/gardener/landscaper/pkg/utils"
+	"github.com/openmcp-project/landscaper/pkg/utils"
 
 	clientlib "sigs.k8s.io/controller-runtime/pkg/client"
 
-	"github.com/gardener/landscaper/pkg/utils/read_write_layer"
+	"github.com/openmcp-project/landscaper/pkg/utils/read_write_layer"
 
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
@@ -21,18 +21,18 @@ import (
 	"k8s.io/utils/clock"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 
-	"github.com/gardener/landscaper/apis/config"
-	v1alpha1config "github.com/gardener/landscaper/apis/config/v1alpha1"
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	mockv1alpha1 "github.com/gardener/landscaper/apis/deployer/mock/v1alpha1"
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	"github.com/gardener/landscaper/pkg/api"
-	mockctlr "github.com/gardener/landscaper/pkg/deployer/mock"
-	execctlr "github.com/gardener/landscaper/pkg/landscaper/controllers/execution"
-	instctlr "github.com/gardener/landscaper/pkg/landscaper/controllers/installations"
-	"github.com/gardener/landscaper/pkg/landscaper/operation"
-	testutils "github.com/gardener/landscaper/test/utils"
-	"github.com/gardener/landscaper/test/utils/envtest"
+	"github.com/openmcp-project/landscaper/apis/config"
+	v1alpha1config "github.com/openmcp-project/landscaper/apis/config/v1alpha1"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	mockv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/mock/v1alpha1"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	"github.com/openmcp-project/landscaper/pkg/api"
+	mockctlr "github.com/openmcp-project/landscaper/pkg/deployer/mock"
+	execctlr "github.com/openmcp-project/landscaper/pkg/landscaper/controllers/execution"
+	instctlr "github.com/openmcp-project/landscaper/pkg/landscaper/controllers/installations"
+	"github.com/openmcp-project/landscaper/pkg/landscaper/operation"
+	testutils "github.com/openmcp-project/landscaper/test/utils"
+	"github.com/openmcp-project/landscaper/test/utils/envtest"
 )
 
 var _ = Describe("Simple", func() {

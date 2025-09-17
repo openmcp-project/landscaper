@@ -22,7 +22,7 @@ fi
 if [[ -z ${MOCKGEN:-} ]]; then
   MOCKGEN="$LOCALBIN/mockgen"
 fi
-LANDSCAPER_MODULE_PATH="github.com/gardener/landscaper"
+LANDSCAPER_MODULE_PATH="github.com/openmcp-project/landscaper"
 API_MODULE_PATH="${LANDSCAPER_MODULE_PATH}"/apis
 
 # Code generation expects this repo to lie under <whatever>/github.com/gardener/landscaper, so let's verify that this is the case.

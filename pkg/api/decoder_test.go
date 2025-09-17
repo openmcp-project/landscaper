@@ -9,10 +9,10 @@ import (
 	. "github.com/onsi/gomega"
 	"k8s.io/apimachinery/pkg/runtime"
 
-	"github.com/gardener/landscaper/pkg/api"
-	"github.com/gardener/landscaper/pkg/api/testdata"
-	v1 "github.com/gardener/landscaper/pkg/api/testdata/v1"
-	v2 "github.com/gardener/landscaper/pkg/api/testdata/v2"
+	"github.com/openmcp-project/landscaper/pkg/api"
+	"github.com/openmcp-project/landscaper/pkg/api/testdata"
+	v1 "github.com/openmcp-project/landscaper/pkg/api/testdata/v1"
+	v2 "github.com/openmcp-project/landscaper/pkg/api/testdata/v2"
 )
 
 var _ = Describe("UniversalInternalVersionDecoder", func() {

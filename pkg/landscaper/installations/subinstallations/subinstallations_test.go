@@ -8,18 +8,18 @@ import (
 	"context"
 	"strings"
 
-	"github.com/gardener/landscaper/pkg/components/model"
+	"github.com/openmcp-project/landscaper/pkg/components/model"
 
-	"github.com/gardener/landscaper/pkg/components/testutils"
+	"github.com/openmcp-project/landscaper/pkg/components/testutils"
 
 	"ocm.software/ocm/api/datacontext"
 	"ocm.software/ocm/api/ocm"
 
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 
-	"github.com/gardener/landscaper/pkg/utils/landscaper"
+	"github.com/openmcp-project/landscaper/pkg/utils/landscaper"
 
-	"github.com/gardener/landscaper/apis/config"
+	"github.com/openmcp-project/landscaper/apis/config"
 
 	cdv2 "github.com/gardener/component-spec/bindings-go/apis/v2"
 	. "github.com/onsi/ginkgo/v2"
@@ -28,15 +28,15 @@ import (
 	"k8s.io/client-go/tools/record"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	"github.com/gardener/landscaper/pkg/api"
-	lstypes "github.com/gardener/landscaper/pkg/components/model/types"
-	"github.com/gardener/landscaper/pkg/components/registries"
-	"github.com/gardener/landscaper/pkg/landscaper/installations"
-	"github.com/gardener/landscaper/pkg/landscaper/installations/subinstallations"
-	lsoperation "github.com/gardener/landscaper/pkg/landscaper/operation"
-	"github.com/gardener/landscaper/test/utils"
-	"github.com/gardener/landscaper/test/utils/envtest"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	"github.com/openmcp-project/landscaper/pkg/api"
+	lstypes "github.com/openmcp-project/landscaper/pkg/components/model/types"
+	"github.com/openmcp-project/landscaper/pkg/components/registries"
+	"github.com/openmcp-project/landscaper/pkg/landscaper/installations"
+	"github.com/openmcp-project/landscaper/pkg/landscaper/installations/subinstallations"
+	lsoperation "github.com/openmcp-project/landscaper/pkg/landscaper/operation"
+	"github.com/openmcp-project/landscaper/test/utils"
+	"github.com/openmcp-project/landscaper/test/utils/envtest"
 )
 
 var _ = Describe("SubInstallation", func() {

@@ -7,7 +7,7 @@ package componentoverwrites
 import (
 	cdv2 "github.com/gardener/component-spec/bindings-go/apis/v2"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 )
 
 // Overwriter is a interface that implements a component reference replace method.

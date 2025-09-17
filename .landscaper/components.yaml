@@ -1,5 +1,5 @@
 components:
-  - name: github.com/gardener/landscaper/helm-deployer
+  - name: github.com/openmcp-project/landscaper/helm-deployer
     version: ${VERSION}
     provider:
       name: ${PROVIDER}
@@ -10,7 +10,7 @@ components:
         access:
           type: github
           commit: ${COMMIT_SHA}
-          repoUrl: github.com/gardener/landscaper
+          repoUrl: github.com/openmcp-project/landscaper
     resources:
       - name: helm-deployer-blueprint
         type: landscaper.gardener.cloud/blueprint
@@ -34,7 +34,7 @@ components:
             - helm-deployer-controller:${VERSION}-linux-arm64
           repository: images/helm-deployer-controller
 
-  - name: github.com/gardener/landscaper/manifest-deployer
+  - name: github.com/openmcp-project/landscaper/manifest-deployer
     version: ${VERSION}
     provider:
       name: ${PROVIDER}
@@ -45,7 +45,7 @@ components:
         access:
           type: github
           commit: ${COMMIT_SHA}
-          repoUrl: github.com/gardener/landscaper
+          repoUrl: github.com/openmcp-project/landscaper
     resources:
       - name: manifest-deployer-blueprint
         type: landscaper.gardener.cloud/blueprint
@@ -69,7 +69,7 @@ components:
             - manifest-deployer-controller:${VERSION}-linux-arm64
           repository: images/manifest-deployer-controller
 
-  - name: github.com/gardener/landscaper/container-deployer
+  - name: github.com/openmcp-project/landscaper/container-deployer
     version: ${VERSION}
     provider:
       name: ${PROVIDER}
@@ -80,7 +80,7 @@ components:
         access:
           type: github
           commit: ${COMMIT_SHA}
-          repoUrl: github.com/gardener/landscaper
+          repoUrl: github.com/openmcp-project/landscaper
     resources:
       - name: container-deployer-blueprint
         type: landscaper.gardener.cloud/blueprint
@@ -120,7 +120,7 @@ components:
             - container-deployer-wait:${VERSION}-linux-arm64
           repository: images/container-deployer-wait
 
-  - name: github.com/gardener/landscaper/mock-deployer
+  - name: github.com/openmcp-project/landscaper/mock-deployer
     version: ${VERSION}
     provider:
       name: ${PROVIDER}
@@ -131,7 +131,7 @@ components:
         access:
           type: github
           commit: ${COMMIT_SHA}
-          repoUrl: github.com/gardener/landscaper
+          repoUrl: github.com/openmcp-project/landscaper
     resources:
       - name: mock-deployer-blueprint
         type: landscaper.gardener.cloud/blueprint
@@ -155,7 +155,7 @@ components:
             - mock-deployer-controller:${VERSION}-linux-arm64
           repository: images/mock-deployer-controller
 
-  - name: github.com/gardener/landscaper
+  - name: github.com/openmcp-project/landscaper
     version: ${VERSION}
     provider:
       name: ${PROVIDER}
@@ -165,19 +165,19 @@ components:
         access:
           type: github
           commit: ${COMMIT_SHA}
-          repoUrl: github.com/gardener/landscaper
+          repoUrl: github.com/openmcp-project/landscaper
     componentReferences:
       - name: helm-deployer
-        componentName: github.com/gardener/landscaper/helm-deployer
+        componentName: github.com/openmcp-project/landscaper/helm-deployer
         version: ${VERSION}
       - name: manifest-deployer
-        componentName: github.com/gardener/landscaper/manifest-deployer
+        componentName: github.com/openmcp-project/landscaper/manifest-deployer
         version: ${VERSION}
       - name: container-deployer
-        componentName: github.com/gardener/landscaper/container-deployer
+        componentName: github.com/openmcp-project/landscaper/container-deployer
         version: ${VERSION}
       - name: mock-deployer
-        componentName: github.com/gardener/landscaper/mock-deployer
+        componentName: github.com/openmcp-project/landscaper/mock-deployer
         version: ${VERSION}
     resources:
       - name: landscaper-chart

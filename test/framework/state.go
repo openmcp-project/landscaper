@@ -7,7 +7,7 @@ package framework
 import (
 	"context"
 
-	"github.com/gardener/landscaper/test/utils/envtest"
+	"github.com/openmcp-project/landscaper/test/utils/envtest"
 )
 
 type CleanupFunc func(ctx context.Context) error

@@ -6,7 +6,7 @@ import (
 	"helm.sh/helm/v3/pkg/chart"
 	"helm.sh/helm/v3/pkg/chart/loader"
 
-	"github.com/gardener/landscaper/pkg/deployer/helm/chartresolver"
+	"github.com/openmcp-project/landscaper/pkg/deployer/helm/chartresolver"
 )
 
 var _ = Describe("Chart tree", func() {

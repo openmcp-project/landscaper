@@ -12,7 +12,7 @@ import (
 	"path/filepath"
 	"reflect"
 
-	"github.com/gardener/landscaper/pkg/components/model"
+	"github.com/openmcp-project/landscaper/pkg/components/model"
 
 	"github.com/mandelsoft/goutils/errors"
 	. "github.com/mandelsoft/goutils/testutils"
@@ -28,12 +28,12 @@ import (
 	ociid "ocm.software/ocm/api/tech/oci/identity"
 	"sigs.k8s.io/yaml"
 
-	"github.com/gardener/landscaper/apis/config"
-	"github.com/gardener/landscaper/apis/core/v1alpha1"
-	helmv1alpha1 "github.com/gardener/landscaper/apis/deployer/helm/v1alpha1"
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	"github.com/gardener/landscaper/pkg/components/model/types"
-	"github.com/gardener/landscaper/pkg/utils/blueprints"
+	"github.com/openmcp-project/landscaper/apis/config"
+	"github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	helmv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/helm/v1alpha1"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	"github.com/openmcp-project/landscaper/pkg/components/model/types"
+	"github.com/openmcp-project/landscaper/pkg/utils/blueprints"
 )
 
 const (

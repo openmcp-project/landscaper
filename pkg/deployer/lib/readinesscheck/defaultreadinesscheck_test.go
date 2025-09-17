@@ -14,7 +14,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/util/intstr"
 
-	"github.com/gardener/landscaper/pkg/deployer/lib/readinesscheck"
+	"github.com/openmcp-project/landscaper/pkg/deployer/lib/readinesscheck"
 )
 
 func replicas(i int32) *int32 {

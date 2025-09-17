@@ -22,30 +22,30 @@ import (
 	"helm.sh/helm/v3/pkg/registry"
 	"k8s.io/utils/ptr"
 
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/selection"
 	"k8s.io/apimachinery/pkg/util/json"
 
-	kutil "github.com/gardener/landscaper/controller-utils/pkg/kubernetes"
+	kutil "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	"github.com/gardener/landscaper/pkg/deployer/helm"
-	lsutils "github.com/gardener/landscaper/pkg/utils/landscaper"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	"github.com/openmcp-project/landscaper/pkg/deployer/helm"
+	lsutils "github.com/openmcp-project/landscaper/pkg/utils/landscaper"
 
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	helmv1alpha1 "github.com/gardener/landscaper/apis/deployer/helm/v1alpha1"
-	"github.com/gardener/landscaper/apis/deployer/helm/v1alpha1/helper"
-	"github.com/gardener/landscaper/apis/deployer/utils/managedresource"
-	"github.com/gardener/landscaper/apis/deployer/utils/readinesschecks"
-	"github.com/gardener/landscaper/test/framework"
-	"github.com/gardener/landscaper/test/utils"
-	"github.com/gardener/landscaper/test/utils/envtest"
+	helmv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/helm/v1alpha1"
+	"github.com/openmcp-project/landscaper/apis/deployer/helm/v1alpha1/helper"
+	"github.com/openmcp-project/landscaper/apis/deployer/utils/managedresource"
+	"github.com/openmcp-project/landscaper/apis/deployer/utils/readinesschecks"
+	"github.com/openmcp-project/landscaper/test/framework"
+	"github.com/openmcp-project/landscaper/test/utils"
+	"github.com/openmcp-project/landscaper/test/utils/envtest"
 )
 
 func HelmDeployerTests(f *framework.Framework) {

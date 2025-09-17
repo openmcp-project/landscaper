@@ -10,16 +10,16 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 	"gopkg.in/yaml.v3"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	lsutils "github.com/gardener/landscaper/pkg/utils/landscaper"
-	"github.com/gardener/landscaper/test/framework"
-	"github.com/gardener/landscaper/test/utils"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	lsutils "github.com/openmcp-project/landscaper/pkg/utils/landscaper"
+	"github.com/openmcp-project/landscaper/test/framework"
+	"github.com/openmcp-project/landscaper/test/utils"
 )
 
 func ImportExecutionsTests(f *framework.Framework) {

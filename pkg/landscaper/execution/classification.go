@@ -3,8 +3,8 @@ package execution
 import (
 	"fmt"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	lserrors "github.com/gardener/landscaper/apis/errors"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	lserrors "github.com/openmcp-project/landscaper/apis/errors"
 )
 
 // DeployItemClassification divides all the deploy items of an execution into the following classes.

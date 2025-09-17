@@ -12,7 +12,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/gardener/landscaper/hack/testcluster/pkg/utils"
+	"github.com/openmcp-project/landscaper/hack/testcluster/pkg/utils"
 
 	appsv1 "k8s.io/api/apps/v1"
 	corev1 "k8s.io/api/core/v1"
@@ -25,8 +25,8 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/yaml"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	kutil "github.com/gardener/landscaper/controller-utils/pkg/kubernetes"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	kutil "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"
 )
 
 // Dumper is a struct to dump logs and useful information about known object for a state

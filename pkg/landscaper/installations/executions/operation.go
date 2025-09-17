@@ -8,7 +8,7 @@ import (
 	"context"
 	"fmt"
 
-	lserrors "github.com/gardener/landscaper/apis/errors"
+	lserrors "github.com/openmcp-project/landscaper/apis/errors"
 
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -16,18 +16,18 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 
-	"github.com/gardener/landscaper/apis/core"
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	lsv1alpha1helper "github.com/gardener/landscaper/apis/core/v1alpha1/helper"
-	"github.com/gardener/landscaper/apis/core/validation"
-	kutil "github.com/gardener/landscaper/controller-utils/pkg/kubernetes"
-	genericresolver "github.com/gardener/landscaper/controller-utils/pkg/landscaper/targetresolver/generic"
-	"github.com/gardener/landscaper/pkg/api"
-	"github.com/gardener/landscaper/pkg/landscaper/installations"
-	"github.com/gardener/landscaper/pkg/landscaper/installations/executions/template"
-	"github.com/gardener/landscaper/pkg/landscaper/installations/executions/template/gotemplate"
-	"github.com/gardener/landscaper/pkg/landscaper/installations/executions/template/spiff"
-	"github.com/gardener/landscaper/pkg/utils/read_write_layer"
+	"github.com/openmcp-project/landscaper/apis/core"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	lsv1alpha1helper "github.com/openmcp-project/landscaper/apis/core/v1alpha1/helper"
+	"github.com/openmcp-project/landscaper/apis/core/validation"
+	kutil "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"
+	genericresolver "github.com/openmcp-project/landscaper/controller-utils/pkg/landscaper/targetresolver/generic"
+	"github.com/openmcp-project/landscaper/pkg/api"
+	"github.com/openmcp-project/landscaper/pkg/landscaper/installations"
+	"github.com/openmcp-project/landscaper/pkg/landscaper/installations/executions/template"
+	"github.com/openmcp-project/landscaper/pkg/landscaper/installations/executions/template/gotemplate"
+	"github.com/openmcp-project/landscaper/pkg/landscaper/installations/executions/template/spiff"
+	"github.com/openmcp-project/landscaper/pkg/utils/read_write_layer"
 )
 
 const (

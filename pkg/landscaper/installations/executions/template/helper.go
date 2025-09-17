@@ -9,12 +9,12 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/gardener/landscaper/pkg/landscaper/installations/executions/template/common"
+	"github.com/openmcp-project/landscaper/pkg/landscaper/installations/executions/template/common"
 
 	"github.com/gardener/component-cli/ociclient/oci"
 	"github.com/gardener/component-spec/bindings-go/utils/selector"
 
-	"github.com/gardener/landscaper/pkg/components/model/types"
+	"github.com/openmcp-project/landscaper/pkg/components/model/types"
 )
 
 // ResolveResources is a helper function that can be used in the specific templating implementations to

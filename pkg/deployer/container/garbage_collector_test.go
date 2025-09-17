@@ -10,7 +10,7 @@ import (
 	"fmt"
 	"time"
 
-	lsutils "github.com/gardener/landscaper/pkg/utils"
+	lsutils "github.com/openmcp-project/landscaper/pkg/utils"
 
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
@@ -23,19 +23,19 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/manager"
 	metricsserver "sigs.k8s.io/controller-runtime/pkg/metrics/server"
 
-	"github.com/gardener/landscaper/apis/deployer/container"
+	"github.com/openmcp-project/landscaper/apis/deployer/container"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	"github.com/gardener/landscaper/pkg/utils/simplelogger"
-	testutils "github.com/gardener/landscaper/test/utils"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	"github.com/openmcp-project/landscaper/pkg/utils/simplelogger"
+	testutils "github.com/openmcp-project/landscaper/test/utils"
 
-	containerv1alpha1 "github.com/gardener/landscaper/apis/deployer/container/v1alpha1"
-	"github.com/gardener/landscaper/pkg/api"
-	containerctlr "github.com/gardener/landscaper/pkg/deployer/container"
+	containerv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/container/v1alpha1"
+	"github.com/openmcp-project/landscaper/pkg/api"
+	containerctlr "github.com/openmcp-project/landscaper/pkg/deployer/container"
 
-	kutil "github.com/gardener/landscaper/controller-utils/pkg/kubernetes"
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	"github.com/gardener/landscaper/test/utils/envtest"
+	kutil "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	"github.com/openmcp-project/landscaper/test/utils/envtest"
 )
 
 var _ = Describe("GarbageCollector", func() {

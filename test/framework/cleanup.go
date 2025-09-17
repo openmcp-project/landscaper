@@ -7,7 +7,7 @@ package framework
 import (
 	"sync"
 
-	"github.com/gardener/landscaper/hack/testcluster/pkg/utils"
+	"github.com/openmcp-project/landscaper/hack/testcluster/pkg/utils"
 )
 
 type CleanupActionHandle *int

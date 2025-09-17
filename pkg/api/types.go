@@ -16,8 +16,8 @@ import (
 	kubernetescheme "k8s.io/client-go/kubernetes/scheme"
 	"sigs.k8s.io/controller-runtime/pkg/client/apiutil"
 
-	configinstall "github.com/gardener/landscaper/apis/config/install"
-	coreinstall "github.com/gardener/landscaper/apis/core/install"
+	configinstall "github.com/openmcp-project/landscaper/apis/config/install"
+	coreinstall "github.com/openmcp-project/landscaper/apis/core/install"
 )
 
 var (

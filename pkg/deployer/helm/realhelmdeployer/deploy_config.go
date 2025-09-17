@@ -8,9 +8,9 @@ import (
 	"encoding/json"
 	"time"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	helmv1alpha1 "github.com/gardener/landscaper/apis/deployer/helm/v1alpha1"
-	lserror "github.com/gardener/landscaper/apis/errors"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	helmv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/helm/v1alpha1"
+	lserror "github.com/openmcp-project/landscaper/apis/errors"
 )
 
 const (

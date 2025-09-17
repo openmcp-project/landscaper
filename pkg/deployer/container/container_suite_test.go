@@ -17,16 +17,16 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/manager"
 	metricsserver "sigs.k8s.io/controller-runtime/pkg/metrics/server"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	containerv1alpha1 "github.com/gardener/landscaper/apis/deployer/container/v1alpha1"
-	kutil "github.com/gardener/landscaper/controller-utils/pkg/kubernetes"
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	"github.com/gardener/landscaper/pkg/api"
-	containerctlr "github.com/gardener/landscaper/pkg/deployer/container"
-	"github.com/gardener/landscaper/pkg/deployer/lib/timeout"
-	lsutils "github.com/gardener/landscaper/pkg/utils"
-	"github.com/gardener/landscaper/test/utils"
-	"github.com/gardener/landscaper/test/utils/envtest"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	containerv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/container/v1alpha1"
+	kutil "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	"github.com/openmcp-project/landscaper/pkg/api"
+	containerctlr "github.com/openmcp-project/landscaper/pkg/deployer/container"
+	"github.com/openmcp-project/landscaper/pkg/deployer/lib/timeout"
+	lsutils "github.com/openmcp-project/landscaper/pkg/utils"
+	"github.com/openmcp-project/landscaper/test/utils"
+	"github.com/openmcp-project/landscaper/test/utils/envtest"
 )
 
 func TestConfig(t *testing.T) {

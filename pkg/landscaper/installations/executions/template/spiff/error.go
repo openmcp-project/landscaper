@@ -7,7 +7,7 @@ package spiff
 import (
 	"strings"
 
-	"github.com/gardener/landscaper/pkg/landscaper/installations/executions/template"
+	"github.com/openmcp-project/landscaper/pkg/landscaper/installations/executions/template"
 )
 
 // TemplateError wraps a spiff templating error and adds more human-readable information.

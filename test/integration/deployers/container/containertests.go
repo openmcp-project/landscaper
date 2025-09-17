@@ -22,14 +22,14 @@ import (
 	"k8s.io/apimachinery/pkg/util/wait"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	lsv1alpha1helper "github.com/gardener/landscaper/apis/core/v1alpha1/helper"
-	containerv1alpha1 "github.com/gardener/landscaper/apis/deployer/container/v1alpha1"
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	"github.com/gardener/landscaper/pkg/deployer/container"
-	lsutils "github.com/gardener/landscaper/pkg/utils/landscaper"
-	"github.com/gardener/landscaper/test/framework"
-	"github.com/gardener/landscaper/test/utils"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	lsv1alpha1helper "github.com/openmcp-project/landscaper/apis/core/v1alpha1/helper"
+	containerv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/container/v1alpha1"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	"github.com/openmcp-project/landscaper/pkg/deployer/container"
+	lsutils "github.com/openmcp-project/landscaper/pkg/utils/landscaper"
+	"github.com/openmcp-project/landscaper/test/framework"
+	"github.com/openmcp-project/landscaper/test/utils"
 )
 
 // ContainerTests implements tests for the Landscaper container deployer.

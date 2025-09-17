@@ -7,8 +7,8 @@ package targets
 import (
 	"context"
 
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	"github.com/gardener/landscaper/test/framework"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	"github.com/openmcp-project/landscaper/test/framework"
 )
 
 // RegisterTests registers all tests of this package

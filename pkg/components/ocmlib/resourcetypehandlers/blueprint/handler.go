@@ -15,10 +15,10 @@ import (
 	bpdownload "ocm.software/ocm/api/ocm/extensions/download/handlers/blueprint"
 	common "ocm.software/ocm/api/utils/misc"
 
-	"github.com/gardener/landscaper/apis/mediatype"
-	componentscommon "github.com/gardener/landscaper/pkg/components/common"
-	"github.com/gardener/landscaper/pkg/components/model"
-	"github.com/gardener/landscaper/pkg/components/ocmlib/registries"
+	"github.com/openmcp-project/landscaper/apis/mediatype"
+	componentscommon "github.com/openmcp-project/landscaper/pkg/components/common"
+	"github.com/openmcp-project/landscaper/pkg/components/model"
+	"github.com/openmcp-project/landscaper/pkg/components/ocmlib/registries"
 )
 
 func init() {

@@ -12,9 +12,9 @@ import (
 	"os"
 	"path/filepath"
 
-	utilerrors "github.com/gardener/landscaper/controller-utils/pkg/errors"
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	lc "github.com/gardener/landscaper/controller-utils/pkg/logging/constants"
+	utilerrors "github.com/openmcp-project/landscaper/controller-utils/pkg/errors"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	lc "github.com/openmcp-project/landscaper/controller-utils/pkg/logging/constants"
 
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 
@@ -24,7 +24,7 @@ import (
 	"k8s.io/apimachinery/pkg/util/sets"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	"github.com/gardener/landscaper/controller-utils/pkg/webhook/certificates"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/webhook/certificates"
 )
 
 // GeDNSNamesFromNamespacedName creates a list of DNS names derived from a service name and namespace.

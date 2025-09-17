@@ -9,13 +9,13 @@ import (
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	"github.com/gardener/landscaper/apis/deployer/utils/managedresource"
+	"github.com/openmcp-project/landscaper/apis/deployer/utils/managedresource"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	cr "github.com/gardener/landscaper/apis/deployer/utils/continuousreconcile"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	cr "github.com/openmcp-project/landscaper/apis/deployer/utils/continuousreconcile"
 
-	lscore "github.com/gardener/landscaper/apis/core"
-	health "github.com/gardener/landscaper/apis/deployer/utils/readinesschecks"
+	lscore "github.com/openmcp-project/landscaper/apis/core"
+	health "github.com/openmcp-project/landscaper/apis/deployer/utils/readinesschecks"
 )
 
 const HelmChartRepoCredentialsKey = "helmChartRepoCredentials"

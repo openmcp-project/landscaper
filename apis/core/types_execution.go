@@ -11,7 +11,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 
-	"github.com/gardener/landscaper/apis/utils"
+	"github.com/openmcp-project/landscaper/apis/utils"
 )
 
 // ExecutionManagedByLabel is the label of a deploy item that contains the name of the managed execution.

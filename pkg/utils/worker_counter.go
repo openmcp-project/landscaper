@@ -3,7 +3,7 @@ package utils
 import (
 	"sync"
 
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 )
 
 type WorkerCounter struct {

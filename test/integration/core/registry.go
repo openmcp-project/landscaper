@@ -27,16 +27,16 @@ import (
 	"k8s.io/utils/ptr"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	lsv1alpha1helper "github.com/gardener/landscaper/apis/core/v1alpha1/helper"
-	"github.com/gardener/landscaper/apis/mediatype"
-	kutil "github.com/gardener/landscaper/controller-utils/pkg/kubernetes"
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	"github.com/gardener/landscaper/pkg/components/model/types"
-	componentresolvers2 "github.com/gardener/landscaper/pkg/components/testutils"
-	lsutils "github.com/gardener/landscaper/pkg/utils/landscaper"
-	"github.com/gardener/landscaper/test/framework"
-	"github.com/gardener/landscaper/test/utils"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	lsv1alpha1helper "github.com/openmcp-project/landscaper/apis/core/v1alpha1/helper"
+	"github.com/openmcp-project/landscaper/apis/mediatype"
+	kutil "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	"github.com/openmcp-project/landscaper/pkg/components/model/types"
+	componentresolvers2 "github.com/openmcp-project/landscaper/pkg/components/testutils"
+	lsutils "github.com/openmcp-project/landscaper/pkg/utils/landscaper"
+	"github.com/openmcp-project/landscaper/test/framework"
+	"github.com/openmcp-project/landscaper/test/utils"
 )
 
 func RegistryTest(f *framework.Framework) {

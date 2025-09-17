@@ -14,9 +14,9 @@ import (
 	"k8s.io/client-go/tools/clientcmd"
 	"k8s.io/client-go/tools/clientcmd/api"
 
-	"github.com/gardener/landscaper/apis/core/v1alpha1"
-	"github.com/gardener/landscaper/apis/core/v1alpha1/targettypes"
-	"github.com/gardener/landscaper/controller-utils/pkg/landscaper/targetresolver"
+	"github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	"github.com/openmcp-project/landscaper/apis/core/v1alpha1/targettypes"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/landscaper/targetresolver"
 )
 
 // GetShootClusterNameFromKubeconfig determines the name of a Gardener shoot cluster from a given kubeconfig.

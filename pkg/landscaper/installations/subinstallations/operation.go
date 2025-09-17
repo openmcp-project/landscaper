@@ -4,7 +4,7 @@
 
 package subinstallations
 
-import "github.com/gardener/landscaper/pkg/landscaper/installations"
+import "github.com/openmcp-project/landscaper/pkg/landscaper/installations"
 
 // Operation contains all subinstallation operations
 type Operation struct {

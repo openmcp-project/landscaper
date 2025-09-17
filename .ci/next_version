@@ -18,13 +18,13 @@ mkdir /lib64 && ln -s /lib/libc.musl-x86_64.so.1 /lib64/ld-linux-x86-64.so.2
 VERSION=$(cat ${PROJECT_ROOT}/VERSION)
 
 # 0,/)/ only replaces the first ocurrence until the first dep block with ')' is reached
-sed -i -e "0,/)/{s@github.com/gardener/landscaper/apis .*@github.com/gardener/landscaper/apis v0.0.0-00010101000000-000000000000@}" \
+sed -i -e "0,/)/{s@github.com/openmcp-project/landscaper/apis .*@github.com/openmcp-project/landscaper/apis v0.0.0-00010101000000-000000000000@}" \
   ${PROJECT_ROOT}/go.mod
 
-sed -i -e "0,/)/{s@github.com/gardener/landscaper/controller-utils .*@github.com/gardener/landscaper/controller-utils v0.0.0-00010101000000-000000000000@}" \
+sed -i -e "0,/)/{s@github.com/openmcp-project/landscaper/controller-utils .*@github.com/openmcp-project/landscaper/controller-utils v0.0.0-00010101000000-000000000000@}" \
   ${PROJECT_ROOT}/go.mod
 
-sed -i -e "0,/)/{s@github.com/gardener/landscaper/apis .*@github.com/gardener/landscaper/apis v0.0.0-00010101000000-000000000000@}" \
+sed -i -e "0,/)/{s@github.com/openmcp-project/landscaper/apis .*@github.com/openmcp-project/landscaper/apis v0.0.0-00010101000000-000000000000@}" \
   ${PROJECT_ROOT}/controller-utils/go.mod
 
 (

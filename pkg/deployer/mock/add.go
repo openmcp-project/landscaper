@@ -15,11 +15,11 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/manager"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 
-	mockv1alpha1 "github.com/gardener/landscaper/apis/deployer/mock/v1alpha1"
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	deployerlib "github.com/gardener/landscaper/pkg/deployer/lib"
-	"github.com/gardener/landscaper/pkg/utils"
-	"github.com/gardener/landscaper/pkg/version"
+	mockv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/mock/v1alpha1"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	deployerlib "github.com/openmcp-project/landscaper/pkg/deployer/lib"
+	"github.com/openmcp-project/landscaper/pkg/utils"
+	"github.com/openmcp-project/landscaper/pkg/version"
 )
 
 // AddDeployerToManager adds a new helm deployers to a controller manager.

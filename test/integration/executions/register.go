@@ -7,7 +7,7 @@ package executions
 import (
 	"time"
 
-	"github.com/gardener/landscaper/test/framework"
+	"github.com/openmcp-project/landscaper/test/framework"
 )
 
 var (

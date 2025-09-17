@@ -14,14 +14,14 @@ import (
 	"k8s.io/client-go/kubernetes/scheme"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	manifestv1alpha2 "github.com/gardener/landscaper/apis/deployer/manifest/v1alpha2"
-	"github.com/gardener/landscaper/apis/deployer/utils/managedresource"
-	kutil "github.com/gardener/landscaper/controller-utils/pkg/kubernetes"
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	"github.com/gardener/landscaper/pkg/api"
-	"github.com/gardener/landscaper/pkg/deployer/lib/resourcemanager"
-	"github.com/gardener/landscaper/pkg/deployer/lib/timeout"
-	"github.com/gardener/landscaper/test/utils/envtest"
+	manifestv1alpha2 "github.com/openmcp-project/landscaper/apis/deployer/manifest/v1alpha2"
+	"github.com/openmcp-project/landscaper/apis/deployer/utils/managedresource"
+	kutil "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	"github.com/openmcp-project/landscaper/pkg/api"
+	"github.com/openmcp-project/landscaper/pkg/deployer/lib/resourcemanager"
+	"github.com/openmcp-project/landscaper/pkg/deployer/lib/timeout"
+	"github.com/openmcp-project/landscaper/test/utils/envtest"
 )
 
 var _ = Describe("ObjectApplier", func() {

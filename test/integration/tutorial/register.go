@@ -5,7 +5,7 @@
 package tutorial
 
 import (
-	"github.com/gardener/landscaper/test/framework"
+	"github.com/openmcp-project/landscaper/test/framework"
 )
 
 // RegisterTests registers all tests of the package

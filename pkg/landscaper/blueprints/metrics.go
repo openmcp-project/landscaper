@@ -7,7 +7,7 @@ package blueprints
 import (
 	"github.com/prometheus/client_golang/prometheus"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 )
 
 const (

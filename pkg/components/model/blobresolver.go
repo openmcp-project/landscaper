@@ -8,7 +8,7 @@ import (
 	"context"
 	"io"
 
-	"github.com/gardener/landscaper/pkg/components/model/types"
+	"github.com/openmcp-project/landscaper/pkg/components/model/types"
 )
 
 type BlobResolver interface {

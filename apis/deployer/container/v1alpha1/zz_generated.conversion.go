@@ -17,10 +17,10 @@ import (
 	conversion "k8s.io/apimachinery/pkg/conversion"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 
-	config "github.com/gardener/landscaper/apis/config"
-	corev1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	container "github.com/gardener/landscaper/apis/deployer/container"
-	continuousreconcile "github.com/gardener/landscaper/apis/deployer/utils/continuousreconcile"
+	config "github.com/openmcp-project/landscaper/apis/config"
+	corev1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	container "github.com/openmcp-project/landscaper/apis/deployer/container"
+	continuousreconcile "github.com/openmcp-project/landscaper/apis/deployer/utils/continuousreconcile"
 )
 
 func init() {

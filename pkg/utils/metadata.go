@@ -4,7 +4,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	"github.com/gardener/landscaper/apis/core"
+	"github.com/openmcp-project/landscaper/apis/core"
 )
 
 const (

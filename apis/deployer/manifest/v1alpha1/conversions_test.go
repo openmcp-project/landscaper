@@ -10,11 +10,11 @@ import (
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 
-	"github.com/gardener/landscaper/apis/deployer/utils/managedresource"
+	"github.com/openmcp-project/landscaper/apis/deployer/utils/managedresource"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	manifestcore "github.com/gardener/landscaper/apis/deployer/manifest"
-	manifestv1alpha1 "github.com/gardener/landscaper/apis/deployer/manifest/v1alpha1"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	manifestcore "github.com/openmcp-project/landscaper/apis/deployer/manifest"
+	manifestv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/manifest/v1alpha1"
 )
 
 var _ = Describe("Conversion", func() {

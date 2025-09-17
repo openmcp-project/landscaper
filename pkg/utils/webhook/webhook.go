@@ -9,17 +9,17 @@ import (
 	"fmt"
 	"net/http"
 
-	lc "github.com/gardener/landscaper/controller-utils/pkg/logging/constants"
+	lc "github.com/openmcp-project/landscaper/controller-utils/pkg/logging/constants"
 
 	admissionv1 "k8s.io/api/admission/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/util/validation/field"
 	"sigs.k8s.io/controller-runtime/pkg/webhook/admission"
 
-	lscore "github.com/gardener/landscaper/apis/core"
-	"github.com/gardener/landscaper/apis/core/validation"
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	webhooklib "github.com/gardener/landscaper/controller-utils/pkg/webhook"
+	lscore "github.com/openmcp-project/landscaper/apis/core"
+	"github.com/openmcp-project/landscaper/apis/core/validation"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	webhooklib "github.com/openmcp-project/landscaper/controller-utils/pkg/webhook"
 )
 
 // INSTALLATION

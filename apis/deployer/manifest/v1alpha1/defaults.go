@@ -5,7 +5,7 @@
 package v1alpha1
 
 import (
-	lsconfigv1alpha1 "github.com/gardener/landscaper/apis/config/v1alpha1"
+	lsconfigv1alpha1 "github.com/openmcp-project/landscaper/apis/config/v1alpha1"
 
 	"k8s.io/apimachinery/pkg/runtime"
 )

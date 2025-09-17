@@ -13,10 +13,10 @@ import (
 	. "github.com/onsi/gomega/gstruct"
 	"k8s.io/apimachinery/pkg/util/validation/field"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 
-	cr "github.com/gardener/landscaper/apis/deployer/utils/continuousreconcile"
-	crval "github.com/gardener/landscaper/apis/deployer/utils/continuousreconcile/validation"
+	cr "github.com/openmcp-project/landscaper/apis/deployer/utils/continuousreconcile"
+	crval "github.com/openmcp-project/landscaper/apis/deployer/utils/continuousreconcile/validation"
 )
 
 func TestConfig(t *testing.T) {

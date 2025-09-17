@@ -9,7 +9,7 @@ import (
 	"path"
 	"time"
 
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
@@ -19,15 +19,15 @@ import (
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 	"k8s.io/apimachinery/pkg/runtime/serializer"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	lsutils "github.com/gardener/landscaper/pkg/utils/landscaper"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	lsutils "github.com/openmcp-project/landscaper/pkg/utils/landscaper"
 
-	manifestv1alpha1 "github.com/gardener/landscaper/apis/deployer/manifest/v1alpha1"
-	manifestv1alpha2 "github.com/gardener/landscaper/apis/deployer/manifest/v1alpha2"
-	kutil "github.com/gardener/landscaper/controller-utils/pkg/kubernetes"
-	manifest "github.com/gardener/landscaper/pkg/deployer/manifest"
-	"github.com/gardener/landscaper/test/framework"
-	"github.com/gardener/landscaper/test/utils"
+	manifestv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/manifest/v1alpha1"
+	manifestv1alpha2 "github.com/openmcp-project/landscaper/apis/deployer/manifest/v1alpha2"
+	kutil "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"
+	manifest "github.com/openmcp-project/landscaper/pkg/deployer/manifest"
+	"github.com/openmcp-project/landscaper/test/framework"
+	"github.com/openmcp-project/landscaper/test/utils"
 )
 
 func ManifestDeployerTestsForNewReconcile(f *framework.Framework) {

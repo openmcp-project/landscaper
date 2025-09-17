@@ -17,16 +17,16 @@ import (
 	"testing"
 	"time"
 
-	testutils2 "github.com/gardener/landscaper/pkg/components/testutils"
+	testutils2 "github.com/openmcp-project/landscaper/pkg/components/testutils"
 
 	"ocm.software/ocm/api/datacontext"
 	"ocm.software/ocm/api/ocm"
 
 	corev1 "k8s.io/api/core/v1"
 
-	"github.com/gardener/landscaper/pkg/landscaper/jsonschema/testreg"
+	"github.com/openmcp-project/landscaper/pkg/landscaper/jsonschema/testreg"
 
-	apiconfig "github.com/gardener/landscaper/apis/config"
+	apiconfig "github.com/openmcp-project/landscaper/apis/config"
 
 	"github.com/gardener/component-cli/ociclient"
 	"github.com/gardener/component-cli/ociclient/cache"
@@ -39,14 +39,14 @@ import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	"github.com/gardener/landscaper/apis/mediatype"
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	"github.com/gardener/landscaper/pkg/components/model"
-	"github.com/gardener/landscaper/pkg/components/model/types"
-	"github.com/gardener/landscaper/pkg/components/registries"
-	"github.com/gardener/landscaper/pkg/landscaper/jsonschema"
-	testutils "github.com/gardener/landscaper/test/utils"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	"github.com/openmcp-project/landscaper/apis/mediatype"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	"github.com/openmcp-project/landscaper/pkg/components/model"
+	"github.com/openmcp-project/landscaper/pkg/components/model/types"
+	"github.com/openmcp-project/landscaper/pkg/components/registries"
+	"github.com/openmcp-project/landscaper/pkg/landscaper/jsonschema"
+	testutils "github.com/openmcp-project/landscaper/test/utils"
 )
 
 const jsonschemaResourceType = "landscaper.gardener.cloud/jsonschema"

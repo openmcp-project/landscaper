@@ -11,10 +11,10 @@ import (
 
 	"github.com/spf13/cobra"
 
-	lc "github.com/gardener/landscaper/controller-utils/pkg/logging/constants"
+	lc "github.com/openmcp-project/landscaper/controller-utils/pkg/logging/constants"
 
-	"github.com/gardener/landscaper/pkg/deployer/container/wait"
-	"github.com/gardener/landscaper/pkg/version"
+	"github.com/openmcp-project/landscaper/pkg/deployer/container/wait"
+	"github.com/openmcp-project/landscaper/pkg/version"
 )
 
 func NewContainerDeployerWaitCommand(ctx context.Context) *cobra.Command {

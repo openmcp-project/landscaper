@@ -9,7 +9,7 @@ import (
 	v1 "k8s.io/api/core/v1"
 	"k8s.io/utils/ptr"
 
-	"github.com/gardener/landscaper/apis/core/v1alpha1/targettypes"
+	"github.com/openmcp-project/landscaper/apis/core/v1alpha1/targettypes"
 )
 
 func TestConfig(t *testing.T) {

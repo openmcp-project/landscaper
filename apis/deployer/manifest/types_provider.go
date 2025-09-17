@@ -7,10 +7,10 @@ package manifest
 import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	"github.com/gardener/landscaper/apis/deployer/utils/managedresource"
+	"github.com/openmcp-project/landscaper/apis/deployer/utils/managedresource"
 
-	cr "github.com/gardener/landscaper/apis/deployer/utils/continuousreconcile"
-	health "github.com/gardener/landscaper/apis/deployer/utils/readinesschecks"
+	cr "github.com/openmcp-project/landscaper/apis/deployer/utils/continuousreconcile"
+	health "github.com/openmcp-project/landscaper/apis/deployer/utils/readinesschecks"
 )
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object

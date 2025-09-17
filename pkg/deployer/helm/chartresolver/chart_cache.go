@@ -12,9 +12,9 @@ import (
 
 	"helm.sh/helm/v3/pkg/chart"
 
-	helmv1alpha1 "github.com/gardener/landscaper/apis/deployer/helm/v1alpha1"
-	"github.com/gardener/landscaper/apis/utils"
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
+	helmv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/helm/v1alpha1"
+	"github.com/openmcp-project/landscaper/apis/utils"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 )
 
 const (

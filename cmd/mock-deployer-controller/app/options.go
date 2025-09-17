@@ -7,9 +7,9 @@ package app
 import (
 	flag "github.com/spf13/pflag"
 
-	mockv1alpha1 "github.com/gardener/landscaper/apis/deployer/mock/v1alpha1"
-	deployercmd "github.com/gardener/landscaper/pkg/deployer/lib/cmd"
-	mockctrl "github.com/gardener/landscaper/pkg/deployer/mock"
+	mockv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/mock/v1alpha1"
+	deployercmd "github.com/openmcp-project/landscaper/pkg/deployer/lib/cmd"
+	mockctrl "github.com/openmcp-project/landscaper/pkg/deployer/mock"
 )
 
 type options struct {

@@ -8,8 +8,8 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
 
-	"github.com/gardener/landscaper/apis/config"
-	"github.com/gardener/landscaper/apis/config/v1alpha1"
+	"github.com/openmcp-project/landscaper/apis/config"
+	"github.com/openmcp-project/landscaper/apis/config/v1alpha1"
 )
 
 var (

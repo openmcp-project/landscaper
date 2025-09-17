@@ -18,14 +18,14 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/manager"
 	metricsserver "sigs.k8s.io/controller-runtime/pkg/metrics/server"
 
-	lsconfig "github.com/gardener/landscaper/apis/config"
-	lsinstall "github.com/gardener/landscaper/apis/core/install"
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	lc "github.com/gardener/landscaper/controller-utils/pkg/logging/constants"
-	"github.com/gardener/landscaper/pkg/landscaper/controllers/targetsync"
-	"github.com/gardener/landscaper/pkg/landscaper/crdmanager"
-	lsutils "github.com/gardener/landscaper/pkg/utils"
-	"github.com/gardener/landscaper/pkg/version"
+	lsconfig "github.com/openmcp-project/landscaper/apis/config"
+	lsinstall "github.com/openmcp-project/landscaper/apis/core/install"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	lc "github.com/openmcp-project/landscaper/controller-utils/pkg/logging/constants"
+	"github.com/openmcp-project/landscaper/pkg/landscaper/controllers/targetsync"
+	"github.com/openmcp-project/landscaper/pkg/landscaper/crdmanager"
+	lsutils "github.com/openmcp-project/landscaper/pkg/utils"
+	"github.com/openmcp-project/landscaper/pkg/version"
 )
 
 // NewTargetSyncControllerCommand creates a new command for the landscaper service controller

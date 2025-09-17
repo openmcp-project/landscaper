@@ -8,8 +8,8 @@ import (
 	. "github.com/onsi/gomega"
 	"sigs.k8s.io/yaml"
 
-	"github.com/gardener/landscaper/pkg/utils/blueprints"
-	lsutils "github.com/gardener/landscaper/pkg/utils/landscaper"
+	"github.com/openmcp-project/landscaper/pkg/utils/blueprints"
+	lsutils "github.com/openmcp-project/landscaper/pkg/utils/landscaper"
 )
 
 func GetBlueprint(path string) *blueprints.Blueprint {

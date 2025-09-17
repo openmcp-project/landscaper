@@ -7,10 +7,10 @@ package targetsync
 import (
 	"time"
 
-	"github.com/gardener/landscaper/pkg/utils/clusters"
+	"github.com/openmcp-project/landscaper/pkg/utils/clusters"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	"github.com/gardener/landscaper/apis/core/v1alpha1/targettypes"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	"github.com/openmcp-project/landscaper/apis/core/v1alpha1/targettypes"
 )
 
 const (

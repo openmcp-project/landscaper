@@ -14,7 +14,7 @@ import (
 	flag "github.com/spf13/pflag"
 	"k8s.io/apimachinery/pkg/util/sets"
 
-	utilerrors "github.com/gardener/landscaper/controller-utils/pkg/errors"
+	utilerrors "github.com/openmcp-project/landscaper/controller-utils/pkg/errors"
 )
 
 var kcidSync = &sync.Mutex{}

@@ -11,7 +11,7 @@ import (
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gstruct"
 
-	"github.com/gardener/landscaper/apis/mediatype"
+	"github.com/openmcp-project/landscaper/apis/mediatype"
 )
 
 func TestConfig(t *testing.T) {

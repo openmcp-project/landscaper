@@ -1,14 +1,14 @@
-module github.com/gardener/landscaper/controller-utils
+module github.com/openmcp-project/landscaper/controller-utils
 
 go 1.25.1
 
 require (
-	github.com/gardener/landscaper/apis v0.0.0-00010101000000-000000000000
 	github.com/go-logr/logr v1.4.3
 	github.com/go-logr/zapr v1.3.0
 	github.com/golang/mock v1.6.0
 	github.com/onsi/ginkgo/v2 v2.25.3
 	github.com/onsi/gomega v1.38.2
+	github.com/openmcp-project/landscaper/apis v0.0.0-00010101000000-000000000000
 	github.com/pkg/errors v0.9.1
 	github.com/spf13/pflag v1.0.10
 	go.uber.org/zap v1.27.0
@@ -21,7 +21,7 @@ require (
 	sigs.k8s.io/yaml v1.6.0
 )
 
-replace github.com/gardener/landscaper/apis => ../apis
+replace github.com/openmcp-project/landscaper/apis => ../apis
 
 require (
 	github.com/Masterminds/semver/v3 v3.4.0 // indirect
@@ -78,7 +78,7 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	k8s.io/klog/v2 v2.130.1 // indirect
-	k8s.io/kube-openapi v0.0.0-20250909170358-d67c058d9372 // indirect
+	k8s.io/kube-openapi v0.0.0-20250910181357-589584f1c912 // indirect
 	k8s.io/utils v0.0.0-20250820121507-0af2bda4dd1d // indirect
 	sigs.k8s.io/json v0.0.0-20241014173422-cfa47c3a1cc8 // indirect
 	sigs.k8s.io/randfill v1.0.0 // indirect

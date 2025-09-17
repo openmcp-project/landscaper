@@ -19,7 +19,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/manager"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 
-	kutil "github.com/gardener/landscaper/controller-utils/pkg/kubernetes"
+	kutil "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"
 )
 
 // ShouldReconcile reconciles the given reconciler with the given request

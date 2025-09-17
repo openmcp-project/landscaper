@@ -7,10 +7,10 @@ package mock
 import (
 	"k8s.io/apimachinery/pkg/runtime"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	mockinstall "github.com/gardener/landscaper/apis/deployer/mock/install"
-	"github.com/gardener/landscaper/pkg/api"
-	"github.com/gardener/landscaper/pkg/utils"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	mockinstall "github.com/openmcp-project/landscaper/apis/deployer/mock/install"
+	"github.com/openmcp-project/landscaper/pkg/api"
+	"github.com/openmcp-project/landscaper/pkg/utils"
 )
 
 // Type is the type name of the deployer.

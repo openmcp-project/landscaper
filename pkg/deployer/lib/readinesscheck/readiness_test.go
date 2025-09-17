@@ -16,8 +16,8 @@ import (
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
-	mock_client "github.com/gardener/landscaper/controller-utils/pkg/kubernetes/mock"
-	"github.com/gardener/landscaper/pkg/deployer/lib/interruption"
+	mock_client "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes/mock"
+	"github.com/openmcp-project/landscaper/pkg/deployer/lib/interruption"
 )
 
 func createUnstructuredPod() *unstructured.Unstructured {

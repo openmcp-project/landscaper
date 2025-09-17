@@ -10,7 +10,7 @@ import (
 	"k8s.io/apimachinery/pkg/conversion"
 	"k8s.io/apimachinery/pkg/runtime"
 
-	"github.com/gardener/landscaper/apis/core"
+	"github.com/openmcp-project/landscaper/apis/core"
 )
 
 func addConversionFuncs(scheme *runtime.Scheme) error {

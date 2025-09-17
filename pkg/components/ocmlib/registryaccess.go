@@ -10,8 +10,8 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	"github.com/gardener/landscaper/pkg/utils"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	"github.com/openmcp-project/landscaper/pkg/utils"
 
 	v2 "github.com/gardener/component-spec/bindings-go/apis/v2"
 	"ocm.software/ocm/api/ocm/compdesc"
@@ -20,15 +20,15 @@ import (
 	"ocm.software/ocm/api/tech/signing/handlers/rsa"
 	"ocm.software/ocm/api/tech/signing/signutils"
 
-	"github.com/gardener/landscaper/pkg/components/model/types"
+	"github.com/openmcp-project/landscaper/pkg/components/model/types"
 
 	"ocm.software/ocm/api/ocm"
 	"ocm.software/ocm/api/utils/runtime"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	"github.com/gardener/landscaper/pkg/components/model"
-	_ "github.com/gardener/landscaper/pkg/components/ocmlib/repository/inline"
-	_ "github.com/gardener/landscaper/pkg/components/ocmlib/repository/local"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	"github.com/openmcp-project/landscaper/pkg/components/model"
+	_ "github.com/openmcp-project/landscaper/pkg/components/ocmlib/repository/inline"
+	_ "github.com/openmcp-project/landscaper/pkg/components/ocmlib/repository/local"
 )
 
 type RegistryAccess struct {

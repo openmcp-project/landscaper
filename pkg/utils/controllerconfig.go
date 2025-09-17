@@ -7,7 +7,7 @@ package utils
 import (
 	"sigs.k8s.io/controller-runtime/pkg/controller"
 
-	"github.com/gardener/landscaper/apis/config"
+	"github.com/openmcp-project/landscaper/apis/config"
 )
 
 // ConvertCommonControllerConfigToControllerOptions converts the landscaper CommonControllerConfig to controller.Options.

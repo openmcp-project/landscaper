@@ -12,10 +12,10 @@ import (
 	"github.com/mandelsoft/vfs/pkg/osfs"
 	"github.com/spf13/cobra"
 
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	lc "github.com/gardener/landscaper/controller-utils/pkg/logging/constants"
-	initpkg "github.com/gardener/landscaper/pkg/deployer/container/init"
-	"github.com/gardener/landscaper/pkg/version"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	lc "github.com/openmcp-project/landscaper/controller-utils/pkg/logging/constants"
+	initpkg "github.com/openmcp-project/landscaper/pkg/deployer/container/init"
+	"github.com/openmcp-project/landscaper/pkg/version"
 )
 
 func NewContainerDeployerInitCommand(ctx context.Context) *cobra.Command {

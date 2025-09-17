@@ -29,9 +29,9 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/client/apiutil"
 
-	kutil "github.com/gardener/landscaper/controller-utils/pkg/kubernetes"
-	"github.com/gardener/landscaper/controller-utils/pkg/webhook/certificates"
-	"github.com/gardener/landscaper/hack/testcluster/pkg/utils"
+	kutil "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/webhook/certificates"
+	"github.com/openmcp-project/landscaper/hack/testcluster/pkg/utils"
 )
 
 const (

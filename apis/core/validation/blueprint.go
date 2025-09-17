@@ -16,8 +16,8 @@ import (
 	"k8s.io/apimachinery/pkg/util/validation"
 	"k8s.io/apimachinery/pkg/util/validation/field"
 
-	"github.com/gardener/landscaper/apis/core"
-	coreinstall "github.com/gardener/landscaper/apis/core/install"
+	"github.com/openmcp-project/landscaper/apis/core"
+	coreinstall "github.com/openmcp-project/landscaper/apis/core/install"
 )
 
 var landscaperScheme = runtime.NewScheme()

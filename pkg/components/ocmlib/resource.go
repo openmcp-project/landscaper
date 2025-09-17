@@ -18,10 +18,10 @@ import (
 	common "ocm.software/ocm/api/utils/misc"
 	"ocm.software/ocm/api/utils/runtime"
 
-	"github.com/gardener/landscaper/pkg/components/model"
-	"github.com/gardener/landscaper/pkg/components/model/types"
-	"github.com/gardener/landscaper/pkg/components/ocmlib/registries"
-	_ "github.com/gardener/landscaper/pkg/components/ocmlib/resourcetypehandlers"
+	"github.com/openmcp-project/landscaper/pkg/components/model"
+	"github.com/openmcp-project/landscaper/pkg/components/model/types"
+	"github.com/openmcp-project/landscaper/pkg/components/ocmlib/registries"
+	_ "github.com/openmcp-project/landscaper/pkg/components/ocmlib/resourcetypehandlers"
 )
 
 type Resource struct {

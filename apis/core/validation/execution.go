@@ -9,7 +9,7 @@ import (
 	"k8s.io/apimachinery/pkg/util/sets"
 	"k8s.io/apimachinery/pkg/util/validation/field"
 
-	"github.com/gardener/landscaper/apis/core"
+	"github.com/openmcp-project/landscaper/apis/core"
 )
 
 // ValidateExecution validates an Execution

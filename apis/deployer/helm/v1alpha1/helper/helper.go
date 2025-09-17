@@ -8,7 +8,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 
-	helmv1alpha1 "github.com/gardener/landscaper/apis/deployer/helm/v1alpha1"
+	helmv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/helm/v1alpha1"
 )
 
 // ProviderStatusToRawExtension converts a helm status into a raw extension

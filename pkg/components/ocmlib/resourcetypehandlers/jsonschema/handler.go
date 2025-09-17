@@ -12,9 +12,9 @@ import (
 	"ocm.software/ocm/api/ocm"
 	"ocm.software/ocm/api/utils/compression"
 
-	"github.com/gardener/landscaper/apis/mediatype"
-	"github.com/gardener/landscaper/pkg/components/model"
-	"github.com/gardener/landscaper/pkg/components/ocmlib/registries"
+	"github.com/openmcp-project/landscaper/apis/mediatype"
+	"github.com/openmcp-project/landscaper/pkg/components/model"
+	"github.com/openmcp-project/landscaper/pkg/components/ocmlib/registries"
 )
 
 func init() {

@@ -8,8 +8,8 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/gardener/landscaper/pkg/components/model"
-	"github.com/gardener/landscaper/pkg/components/model/types"
+	"github.com/openmcp-project/landscaper/pkg/components/model"
+	"github.com/openmcp-project/landscaper/pkg/components/model/types"
 )
 
 func newTestResource(res *types.Resource) *TestResource {

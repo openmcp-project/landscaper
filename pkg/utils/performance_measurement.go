@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 )
 
 const (

@@ -56,16 +56,16 @@ echo "> Transfer Component version ${EFFECTIVE_VERSION} to ${PROVIDER}"
 "$OCM" transfer ctf --copy-resources --recursive --overwrite ${COMPONENT_ARCHIVE_PATH} ${PROVIDER}
 
 echo "> Remote Component Version Landscaper"
-"$OCM" get componentversion --repo OCIRegistry::${PROVIDER} "github.com/gardener/landscaper:${EFFECTIVE_VERSION}" -o yaml
+"$OCM" get componentversion --repo OCIRegistry::${PROVIDER} "github.com/openmcp-project/landscaper:${EFFECTIVE_VERSION}" -o yaml
 
 echo "> Remote Component Version Helm Deployer"
-"$OCM" get componentversion --repo OCIRegistry::${PROVIDER} "github.com/gardener/landscaper/helm-deployer:${EFFECTIVE_VERSION}" -o yaml
+"$OCM" get componentversion --repo OCIRegistry::${PROVIDER} "github.com/openmcp-project/landscaper/helm-deployer:${EFFECTIVE_VERSION}" -o yaml
 
 echo "> Remote Component Version Manifest Deployer"
-"$OCM" get componentversion --repo OCIRegistry::${PROVIDER} "github.com/gardener/landscaper/manifest-deployer:${EFFECTIVE_VERSION}" -o yaml
+"$OCM" get componentversion --repo OCIRegistry::${PROVIDER} "github.com/openmcp-project/landscaper/manifest-deployer:${EFFECTIVE_VERSION}" -o yaml
 
 echo "> Remote Component Version Container Deployer"
-"$OCM" get componentversion --repo OCIRegistry::${PROVIDER} "github.com/gardener/landscaper/container-deployer:${EFFECTIVE_VERSION}" -o yaml
+"$OCM" get componentversion --repo OCIRegistry::${PROVIDER} "github.com/openmcp-project/landscaper/container-deployer:${EFFECTIVE_VERSION}" -o yaml
 
 echo "> Remote Component Version Mock Deployer"
-"$OCM" get componentversion --repo OCIRegistry::${PROVIDER} "github.com/gardener/landscaper/mock-deployer:${EFFECTIVE_VERSION}" -o yaml
+"$OCM" get componentversion --repo OCIRegistry::${PROVIDER} "github.com/openmcp-project/landscaper/mock-deployer:${EFFECTIVE_VERSION}" -o yaml

@@ -7,7 +7,7 @@ package jsonpath_test
 import (
 	"testing"
 
-	"github.com/gardener/landscaper/pkg/landscaper/dataobjects/jsonpath"
+	"github.com/openmcp-project/landscaper/pkg/landscaper/dataobjects/jsonpath"
 
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"

@@ -10,9 +10,9 @@ import (
 
 	"github.com/spf13/cobra"
 
-	lc "github.com/gardener/landscaper/controller-utils/pkg/logging/constants"
-	mockctrl "github.com/gardener/landscaper/pkg/deployer/mock"
-	"github.com/gardener/landscaper/pkg/version"
+	lc "github.com/openmcp-project/landscaper/controller-utils/pkg/logging/constants"
+	mockctrl "github.com/openmcp-project/landscaper/pkg/deployer/mock"
+	"github.com/openmcp-project/landscaper/pkg/version"
 )
 
 func NewMockDeployerControllerCommand(ctx context.Context) *cobra.Command {

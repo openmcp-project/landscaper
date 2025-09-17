@@ -7,11 +7,11 @@ package validation
 import (
 	"k8s.io/apimachinery/pkg/util/validation/field"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	manifestv1alpha2 "github.com/gardener/landscaper/apis/deployer/manifest/v1alpha2"
-	crval "github.com/gardener/landscaper/apis/deployer/utils/continuousreconcile/validation"
-	"github.com/gardener/landscaper/apis/deployer/utils/managedresource/validation"
-	health "github.com/gardener/landscaper/apis/deployer/utils/readinesschecks/validation"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	manifestv1alpha2 "github.com/openmcp-project/landscaper/apis/deployer/manifest/v1alpha2"
+	crval "github.com/openmcp-project/landscaper/apis/deployer/utils/continuousreconcile/validation"
+	"github.com/openmcp-project/landscaper/apis/deployer/utils/managedresource/validation"
+	health "github.com/openmcp-project/landscaper/apis/deployer/utils/readinesschecks/validation"
 )
 
 // ValidateProviderConfiguration validates a manifest provider configuration.

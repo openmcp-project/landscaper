@@ -20,8 +20,8 @@ import (
 	"ocm.software/ocm/api/utils/runtime"
 	"ocm.software/ocm/api/utils/tarutils"
 
-	"github.com/gardener/landscaper/pkg/components/ocmlib/repository"
-	"github.com/gardener/landscaper/pkg/components/ocmlib/repository/inline"
+	"github.com/openmcp-project/landscaper/pkg/components/ocmlib/repository"
+	"github.com/openmcp-project/landscaper/pkg/components/ocmlib/repository/inline"
 )
 
 const (

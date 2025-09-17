@@ -13,11 +13,11 @@ import (
 	"k8s.io/apimachinery/pkg/runtime/serializer"
 	ctrl "sigs.k8s.io/controller-runtime"
 
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 
-	"github.com/gardener/landscaper/apis/config"
-	"github.com/gardener/landscaper/apis/config/v1alpha1"
-	"github.com/gardener/landscaper/pkg/api"
+	"github.com/openmcp-project/landscaper/apis/config"
+	"github.com/openmcp-project/landscaper/apis/config/v1alpha1"
+	"github.com/openmcp-project/landscaper/pkg/api"
 )
 
 // Options describes the options to configure the Landscaper controller.

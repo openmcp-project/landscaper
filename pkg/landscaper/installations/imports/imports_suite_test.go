@@ -10,13 +10,13 @@ import (
 	"path/filepath"
 	"testing"
 
-	testutils2 "github.com/gardener/landscaper/pkg/components/testutils"
+	testutils2 "github.com/openmcp-project/landscaper/pkg/components/testutils"
 
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	testutils "github.com/gardener/landscaper/test/utils"
+	testutils "github.com/openmcp-project/landscaper/test/utils"
 )
 
 func TestConfig(t *testing.T) {

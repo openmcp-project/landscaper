@@ -20,13 +20,13 @@ echo "Landscaper release: updating go.mod files"
 VERSION=$(cat ${PROJECT_ROOT}/VERSION)
 
 # 0,/)/ only replaces the first ocurrence until the first dep block with ')' is reached
-sed -i -e "0,/)/{s@github.com/gardener/landscaper/apis .*@github.com/gardener/landscaper/apis ${VERSION}@}" \
+sed -i -e "0,/)/{s@github.com/openmcp-project/landscaper/apis .*@github.com/openmcp-project/landscaper/apis ${VERSION}@}" \
   ${PROJECT_ROOT}/go.mod
 
-sed -i -e "0,/)/{s@github.com/gardener/landscaper/controller-utils .*@github.com/gardener/landscaper/controller-utils ${VERSION}@}" \
+sed -i -e "0,/)/{s@github.com/openmcp-project/landscaper/controller-utils .*@github.com/openmcp-project/landscaper/controller-utils ${VERSION}@}" \
   ${PROJECT_ROOT}/go.mod
 
-sed -i -e "0,/)/{s@github.com/gardener/landscaper/apis .*@github.com/gardener/landscaper/apis ${VERSION}@}" \
+sed -i -e "0,/)/{s@github.com/openmcp-project/landscaper/apis .*@github.com/gardener/openmcp-project/apis ${VERSION}@}" \
   ${PROJECT_ROOT}/controller-utils/go.mod
 
 echo "Landscaper release: starting revendor"

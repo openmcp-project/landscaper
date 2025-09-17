@@ -12,7 +12,7 @@ import (
 	"ocm.software/ocm/api/utils"
 	"ocm.software/ocm/api/utils/runtime"
 
-	"github.com/gardener/landscaper/pkg/components/ocmlib/repository"
+	"github.com/openmcp-project/landscaper/pkg/components/ocmlib/repository"
 )
 
 const (

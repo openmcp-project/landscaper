@@ -13,10 +13,10 @@ import (
 
 	"github.com/go-logr/logr"
 
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	"github.com/gardener/landscaper/pkg/utils"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	"github.com/openmcp-project/landscaper/pkg/utils"
 
-	"github.com/gardener/landscaper/apis/config"
+	"github.com/openmcp-project/landscaper/apis/config"
 )
 
 // AddControllerToManager adds the context defaulterController to the defaulterController manager.

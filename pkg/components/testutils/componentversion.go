@@ -13,10 +13,10 @@ import (
 
 	cdv2 "github.com/gardener/component-spec/bindings-go/apis/v2"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	"github.com/gardener/landscaper/pkg/components/model"
-	"github.com/gardener/landscaper/pkg/components/model/componentoverwrites"
-	"github.com/gardener/landscaper/pkg/components/model/types"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	"github.com/openmcp-project/landscaper/pkg/components/model"
+	"github.com/openmcp-project/landscaper/pkg/components/model/componentoverwrites"
+	"github.com/openmcp-project/landscaper/pkg/components/model/types"
 )
 
 type TestComponentVersion struct {

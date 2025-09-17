@@ -8,10 +8,10 @@ import (
 	"context"
 	"fmt"
 
-	lserror "github.com/gardener/landscaper/apis/errors"
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
+	lserror "github.com/openmcp-project/landscaper/apis/errors"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 )
 
 type HookType string

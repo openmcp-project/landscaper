@@ -12,8 +12,8 @@ import (
 	"os"
 	"path/filepath"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	"github.com/gardener/landscaper/pkg/api"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	"github.com/openmcp-project/landscaper/pkg/api"
 
 	"github.com/mandelsoft/vfs/pkg/vfs"
 	"sigs.k8s.io/controller-runtime/pkg/client"

@@ -8,15 +8,15 @@ import (
 	"context"
 	"errors"
 
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
-	"github.com/gardener/landscaper/pkg/utils"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	"github.com/openmcp-project/landscaper/pkg/utils"
 
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/client-go/tools/record"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	"github.com/gardener/landscaper/pkg/components/model"
-	lsoperation "github.com/gardener/landscaper/pkg/landscaper/operation"
+	"github.com/openmcp-project/landscaper/pkg/components/model"
+	lsoperation "github.com/openmcp-project/landscaper/pkg/landscaper/operation"
 )
 
 // OperationBuilder is a builder helper struct for building an installation operation.

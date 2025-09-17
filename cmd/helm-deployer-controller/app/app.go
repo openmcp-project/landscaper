@@ -12,14 +12,14 @@ import (
 	"os"
 	"time"
 
-	"github.com/gardener/landscaper/controller-utils/pkg/logging"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 
 	"github.com/spf13/cobra"
 
-	lc "github.com/gardener/landscaper/controller-utils/pkg/logging/constants"
-	helmctrl "github.com/gardener/landscaper/pkg/deployer/helm"
-	"github.com/gardener/landscaper/pkg/utils"
-	"github.com/gardener/landscaper/pkg/version"
+	lc "github.com/openmcp-project/landscaper/controller-utils/pkg/logging/constants"
+	helmctrl "github.com/openmcp-project/landscaper/pkg/deployer/helm"
+	"github.com/openmcp-project/landscaper/pkg/utils"
+	"github.com/openmcp-project/landscaper/pkg/version"
 )
 
 func NewHelmDeployerControllerCommand(ctx context.Context) *cobra.Command {

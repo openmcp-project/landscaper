@@ -24,10 +24,10 @@ echo "> Building binaries for component '$COMPONENT' ..."
     arch=${pf#*/}
     CGO_ENABLED=0 GOOS=$os GOARCH=$arch \
       go build -a -o "bin/${COMPONENT}-${os}.${arch}" \
-      -ldflags "-X github.com/gardener/landscaper/pkg/version.GitVersion=$EFFECTIVE_VERSION \
-                -X github.com/gardener/landscaper/pkg/version.gitTreeState=$([ -z git status --porcelain 2>/dev/null ] && echo clean || echo dirty) \
-                -X github.com/gardener/landscaper/pkg/version.gitCommit=$(git rev-parse --verify HEAD) \
-                -X github.com/gardener/landscaper/pkg/version.buildDate=$(date --rfc-3339=seconds | sed 's/ /T/')" \
+      -ldflags "-X github.com/openmcp-project/landscaper/pkg/version.GitVersion=$EFFECTIVE_VERSION \
+                -X github.com/openmcp-project/landscaper/pkg/version.gitTreeState=$([ -z git status --porcelain 2>/dev/null ] && echo clean || echo dirty) \
+                -X github.com/openmcp-project/landscaper/pkg/version.gitCommit=$(git rev-parse --verify HEAD) \
+                -X github.com/openmcp-project/landscaper/pkg/version.buildDate=$(date --rfc-3339=seconds | sed 's/ /T/')" \
       "cmd/$COMPONENT_MAIN_PATH/main.go"
   done
 )

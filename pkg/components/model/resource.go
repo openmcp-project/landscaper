@@ -9,7 +9,7 @@ import (
 
 	v1 "ocm.software/ocm/api/ocm/compdesc/meta/v1"
 
-	"github.com/gardener/landscaper/pkg/components/model/types"
+	"github.com/openmcp-project/landscaper/pkg/components/model/types"
 )
 
 type Resource interface {

@@ -18,7 +18,7 @@ import (
 	"k8s.io/client-go/tools/clientcmd"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	"github.com/gardener/landscaper/hack/testcluster/pkg"
+	"github.com/openmcp-project/landscaper/hack/testcluster/pkg"
 )
 
 // CommonOptions describes common options are used across different test cluster commands.

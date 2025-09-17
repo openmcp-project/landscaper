@@ -14,9 +14,9 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/manager"
 	metricsserver "sigs.k8s.io/controller-runtime/pkg/metrics/server"
 
-	lsinstall "github.com/gardener/landscaper/apis/core/install"
-	lsutils "github.com/gardener/landscaper/pkg/utils"
-	"github.com/gardener/landscaper/test/utils/envtest"
+	lsinstall "github.com/openmcp-project/landscaper/apis/core/install"
+	lsutils "github.com/openmcp-project/landscaper/pkg/utils"
+	"github.com/openmcp-project/landscaper/test/utils/envtest"
 )
 
 func TestConfig(t *testing.T) {

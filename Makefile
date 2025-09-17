@@ -11,7 +11,7 @@ EFFECTIVE_VERSION                              := $(shell $(REPO_ROOT)/hack/get-
 BUILD_OS                                       := "linux"
 BUILD_ARCH                                     := "amd64"
 
-REGISTRY                                       := europe-docker.pkg.dev/sap-gcp-cp-k8s-stable-hub/landscaper
+REGISTRY                                       := ghcr.io/openmcp-project
 DOCKER_BUILDER_NAME := "ls-multiarch"
 
 DISABLE_CLEANUP := false

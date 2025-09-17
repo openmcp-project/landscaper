@@ -13,7 +13,7 @@ import (
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gstruct"
 
-	"github.com/gardener/landscaper/apis/config/v1alpha1"
+	"github.com/openmcp-project/landscaper/apis/config/v1alpha1"
 )
 
 func TestConfig(t *testing.T) {

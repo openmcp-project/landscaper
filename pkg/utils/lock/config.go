@@ -1,6 +1,6 @@
 package lock
 
-import "github.com/gardener/landscaper/apis/config"
+import "github.com/openmcp-project/landscaper/apis/config"
 
 func IsLockingEnabledForMainControllers(config *config.LandscaperConfiguration) bool {
 	return config != nil &&

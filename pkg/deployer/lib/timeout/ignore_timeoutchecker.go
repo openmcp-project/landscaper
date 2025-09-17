@@ -4,8 +4,8 @@ import (
 	"context"
 	"time"
 
-	lsv1alpha1 "github.com/gardener/landscaper/apis/core/v1alpha1"
-	lserrors "github.com/gardener/landscaper/apis/errors"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	lserrors "github.com/openmcp-project/landscaper/apis/errors"
 )
 
 // ignoreTimeoutChecker is a TimeoutChecker which never raises a timeout error.
