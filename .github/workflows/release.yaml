@@ -1,0 +1,116 @@
+name: Versioned Release
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write # we need this to be able to push tags
+  pull-requests: read
+
+jobs:
+  release_tag:
+    name: Release version
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Create GitHub App token
+        uses: actions/create-github-app-token@a8d616148505b5069dccd32f177bb87d7f39123b # v2
+        id: app-token
+        with:
+          # required
+          app-id: 1312871
+          private-key: ${{ secrets.OPENMCP_CI_APP_PRIVATE_KEY }}
+
+      - name: Checkout code
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          fetch-tags: true
+          fetch-depth: 0
+          submodules: recursive
+
+      - name: Read and validate VERSION
+        id: version
+        run: |
+          VERSION=$(task version)
+          if [[ ! "$VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-dev(-[0-9a-f]*)?)?$ ]]; then
+            echo "Invalid version format: $VERSION"
+            exit 1
+          fi
+          echo "New version: $VERSION"
+          echo "version=$VERSION" >> $GITHUB_ENV
+
+      - name: Skip release if version is a dev version
+        if: contains(env.version, '-dev')
+        run: |
+          echo "Skipping development version release: ${{ env.version }}"
+          echo "SKIP=true" >> $GITHUB_ENV
+          exit 0
+
+      - name: Check if VERSION is already tagged
+        id: check_tag
+        run: |
+          if git rev-parse "refs/tags/${{ env.version }}" >/dev/null 2>&1; then
+            echo "Tag ${{ env.version }} already exists. Skipping release."
+            echo "SKIP=true" >> $GITHUB_ENV
+            exit 0
+          fi
+          echo "Tag ${{ env.version }} doesn't exists. Proceeding with release."
+
+      - name: Create Git tag
+        if: ${{ env.SKIP != 'true' }}
+        run: |
+          AUTHOR_NAME=$(git log -1 --pretty=format:'%an')
+          AUTHOR_EMAIL=$(git log -1 --pretty=format:'%ae')
+          echo "Tagging as $AUTHOR_NAME <$AUTHOR_EMAIL>"
+          
+          echo "AUTHOR_NAME=$AUTHOR_NAME" >> $GITHUB_ENV
+          echo "AUTHOR_EMAIL=$AUTHOR_EMAIL" >> $GITHUB_ENV
+          
+          git config user.name "$AUTHOR_NAME"
+          git config user.email "$AUTHOR_EMAIL"
+          
+          git tag -a "${{ env.version }}" -m "Release ${{ env.version }}"
+          git push origin "${{ env.version }}"
+          
+          NESTED_GO_MODULES="$(task release:list-nested-modules)"
+          
+          for MODULE in $NESTED_GO_MODULES; do
+            git tag -a "${MODULE}/${{ env.version }}" -m "Release ${{ env.version }}"
+            git push origin "${MODULE}/${{ env.version }}"
+          done
+
+      - name: Create GitHub release
+        if: ${{ env.SKIP != 'true' }}
+        uses: softprops/action-gh-release@72f2c25fcb47643c292f7107632f7a47c1df5cd8 # v2
+        with:
+          tag_name: ${{ env.version }}
+          name: Release ${{ env.version }}
+          body: ""
+          draft: true
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push dev VERSION
+        if: ${{ env.SKIP != 'true' }}
+        run: |
+          echo "${{ env.version }}-dev" > VERSION
+          
+          sed -i -e "0,/)/{s@github.com/openmcp-project/landscaper/apis .*@github.com/openmcp-project/landscaper/apis v0.0.0-00010101000000-000000000000@}" \
+            go.mod
+        
+          sed -i -e "0,/)/{s@github.com/openmcp-project/landscaper/controller-utils .*@github.com/openmcp-project/landscaper/controller-utils v0.0.0-00010101000000-000000000000@}" \
+            go.mod
+          
+          sed -i -e "0,/)/{s@github.com/openmcp-project/landscaper/apis .*@github.com/openmcp-project/landscaper/apis v0.0.0-00010101000000-000000000000@}" \
+            controller-utils/go.mod
+          
+          git config user.name "${{ env.AUTHOR_NAME }}"
+          git config user.email "${{ env.AUTHOR_EMAIL }}"
+          git add VERSION
+          git add go.mod
+          git add controller-utils/go.mod
+          git commit -m "chore(release): Update VERSION to ${{ env.version }}-dev"
+          git push origin main

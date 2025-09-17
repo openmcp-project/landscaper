@@ -1,0 +1,83 @@
+name: Publish
+
+on:
+  push:
+    tags:
+      - v*
+  workflow_dispatch:
+
+permissions:
+  packages: write
+
+jobs:
+  release_tag:
+    name: Release version
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Create GitHub App token
+        uses: actions/create-github-app-token@a8d616148505b5069dccd32f177bb87d7f39123b # v2
+        id: app-token
+        with:
+          # required
+          app-id: 1312871
+          private-key: ${{ secrets.OPENMCP_CI_APP_PRIVATE_KEY }}
+
+      - name: Checkout code
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          fetch-tags: true
+          fetch-depth: 0
+          submodules: recursive
+
+      - name: Read and validate VERSION
+        id: version
+        run: |
+          VERSION=$(task version)
+          if [[ ! "$VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-dev(-[0-9a-f]*)?)?$ ]]; then
+            echo "Invalid version format: $VERSION"
+            exit 1
+          fi
+          echo "New version: $VERSION"
+          echo "version=$VERSION" >> $GITHUB_ENV
+
+      - name: Skip release if version is a dev version
+        if: contains(env.version, '-dev')
+        run: |
+          echo "Skipping development version release: ${{ env.version }}"
+          echo "SKIP=true" >> $GITHUB_ENV
+          exit 0
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@29109295f81e9208d7d86ff1c6c12d2833863392 # v3
+
+      - name: Set up Docker Context for Buildx
+        id: buildx-context
+        run: |
+          docker context create builders
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@184bdaa0721073962dff0199f1fb9940f07167d1 # v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        timeout-minutes: 5
+        uses: docker/setup-buildx-action@e468171a9de216ec08956ac3ada2f0791b6bd435 # v3
+        with:
+          version: latest
+
+      - name: Set up Go
+        uses: actions/setup-go@d35c59abb061a4a6fb18e82ac0862c26744d6ab5 # v5
+        with:
+          go-version-file: go.mod
+
+      - name: Build and Push Images
+        run: |
+          make docker-images
+
+      - name: Build and Push OCM Component
+        run: |
+          make component
