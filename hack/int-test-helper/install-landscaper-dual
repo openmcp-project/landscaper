@@ -58,8 +58,8 @@ if [[ -z $INGRESS_URL ]]; then
     exit 1
 fi
 
-OCI_REPO="europe-docker.pkg.dev/sap-gcp-cp-k8s-stable-hub/landscaper"
-COMPONENT_NAME="github.com/gardener/landscaper"
+OCI_REPO="ghcr.op/openmcp-project"
+COMPONENT_NAME="github.com/openmcp-project/landscaper"
 
 echo "> Pull landscaper charts"
 ocm download resources --repo $OCI_REPO "${COMPONENT_NAME}:${LANDSCAPER_VERSION}" landscaper-controller-rbac-chart --download-handlers -O "${WORKDIR}/landscaper-controller-rbac-chart.tgz"
