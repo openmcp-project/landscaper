@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -28,6 +29,12 @@ jobs:
 
       - name: make build
         run: make build
+
+      - name: make verify
+        run: make verify
+
+      - name: make test
+        run: make test
 
       - name: run integration test
         env:
