@@ -4,7 +4,8 @@
 # Landscaper
 
 [![REUSE status](https://api.reuse.software/badge/github.com/openmcp-project/landscaper)](https://api.reuse.software/info/github.com/openmcp-project/landscaper)
-[![CI Build](https://github.com/openmcp-project/landscaper/actions/workflows/publish.yaml/badge.svg)](https://github.com/openmcp-project/landscaper/actions/workflows/publish.yaml/badge.svg)
+[![Publish](https://github.com/openmcp-project/landscaper/actions/workflows/publish.yaml/badge.svg)](https://github.com/openmcp-project/landscaper/actions/workflows/publish.yaml/badge.svg)
+[![Integration Test](https://github.com/openmcp-project/landscaper/actions/workflows/integration_test_main.yaml/badge.svg)](https://github.com/openmcp-project/landscaper/actions/workflows/integration_test_main.yaml/badge.svg)
 [![Go Report Card](https://goreportcard.com/badge/github.com/openmcp-project/landscaper)](https://goreportcard.com/report/github.com/openmp-project/landscaper)
 
 <!-- Motivation -->
