@@ -221,3 +221,7 @@ registry: localbin ## Download registry locally if necessary. If wrong version i
 	@test -s $(REGISTRY_BINARY) && $(REGISTRY_BINARY) --version | grep -q $(REGISTRY_VERSION) || \
 	( echo "Installing local registry ..."; \
 	REGISTRY=$(REGISTRY_BINARY) LOCALBIN=$(LOCALBIN) $(REPO_ROOT)/hack/install-registry.sh $(REGISTRY_VERSION) )
+
+.PHONY: release
+release:
+	@$(REPO_ROOT)/hack/release.sh
