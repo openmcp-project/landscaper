@@ -33,7 +33,7 @@ jobs:
       - name: Read and validate VERSION
         id: version
         run: |
-          VERSION=$(task version)
+          VERSION=$(cat ./VERSION)
           if [[ ! "$VERSION" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-dev(-[0-9a-f]*)?)?$ ]]; then
             echo "Invalid version format: $VERSION"
             exit 1
@@ -74,7 +74,7 @@ jobs:
           git tag -a "${{ env.version }}" -m "Release ${{ env.version }}"
           git push origin "${{ env.version }}"
           
-          NESTED_GO_MODULES="$(task release:list-nested-modules)"
+          NESTED_GO_MODULES="apis controller-utils"
           
           for MODULE in $NESTED_GO_MODULES; do
             git tag -a "${MODULE}/${{ env.version }}" -m "Release ${{ env.version }}"
