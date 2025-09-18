@@ -12,7 +12,7 @@ permissions:
 jobs:
   release_tag:
     name: Release version
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest-8core
     steps:
       - name: Create GitHub App token
         uses: actions/create-github-app-token@a8d616148505b5069dccd32f177bb87d7f39123b # v2
