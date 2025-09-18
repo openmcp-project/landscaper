@@ -4,8 +4,8 @@
 # Landscaper
 
 [![REUSE status](https://api.reuse.software/badge/github.com/openmcp-project/landscaper)](https://api.reuse.software/info/github.com/openmcp-project/landscaper)
-[![CI Build status](https://concourse.ci.gardener.cloud/api/v1/teams/landscaper/pipelines/landscaper-master/jobs/master-head-update-job/badge)](https://concourse.ci.gardener.cloud/teams/landscaper/pipelines/landscaper-master/jobs/master-head-update-job)
-[![Go Report Card](https://goreportcard.com/badge/github.com/landscaper/landscaper)](https://goreportcard.com/report/github.com/landscaper/landscaper)
+[![CI Build](https://github.com/openmcp-project/landscaper/actions/workflows/publish.yaml/badge.svg)](https://github.com/openmcp-project/landscaper/actions/workflows/publish.yaml/badge.svg)
+[![Go Report Card](https://goreportcard.com/badge/github.com/openmcp-project/landscaper)](https://goreportcard.com/report/github.com/openmp-project/landscaper)
 
 <!-- Motivation -->
 _Landscaper_ provides the means to describe, install and maintain cloud-native landscapes. It allows
