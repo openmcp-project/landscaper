@@ -8,7 +8,7 @@ require (
 	github.com/golang/mock v1.6.0
 	github.com/onsi/ginkgo/v2 v2.25.3
 	github.com/onsi/gomega v1.38.2
-	github.com/openmcp-project/landscaper/apis v0.0.0-00010101000000-000000000000
+	github.com/openmcp-project/landscaper/apis v1.0.0
 	github.com/pkg/errors v0.9.1
 	github.com/spf13/pflag v1.0.10
 	go.uber.org/zap v1.27.0
