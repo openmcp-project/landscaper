@@ -1,4 +1,4 @@
-name: Integration Test Pull Main Update
+name: Integration Test Main Update
 
 on:
   push:
