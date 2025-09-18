@@ -1,0 +1,53 @@
+name: Integration Test Pull Request
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest-8core
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+        with:
+          submodules: recursive
+
+      - name: Set up Go
+        uses: actions/setup-go@d35c59abb061a4a6fb18e82ac0862c26744d6ab5 # v5
+        with:
+          go-version-file: go.mod
+
+      - name: make revendor
+        run: make revendor
+
+      - name: make build
+        run: make build
+
+      - name: run integration test
+        env:
+          GARDENER_KUBECONFIG: ${{ secrets.GARDENER_LAAS_SERVICE_ACCOUNT }}
+        run: |
+          VERSION="$("./hack/get-version.sh")"
+          
+          echo "check if integration tests should be started"
+          (
+            PR_ID=$(git config -f "./.git/config" pullrequest.id)
+            echo "PR_ID: " $PR_ID
+          
+            GIT_COMMENT=$(git show -s --format=%s)
+            echo "git comment: " $GIT_COMMENT
+          
+            if git show -s --format=%s | grep run-int-tests; then
+              echo "'run-int-tests' in commit message, integration tests should be started"
+              "./hack/integration-test-runner.sh" "$GARDENER_KUBECONFIG" "garden-laas" "$VERSION" "$PR_ID"
+            elif git branch --show-current | grep -E "renovate/|dependabot/"; then
+              echo "Dependency update from renovate or dependabot, integration tests should be started"
+              "./hack/integration-test-runner.sh" "$GARDENER_KUBECONFIG" "garden-laas" "$VERSION" "$PR_ID"
+             else
+                echo "integration tests are skipped"
+            fi
+          )
+
