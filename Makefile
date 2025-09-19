@@ -12,6 +12,7 @@ BUILD_OS                                       := "linux"
 BUILD_ARCH                                     := "amd64"
 
 REGISTRY                                       := ghcr.io/openmcp-project
+OCM_REGISTRY                                   := $(REGISTRY)/components
 DOCKER_BUILDER_NAME := "ls-multiarch"
 
 DISABLE_CLEANUP := false
@@ -95,7 +96,7 @@ docker-images: build ## Builds images for all controllers locally. The images ar
 
 .PHONY: component
 component: ocm ## Builds and pushes the Component Descriptor. Also pushes the images and combines them into multi-platform images. Requires the docker images to have been built before.
-	@OCM=$(OCM) $(REPO_ROOT)/hack/generate-cd.sh $(REGISTRY)
+	@OCM=$(OCM) $(REPO_ROOT)/hack/generate-cd.sh $(OCM_REGISTRY)
 
 .PHONY: build-resources ## Wrapper for 'make docker-images component'.
 build-resources: docker-images component
