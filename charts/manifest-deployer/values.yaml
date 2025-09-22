@@ -16,15 +16,15 @@ deployer:
   #   kubeconfig: |
   #     <landscaper-cluster-kubeconfig>
 
-#  identity: ""
+  #  identity: ""
   namespace: ""
-#  verbosityLevel: info
+  #  verbosityLevel: info
 
-#  targetSelector:
-#  - annotations:
-#    - key:
-#      operator:
-#      value:
+  #  targetSelector:
+  #  - annotations:
+  #    - key:
+  #      operator:
+  #      value:
 
   controller:
     workers: 30
@@ -45,7 +45,7 @@ deployer:
 replicaCount: 1
 
 image:
-  repository: ghcr.io/openmcp-project/github.com/openmcp-project/landscaper/manifest-deployer/images/manifest-deployer-controller
+  repository: ghcr.io/openmcp-project/components/github.com/openmcp-project/landscaper/manifest-deployer/images/manifest-deployer-controller
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   # tag: ""
@@ -65,10 +65,12 @@ serviceAccount:
 
 podAnnotations: {}
 
-podSecurityContext: {}
+podSecurityContext:
+  {}
   # fsGroup: 2000
 
-securityContext: {}
+securityContext:
+  {}
   # capabilities:
   #   drop:
   #   - ALL
