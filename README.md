@@ -1,6 +1,5 @@
 <img src="./logo/landscaper.svg" width="221">
 
-
 # Landscaper
 
 [![REUSE status](https://api.reuse.software/badge/github.com/openmcp-project/landscaper)](https://api.reuse.software/info/github.com/openmcp-project/landscaper)
@@ -28,3 +27,10 @@ of reconciliation to enforce a desired state, which also allows for updates to b
 - A list of available deployers is maintained [here](docs/deployer).
 - A glossary can be found [here](docs/concepts/Glossary.md)
 - Installation instructions can be found [here](docs/installation/install-landscaper-controller.md)
+
+### Information about this fork
+
+This repository is a fork of https://github.com/gardener/landscaper. The support for the Landscaper project is sunsetting in the _Gardener_ organization.
+Maintainenance and development of the Landscaper project will continue in the https://github.com/openmcp-project/landscaper repository.
+This doesn't affect any feature or functionality of the Landscaper project.
+OCI images and OCM components can be consumed directly from within this repository GitHub Container Registry.
