@@ -81,7 +81,7 @@ registry) or through embedding it as a local blob (e.g. as an additional layer o
 
 For more details on ocm components in general, see [here](https://ocm.software/). For more details on the usage of ocm
 components in the context of the landscaper, check out the blueprint and components section of the guided tour 
-[here](https://github.com/gardener/landscaper/blob/master/docs/guided-tour/README.md#blueprints-and-components).
+[here](https://github.com/openmcp-project/landscaper/blob/master/docs/guided-tour/README.md#blueprints-and-components).
 
 [↑](#glossary)
 

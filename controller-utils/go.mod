@@ -21,7 +21,10 @@ require (
 	sigs.k8s.io/yaml v1.6.0
 )
 
-replace github.com/openmcp-project/landscaper/apis => ../apis
+replace (
+	github.com/openmcp-project/landscaper/apis => ../apis
+	github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go => ../legacy-component-spec/bindings-go
+)
 
 require (
 	github.com/Masterminds/semver/v3 v3.4.0 // indirect
@@ -32,7 +35,6 @@ require (
 	github.com/evanphx/json-patch/v5 v5.9.11 // indirect
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
 	github.com/fxamacker/cbor/v2 v2.9.0 // indirect
-	github.com/gardener/component-spec/bindings-go v0.0.98 // indirect
 	github.com/ghodss/yaml v1.0.0 // indirect
 	github.com/go-openapi/jsonpointer v0.21.0 // indirect
 	github.com/go-openapi/jsonreference v0.21.0 // indirect
@@ -50,6 +52,7 @@ require (
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.3-0.20250322232337-35a7c28c31ee // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
+	github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go v0.0.0-00010101000000-000000000000 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/prometheus/client_golang v1.22.0 // indirect
 	github.com/prometheus/client_model v0.6.1 // indirect

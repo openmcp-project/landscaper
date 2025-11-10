@@ -8,8 +8,6 @@ require (
 	github.com/cloudflare/cfssl v1.6.5
 	github.com/distribution/reference v0.6.0
 	github.com/docker/cli v28.5.2+incompatible
-	github.com/gardener/component-cli v0.44.0
-	github.com/gardener/component-spec/bindings-go v0.0.98
 	github.com/go-logr/logr v1.4.3
 	github.com/golang/mock v1.7.0-rc.1
 	github.com/google/uuid v1.6.0
@@ -24,6 +22,8 @@ require (
 	github.com/opencontainers/image-spec v1.1.1
 	github.com/openmcp-project/landscaper/apis v0.0.0-00010101000000-000000000000
 	github.com/openmcp-project/landscaper/controller-utils v0.0.0-00010101000000-000000000000
+	github.com/openmcp-project/landscaper/legacy-component-cli v0.0.0-00010101000000-000000000000
+	github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go v0.0.0-00010101000000-000000000000
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus/client_golang v1.23.2
 	github.com/robfig/cron/v3 v3.0.1
@@ -50,6 +50,8 @@ require (
 replace (
 	github.com/openmcp-project/landscaper/apis => ./apis
 	github.com/openmcp-project/landscaper/controller-utils => ./controller-utils
+	github.com/openmcp-project/landscaper/legacy-component-cli => ./legacy-component-cli
+	github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go => ./legacy-component-spec/bindings-go
 )
 
 require (
@@ -182,6 +184,7 @@ require (
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
 	github.com/fvbommel/sortorder v1.1.0 // indirect
 	github.com/fxamacker/cbor/v2 v2.9.0 // indirect
+	github.com/gardener/component-spec/bindings-go v0.0.98 // indirect
 	github.com/ghodss/yaml v1.0.0 // indirect
 	github.com/go-chi/chi/v5 v5.2.3 // indirect
 	github.com/go-errors/errors v1.5.1 // indirect

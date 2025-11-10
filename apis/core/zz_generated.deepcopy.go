@@ -11,7 +11,7 @@ package core
 import (
 	json "encoding/json"
 
-	v2 "github.com/gardener/component-spec/bindings-go/apis/v2"
+	v2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 	v1 "k8s.io/api/core/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 )
