@@ -99,10 +99,12 @@ var _ = Describe("Manifest v1 Conversion", func() {
 			}
 
 			expectedCfg := ocispecv1.Image{
-				Architecture: "amd64",
-				Config:       ocispecv1.ImageConfig{},
-				History:      v2History,
-				OS:           "linux",
+				Platform: ocispecv1.Platform{
+					Architecture: "amd64",
+					OS:           "linux",
+				},
+				Config:  ocispecv1.ImageConfig{},
+				History: v2History,
 				RootFS: ocispecv1.RootFS{
 					Type:    "layers",
 					DiffIDs: diffIDs,
