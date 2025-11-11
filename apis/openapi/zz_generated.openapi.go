@@ -10,14 +10,13 @@ package apis
 
 import (
 	v2 "github.com/gardener/component-spec/bindings-go/apis/v2"
+	core "github.com/openmcp-project/landscaper/apis/core"
+	v1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	v1 "k8s.io/api/core/v1"
 	resource "k8s.io/apimachinery/pkg/api/resource"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	common "k8s.io/kube-openapi/pkg/common"
 	spec "k8s.io/kube-openapi/pkg/validation/spec"
-
-	core "github.com/openmcp-project/landscaper/apis/core"
-	v1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 )
 
 func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenAPIDefinition {
@@ -35,27 +34,27 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/gardener/component-spec/bindings-go/apis/v2.Source":                                               schema_component_spec_bindings_go_apis_v2_Source(ref),
 		"github.com/gardener/component-spec/bindings-go/apis/v2.SourceRef":                                            schema_component_spec_bindings_go_apis_v2_SourceRef(ref),
 		"github.com/gardener/component-spec/bindings-go/apis/v2.UnstructuredTypedObject":                              schema_component_spec_bindings_go_apis_v2_UnstructuredTypedObject(ref),
-		"github.com/openmcp-project/landscaper/apis/config.AdditionalDeployments":                                     schema_gardener_landscaper_apis_config_AdditionalDeployments(ref),
-		"github.com/openmcp-project/landscaper/apis/config.BlueprintStore":                                            schema_gardener_landscaper_apis_config_BlueprintStore(ref),
-		"github.com/openmcp-project/landscaper/apis/config.CommonControllerConfig":                                    schema_gardener_landscaper_apis_config_CommonControllerConfig(ref),
-		"github.com/openmcp-project/landscaper/apis/config.ContextControllerConfig":                                   schema_gardener_landscaper_apis_config_ContextControllerConfig(ref),
-		"github.com/openmcp-project/landscaper/apis/config.ContextControllerDefaultConfig":                            schema_gardener_landscaper_apis_config_ContextControllerDefaultConfig(ref),
-		"github.com/openmcp-project/landscaper/apis/config.ContextsController":                                        schema_gardener_landscaper_apis_config_ContextsController(ref),
-		"github.com/openmcp-project/landscaper/apis/config.Controllers":                                               schema_gardener_landscaper_apis_config_Controllers(ref),
-		"github.com/openmcp-project/landscaper/apis/config.CrdManagementConfiguration":                                schema_gardener_landscaper_apis_config_CrdManagementConfiguration(ref),
-		"github.com/openmcp-project/landscaper/apis/config.DeployItemTimeouts":                                        schema_gardener_landscaper_apis_config_DeployItemTimeouts(ref),
-		"github.com/openmcp-project/landscaper/apis/config.DeployItemsController":                                     schema_gardener_landscaper_apis_config_DeployItemsController(ref),
-		"github.com/openmcp-project/landscaper/apis/config.ExecutionsController":                                      schema_gardener_landscaper_apis_config_ExecutionsController(ref),
-		"github.com/openmcp-project/landscaper/apis/config.GarbageCollectionConfiguration":                            schema_gardener_landscaper_apis_config_GarbageCollectionConfiguration(ref),
-		"github.com/openmcp-project/landscaper/apis/config.HPAMainConfiguration":                                      schema_gardener_landscaper_apis_config_HPAMainConfiguration(ref),
-		"github.com/openmcp-project/landscaper/apis/config.InstallationsController":                                   schema_gardener_landscaper_apis_config_InstallationsController(ref),
-		"github.com/openmcp-project/landscaper/apis/config.LandscaperConfiguration":                                   schema_gardener_landscaper_apis_config_LandscaperConfiguration(ref),
-		"github.com/openmcp-project/landscaper/apis/config.LocalRegistryConfiguration":                                schema_gardener_landscaper_apis_config_LocalRegistryConfiguration(ref),
-		"github.com/openmcp-project/landscaper/apis/config.LsDeployments":                                             schema_gardener_landscaper_apis_config_LsDeployments(ref),
-		"github.com/openmcp-project/landscaper/apis/config.MetricsConfiguration":                                      schema_gardener_landscaper_apis_config_MetricsConfiguration(ref),
-		"github.com/openmcp-project/landscaper/apis/config.OCICacheConfiguration":                                     schema_gardener_landscaper_apis_config_OCICacheConfiguration(ref),
-		"github.com/openmcp-project/landscaper/apis/config.OCIConfiguration":                                          schema_gardener_landscaper_apis_config_OCIConfiguration(ref),
-		"github.com/openmcp-project/landscaper/apis/config.RegistryConfiguration":                                     schema_gardener_landscaper_apis_config_RegistryConfiguration(ref),
+		"github.com/openmcp-project/landscaper/apis/config.AdditionalDeployments":                                     schema_openmcp_project_landscaper_apis_config_AdditionalDeployments(ref),
+		"github.com/openmcp-project/landscaper/apis/config.BlueprintStore":                                            schema_openmcp_project_landscaper_apis_config_BlueprintStore(ref),
+		"github.com/openmcp-project/landscaper/apis/config.CommonControllerConfig":                                    schema_openmcp_project_landscaper_apis_config_CommonControllerConfig(ref),
+		"github.com/openmcp-project/landscaper/apis/config.ContextControllerConfig":                                   schema_openmcp_project_landscaper_apis_config_ContextControllerConfig(ref),
+		"github.com/openmcp-project/landscaper/apis/config.ContextControllerDefaultConfig":                            schema_openmcp_project_landscaper_apis_config_ContextControllerDefaultConfig(ref),
+		"github.com/openmcp-project/landscaper/apis/config.ContextsController":                                        schema_openmcp_project_landscaper_apis_config_ContextsController(ref),
+		"github.com/openmcp-project/landscaper/apis/config.Controllers":                                               schema_openmcp_project_landscaper_apis_config_Controllers(ref),
+		"github.com/openmcp-project/landscaper/apis/config.CrdManagementConfiguration":                                schema_openmcp_project_landscaper_apis_config_CrdManagementConfiguration(ref),
+		"github.com/openmcp-project/landscaper/apis/config.DeployItemTimeouts":                                        schema_openmcp_project_landscaper_apis_config_DeployItemTimeouts(ref),
+		"github.com/openmcp-project/landscaper/apis/config.DeployItemsController":                                     schema_openmcp_project_landscaper_apis_config_DeployItemsController(ref),
+		"github.com/openmcp-project/landscaper/apis/config.ExecutionsController":                                      schema_openmcp_project_landscaper_apis_config_ExecutionsController(ref),
+		"github.com/openmcp-project/landscaper/apis/config.GarbageCollectionConfiguration":                            schema_openmcp_project_landscaper_apis_config_GarbageCollectionConfiguration(ref),
+		"github.com/openmcp-project/landscaper/apis/config.HPAMainConfiguration":                                      schema_openmcp_project_landscaper_apis_config_HPAMainConfiguration(ref),
+		"github.com/openmcp-project/landscaper/apis/config.InstallationsController":                                   schema_openmcp_project_landscaper_apis_config_InstallationsController(ref),
+		"github.com/openmcp-project/landscaper/apis/config.LandscaperConfiguration":                                   schema_openmcp_project_landscaper_apis_config_LandscaperConfiguration(ref),
+		"github.com/openmcp-project/landscaper/apis/config.LocalRegistryConfiguration":                                schema_openmcp_project_landscaper_apis_config_LocalRegistryConfiguration(ref),
+		"github.com/openmcp-project/landscaper/apis/config.LsDeployments":                                             schema_openmcp_project_landscaper_apis_config_LsDeployments(ref),
+		"github.com/openmcp-project/landscaper/apis/config.MetricsConfiguration":                                      schema_openmcp_project_landscaper_apis_config_MetricsConfiguration(ref),
+		"github.com/openmcp-project/landscaper/apis/config.OCICacheConfiguration":                                     schema_openmcp_project_landscaper_apis_config_OCICacheConfiguration(ref),
+		"github.com/openmcp-project/landscaper/apis/config.OCIConfiguration":                                          schema_openmcp_project_landscaper_apis_config_OCIConfiguration(ref),
+		"github.com/openmcp-project/landscaper/apis/config.RegistryConfiguration":                                     schema_openmcp_project_landscaper_apis_config_RegistryConfiguration(ref),
 		"github.com/openmcp-project/landscaper/apis/config/v1alpha1.AdditionalDeployments":                            schema_landscaper_apis_config_v1alpha1_AdditionalDeployments(ref),
 		"github.com/openmcp-project/landscaper/apis/config/v1alpha1.BlueprintStore":                                   schema_landscaper_apis_config_v1alpha1_BlueprintStore(ref),
 		"github.com/openmcp-project/landscaper/apis/config/v1alpha1.CommonControllerConfig":                           schema_landscaper_apis_config_v1alpha1_CommonControllerConfig(ref),
@@ -77,107 +76,107 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/openmcp-project/landscaper/apis/config/v1alpha1.OCICacheConfiguration":                            schema_landscaper_apis_config_v1alpha1_OCICacheConfiguration(ref),
 		"github.com/openmcp-project/landscaper/apis/config/v1alpha1.OCIConfiguration":                                 schema_landscaper_apis_config_v1alpha1_OCIConfiguration(ref),
 		"github.com/openmcp-project/landscaper/apis/config/v1alpha1.RegistryConfiguration":                            schema_landscaper_apis_config_v1alpha1_RegistryConfiguration(ref),
-		"github.com/openmcp-project/landscaper/apis/core.AnyJSON":                                                     schema_gardener_landscaper_apis_core_AnyJSON(ref),
-		"github.com/openmcp-project/landscaper/apis/core.AutomaticReconcile":                                          schema_gardener_landscaper_apis_core_AutomaticReconcile(ref),
-		"github.com/openmcp-project/landscaper/apis/core.AutomaticReconcileStatus":                                    schema_gardener_landscaper_apis_core_AutomaticReconcileStatus(ref),
-		"github.com/openmcp-project/landscaper/apis/core.Blueprint":                                                   schema_gardener_landscaper_apis_core_Blueprint(ref),
-		"github.com/openmcp-project/landscaper/apis/core.BlueprintDefinition":                                         schema_gardener_landscaper_apis_core_BlueprintDefinition(ref),
-		"github.com/openmcp-project/landscaper/apis/core.BlueprintStaticDataSource":                                   schema_gardener_landscaper_apis_core_BlueprintStaticDataSource(ref),
-		"github.com/openmcp-project/landscaper/apis/core.BlueprintStaticDataValueFrom":                                schema_gardener_landscaper_apis_core_BlueprintStaticDataValueFrom(ref),
-		"github.com/openmcp-project/landscaper/apis/core.ComponentDescriptorDefinition":                               schema_gardener_landscaper_apis_core_ComponentDescriptorDefinition(ref),
-		"github.com/openmcp-project/landscaper/apis/core.ComponentDescriptorReference":                                schema_gardener_landscaper_apis_core_ComponentDescriptorReference(ref),
-		"github.com/openmcp-project/landscaper/apis/core.ComponentVersionOverwrite":                                   schema_gardener_landscaper_apis_core_ComponentVersionOverwrite(ref),
-		"github.com/openmcp-project/landscaper/apis/core.ComponentVersionOverwriteReference":                          schema_gardener_landscaper_apis_core_ComponentVersionOverwriteReference(ref),
-		"github.com/openmcp-project/landscaper/apis/core.ComponentVersionOverwrites":                                  schema_gardener_landscaper_apis_core_ComponentVersionOverwrites(ref),
-		"github.com/openmcp-project/landscaper/apis/core.ComponentVersionOverwritesList":                              schema_gardener_landscaper_apis_core_ComponentVersionOverwritesList(ref),
-		"github.com/openmcp-project/landscaper/apis/core.Condition":                                                   schema_gardener_landscaper_apis_core_Condition(ref),
-		"github.com/openmcp-project/landscaper/apis/core.ConfigMapReference":                                          schema_gardener_landscaper_apis_core_ConfigMapReference(ref),
-		"github.com/openmcp-project/landscaper/apis/core.Context":                                                     schema_gardener_landscaper_apis_core_Context(ref),
-		"github.com/openmcp-project/landscaper/apis/core.ContextConfiguration":                                        schema_gardener_landscaper_apis_core_ContextConfiguration(ref),
-		"github.com/openmcp-project/landscaper/apis/core.ContextList":                                                 schema_gardener_landscaper_apis_core_ContextList(ref),
-		"github.com/openmcp-project/landscaper/apis/core.CriticalProblem":                                             schema_gardener_landscaper_apis_core_CriticalProblem(ref),
-		"github.com/openmcp-project/landscaper/apis/core.CriticalProblems":                                            schema_gardener_landscaper_apis_core_CriticalProblems(ref),
-		"github.com/openmcp-project/landscaper/apis/core.CriticalProblemsList":                                        schema_gardener_landscaper_apis_core_CriticalProblemsList(ref),
-		"github.com/openmcp-project/landscaper/apis/core.CriticalProblemsSpec":                                        schema_gardener_landscaper_apis_core_CriticalProblemsSpec(ref),
-		"github.com/openmcp-project/landscaper/apis/core.CriticalProblemsStatus":                                      schema_gardener_landscaper_apis_core_CriticalProblemsStatus(ref),
-		"github.com/openmcp-project/landscaper/apis/core.DataExport":                                                  schema_gardener_landscaper_apis_core_DataExport(ref),
-		"github.com/openmcp-project/landscaper/apis/core.DataImport":                                                  schema_gardener_landscaper_apis_core_DataImport(ref),
-		"github.com/openmcp-project/landscaper/apis/core.DataObject":                                                  schema_gardener_landscaper_apis_core_DataObject(ref),
-		"github.com/openmcp-project/landscaper/apis/core.DataObjectList":                                              schema_gardener_landscaper_apis_core_DataObjectList(ref),
-		"github.com/openmcp-project/landscaper/apis/core.Default":                                                     schema_gardener_landscaper_apis_core_Default(ref),
-		"github.com/openmcp-project/landscaper/apis/core.DependentToTrigger":                                          schema_gardener_landscaper_apis_core_DependentToTrigger(ref),
-		"github.com/openmcp-project/landscaper/apis/core.DeployItem":                                                  schema_gardener_landscaper_apis_core_DeployItem(ref),
-		"github.com/openmcp-project/landscaper/apis/core.DeployItemCache":                                             schema_gardener_landscaper_apis_core_DeployItemCache(ref),
-		"github.com/openmcp-project/landscaper/apis/core.DeployItemList":                                              schema_gardener_landscaper_apis_core_DeployItemList(ref),
-		"github.com/openmcp-project/landscaper/apis/core.DeployItemSpec":                                              schema_gardener_landscaper_apis_core_DeployItemSpec(ref),
-		"github.com/openmcp-project/landscaper/apis/core.DeployItemStatus":                                            schema_gardener_landscaper_apis_core_DeployItemStatus(ref),
-		"github.com/openmcp-project/landscaper/apis/core.DeployItemTemplate":                                          schema_gardener_landscaper_apis_core_DeployItemTemplate(ref),
-		"github.com/openmcp-project/landscaper/apis/core.DeployerInformation":                                         schema_gardener_landscaper_apis_core_DeployerInformation(ref),
-		"github.com/openmcp-project/landscaper/apis/core.DiNamePair":                                                  schema_gardener_landscaper_apis_core_DiNamePair(ref),
-		"github.com/openmcp-project/landscaper/apis/core.Duration":                                                    schema_gardener_landscaper_apis_core_Duration(ref),
-		"github.com/openmcp-project/landscaper/apis/core.Error":                                                       schema_gardener_landscaper_apis_core_Error(ref),
-		"github.com/openmcp-project/landscaper/apis/core.Execution":                                                   schema_gardener_landscaper_apis_core_Execution(ref),
-		"github.com/openmcp-project/landscaper/apis/core.ExecutionList":                                               schema_gardener_landscaper_apis_core_ExecutionList(ref),
-		"github.com/openmcp-project/landscaper/apis/core.ExecutionSpec":                                               schema_gardener_landscaper_apis_core_ExecutionSpec(ref),
-		"github.com/openmcp-project/landscaper/apis/core.ExecutionStatus":                                             schema_gardener_landscaper_apis_core_ExecutionStatus(ref),
-		"github.com/openmcp-project/landscaper/apis/core.ExportDefinition":                                            schema_gardener_landscaper_apis_core_ExportDefinition(ref),
-		"github.com/openmcp-project/landscaper/apis/core.FailedReconcile":                                             schema_gardener_landscaper_apis_core_FailedReconcile(ref),
-		"github.com/openmcp-project/landscaper/apis/core.FieldValueDefinition":                                        schema_gardener_landscaper_apis_core_FieldValueDefinition(ref),
-		"github.com/openmcp-project/landscaper/apis/core.ImportDefinition":                                            schema_gardener_landscaper_apis_core_ImportDefinition(ref),
-		"github.com/openmcp-project/landscaper/apis/core.InlineBlueprint":                                             schema_gardener_landscaper_apis_core_InlineBlueprint(ref),
-		"github.com/openmcp-project/landscaper/apis/core.Installation":                                                schema_gardener_landscaper_apis_core_Installation(ref),
-		"github.com/openmcp-project/landscaper/apis/core.InstallationExports":                                         schema_gardener_landscaper_apis_core_InstallationExports(ref),
-		"github.com/openmcp-project/landscaper/apis/core.InstallationImports":                                         schema_gardener_landscaper_apis_core_InstallationImports(ref),
-		"github.com/openmcp-project/landscaper/apis/core.InstallationList":                                            schema_gardener_landscaper_apis_core_InstallationList(ref),
-		"github.com/openmcp-project/landscaper/apis/core.InstallationSpec":                                            schema_gardener_landscaper_apis_core_InstallationSpec(ref),
-		"github.com/openmcp-project/landscaper/apis/core.InstallationStatus":                                          schema_gardener_landscaper_apis_core_InstallationStatus(ref),
-		"github.com/openmcp-project/landscaper/apis/core.InstallationTemplate":                                        schema_gardener_landscaper_apis_core_InstallationTemplate(ref),
-		"github.com/openmcp-project/landscaper/apis/core.InstallationTemplateBlueprintDefinition":                     schema_gardener_landscaper_apis_core_InstallationTemplateBlueprintDefinition(ref),
-		"github.com/openmcp-project/landscaper/apis/core.JSONSchemaDefinition":                                        schema_gardener_landscaper_apis_core_JSONSchemaDefinition(ref),
-		"github.com/openmcp-project/landscaper/apis/core.LocalConfigMapReference":                                     schema_gardener_landscaper_apis_core_LocalConfigMapReference(ref),
-		"github.com/openmcp-project/landscaper/apis/core.LocalSecretReference":                                        schema_gardener_landscaper_apis_core_LocalSecretReference(ref),
-		"github.com/openmcp-project/landscaper/apis/core.LsHealthCheck":                                               schema_gardener_landscaper_apis_core_LsHealthCheck(ref),
-		"github.com/openmcp-project/landscaper/apis/core.LsHealthCheckList":                                           schema_gardener_landscaper_apis_core_LsHealthCheckList(ref),
-		"github.com/openmcp-project/landscaper/apis/core.NamedObjectReference":                                        schema_gardener_landscaper_apis_core_NamedObjectReference(ref),
-		"github.com/openmcp-project/landscaper/apis/core.ObjectReference":                                             schema_gardener_landscaper_apis_core_ObjectReference(ref),
-		"github.com/openmcp-project/landscaper/apis/core.OnDeleteConfig":                                              schema_gardener_landscaper_apis_core_OnDeleteConfig(ref),
-		"github.com/openmcp-project/landscaper/apis/core.Optimization":                                                schema_gardener_landscaper_apis_core_Optimization(ref),
-		"github.com/openmcp-project/landscaper/apis/core.RemoteBlueprintReference":                                    schema_gardener_landscaper_apis_core_RemoteBlueprintReference(ref),
-		"github.com/openmcp-project/landscaper/apis/core.Requirement":                                                 schema_gardener_landscaper_apis_core_Requirement(ref),
-		"github.com/openmcp-project/landscaper/apis/core.ResolvedTarget":                                              schema_gardener_landscaper_apis_core_ResolvedTarget(ref),
-		"github.com/openmcp-project/landscaper/apis/core.ResourceReference":                                           schema_gardener_landscaper_apis_core_ResourceReference(ref),
-		"github.com/openmcp-project/landscaper/apis/core.SecretLabelSelectorRef":                                      schema_gardener_landscaper_apis_core_SecretLabelSelectorRef(ref),
-		"github.com/openmcp-project/landscaper/apis/core.SecretReference":                                             schema_gardener_landscaper_apis_core_SecretReference(ref),
-		"github.com/openmcp-project/landscaper/apis/core.StaticDataSource":                                            schema_gardener_landscaper_apis_core_StaticDataSource(ref),
-		"github.com/openmcp-project/landscaper/apis/core.StaticDataValueFrom":                                         schema_gardener_landscaper_apis_core_StaticDataValueFrom(ref),
-		"github.com/openmcp-project/landscaper/apis/core.SubInstCache":                                                schema_gardener_landscaper_apis_core_SubInstCache(ref),
-		"github.com/openmcp-project/landscaper/apis/core.SubNamePair":                                                 schema_gardener_landscaper_apis_core_SubNamePair(ref),
-		"github.com/openmcp-project/landscaper/apis/core.SubinstallationTemplate":                                     schema_gardener_landscaper_apis_core_SubinstallationTemplate(ref),
-		"github.com/openmcp-project/landscaper/apis/core.SucceededReconcile":                                          schema_gardener_landscaper_apis_core_SucceededReconcile(ref),
-		"github.com/openmcp-project/landscaper/apis/core.SyncObject":                                                  schema_gardener_landscaper_apis_core_SyncObject(ref),
-		"github.com/openmcp-project/landscaper/apis/core.SyncObjectList":                                              schema_gardener_landscaper_apis_core_SyncObjectList(ref),
-		"github.com/openmcp-project/landscaper/apis/core.SyncObjectSpec":                                              schema_gardener_landscaper_apis_core_SyncObjectSpec(ref),
-		"github.com/openmcp-project/landscaper/apis/core.SyncObjectStatus":                                            schema_gardener_landscaper_apis_core_SyncObjectStatus(ref),
-		"github.com/openmcp-project/landscaper/apis/core.Target":                                                      schema_gardener_landscaper_apis_core_Target(ref),
-		"github.com/openmcp-project/landscaper/apis/core.TargetExport":                                                schema_gardener_landscaper_apis_core_TargetExport(ref),
-		"github.com/openmcp-project/landscaper/apis/core.TargetImport":                                                schema_gardener_landscaper_apis_core_TargetImport(ref),
-		"github.com/openmcp-project/landscaper/apis/core.TargetList":                                                  schema_gardener_landscaper_apis_core_TargetList(ref),
-		"github.com/openmcp-project/landscaper/apis/core.TargetSelector":                                              schema_gardener_landscaper_apis_core_TargetSelector(ref),
-		"github.com/openmcp-project/landscaper/apis/core.TargetSpec":                                                  schema_gardener_landscaper_apis_core_TargetSpec(ref),
-		"github.com/openmcp-project/landscaper/apis/core.TargetSync":                                                  schema_gardener_landscaper_apis_core_TargetSync(ref),
-		"github.com/openmcp-project/landscaper/apis/core.TargetSyncList":                                              schema_gardener_landscaper_apis_core_TargetSyncList(ref),
-		"github.com/openmcp-project/landscaper/apis/core.TargetSyncSpec":                                              schema_gardener_landscaper_apis_core_TargetSyncSpec(ref),
-		"github.com/openmcp-project/landscaper/apis/core.TargetSyncStatus":                                            schema_gardener_landscaper_apis_core_TargetSyncStatus(ref),
-		"github.com/openmcp-project/landscaper/apis/core.TargetTemplate":                                              schema_gardener_landscaper_apis_core_TargetTemplate(ref),
-		"github.com/openmcp-project/landscaper/apis/core.TemplateExecutor":                                            schema_gardener_landscaper_apis_core_TemplateExecutor(ref),
-		"github.com/openmcp-project/landscaper/apis/core.TokenRotation":                                               schema_gardener_landscaper_apis_core_TokenRotation(ref),
-		"github.com/openmcp-project/landscaper/apis/core.TransitionTimes":                                             schema_gardener_landscaper_apis_core_TransitionTimes(ref),
-		"github.com/openmcp-project/landscaper/apis/core.TypedObjectReference":                                        schema_gardener_landscaper_apis_core_TypedObjectReference(ref),
-		"github.com/openmcp-project/landscaper/apis/core.Verification":                                                schema_gardener_landscaper_apis_core_Verification(ref),
-		"github.com/openmcp-project/landscaper/apis/core.VerificationSignature":                                       schema_gardener_landscaper_apis_core_VerificationSignature(ref),
-		"github.com/openmcp-project/landscaper/apis/core.VersionedNamedObjectReference":                               schema_gardener_landscaper_apis_core_VersionedNamedObjectReference(ref),
-		"github.com/openmcp-project/landscaper/apis/core.VersionedObjectReference":                                    schema_gardener_landscaper_apis_core_VersionedObjectReference(ref),
-		"github.com/openmcp-project/landscaper/apis/core.VersionedResourceReference":                                  schema_gardener_landscaper_apis_core_VersionedResourceReference(ref),
+		"github.com/openmcp-project/landscaper/apis/core.AnyJSON":                                                     schema_openmcp_project_landscaper_apis_core_AnyJSON(ref),
+		"github.com/openmcp-project/landscaper/apis/core.AutomaticReconcile":                                          schema_openmcp_project_landscaper_apis_core_AutomaticReconcile(ref),
+		"github.com/openmcp-project/landscaper/apis/core.AutomaticReconcileStatus":                                    schema_openmcp_project_landscaper_apis_core_AutomaticReconcileStatus(ref),
+		"github.com/openmcp-project/landscaper/apis/core.Blueprint":                                                   schema_openmcp_project_landscaper_apis_core_Blueprint(ref),
+		"github.com/openmcp-project/landscaper/apis/core.BlueprintDefinition":                                         schema_openmcp_project_landscaper_apis_core_BlueprintDefinition(ref),
+		"github.com/openmcp-project/landscaper/apis/core.BlueprintStaticDataSource":                                   schema_openmcp_project_landscaper_apis_core_BlueprintStaticDataSource(ref),
+		"github.com/openmcp-project/landscaper/apis/core.BlueprintStaticDataValueFrom":                                schema_openmcp_project_landscaper_apis_core_BlueprintStaticDataValueFrom(ref),
+		"github.com/openmcp-project/landscaper/apis/core.ComponentDescriptorDefinition":                               schema_openmcp_project_landscaper_apis_core_ComponentDescriptorDefinition(ref),
+		"github.com/openmcp-project/landscaper/apis/core.ComponentDescriptorReference":                                schema_openmcp_project_landscaper_apis_core_ComponentDescriptorReference(ref),
+		"github.com/openmcp-project/landscaper/apis/core.ComponentVersionOverwrite":                                   schema_openmcp_project_landscaper_apis_core_ComponentVersionOverwrite(ref),
+		"github.com/openmcp-project/landscaper/apis/core.ComponentVersionOverwriteReference":                          schema_openmcp_project_landscaper_apis_core_ComponentVersionOverwriteReference(ref),
+		"github.com/openmcp-project/landscaper/apis/core.ComponentVersionOverwrites":                                  schema_openmcp_project_landscaper_apis_core_ComponentVersionOverwrites(ref),
+		"github.com/openmcp-project/landscaper/apis/core.ComponentVersionOverwritesList":                              schema_openmcp_project_landscaper_apis_core_ComponentVersionOverwritesList(ref),
+		"github.com/openmcp-project/landscaper/apis/core.Condition":                                                   schema_openmcp_project_landscaper_apis_core_Condition(ref),
+		"github.com/openmcp-project/landscaper/apis/core.ConfigMapReference":                                          schema_openmcp_project_landscaper_apis_core_ConfigMapReference(ref),
+		"github.com/openmcp-project/landscaper/apis/core.Context":                                                     schema_openmcp_project_landscaper_apis_core_Context(ref),
+		"github.com/openmcp-project/landscaper/apis/core.ContextConfiguration":                                        schema_openmcp_project_landscaper_apis_core_ContextConfiguration(ref),
+		"github.com/openmcp-project/landscaper/apis/core.ContextList":                                                 schema_openmcp_project_landscaper_apis_core_ContextList(ref),
+		"github.com/openmcp-project/landscaper/apis/core.CriticalProblem":                                             schema_openmcp_project_landscaper_apis_core_CriticalProblem(ref),
+		"github.com/openmcp-project/landscaper/apis/core.CriticalProblems":                                            schema_openmcp_project_landscaper_apis_core_CriticalProblems(ref),
+		"github.com/openmcp-project/landscaper/apis/core.CriticalProblemsList":                                        schema_openmcp_project_landscaper_apis_core_CriticalProblemsList(ref),
+		"github.com/openmcp-project/landscaper/apis/core.CriticalProblemsSpec":                                        schema_openmcp_project_landscaper_apis_core_CriticalProblemsSpec(ref),
+		"github.com/openmcp-project/landscaper/apis/core.CriticalProblemsStatus":                                      schema_openmcp_project_landscaper_apis_core_CriticalProblemsStatus(ref),
+		"github.com/openmcp-project/landscaper/apis/core.DataExport":                                                  schema_openmcp_project_landscaper_apis_core_DataExport(ref),
+		"github.com/openmcp-project/landscaper/apis/core.DataImport":                                                  schema_openmcp_project_landscaper_apis_core_DataImport(ref),
+		"github.com/openmcp-project/landscaper/apis/core.DataObject":                                                  schema_openmcp_project_landscaper_apis_core_DataObject(ref),
+		"github.com/openmcp-project/landscaper/apis/core.DataObjectList":                                              schema_openmcp_project_landscaper_apis_core_DataObjectList(ref),
+		"github.com/openmcp-project/landscaper/apis/core.Default":                                                     schema_openmcp_project_landscaper_apis_core_Default(ref),
+		"github.com/openmcp-project/landscaper/apis/core.DependentToTrigger":                                          schema_openmcp_project_landscaper_apis_core_DependentToTrigger(ref),
+		"github.com/openmcp-project/landscaper/apis/core.DeployItem":                                                  schema_openmcp_project_landscaper_apis_core_DeployItem(ref),
+		"github.com/openmcp-project/landscaper/apis/core.DeployItemCache":                                             schema_openmcp_project_landscaper_apis_core_DeployItemCache(ref),
+		"github.com/openmcp-project/landscaper/apis/core.DeployItemList":                                              schema_openmcp_project_landscaper_apis_core_DeployItemList(ref),
+		"github.com/openmcp-project/landscaper/apis/core.DeployItemSpec":                                              schema_openmcp_project_landscaper_apis_core_DeployItemSpec(ref),
+		"github.com/openmcp-project/landscaper/apis/core.DeployItemStatus":                                            schema_openmcp_project_landscaper_apis_core_DeployItemStatus(ref),
+		"github.com/openmcp-project/landscaper/apis/core.DeployItemTemplate":                                          schema_openmcp_project_landscaper_apis_core_DeployItemTemplate(ref),
+		"github.com/openmcp-project/landscaper/apis/core.DeployerInformation":                                         schema_openmcp_project_landscaper_apis_core_DeployerInformation(ref),
+		"github.com/openmcp-project/landscaper/apis/core.DiNamePair":                                                  schema_openmcp_project_landscaper_apis_core_DiNamePair(ref),
+		"github.com/openmcp-project/landscaper/apis/core.Duration":                                                    schema_openmcp_project_landscaper_apis_core_Duration(ref),
+		"github.com/openmcp-project/landscaper/apis/core.Error":                                                       schema_openmcp_project_landscaper_apis_core_Error(ref),
+		"github.com/openmcp-project/landscaper/apis/core.Execution":                                                   schema_openmcp_project_landscaper_apis_core_Execution(ref),
+		"github.com/openmcp-project/landscaper/apis/core.ExecutionList":                                               schema_openmcp_project_landscaper_apis_core_ExecutionList(ref),
+		"github.com/openmcp-project/landscaper/apis/core.ExecutionSpec":                                               schema_openmcp_project_landscaper_apis_core_ExecutionSpec(ref),
+		"github.com/openmcp-project/landscaper/apis/core.ExecutionStatus":                                             schema_openmcp_project_landscaper_apis_core_ExecutionStatus(ref),
+		"github.com/openmcp-project/landscaper/apis/core.ExportDefinition":                                            schema_openmcp_project_landscaper_apis_core_ExportDefinition(ref),
+		"github.com/openmcp-project/landscaper/apis/core.FailedReconcile":                                             schema_openmcp_project_landscaper_apis_core_FailedReconcile(ref),
+		"github.com/openmcp-project/landscaper/apis/core.FieldValueDefinition":                                        schema_openmcp_project_landscaper_apis_core_FieldValueDefinition(ref),
+		"github.com/openmcp-project/landscaper/apis/core.ImportDefinition":                                            schema_openmcp_project_landscaper_apis_core_ImportDefinition(ref),
+		"github.com/openmcp-project/landscaper/apis/core.InlineBlueprint":                                             schema_openmcp_project_landscaper_apis_core_InlineBlueprint(ref),
+		"github.com/openmcp-project/landscaper/apis/core.Installation":                                                schema_openmcp_project_landscaper_apis_core_Installation(ref),
+		"github.com/openmcp-project/landscaper/apis/core.InstallationExports":                                         schema_openmcp_project_landscaper_apis_core_InstallationExports(ref),
+		"github.com/openmcp-project/landscaper/apis/core.InstallationImports":                                         schema_openmcp_project_landscaper_apis_core_InstallationImports(ref),
+		"github.com/openmcp-project/landscaper/apis/core.InstallationList":                                            schema_openmcp_project_landscaper_apis_core_InstallationList(ref),
+		"github.com/openmcp-project/landscaper/apis/core.InstallationSpec":                                            schema_openmcp_project_landscaper_apis_core_InstallationSpec(ref),
+		"github.com/openmcp-project/landscaper/apis/core.InstallationStatus":                                          schema_openmcp_project_landscaper_apis_core_InstallationStatus(ref),
+		"github.com/openmcp-project/landscaper/apis/core.InstallationTemplate":                                        schema_openmcp_project_landscaper_apis_core_InstallationTemplate(ref),
+		"github.com/openmcp-project/landscaper/apis/core.InstallationTemplateBlueprintDefinition":                     schema_openmcp_project_landscaper_apis_core_InstallationTemplateBlueprintDefinition(ref),
+		"github.com/openmcp-project/landscaper/apis/core.JSONSchemaDefinition":                                        schema_openmcp_project_landscaper_apis_core_JSONSchemaDefinition(ref),
+		"github.com/openmcp-project/landscaper/apis/core.LocalConfigMapReference":                                     schema_openmcp_project_landscaper_apis_core_LocalConfigMapReference(ref),
+		"github.com/openmcp-project/landscaper/apis/core.LocalSecretReference":                                        schema_openmcp_project_landscaper_apis_core_LocalSecretReference(ref),
+		"github.com/openmcp-project/landscaper/apis/core.LsHealthCheck":                                               schema_openmcp_project_landscaper_apis_core_LsHealthCheck(ref),
+		"github.com/openmcp-project/landscaper/apis/core.LsHealthCheckList":                                           schema_openmcp_project_landscaper_apis_core_LsHealthCheckList(ref),
+		"github.com/openmcp-project/landscaper/apis/core.NamedObjectReference":                                        schema_openmcp_project_landscaper_apis_core_NamedObjectReference(ref),
+		"github.com/openmcp-project/landscaper/apis/core.ObjectReference":                                             schema_openmcp_project_landscaper_apis_core_ObjectReference(ref),
+		"github.com/openmcp-project/landscaper/apis/core.OnDeleteConfig":                                              schema_openmcp_project_landscaper_apis_core_OnDeleteConfig(ref),
+		"github.com/openmcp-project/landscaper/apis/core.Optimization":                                                schema_openmcp_project_landscaper_apis_core_Optimization(ref),
+		"github.com/openmcp-project/landscaper/apis/core.RemoteBlueprintReference":                                    schema_openmcp_project_landscaper_apis_core_RemoteBlueprintReference(ref),
+		"github.com/openmcp-project/landscaper/apis/core.Requirement":                                                 schema_openmcp_project_landscaper_apis_core_Requirement(ref),
+		"github.com/openmcp-project/landscaper/apis/core.ResolvedTarget":                                              schema_openmcp_project_landscaper_apis_core_ResolvedTarget(ref),
+		"github.com/openmcp-project/landscaper/apis/core.ResourceReference":                                           schema_openmcp_project_landscaper_apis_core_ResourceReference(ref),
+		"github.com/openmcp-project/landscaper/apis/core.SecretLabelSelectorRef":                                      schema_openmcp_project_landscaper_apis_core_SecretLabelSelectorRef(ref),
+		"github.com/openmcp-project/landscaper/apis/core.SecretReference":                                             schema_openmcp_project_landscaper_apis_core_SecretReference(ref),
+		"github.com/openmcp-project/landscaper/apis/core.StaticDataSource":                                            schema_openmcp_project_landscaper_apis_core_StaticDataSource(ref),
+		"github.com/openmcp-project/landscaper/apis/core.StaticDataValueFrom":                                         schema_openmcp_project_landscaper_apis_core_StaticDataValueFrom(ref),
+		"github.com/openmcp-project/landscaper/apis/core.SubInstCache":                                                schema_openmcp_project_landscaper_apis_core_SubInstCache(ref),
+		"github.com/openmcp-project/landscaper/apis/core.SubNamePair":                                                 schema_openmcp_project_landscaper_apis_core_SubNamePair(ref),
+		"github.com/openmcp-project/landscaper/apis/core.SubinstallationTemplate":                                     schema_openmcp_project_landscaper_apis_core_SubinstallationTemplate(ref),
+		"github.com/openmcp-project/landscaper/apis/core.SucceededReconcile":                                          schema_openmcp_project_landscaper_apis_core_SucceededReconcile(ref),
+		"github.com/openmcp-project/landscaper/apis/core.SyncObject":                                                  schema_openmcp_project_landscaper_apis_core_SyncObject(ref),
+		"github.com/openmcp-project/landscaper/apis/core.SyncObjectList":                                              schema_openmcp_project_landscaper_apis_core_SyncObjectList(ref),
+		"github.com/openmcp-project/landscaper/apis/core.SyncObjectSpec":                                              schema_openmcp_project_landscaper_apis_core_SyncObjectSpec(ref),
+		"github.com/openmcp-project/landscaper/apis/core.SyncObjectStatus":                                            schema_openmcp_project_landscaper_apis_core_SyncObjectStatus(ref),
+		"github.com/openmcp-project/landscaper/apis/core.Target":                                                      schema_openmcp_project_landscaper_apis_core_Target(ref),
+		"github.com/openmcp-project/landscaper/apis/core.TargetExport":                                                schema_openmcp_project_landscaper_apis_core_TargetExport(ref),
+		"github.com/openmcp-project/landscaper/apis/core.TargetImport":                                                schema_openmcp_project_landscaper_apis_core_TargetImport(ref),
+		"github.com/openmcp-project/landscaper/apis/core.TargetList":                                                  schema_openmcp_project_landscaper_apis_core_TargetList(ref),
+		"github.com/openmcp-project/landscaper/apis/core.TargetSelector":                                              schema_openmcp_project_landscaper_apis_core_TargetSelector(ref),
+		"github.com/openmcp-project/landscaper/apis/core.TargetSpec":                                                  schema_openmcp_project_landscaper_apis_core_TargetSpec(ref),
+		"github.com/openmcp-project/landscaper/apis/core.TargetSync":                                                  schema_openmcp_project_landscaper_apis_core_TargetSync(ref),
+		"github.com/openmcp-project/landscaper/apis/core.TargetSyncList":                                              schema_openmcp_project_landscaper_apis_core_TargetSyncList(ref),
+		"github.com/openmcp-project/landscaper/apis/core.TargetSyncSpec":                                              schema_openmcp_project_landscaper_apis_core_TargetSyncSpec(ref),
+		"github.com/openmcp-project/landscaper/apis/core.TargetSyncStatus":                                            schema_openmcp_project_landscaper_apis_core_TargetSyncStatus(ref),
+		"github.com/openmcp-project/landscaper/apis/core.TargetTemplate":                                              schema_openmcp_project_landscaper_apis_core_TargetTemplate(ref),
+		"github.com/openmcp-project/landscaper/apis/core.TemplateExecutor":                                            schema_openmcp_project_landscaper_apis_core_TemplateExecutor(ref),
+		"github.com/openmcp-project/landscaper/apis/core.TokenRotation":                                               schema_openmcp_project_landscaper_apis_core_TokenRotation(ref),
+		"github.com/openmcp-project/landscaper/apis/core.TransitionTimes":                                             schema_openmcp_project_landscaper_apis_core_TransitionTimes(ref),
+		"github.com/openmcp-project/landscaper/apis/core.TypedObjectReference":                                        schema_openmcp_project_landscaper_apis_core_TypedObjectReference(ref),
+		"github.com/openmcp-project/landscaper/apis/core.Verification":                                                schema_openmcp_project_landscaper_apis_core_Verification(ref),
+		"github.com/openmcp-project/landscaper/apis/core.VerificationSignature":                                       schema_openmcp_project_landscaper_apis_core_VerificationSignature(ref),
+		"github.com/openmcp-project/landscaper/apis/core.VersionedNamedObjectReference":                               schema_openmcp_project_landscaper_apis_core_VersionedNamedObjectReference(ref),
+		"github.com/openmcp-project/landscaper/apis/core.VersionedObjectReference":                                    schema_openmcp_project_landscaper_apis_core_VersionedObjectReference(ref),
+		"github.com/openmcp-project/landscaper/apis/core.VersionedResourceReference":                                  schema_openmcp_project_landscaper_apis_core_VersionedResourceReference(ref),
 		"github.com/openmcp-project/landscaper/apis/core/v1alpha1.AnyJSON":                                            schema_landscaper_apis_core_v1alpha1_AnyJSON(ref),
 		"github.com/openmcp-project/landscaper/apis/core/v1alpha1.AutomaticReconcile":                                 schema_landscaper_apis_core_v1alpha1_AutomaticReconcile(ref),
 		"github.com/openmcp-project/landscaper/apis/core/v1alpha1.AutomaticReconcileStatus":                           schema_landscaper_apis_core_v1alpha1_AutomaticReconcileStatus(ref),
@@ -1358,7 +1357,7 @@ func schema_component_spec_bindings_go_apis_v2_UnstructuredTypedObject(ref commo
 	}
 }
 
-func schema_gardener_landscaper_apis_config_AdditionalDeployments(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_config_AdditionalDeployments(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -1387,7 +1386,7 @@ func schema_gardener_landscaper_apis_config_AdditionalDeployments(ref common.Ref
 	}
 }
 
-func schema_gardener_landscaper_apis_config_BlueprintStore(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_config_BlueprintStore(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -1433,7 +1432,7 @@ func schema_gardener_landscaper_apis_config_BlueprintStore(ref common.ReferenceC
 	}
 }
 
-func schema_gardener_landscaper_apis_config_CommonControllerConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_config_CommonControllerConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -1463,7 +1462,7 @@ func schema_gardener_landscaper_apis_config_CommonControllerConfig(ref common.Re
 	}
 }
 
-func schema_gardener_landscaper_apis_config_ContextControllerConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_config_ContextControllerConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -1485,7 +1484,7 @@ func schema_gardener_landscaper_apis_config_ContextControllerConfig(ref common.R
 	}
 }
 
-func schema_gardener_landscaper_apis_config_ContextControllerDefaultConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_config_ContextControllerDefaultConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -1530,7 +1529,7 @@ func schema_gardener_landscaper_apis_config_ContextControllerDefaultConfig(ref c
 	}
 }
 
-func schema_gardener_landscaper_apis_config_ContextsController(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_config_ContextsController(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -1558,7 +1557,7 @@ func schema_gardener_landscaper_apis_config_ContextsController(ref common.Refere
 	}
 }
 
-func schema_gardener_landscaper_apis_config_Controllers(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_config_Controllers(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -1608,7 +1607,7 @@ func schema_gardener_landscaper_apis_config_Controllers(ref common.ReferenceCall
 	}
 }
 
-func schema_gardener_landscaper_apis_config_CrdManagementConfiguration(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_config_CrdManagementConfiguration(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -1636,7 +1635,7 @@ func schema_gardener_landscaper_apis_config_CrdManagementConfiguration(ref commo
 	}
 }
 
-func schema_gardener_landscaper_apis_config_DeployItemTimeouts(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_config_DeployItemTimeouts(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -1663,7 +1662,7 @@ func schema_gardener_landscaper_apis_config_DeployItemTimeouts(ref common.Refere
 	}
 }
 
-func schema_gardener_landscaper_apis_config_DeployItemsController(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_config_DeployItemsController(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -1685,7 +1684,7 @@ func schema_gardener_landscaper_apis_config_DeployItemsController(ref common.Ref
 	}
 }
 
-func schema_gardener_landscaper_apis_config_ExecutionsController(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_config_ExecutionsController(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -1707,7 +1706,7 @@ func schema_gardener_landscaper_apis_config_ExecutionsController(ref common.Refe
 	}
 }
 
-func schema_gardener_landscaper_apis_config_GarbageCollectionConfiguration(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_config_GarbageCollectionConfiguration(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -1761,7 +1760,7 @@ func schema_gardener_landscaper_apis_config_GarbageCollectionConfiguration(ref c
 	}
 }
 
-func schema_gardener_landscaper_apis_config_HPAMainConfiguration(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_config_HPAMainConfiguration(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -1780,7 +1779,7 @@ func schema_gardener_landscaper_apis_config_HPAMainConfiguration(ref common.Refe
 	}
 }
 
-func schema_gardener_landscaper_apis_config_InstallationsController(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_config_InstallationsController(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -1802,7 +1801,7 @@ func schema_gardener_landscaper_apis_config_InstallationsController(ref common.R
 	}
 }
 
-func schema_gardener_landscaper_apis_config_LandscaperConfiguration(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_config_LandscaperConfiguration(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -1890,7 +1889,7 @@ func schema_gardener_landscaper_apis_config_LandscaperConfiguration(ref common.R
 	}
 }
 
-func schema_gardener_landscaper_apis_config_LocalRegistryConfiguration(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_config_LocalRegistryConfiguration(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -1912,7 +1911,7 @@ func schema_gardener_landscaper_apis_config_LocalRegistryConfiguration(ref commo
 	}
 }
 
-func schema_gardener_landscaper_apis_config_LsDeployments(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_config_LsDeployments(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -1974,7 +1973,7 @@ func schema_gardener_landscaper_apis_config_LsDeployments(ref common.ReferenceCa
 	}
 }
 
-func schema_gardener_landscaper_apis_config_MetricsConfiguration(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_config_MetricsConfiguration(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -1996,7 +1995,7 @@ func schema_gardener_landscaper_apis_config_MetricsConfiguration(ref common.Refe
 	}
 }
 
-func schema_gardener_landscaper_apis_config_OCICacheConfiguration(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_config_OCICacheConfiguration(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -2024,7 +2023,7 @@ func schema_gardener_landscaper_apis_config_OCICacheConfiguration(ref common.Ref
 	}
 }
 
-func schema_gardener_landscaper_apis_config_OCIConfiguration(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_config_OCIConfiguration(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -2077,7 +2076,7 @@ func schema_gardener_landscaper_apis_config_OCIConfiguration(ref common.Referenc
 	}
 }
 
-func schema_gardener_landscaper_apis_config_RegistryConfiguration(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_config_RegistryConfiguration(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -2854,7 +2853,7 @@ func schema_landscaper_apis_config_v1alpha1_RegistryConfiguration(ref common.Ref
 	}
 }
 
-func schema_gardener_landscaper_apis_core_AnyJSON(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_AnyJSON(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -2866,7 +2865,7 @@ func schema_gardener_landscaper_apis_core_AnyJSON(ref common.ReferenceCallback) 
 	}
 }
 
-func schema_gardener_landscaper_apis_core_AutomaticReconcile(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_AutomaticReconcile(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -2893,7 +2892,7 @@ func schema_gardener_landscaper_apis_core_AutomaticReconcile(ref common.Referenc
 	}
 }
 
-func schema_gardener_landscaper_apis_core_AutomaticReconcileStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_AutomaticReconcileStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -2935,7 +2934,7 @@ func schema_gardener_landscaper_apis_core_AutomaticReconcileStatus(ref common.Re
 	}
 }
 
-func schema_gardener_landscaper_apis_core_Blueprint(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_Blueprint(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -3100,7 +3099,7 @@ func schema_gardener_landscaper_apis_core_Blueprint(ref common.ReferenceCallback
 	}
 }
 
-func schema_gardener_landscaper_apis_core_BlueprintDefinition(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_BlueprintDefinition(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -3127,7 +3126,7 @@ func schema_gardener_landscaper_apis_core_BlueprintDefinition(ref common.Referen
 	}
 }
 
-func schema_gardener_landscaper_apis_core_BlueprintStaticDataSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_BlueprintStaticDataSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -3154,7 +3153,7 @@ func schema_gardener_landscaper_apis_core_BlueprintStaticDataSource(ref common.R
 	}
 }
 
-func schema_gardener_landscaper_apis_core_BlueprintStaticDataValueFrom(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_BlueprintStaticDataValueFrom(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -3174,7 +3173,7 @@ func schema_gardener_landscaper_apis_core_BlueprintStaticDataValueFrom(ref commo
 	}
 }
 
-func schema_gardener_landscaper_apis_core_ComponentDescriptorDefinition(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_ComponentDescriptorDefinition(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -3201,7 +3200,7 @@ func schema_gardener_landscaper_apis_core_ComponentDescriptorDefinition(ref comm
 	}
 }
 
-func schema_gardener_landscaper_apis_core_ComponentDescriptorReference(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_ComponentDescriptorReference(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -3239,7 +3238,7 @@ func schema_gardener_landscaper_apis_core_ComponentDescriptorReference(ref commo
 	}
 }
 
-func schema_gardener_landscaper_apis_core_ComponentVersionOverwrite(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_ComponentVersionOverwrite(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -3269,7 +3268,7 @@ func schema_gardener_landscaper_apis_core_ComponentVersionOverwrite(ref common.R
 	}
 }
 
-func schema_gardener_landscaper_apis_core_ComponentVersionOverwriteReference(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_ComponentVersionOverwriteReference(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -3306,7 +3305,7 @@ func schema_gardener_landscaper_apis_core_ComponentVersionOverwriteReference(ref
 	}
 }
 
-func schema_gardener_landscaper_apis_core_ComponentVersionOverwrites(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_ComponentVersionOverwrites(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -3355,7 +3354,7 @@ func schema_gardener_landscaper_apis_core_ComponentVersionOverwrites(ref common.
 	}
 }
 
-func schema_gardener_landscaper_apis_core_ComponentVersionOverwritesList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_ComponentVersionOverwritesList(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -3404,7 +3403,7 @@ func schema_gardener_landscaper_apis_core_ComponentVersionOverwritesList(ref com
 	}
 }
 
-func schema_gardener_landscaper_apis_core_Condition(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_Condition(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -3479,7 +3478,7 @@ func schema_gardener_landscaper_apis_core_Condition(ref common.ReferenceCallback
 	}
 }
 
-func schema_gardener_landscaper_apis_core_ConfigMapReference(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_ConfigMapReference(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -3517,7 +3516,7 @@ func schema_gardener_landscaper_apis_core_ConfigMapReference(ref common.Referenc
 	}
 }
 
-func schema_gardener_landscaper_apis_core_Context(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_Context(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -3615,7 +3614,7 @@ func schema_gardener_landscaper_apis_core_Context(ref common.ReferenceCallback) 
 	}
 }
 
-func schema_gardener_landscaper_apis_core_ContextConfiguration(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_ContextConfiguration(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -3692,7 +3691,7 @@ func schema_gardener_landscaper_apis_core_ContextConfiguration(ref common.Refere
 	}
 }
 
-func schema_gardener_landscaper_apis_core_ContextList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_ContextList(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -3741,7 +3740,7 @@ func schema_gardener_landscaper_apis_core_ContextList(ref common.ReferenceCallba
 	}
 }
 
-func schema_gardener_landscaper_apis_core_CriticalProblem(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_CriticalProblem(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -3776,7 +3775,7 @@ func schema_gardener_landscaper_apis_core_CriticalProblem(ref common.ReferenceCa
 	}
 }
 
-func schema_gardener_landscaper_apis_core_CriticalProblems(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_CriticalProblems(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -3826,7 +3825,7 @@ func schema_gardener_landscaper_apis_core_CriticalProblems(ref common.ReferenceC
 	}
 }
 
-func schema_gardener_landscaper_apis_core_CriticalProblemsList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_CriticalProblemsList(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -3875,7 +3874,7 @@ func schema_gardener_landscaper_apis_core_CriticalProblemsList(ref common.Refere
 	}
 }
 
-func schema_gardener_landscaper_apis_core_CriticalProblemsSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_CriticalProblemsSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -3903,7 +3902,7 @@ func schema_gardener_landscaper_apis_core_CriticalProblemsSpec(ref common.Refere
 	}
 }
 
-func schema_gardener_landscaper_apis_core_CriticalProblemsStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_CriticalProblemsStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -3914,7 +3913,7 @@ func schema_gardener_landscaper_apis_core_CriticalProblemsStatus(ref common.Refe
 	}
 }
 
-func schema_gardener_landscaper_apis_core_DataExport(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_DataExport(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -3944,7 +3943,7 @@ func schema_gardener_landscaper_apis_core_DataExport(ref common.ReferenceCallbac
 	}
 }
 
-func schema_gardener_landscaper_apis_core_DataImport(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_DataImport(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -3995,7 +3994,7 @@ func schema_gardener_landscaper_apis_core_DataImport(ref common.ReferenceCallbac
 	}
 }
 
-func schema_gardener_landscaper_apis_core_DataObject(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_DataObject(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -4037,7 +4036,7 @@ func schema_gardener_landscaper_apis_core_DataObject(ref common.ReferenceCallbac
 	}
 }
 
-func schema_gardener_landscaper_apis_core_DataObjectList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_DataObjectList(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -4086,7 +4085,7 @@ func schema_gardener_landscaper_apis_core_DataObjectList(ref common.ReferenceCal
 	}
 }
 
-func schema_gardener_landscaper_apis_core_Default(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_Default(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -4107,7 +4106,7 @@ func schema_gardener_landscaper_apis_core_Default(ref common.ReferenceCallback) 
 	}
 }
 
-func schema_gardener_landscaper_apis_core_DependentToTrigger(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_DependentToTrigger(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -4126,7 +4125,7 @@ func schema_gardener_landscaper_apis_core_DependentToTrigger(ref common.Referenc
 	}
 }
 
-func schema_gardener_landscaper_apis_core_DeployItem(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_DeployItem(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -4174,7 +4173,7 @@ func schema_gardener_landscaper_apis_core_DeployItem(ref common.ReferenceCallbac
 	}
 }
 
-func schema_gardener_landscaper_apis_core_DeployItemCache(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_DeployItemCache(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -4216,7 +4215,7 @@ func schema_gardener_landscaper_apis_core_DeployItemCache(ref common.ReferenceCa
 	}
 }
 
-func schema_gardener_landscaper_apis_core_DeployItemList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_DeployItemList(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -4265,7 +4264,7 @@ func schema_gardener_landscaper_apis_core_DeployItemList(ref common.ReferenceCal
 	}
 }
 
-func schema_gardener_landscaper_apis_core_DeployItemSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_DeployItemSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -4327,7 +4326,7 @@ func schema_gardener_landscaper_apis_core_DeployItemSpec(ref common.ReferenceCal
 	}
 }
 
-func schema_gardener_landscaper_apis_core_DeployItemStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_DeployItemStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -4455,7 +4454,7 @@ func schema_gardener_landscaper_apis_core_DeployItemStatus(ref common.ReferenceC
 	}
 }
 
-func schema_gardener_landscaper_apis_core_DeployItemTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_DeployItemTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -4549,7 +4548,7 @@ func schema_gardener_landscaper_apis_core_DeployItemTemplate(ref common.Referenc
 	}
 }
 
-func schema_gardener_landscaper_apis_core_DeployerInformation(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_DeployerInformation(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -4587,7 +4586,7 @@ func schema_gardener_landscaper_apis_core_DeployerInformation(ref common.Referen
 	}
 }
 
-func schema_gardener_landscaper_apis_core_DiNamePair(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_DiNamePair(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -4612,7 +4611,7 @@ func schema_gardener_landscaper_apis_core_DiNamePair(ref common.ReferenceCallbac
 	}
 }
 
-func schema_gardener_landscaper_apis_core_Duration(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_Duration(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -4624,7 +4623,7 @@ func schema_gardener_landscaper_apis_core_Duration(ref common.ReferenceCallback)
 	}
 }
 
-func schema_gardener_landscaper_apis_core_Error(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_Error(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -4691,7 +4690,7 @@ func schema_gardener_landscaper_apis_core_Error(ref common.ReferenceCallback) co
 	}
 }
 
-func schema_gardener_landscaper_apis_core_Execution(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_Execution(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -4740,7 +4739,7 @@ func schema_gardener_landscaper_apis_core_Execution(ref common.ReferenceCallback
 	}
 }
 
-func schema_gardener_landscaper_apis_core_ExecutionList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_ExecutionList(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -4789,7 +4788,7 @@ func schema_gardener_landscaper_apis_core_ExecutionList(ref common.ReferenceCall
 	}
 }
 
-func schema_gardener_landscaper_apis_core_ExecutionSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_ExecutionSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -4832,7 +4831,7 @@ func schema_gardener_landscaper_apis_core_ExecutionSpec(ref common.ReferenceCall
 	}
 }
 
-func schema_gardener_landscaper_apis_core_ExecutionStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_ExecutionStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -4921,7 +4920,7 @@ func schema_gardener_landscaper_apis_core_ExecutionStatus(ref common.ReferenceCa
 	}
 }
 
-func schema_gardener_landscaper_apis_core_ExportDefinition(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_ExportDefinition(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -4965,7 +4964,7 @@ func schema_gardener_landscaper_apis_core_ExportDefinition(ref common.ReferenceC
 	}
 }
 
-func schema_gardener_landscaper_apis_core_FailedReconcile(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_FailedReconcile(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -5000,7 +4999,7 @@ func schema_gardener_landscaper_apis_core_FailedReconcile(ref common.ReferenceCa
 	}
 }
 
-func schema_gardener_landscaper_apis_core_FieldValueDefinition(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_FieldValueDefinition(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -5037,7 +5036,7 @@ func schema_gardener_landscaper_apis_core_FieldValueDefinition(ref common.Refere
 	}
 }
 
-func schema_gardener_landscaper_apis_core_ImportDefinition(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_ImportDefinition(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -5109,7 +5108,7 @@ func schema_gardener_landscaper_apis_core_ImportDefinition(ref common.ReferenceC
 	}
 }
 
-func schema_gardener_landscaper_apis_core_InlineBlueprint(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_InlineBlueprint(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -5131,7 +5130,7 @@ func schema_gardener_landscaper_apis_core_InlineBlueprint(ref common.ReferenceCa
 	}
 }
 
-func schema_gardener_landscaper_apis_core_Installation(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_Installation(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -5181,7 +5180,7 @@ func schema_gardener_landscaper_apis_core_Installation(ref common.ReferenceCallb
 	}
 }
 
-func schema_gardener_landscaper_apis_core_InstallationExports(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_InstallationExports(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -5224,7 +5223,7 @@ func schema_gardener_landscaper_apis_core_InstallationExports(ref common.Referen
 	}
 }
 
-func schema_gardener_landscaper_apis_core_InstallationImports(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_InstallationImports(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -5267,7 +5266,7 @@ func schema_gardener_landscaper_apis_core_InstallationImports(ref common.Referen
 	}
 }
 
-func schema_gardener_landscaper_apis_core_InstallationList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_InstallationList(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -5316,7 +5315,7 @@ func schema_gardener_landscaper_apis_core_InstallationList(ref common.ReferenceC
 	}
 }
 
-func schema_gardener_landscaper_apis_core_InstallationSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_InstallationSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -5412,7 +5411,7 @@ func schema_gardener_landscaper_apis_core_InstallationSpec(ref common.ReferenceC
 	}
 }
 
-func schema_gardener_landscaper_apis_core_InstallationStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_InstallationStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -5528,7 +5527,7 @@ func schema_gardener_landscaper_apis_core_InstallationStatus(ref common.Referenc
 	}
 }
 
-func schema_gardener_landscaper_apis_core_InstallationTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_InstallationTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -5621,7 +5620,7 @@ func schema_gardener_landscaper_apis_core_InstallationTemplate(ref common.Refere
 	}
 }
 
-func schema_gardener_landscaper_apis_core_InstallationTemplateBlueprintDefinition(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_InstallationTemplateBlueprintDefinition(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -5649,7 +5648,7 @@ func schema_gardener_landscaper_apis_core_InstallationTemplateBlueprintDefinitio
 	}
 }
 
-func schema_gardener_landscaper_apis_core_JSONSchemaDefinition(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_JSONSchemaDefinition(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -5661,7 +5660,7 @@ func schema_gardener_landscaper_apis_core_JSONSchemaDefinition(ref common.Refere
 	}
 }
 
-func schema_gardener_landscaper_apis_core_LocalConfigMapReference(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_LocalConfigMapReference(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -5691,7 +5690,7 @@ func schema_gardener_landscaper_apis_core_LocalConfigMapReference(ref common.Ref
 	}
 }
 
-func schema_gardener_landscaper_apis_core_LocalSecretReference(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_LocalSecretReference(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -5721,7 +5720,7 @@ func schema_gardener_landscaper_apis_core_LocalSecretReference(ref common.Refere
 	}
 }
 
-func schema_gardener_landscaper_apis_core_LsHealthCheck(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_LsHealthCheck(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -5779,7 +5778,7 @@ func schema_gardener_landscaper_apis_core_LsHealthCheck(ref common.ReferenceCall
 	}
 }
 
-func schema_gardener_landscaper_apis_core_LsHealthCheckList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_LsHealthCheckList(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -5828,7 +5827,7 @@ func schema_gardener_landscaper_apis_core_LsHealthCheckList(ref common.Reference
 	}
 }
 
-func schema_gardener_landscaper_apis_core_NamedObjectReference(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_NamedObjectReference(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -5859,7 +5858,7 @@ func schema_gardener_landscaper_apis_core_NamedObjectReference(ref common.Refere
 	}
 }
 
-func schema_gardener_landscaper_apis_core_ObjectReference(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_ObjectReference(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -5889,7 +5888,7 @@ func schema_gardener_landscaper_apis_core_ObjectReference(ref common.ReferenceCa
 	}
 }
 
-func schema_gardener_landscaper_apis_core_OnDeleteConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_OnDeleteConfig(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -5909,7 +5908,7 @@ func schema_gardener_landscaper_apis_core_OnDeleteConfig(ref common.ReferenceCal
 	}
 }
 
-func schema_gardener_landscaper_apis_core_Optimization(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_Optimization(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -5936,7 +5935,7 @@ func schema_gardener_landscaper_apis_core_Optimization(ref common.ReferenceCallb
 	}
 }
 
-func schema_gardener_landscaper_apis_core_RemoteBlueprintReference(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_RemoteBlueprintReference(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -5958,7 +5957,7 @@ func schema_gardener_landscaper_apis_core_RemoteBlueprintReference(ref common.Re
 	}
 }
 
-func schema_gardener_landscaper_apis_core_Requirement(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_Requirement(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -6001,7 +6000,7 @@ func schema_gardener_landscaper_apis_core_Requirement(ref common.ReferenceCallba
 	}
 }
 
-func schema_gardener_landscaper_apis_core_ResolvedTarget(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_ResolvedTarget(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -6031,7 +6030,7 @@ func schema_gardener_landscaper_apis_core_ResolvedTarget(ref common.ReferenceCal
 	}
 }
 
-func schema_gardener_landscaper_apis_core_ResourceReference(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_ResourceReference(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -6061,7 +6060,7 @@ func schema_gardener_landscaper_apis_core_ResourceReference(ref common.Reference
 	}
 }
 
-func schema_gardener_landscaper_apis_core_SecretLabelSelectorRef(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_SecretLabelSelectorRef(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -6099,7 +6098,7 @@ func schema_gardener_landscaper_apis_core_SecretLabelSelectorRef(ref common.Refe
 	}
 }
 
-func schema_gardener_landscaper_apis_core_SecretReference(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_SecretReference(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -6137,7 +6136,7 @@ func schema_gardener_landscaper_apis_core_SecretReference(ref common.ReferenceCa
 	}
 }
 
-func schema_gardener_landscaper_apis_core_StaticDataSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_StaticDataSource(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -6164,7 +6163,7 @@ func schema_gardener_landscaper_apis_core_StaticDataSource(ref common.ReferenceC
 	}
 }
 
-func schema_gardener_landscaper_apis_core_StaticDataValueFrom(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_StaticDataValueFrom(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -6191,7 +6190,7 @@ func schema_gardener_landscaper_apis_core_StaticDataValueFrom(ref common.Referen
 	}
 }
 
-func schema_gardener_landscaper_apis_core_SubInstCache(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_SubInstCache(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -6233,7 +6232,7 @@ func schema_gardener_landscaper_apis_core_SubInstCache(ref common.ReferenceCallb
 	}
 }
 
-func schema_gardener_landscaper_apis_core_SubNamePair(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_SubNamePair(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -6258,7 +6257,7 @@ func schema_gardener_landscaper_apis_core_SubNamePair(ref common.ReferenceCallba
 	}
 }
 
-func schema_gardener_landscaper_apis_core_SubinstallationTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_SubinstallationTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -6358,7 +6357,7 @@ func schema_gardener_landscaper_apis_core_SubinstallationTemplate(ref common.Ref
 	}
 }
 
-func schema_gardener_landscaper_apis_core_SucceededReconcile(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_SucceededReconcile(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -6386,7 +6385,7 @@ func schema_gardener_landscaper_apis_core_SucceededReconcile(ref common.Referenc
 	}
 }
 
-func schema_gardener_landscaper_apis_core_SyncObject(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_SyncObject(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -6436,7 +6435,7 @@ func schema_gardener_landscaper_apis_core_SyncObject(ref common.ReferenceCallbac
 	}
 }
 
-func schema_gardener_landscaper_apis_core_SyncObjectList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_SyncObjectList(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -6485,7 +6484,7 @@ func schema_gardener_landscaper_apis_core_SyncObjectList(ref common.ReferenceCal
 	}
 }
 
-func schema_gardener_landscaper_apis_core_SyncObjectSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_SyncObjectSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -6539,7 +6538,7 @@ func schema_gardener_landscaper_apis_core_SyncObjectSpec(ref common.ReferenceCal
 	}
 }
 
-func schema_gardener_landscaper_apis_core_SyncObjectStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_SyncObjectStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -6550,7 +6549,7 @@ func schema_gardener_landscaper_apis_core_SyncObjectStatus(ref common.ReferenceC
 	}
 }
 
-func schema_gardener_landscaper_apis_core_Target(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_Target(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -6592,7 +6591,7 @@ func schema_gardener_landscaper_apis_core_Target(ref common.ReferenceCallback) c
 	}
 }
 
-func schema_gardener_landscaper_apis_core_TargetExport(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_TargetExport(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -6621,7 +6620,7 @@ func schema_gardener_landscaper_apis_core_TargetExport(ref common.ReferenceCallb
 	}
 }
 
-func schema_gardener_landscaper_apis_core_TargetImport(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_TargetImport(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -6693,7 +6692,7 @@ func schema_gardener_landscaper_apis_core_TargetImport(ref common.ReferenceCallb
 	}
 }
 
-func schema_gardener_landscaper_apis_core_TargetList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_TargetList(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -6742,7 +6741,7 @@ func schema_gardener_landscaper_apis_core_TargetList(ref common.ReferenceCallbac
 	}
 }
 
-func schema_gardener_landscaper_apis_core_TargetSelector(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_TargetSelector(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -6799,7 +6798,7 @@ func schema_gardener_landscaper_apis_core_TargetSelector(ref common.ReferenceCal
 	}
 }
 
-func schema_gardener_landscaper_apis_core_TargetSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_TargetSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -6835,7 +6834,7 @@ func schema_gardener_landscaper_apis_core_TargetSpec(ref common.ReferenceCallbac
 	}
 }
 
-func schema_gardener_landscaper_apis_core_TargetSync(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_TargetSync(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -6885,7 +6884,7 @@ func schema_gardener_landscaper_apis_core_TargetSync(ref common.ReferenceCallbac
 	}
 }
 
-func schema_gardener_landscaper_apis_core_TargetSyncList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_TargetSyncList(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -6934,7 +6933,7 @@ func schema_gardener_landscaper_apis_core_TargetSyncList(ref common.ReferenceCal
 	}
 }
 
-func schema_gardener_landscaper_apis_core_TargetSyncSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_TargetSyncSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -7001,7 +7000,7 @@ func schema_gardener_landscaper_apis_core_TargetSyncSpec(ref common.ReferenceCal
 	}
 }
 
-func schema_gardener_landscaper_apis_core_TargetSyncStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_TargetSyncStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -7051,7 +7050,7 @@ func schema_gardener_landscaper_apis_core_TargetSyncStatus(ref common.ReferenceC
 	}
 }
 
-func schema_gardener_landscaper_apis_core_TargetTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_TargetTemplate(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -7119,7 +7118,7 @@ func schema_gardener_landscaper_apis_core_TargetTemplate(ref common.ReferenceCal
 	}
 }
 
-func schema_gardener_landscaper_apis_core_TemplateExecutor(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_TemplateExecutor(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -7164,7 +7163,7 @@ func schema_gardener_landscaper_apis_core_TemplateExecutor(ref common.ReferenceC
 	}
 }
 
-func schema_gardener_landscaper_apis_core_TokenRotation(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_TokenRotation(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -7183,7 +7182,7 @@ func schema_gardener_landscaper_apis_core_TokenRotation(ref common.ReferenceCall
 	}
 }
 
-func schema_gardener_landscaper_apis_core_TransitionTimes(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_TransitionTimes(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -7221,7 +7220,7 @@ func schema_gardener_landscaper_apis_core_TransitionTimes(ref common.ReferenceCa
 	}
 }
 
-func schema_gardener_landscaper_apis_core_TypedObjectReference(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_TypedObjectReference(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -7267,7 +7266,7 @@ func schema_gardener_landscaper_apis_core_TypedObjectReference(ref common.Refere
 	}
 }
 
-func schema_gardener_landscaper_apis_core_Verification(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_Verification(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -7289,7 +7288,7 @@ func schema_gardener_landscaper_apis_core_Verification(ref common.ReferenceCallb
 	}
 }
 
-func schema_gardener_landscaper_apis_core_VerificationSignature(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_VerificationSignature(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -7316,7 +7315,7 @@ func schema_gardener_landscaper_apis_core_VerificationSignature(ref common.Refer
 	}
 }
 
-func schema_gardener_landscaper_apis_core_VersionedNamedObjectReference(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_VersionedNamedObjectReference(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -7347,7 +7346,7 @@ func schema_gardener_landscaper_apis_core_VersionedNamedObjectReference(ref comm
 	}
 }
 
-func schema_gardener_landscaper_apis_core_VersionedObjectReference(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_VersionedObjectReference(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -7385,7 +7384,7 @@ func schema_gardener_landscaper_apis_core_VersionedObjectReference(ref common.Re
 	}
 }
 
-func schema_gardener_landscaper_apis_core_VersionedResourceReference(ref common.ReferenceCallback) common.OpenAPIDefinition {
+func schema_openmcp_project_landscaper_apis_core_VersionedResourceReference(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
 			SchemaProps: spec.SchemaProps{
@@ -13455,6 +13454,18 @@ func schema_landscaper_apis_deployer_helm_HelmInstallConfiguration(ref common.Re
 							Format: "",
 						},
 					},
+					"takeOwnership": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+					"wait": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
 					"timeout": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Timeout is the timeout for the operation in minutes.",
@@ -13476,6 +13487,12 @@ func schema_landscaper_apis_deployer_helm_HelmUninstallConfiguration(ref common.
 				Description: "HelmUninstallConfiguration defines settings for a helm uninstall operation.",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
+					"wait": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
 					"timeout": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Timeout is the timeout for the operation in minutes.",
@@ -14131,6 +14148,18 @@ func schema_apis_deployer_helm_v1alpha1_HelmInstallConfiguration(ref common.Refe
 							Format: "",
 						},
 					},
+					"takeOwnership": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
+					"wait": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
 					"timeout": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Timeout is the timeout for the operation in minutes.",
@@ -14152,6 +14181,12 @@ func schema_apis_deployer_helm_v1alpha1_HelmUninstallConfiguration(ref common.Re
 				Description: "HelmUninstallConfiguration defines settings for a helm uninstall operation.",
 				Type:        []string{"object"},
 				Properties: map[string]spec.Schema{
+					"wait": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"boolean"},
+							Format: "",
+						},
+					},
 					"timeout": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Timeout is the timeout for the operation in minutes.",

@@ -51,103 +51,103 @@ spec:
       # especially useful for resources that came in through CRDs
       # optional
       custom:
-      # the name of the custom readiness check, required
-      - name: myCustomReadinessCheck
-        # temporarily disable this custom readiness check, useful for test setups
-        # optional, defaults to false
-        disabled: false
-        # a specific resource should be selected for this readiness check to be performed on
-        # a resource is uniquely defined by its GVK, namespace and name
-        # required if no labelSelector is specified, can be combined with a labelSelector which is potentially harmful
-        resourceSelector:
-          - apiVersion: apps/v1
+        # the name of the custom readiness check, required
+        - name: myCustomReadinessCheck
+          # temporarily disable this custom readiness check, useful for test setups
+          # optional, defaults to false
+          disabled: false
+          # a specific resource should be selected for this readiness check to be performed on
+          # a resource is uniquely defined by its GVK, namespace and name
+          # required if no labelSelector is specified, can be combined with a labelSelector which is potentially harmful
+          resourceSelector:
+            - apiVersion: apps/v1
+              kind: Deployment
+              name: myDeployment
+              namespace: myNamespace
+          # multiple resources for the readiness check to be performed on can be selected through labels
+          # they are identified by their GVK and a set of labels that all need to match
+          # required if no resourceSelector is specified, can be combined with a resourceSelector which is potentially harmful
+          labelSelector:
+            apiVersion: apps/v1
             kind: Deployment
-            name: myDeployment
-            namespace: myNamespace
-        # multiple resources for the readiness check to be performed on can be selected through labels
-        # they are identified by their GVK and a set of labels that all need to match
-        # required if no resourceSelector is specified, can be combined with a resourceSelector which is potentially harmful
-        labelSelector:
-          apiVersion: apps/v1
-          kind: Deployment
-          matchLabels:
-            app: myApp
-            component: backendService
-        # requirements specifies what condition must hold true for the given objects to pass the readiness check
-        # multiple requirements can be given and they all need to successfully evaluate
-        requirements:
-        # jsonPath denotes the path of the field of the selected object to be checked and compared
-        - jsonPath: .status.readyReplicas
-          # operator specifies how the contents of the given field should be compared to the desired value
-          # allowed operators are: DoesNotExist(!), Exists(exists), Equals(=, ==), NotEquals(!=), In(in), NotIn(notIn)
-          operator: In
-          # values is a list of values that the field at jsonPath must match to according to the operators
-          values:
-          - value: 1
-          - value: 2
-          - value: 3
-        # alternative cluster to get the resource values
-        targetName: someOtherTargetName
+            matchLabels:
+              app: myApp
+              component: backendService
+          # requirements specifies what condition must hold true for the given objects to pass the readiness check
+          # multiple requirements can be given and they all need to successfully evaluate
+          requirements:
+            # jsonPath denotes the path of the field of the selected object to be checked and compared
+            - jsonPath: .status.readyReplicas
+              # operator specifies how the contents of the given field should be compared to the desired value
+              # allowed operators are: ! (field does not exist), exists (field exists), =, == (equal), != (not equal), in (matches at least one given value), notin (does not match any given value)
+              operator: in
+              # values is a list of values that the field at jsonPath must match to according to the operators
+              values:
+                - value: 1
+                - value: 2
+                - value: 3
+          # alternative cluster to get the resource values
+          targetName: someOtherTargetName
 
     manifests: # list of kubernetes manifests
-    - policy: manage | fallback | ignore | keep | immutable
-      # Optional: A map of annotations that are only added to the manifest when it is first created on the target.
-      # These annotations are not getting re-applied during an update of the manifest.
-      annotateBeforeCreate:
-        annotationA: valueA
-        annotationB: valueB
-      # Optional: A map of annotations that are only added to the manifest when before it is being deleted on the target.
-      annotateBeforeDelete:
-        annotationA: valueA
-        annotationB: valueB
-      # Optional: The specified yaml is merged into the manifest and the manifest is updated. This is executed after 
-      # all manifests of the DeployItem were deployed
-      patchAfterDeployment:
-        # example
-        spec:
-          suspend: true
-      # Optional: The specified yaml is merged into the manifest and the manifest is updated. This is executed before
-      # the manifest is deleted.
-      patchBeforeDelete:
-        # example
-        spec:
-          suspend: false
-      # the manifest specification
-      manifest:
-        apiVersion: v1
-        kind: Secret
-        metadata:
-          name: my-secret
-          namespace: default
-        data:
-          config: abc
-    - ...
-    
+      - policy: manage | fallback | ignore | keep | immutable
+        # Optional: A map of annotations that are only added to the manifest when it is first created on the target.
+        # These annotations are not getting re-applied during an update of the manifest.
+        annotateBeforeCreate:
+          annotationA: valueA
+          annotationB: valueB
+        # Optional: A map of annotations that are only added to the manifest when before it is being deleted on the target.
+        annotateBeforeDelete:
+          annotationA: valueA
+          annotationB: valueB
+        # Optional: The specified yaml is merged into the manifest and the manifest is updated. This is executed after 
+        # all manifests of the DeployItem were deployed
+        patchAfterDeployment:
+          # example
+          spec:
+            suspend: true
+        # Optional: The specified yaml is merged into the manifest and the manifest is updated. This is executed before
+        # the manifest is deleted.
+        patchBeforeDelete:
+          # example
+          spec:
+            suspend: false
+        # the manifest specification
+        manifest:
+          apiVersion: v1
+          kind: Secret
+          metadata:
+            name: my-secret
+            namespace: default
+          data:
+            config: abc
+      - ...
+
     # Define exports that are read from the kubernetes resources,
     # so they can be used by other deployitems or installations.
     # The deployer tries to read the export values until the timeout of the DeployItem (`spec.timeout`) is exceeded.
     exports:
       exports:
-      - key: KeyA # value is read from a secret and exported with name "KeyA"
-        jsonPath: .data.somekey # points to the value in the resource that is being exported
-        fromResource: # required
-          apiVersion: v1 # specification of the resource type
-          kind: Secret
-          name: my-secret # name of the resource
-          namespace: a # namespace of the resource
-      - key: KeyB # value is read from secret that is referenced by a service account and exported with name "KeyB"
-        jsonPath: .secrets[0] # points to an object reference that consists of a name and namespace
-        fromResource:
-          apiVersion: v1 # specification of the resource type
-          kind: ServiceAccount
-          name: my-user # name of the resource
-          namespace: a # namespace of the resource
-        # Defines the referenced objects kind and version. 
-        # The name and namespace is taken from the jsonPath defined in "fromResource".
-        fromObjectRef:
-          apiVersion: v1
-          kind: Secret
-          jsonPath: ".data.somekey" # points to the value in the resource that is being exported
+        - key: KeyA # value is read from a secret and exported with name "KeyA"
+          jsonPath: .data.somekey # points to the value in the resource that is being exported
+          fromResource: # required
+            apiVersion: v1 # specification of the resource type
+            kind: Secret
+            name: my-secret # name of the resource
+            namespace: a # namespace of the resource
+        - key: KeyB # value is read from secret that is referenced by a service account and exported with name "KeyB"
+          jsonPath: .secrets[0] # points to an object reference that consists of a name and namespace
+          fromResource:
+            apiVersion: v1 # specification of the resource type
+            kind: ServiceAccount
+            name: my-user # name of the resource
+            namespace: a # namespace of the resource
+          # Defines the referenced objects kind and version. 
+          # The name and namespace is taken from the jsonPath defined in "fromResource".
+          fromObjectRef:
+            apiVersion: v1
+            kind: Secret
+            jsonPath: ".data.somekey" # points to the value in the resource that is being exported
 
     # Optional. Allows to customize the deletion behaviour.
     deletionGroups: []
@@ -167,24 +167,24 @@ metadata:
   name: myDeployItemName
 spec:
   ...
-  
-  target: 
+
+  target:
     import: my-cluster
 
   config:
     ...
-    
+
     exports:
       exports:
-      - key: someKey
-        jsonPath: .data.somekey 
-        fromResource: 
-          apiVersion: someVersion
-          kind: someKind
-          name: someName
-          namespace: someNamespace
-        # optional: other target cluster to fetch the export data  
-        targetName: otherTargetName
+        - key: someKey
+          jsonPath: .data.somekey
+          fromResource:
+            apiVersion: someVersion
+            kind: someKind
+            name: someName
+            namespace: someNamespace
+          # optional: other target cluster to fetch the export data  
+          targetName: otherTargetName
 ```
 
 ### Update Strategy
@@ -202,7 +202,7 @@ The update strategy defines the behavior of the manifest deployer when a resourc
 - `fallback`: The manifest will be created, updated and deleted (only if not already managed by someone else: check for annotation with landscaper identity, deployitem name + namespace)
 - `keep`: The manifest will be created, updated, but not deleted.
 - `ignore`: The manifest will be completely ignored.
-- `immutable`: The manifest will be created and deleted, but never updated. 
+- `immutable`: The manifest will be created and deleted, but never updated.
 
 ### Deletion Groups
 
@@ -219,10 +219,10 @@ status:
     apiVersion: manifest.deployer.landscaper.gardener.cloud
     kind: ProviderStatus
     managedResources:
-    - apiGroup: k8s.apigroup.com/v1
-      kind: my-type
-      name: my-resource
-      namespace: default
+      - apiGroup: k8s.apigroup.com/v1
+        kind: my-type
+        name: my-resource
+        namespace: default
 ```
 
 ## Deployer Configuration

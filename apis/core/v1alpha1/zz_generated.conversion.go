@@ -14,13 +14,12 @@ import (
 	unsafe "unsafe"
 
 	v2 "github.com/gardener/component-spec/bindings-go/apis/v2"
+	core "github.com/openmcp-project/landscaper/apis/core"
 	v1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	conversion "k8s.io/apimachinery/pkg/conversion"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	selection "k8s.io/apimachinery/pkg/selection"
-
-	core "github.com/openmcp-project/landscaper/apis/core"
 )
 
 func init() {
