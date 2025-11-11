@@ -7,7 +7,7 @@ require (
 	github.com/Masterminds/sprig/v3 v3.3.0
 	github.com/cloudflare/cfssl v1.6.5
 	github.com/distribution/reference v0.6.0
-	github.com/docker/cli v28.5.2+incompatible
+	github.com/docker/cli v29.0.0+incompatible
 	github.com/gardener/component-cli v0.44.0
 	github.com/gardener/component-spec/bindings-go v0.0.98
 	github.com/go-logr/logr v1.4.3
@@ -284,6 +284,8 @@ require (
 	github.com/mitchellh/reflectwalk v1.0.2 // indirect
 	github.com/moby/docker-image-spec v1.3.1 // indirect
 	github.com/moby/locker v1.0.1 // indirect
+	github.com/moby/moby/api v1.52.0 // indirect
+	github.com/moby/moby/client v0.1.0 // indirect
 	github.com/moby/spdystream v0.5.0 // indirect
 	github.com/moby/sys/atomicwriter v0.1.0 // indirect
 	github.com/moby/sys/capability v0.4.0 // indirect
