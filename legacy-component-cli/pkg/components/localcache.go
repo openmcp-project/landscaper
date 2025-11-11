@@ -11,11 +11,12 @@ import (
 	"path/filepath"
 	"strings"
 
-	cdv2 "github.com/gardener/component-spec/bindings-go/apis/v2"
-	"github.com/gardener/component-spec/bindings-go/codec"
-	"github.com/gardener/component-spec/bindings-go/ctf"
-	cdoci "github.com/gardener/component-spec/bindings-go/oci"
 	"github.com/mandelsoft/vfs/pkg/vfs"
+
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
+	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/codec"
+	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/ctf"
+	cdoci "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/oci"
 
 	"github.com/openmcp-project/landscaper/legacy-component-cli/pkg/commands/constants"
 )
@@ -58,7 +59,7 @@ func ResolveInLocalCache(fs vfs.FileSystem, repoCtx cdv2.OCIRegistryRepository, 
 	data, err := vfs.ReadFile(fs, componentPath)
 	if err != nil {
 		if os.IsNotExist(err) {
-			return nil, ctf.NotFoundError
+			return nil, ctf.ErrNotFoundError
 		}
 		return nil, fmt.Errorf("unable to read file from %q: %w", componentPath, err)
 	}

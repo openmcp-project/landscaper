@@ -8,11 +8,11 @@ import (
 	"bytes"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 
-	cdv2 "github.com/gardener/component-spec/bindings-go/apis/v2"
 	"sigs.k8s.io/yaml"
+
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 
 	"github.com/openmcp-project/landscaper/legacy-component-cli/pkg/utils"
 )
@@ -92,7 +92,7 @@ func ReadProcessorMessage(r io.Reader) (*cdv2.ComponentDescriptor, cdv2.Resource
 				return nil, cdv2.Resource{}, nil, fmt.Errorf("unable to read %s: %w", ComponentDescriptorFile, err)
 			}
 		case ResourceBlobFile:
-			if f, err = ioutil.TempFile("", ""); err != nil {
+			if f, err = os.CreateTemp("", ""); err != nil {
 				return nil, cdv2.Resource{}, nil, fmt.Errorf("unable to create tempfile: %w", err)
 			}
 			if _, err := io.Copy(f, tr); err != nil {

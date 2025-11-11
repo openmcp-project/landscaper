@@ -8,9 +8,10 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/gardener/component-spec/bindings-go/ctf"
 	"github.com/mandelsoft/vfs/pkg/vfs"
 	"github.com/spf13/pflag"
+
+	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/ctf"
 )
 
 // DefaultOutputFormatUsage defines the default usage string for output format flag.

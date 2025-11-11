@@ -12,6 +12,7 @@ import (
 	"github.com/Masterminds/semver/v3"
 	"github.com/go-logr/logr"
 	ocispecv1 "github.com/opencontainers/image-spec/specs-go/v1"
+
 	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/ctf"
 )
@@ -364,7 +365,7 @@ func getImageFromCompDesc(ctx context.Context, image ComponentReferenceImageEntr
 			return []cdv2.Resource{res}, nil
 		}
 	}
-	return nil, ReferencedResourceNotFoundError
+	return nil, ErrReferencedResourceNotFoundError
 }
 
 // parseGenericImages parses the generic images of the component descriptor and matches all oci resources of the other component descriptors
@@ -415,7 +416,7 @@ func (io *imageOverwrite) findGenericImageResource(ctx context.Context, image Im
 
 		resources, err := comp.GetResourcesByType(cdv2.OCIImageType)
 		if err != nil {
-			if errors.Is(err, cdv2.NotFound) {
+			if errors.Is(err, cdv2.ErrNotFound) {
 				cLog.V(7).Info("no oci images found")
 				continue
 			}

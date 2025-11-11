@@ -11,14 +11,15 @@ import (
 	"os"
 	"path/filepath"
 
-	cdv2 "github.com/gardener/component-spec/bindings-go/apis/v2"
-	cdoci "github.com/gardener/component-spec/bindings-go/oci"
 	"github.com/go-logr/logr"
 	"github.com/mandelsoft/vfs/pkg/osfs"
 	"github.com/mandelsoft/vfs/pkg/vfs"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 	"sigs.k8s.io/yaml"
+
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
+	cdoci "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/oci"
 
 	ociopts "github.com/openmcp-project/landscaper/legacy-component-cli/ociclient/options"
 	"github.com/openmcp-project/landscaper/legacy-component-cli/pkg/commands/constants"

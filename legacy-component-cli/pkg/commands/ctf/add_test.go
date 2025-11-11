@@ -7,7 +7,6 @@ package ctf_test
 import (
 	"context"
 
-	"github.com/gardener/component-spec/bindings-go/ctf"
 	"github.com/go-logr/logr"
 	"github.com/mandelsoft/vfs/pkg/layerfs"
 	"github.com/mandelsoft/vfs/pkg/memoryfs"
@@ -16,6 +15,8 @@ import (
 	"github.com/mandelsoft/vfs/pkg/vfs"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+
+	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/ctf"
 
 	cmd "github.com/openmcp-project/landscaper/legacy-component-cli/pkg/commands/ctf"
 )

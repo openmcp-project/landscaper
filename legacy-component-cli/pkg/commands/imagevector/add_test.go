@@ -8,9 +8,6 @@ import (
 	"context"
 	"encoding/json"
 
-	cdv2 "github.com/gardener/component-spec/bindings-go/apis/v2"
-	"github.com/gardener/component-spec/bindings-go/codec"
-	iv "github.com/gardener/image-vector/pkg"
 	"github.com/go-logr/logr"
 	"github.com/mandelsoft/vfs/pkg/layerfs"
 	"github.com/mandelsoft/vfs/pkg/memoryfs"
@@ -20,6 +17,11 @@ import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	. "github.com/onsi/gomega/gstruct"
+
+	iv "github.com/openmcp-project/landscaper/legacy-image-vector/pkg"
+
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
+	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/codec"
 
 	ivcmd "github.com/openmcp-project/landscaper/legacy-component-cli/pkg/commands/imagevector"
 )

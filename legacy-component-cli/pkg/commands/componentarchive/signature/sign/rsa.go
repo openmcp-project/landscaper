@@ -9,8 +9,8 @@ import (
 	"fmt"
 	"os"
 
-	cdv2 "github.com/gardener/component-spec/bindings-go/apis/v2"
-	cdv2Sign "github.com/gardener/component-spec/bindings-go/apis/v2/signatures"
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
+	cdv2Sign "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2/signatures"
 
 	"github.com/go-logr/logr"
 	"github.com/mandelsoft/vfs/pkg/osfs"

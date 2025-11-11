@@ -16,8 +16,8 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 
-	cdv2 "github.com/gardener/component-spec/bindings-go/apis/v2"
-	cdv2Sign "github.com/gardener/component-spec/bindings-go/apis/v2/signatures"
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
+	cdv2Sign "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2/signatures"
 
 	"github.com/openmcp-project/landscaper/legacy-component-cli/pkg/logger"
 	"github.com/openmcp-project/landscaper/legacy-component-cli/pkg/signatures"
@@ -71,7 +71,7 @@ func (o *X509CertificateVerifyOptions) Run(ctx context.Context, log logr.Logger,
 		return fmt.Errorf("unable to create rsa verifier: %w", err)
 	}
 
-	if err := o.GenericVerifyOptions.VerifyWithVerifier(ctx, log, fs, verifier); err != nil {
+	if err := o.VerifyWithVerifier(ctx, log, fs, verifier); err != nil {
 		return fmt.Errorf("unable to verify component descriptor: %w", err)
 	}
 	return nil

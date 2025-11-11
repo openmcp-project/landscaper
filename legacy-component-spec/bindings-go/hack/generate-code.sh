@@ -8,7 +8,7 @@ set -o errexit
 set -o nounset
 set -o pipefail
 
-PROJECT_MOD_ROOT="github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go"
+PROJECT_MOD_ROOT="github.com/gardener/landscaper/legacy-component-spec/bindings-go"
 
 CURRENT_DIR=$(dirname $0)
 PROJECT_ROOT="${CURRENT_DIR}"/..

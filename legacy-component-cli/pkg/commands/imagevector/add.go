@@ -12,18 +12,20 @@ import (
 	"path/filepath"
 	"strings"
 
-	cdv2 "github.com/gardener/component-spec/bindings-go/apis/v2"
-	cdvalidation "github.com/gardener/component-spec/bindings-go/apis/v2/validation"
-	"github.com/gardener/component-spec/bindings-go/codec"
-	"github.com/gardener/component-spec/bindings-go/ctf"
-	cdoci "github.com/gardener/component-spec/bindings-go/oci"
-	iv "github.com/gardener/image-vector/pkg"
 	"github.com/ghodss/yaml"
 	"github.com/go-logr/logr"
 	"github.com/mandelsoft/vfs/pkg/osfs"
 	"github.com/mandelsoft/vfs/pkg/vfs"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
+
+	iv "github.com/openmcp-project/landscaper/legacy-image-vector/pkg"
+
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
+	cdvalidation "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2/validation"
+	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/codec"
+	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/ctf"
+	cdoci "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/oci"
 
 	ociopts "github.com/openmcp-project/landscaper/legacy-component-cli/ociclient/options"
 	"github.com/openmcp-project/landscaper/legacy-component-cli/pkg/components"
@@ -289,8 +291,8 @@ func (o *AddOptions) validate() error {
 func (o *AddOptions) AddFlags(set *pflag.FlagSet) {
 	set.StringVar(&o.ComponentDescriptorPath, "comp-desc", "", "path to the component descriptor directory")
 	set.StringVar(&o.ImageVectorPath, "image-vector", "", "The path to the resources defined as yaml or json")
-	set.StringArrayVar(&o.ParseImageOptions.ComponentReferencePrefixes, "component-prefixes", []string{}, "Specify all prefixes that define a image  from another component")
-	set.StringArrayVar(&o.ParseImageOptions.ExcludeComponentReference, "exclude-component-reference", []string{}, "Specify all image name that should not be added as component reference")
+	set.StringArrayVar(&o.ComponentReferencePrefixes, "component-prefixes", []string{}, "Specify all prefixes that define a image  from another component")
+	set.StringArrayVar(&o.ExcludeComponentReference, "exclude-component-reference", []string{}, "Specify all image name that should not be added as component reference")
 	set.StringArrayVar(&o.ParseImageOptions.GenericDependencies, "generic-dependency", []string{}, "Specify all image source names that are a generic dependency.")
 	set.StringVar(&o.GenericDependencies, "generic-dependencies", "", "Specify all prefixes that define a image  from another component")
 	o.OciOptions.AddFlags(set)

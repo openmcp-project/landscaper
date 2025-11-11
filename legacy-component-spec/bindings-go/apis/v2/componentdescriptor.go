@@ -22,7 +22,7 @@ import (
 const SchemaVersion = "v2"
 
 var (
-	NotFound = errors.New("NotFound")
+	ErrNotFound = errors.New("NotFound")
 )
 
 // Metadata defines the metadata of the component descriptor.
@@ -35,13 +35,13 @@ type Metadata struct {
 
 // ProviderType describes the provider of component in the origin's context.
 // For example the name of an organisation or company.
-// +k8s:deepcopy-gen=true
+// +k8s:deepcopy-gen=false
 // +k8s:openapi-gen=true
 type ProviderType string
 
 // ResourceRelation describes the type of a resource.
 // Defines whether the component is created by a third party or internally.
-// +k8s:deepcopy-gen=true
+// +k8s:deepcopy-gen=false
 // +k8s:openapi-gen=true
 type ResourceRelation string
 

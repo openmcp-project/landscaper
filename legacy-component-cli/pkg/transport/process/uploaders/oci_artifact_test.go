@@ -13,7 +13,7 @@ import (
 	. "github.com/onsi/gomega"
 	ocispecv1 "github.com/opencontainers/image-spec/specs-go/v1"
 
-	cdv2 "github.com/gardener/component-spec/bindings-go/apis/v2"
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 
 	"github.com/openmcp-project/landscaper/legacy-component-cli/ociclient/cache"
 	"github.com/openmcp-project/landscaper/legacy-component-cli/ociclient/oci"

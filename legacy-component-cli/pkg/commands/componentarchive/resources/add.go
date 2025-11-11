@@ -13,10 +13,6 @@ import (
 	"os"
 	"path/filepath"
 
-	cdv2 "github.com/gardener/component-spec/bindings-go/apis/v2"
-	"github.com/gardener/component-spec/bindings-go/apis/v2/cdutils"
-	cdvalidation "github.com/gardener/component-spec/bindings-go/apis/v2/validation"
-	"github.com/gardener/component-spec/bindings-go/ctf"
 	"github.com/go-logr/logr"
 	"github.com/mandelsoft/vfs/pkg/osfs"
 	"github.com/mandelsoft/vfs/pkg/vfs"
@@ -25,6 +21,11 @@ import (
 	"k8s.io/apimachinery/pkg/util/validation/field"
 	yamlutil "k8s.io/apimachinery/pkg/util/yaml"
 	"sigs.k8s.io/yaml"
+
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
+	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2/cdutils"
+	cdvalidation "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2/validation"
+	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/ctf"
 
 	"github.com/openmcp-project/landscaper/legacy-component-cli/pkg/commands/componentarchive/input"
 	"github.com/openmcp-project/landscaper/legacy-component-cli/pkg/componentarchive"
@@ -169,7 +170,7 @@ resources:
 func (o *Options) Run(ctx context.Context, log logr.Logger, fs vfs.FileSystem) error {
 	compDescFilePath := filepath.Join(o.ComponentArchivePath, ctf.ComponentDescriptorFileName)
 
-	archive, err := o.BuilderOptions.Build(fs)
+	archive, err := o.Build(fs)
 	if err != nil {
 		return err
 	}
@@ -229,8 +230,8 @@ func (o *Options) Complete(args []string) error {
 	if len(args) == 0 {
 		return errors.New("at least a component archive path argument has to be defined")
 	}
-	o.BuilderOptions.ComponentArchivePath = args[0]
-	o.BuilderOptions.Default()
+	o.ComponentArchivePath = args[0]
+	o.Default()
 
 	o.ResourceObjectPaths = append(o.ResourceObjectPaths, args[1:]...)
 	if len(o.ResourceObjectPath) != 0 {
@@ -241,7 +242,7 @@ func (o *Options) Complete(args []string) error {
 }
 
 func (o *Options) validate() error {
-	return o.BuilderOptions.Validate()
+	return o.Validate()
 }
 
 func (o *Options) AddFlags(fs *pflag.FlagSet) {

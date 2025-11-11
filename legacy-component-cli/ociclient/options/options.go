@@ -11,8 +11,9 @@ import (
 
 	"github.com/go-logr/logr"
 	"github.com/mandelsoft/vfs/pkg/vfs"
-	cdoci "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/oci"
 	"github.com/spf13/pflag"
+
+	cdoci "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/oci"
 
 	"github.com/openmcp-project/landscaper/legacy-component-cli/ociclient"
 	"github.com/openmcp-project/landscaper/legacy-component-cli/ociclient/cache"

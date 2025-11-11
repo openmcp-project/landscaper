@@ -12,7 +12,6 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"math"
 	"math/rand"
 	"net/http"
@@ -23,10 +22,11 @@ import (
 	"strings"
 	"time"
 
-	cdv2 "github.com/gardener/component-spec/bindings-go/apis/v2"
 	"github.com/mandelsoft/vfs/pkg/vfs"
 	"github.com/spf13/cobra"
 	"sigs.k8s.io/yaml"
+
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 
 	"github.com/openmcp-project/landscaper/legacy-component-cli/ociclient/cache"
 	"github.com/openmcp-project/landscaper/legacy-component-cli/ociclient/oci"
@@ -193,7 +193,7 @@ func WriteFileToTARArchive(filename string, inputReader io.Reader, outputWriter 
 		return errors.New("outputWriter must not be nil")
 	}
 
-	tempfile, err := ioutil.TempFile("", "")
+	tempfile, err := os.CreateTemp("", "")
 	if err != nil {
 		return fmt.Errorf("unable to create tempfile: %w", err)
 	}

@@ -6,7 +6,7 @@ package filters
 import (
 	"fmt"
 
-	cdv2 "github.com/gardener/component-spec/bindings-go/apis/v2"
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 )
 
 type AccessTypeFilterSpec struct {

@@ -11,12 +11,13 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/gardener/component-spec/bindings-go/ctf"
 	"github.com/go-logr/logr"
 	"github.com/mandelsoft/vfs/pkg/osfs"
 	"github.com/mandelsoft/vfs/pkg/vfs"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
+
+	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/ctf"
 
 	"github.com/openmcp-project/landscaper/legacy-component-cli/pkg/componentarchive"
 	"github.com/openmcp-project/landscaper/legacy-component-cli/pkg/logger"

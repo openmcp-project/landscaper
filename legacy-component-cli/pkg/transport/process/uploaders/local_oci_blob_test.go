@@ -8,11 +8,12 @@ import (
 	"context"
 	"io"
 
-	cdv2 "github.com/gardener/component-spec/bindings-go/apis/v2"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	"github.com/opencontainers/go-digest"
 	ocispecv1 "github.com/opencontainers/image-spec/specs-go/v1"
+
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 
 	"github.com/openmcp-project/landscaper/legacy-component-cli/pkg/transport/process/uploaders"
 	processutils "github.com/openmcp-project/landscaper/legacy-component-cli/pkg/transport/process/utils"

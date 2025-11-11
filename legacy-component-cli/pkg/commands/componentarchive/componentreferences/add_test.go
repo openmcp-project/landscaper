@@ -10,9 +10,6 @@ import (
 	"path/filepath"
 	"testing"
 
-	cdv2 "github.com/gardener/component-spec/bindings-go/apis/v2"
-	"github.com/gardener/component-spec/bindings-go/codec"
-	"github.com/gardener/component-spec/bindings-go/ctf"
 	"github.com/go-logr/logr"
 	"github.com/mandelsoft/vfs/pkg/layerfs"
 	"github.com/mandelsoft/vfs/pkg/memoryfs"
@@ -22,6 +19,10 @@ import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	. "github.com/onsi/gomega/gstruct"
+
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
+	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/codec"
+	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/ctf"
 
 	"github.com/openmcp-project/landscaper/legacy-component-cli/pkg/commands/componentarchive/componentreferences"
 	"github.com/openmcp-project/landscaper/legacy-component-cli/pkg/componentarchive"

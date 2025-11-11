@@ -8,7 +8,6 @@ import (
 	"context"
 	"path/filepath"
 
-	"github.com/gardener/component-spec/bindings-go/ctf"
 	"github.com/mandelsoft/vfs/pkg/layerfs"
 	"github.com/mandelsoft/vfs/pkg/memoryfs"
 	"github.com/mandelsoft/vfs/pkg/osfs"
@@ -16,6 +15,8 @@ import (
 	"github.com/mandelsoft/vfs/pkg/vfs"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+
+	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/ctf"
 
 	"github.com/openmcp-project/landscaper/legacy-component-cli/pkg/commands/componentarchive"
 	"github.com/openmcp-project/landscaper/legacy-component-cli/pkg/utils"

@@ -33,6 +33,7 @@ import (
 	ocispecv1 "github.com/opencontainers/image-spec/specs-go/v1"
 
 	"github.com/go-logr/logr"
+
 	v2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/codec"
 	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/ctf"
@@ -77,8 +78,8 @@ func OCIRef(repoCtx v2.OCIRegistryRepository, name, version string) (string, err
 	}
 }
 
-// ItemNotCached defines an error that defines that an item was not cached.
-var ItemNotCached = errors.New("ITEM_NOT_CACHED")
+// ErrorItemNotCached defines an error that defines that an item was not cached.
+var ErrorItemNotCached = errors.New("ITEM_NOT_CACHED")
 
 // Cache describes a interface to cache component descriptors.
 // The cache expects that a component descriptor identified by repoCtx, name and version is immutable.
@@ -86,7 +87,7 @@ var ItemNotCached = errors.New("ITEM_NOT_CACHED")
 // The blob resolver might be added in the future.
 type Cache interface {
 	// Get reads a component descriptor from the cache.
-	// Use the ItemNotCached error to identicate that an error does not have occurred.
+	// Use the ErrorItemNotCached error to identicate that an error does not have occurred.
 	Get(ctx context.Context, repoCtx v2.OCIRegistryRepository, name, version string) (*v2.ComponentDescriptor, error)
 	// Store stores a component descriptor in the cache.
 	Store(ctx context.Context, descriptor *v2.ComponentDescriptor) error
@@ -159,7 +160,7 @@ func (r *Resolver) resolve(ctx context.Context, repoCtx v2.Repository, name, ver
 	if r.cache != nil {
 		cd, err := r.cache.Get(ctx, repo, name, version)
 		if err != nil {
-			if errors.Is(err, ctf.NotFoundError) {
+			if errors.Is(err, ctf.ErrNotFoundError) {
 				log.V(5).Info(err.Error())
 			} else {
 				log.Error(err, "unable to get component descriptor")

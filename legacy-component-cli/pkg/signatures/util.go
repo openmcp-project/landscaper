@@ -8,18 +8,20 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/gardener/component-spec/bindings-go/ctf"
 	"github.com/go-logr/logr"
 	"github.com/opencontainers/go-digest"
+
+	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/ctf"
 
 	"github.com/openmcp-project/landscaper/legacy-component-cli/ociclient"
 	"github.com/openmcp-project/landscaper/legacy-component-cli/pkg/components"
 	"github.com/openmcp-project/landscaper/legacy-component-cli/pkg/logger"
 
-	cdv2 "github.com/gardener/component-spec/bindings-go/apis/v2"
-	cdv2Sign "github.com/gardener/component-spec/bindings-go/apis/v2/signatures"
-	cdoci "github.com/gardener/component-spec/bindings-go/oci"
 	ocispecv1 "github.com/opencontainers/image-spec/specs-go/v1"
+
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
+	cdv2Sign "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2/signatures"
+	cdoci "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/oci"
 
 	ociCache "github.com/openmcp-project/landscaper/legacy-component-cli/ociclient/cache"
 )

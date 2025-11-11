@@ -11,14 +11,15 @@ import (
 	"os"
 	"path/filepath"
 
-	cdv2 "github.com/gardener/component-spec/bindings-go/apis/v2"
-	cdvalidation "github.com/gardener/component-spec/bindings-go/apis/v2/validation"
-	"github.com/gardener/component-spec/bindings-go/codec"
-	"github.com/gardener/component-spec/bindings-go/ctf"
 	"github.com/mandelsoft/vfs/pkg/projectionfs"
 	"github.com/mandelsoft/vfs/pkg/vfs"
 	"github.com/spf13/pflag"
 	"sigs.k8s.io/yaml"
+
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
+	cdvalidation "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2/validation"
+	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/codec"
+	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/ctf"
 
 	"github.com/openmcp-project/landscaper/legacy-component-cli/pkg/commands/componentarchive/input"
 	"github.com/openmcp-project/landscaper/legacy-component-cli/pkg/commands/constants"
@@ -133,8 +134,8 @@ func (o *BuilderOptions) Build(fs vfs.FileSystem) (*ctf.ComponentArchive, error)
 
 	cd := &cdv2.ComponentDescriptor{}
 	cd.Metadata.Version = cdv2.SchemaVersion
-	cd.ComponentSpec.Name = o.Name
-	cd.ComponentSpec.Version = o.Version
+	cd.Name = o.Name
+	cd.Version = o.Version
 	cd.Provider = "internal"
 	cd.RepositoryContexts = make([]*cdv2.UnstructuredTypedObject, 0)
 	if len(o.BaseUrl) != 0 {

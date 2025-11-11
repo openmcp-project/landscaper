@@ -11,11 +11,12 @@ import (
 	"path/filepath"
 	"reflect"
 
-	cdv2 "github.com/gardener/component-spec/bindings-go/apis/v2"
-	cdv2Sign "github.com/gardener/component-spec/bindings-go/apis/v2/signatures"
-	cdoci "github.com/gardener/component-spec/bindings-go/oci"
 	"github.com/go-logr/logr"
 	"github.com/mandelsoft/vfs/pkg/vfs"
+
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
+	cdv2Sign "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2/signatures"
+	cdoci "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/oci"
 
 	"github.com/openmcp-project/landscaper/legacy-component-cli/ociclient"
 	ociopts "github.com/openmcp-project/landscaper/legacy-component-cli/ociclient/options"

@@ -19,7 +19,7 @@ set -e
 echo "> Check"
 
 echo "Check generated files"
-unformatted_files="$(goimports -l --local github.com/openmcp-project/landscaper/legacy-component-spec $@)"
+unformatted_files="$(goimports -l --local github.com/gardener/landscaper/legacy-component-spec $@)"
 if [[ "$unformatted_files" ]]; then
   echo "Unformatted files:"
   echo "$unformatted_files"

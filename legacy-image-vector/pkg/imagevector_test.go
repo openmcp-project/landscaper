@@ -13,6 +13,7 @@ import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	. "github.com/onsi/gomega/gstruct"
+
 	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/ctf"
 
@@ -360,7 +361,7 @@ var _ = Describe("Add", func() {
 				},
 			)
 			Expect(err).To(HaveOccurred())
-			Expect(errors.Is(err, ctf.NotFoundError)).To(BeTrue())
+			Expect(errors.Is(err, ctf.ErrNotFoundError)).To(BeTrue())
 		})
 
 		It("should add image sources with the component reference label as component reference", func() {

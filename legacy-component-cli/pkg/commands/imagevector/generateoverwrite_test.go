@@ -12,9 +12,6 @@ import (
 	"os"
 	"path/filepath"
 
-	cdv2 "github.com/gardener/component-spec/bindings-go/apis/v2"
-	"github.com/gardener/component-spec/bindings-go/codec"
-	iv "github.com/gardener/image-vector/pkg"
 	"github.com/go-logr/logr"
 	"github.com/mandelsoft/vfs/pkg/layerfs"
 	"github.com/mandelsoft/vfs/pkg/memoryfs"
@@ -25,6 +22,11 @@ import (
 	. "github.com/onsi/gomega"
 	. "github.com/onsi/gomega/gstruct"
 	"sigs.k8s.io/yaml"
+
+	iv "github.com/openmcp-project/landscaper/legacy-image-vector/pkg"
+
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
+	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/codec"
 
 	"github.com/openmcp-project/landscaper/legacy-component-cli/pkg/commands/constants"
 	"github.com/openmcp-project/landscaper/legacy-component-cli/pkg/components"

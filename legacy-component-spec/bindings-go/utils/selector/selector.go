@@ -19,8 +19,8 @@ import (
 	"fmt"
 	"regexp"
 
-	"github.com/ghodss/yaml"
 	"github.com/xeipuuv/gojsonschema"
+	"sigs.k8s.io/yaml"
 )
 
 // Interface defines a selector interface that
@@ -39,7 +39,7 @@ func (s SelectorFunc) Match(obj map[string]string) (bool, error) {
 // MatchSelectors checks whether all selectors matches the given obj.
 func MatchSelectors(obj map[string]string, selectors ...Interface) (bool, error) {
 	for _, sel := range selectors {
-		ok, err:= sel.Match(obj)
+		ok, err := sel.Match(obj)
 		if err != nil {
 			return false, err
 		}

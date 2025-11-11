@@ -13,10 +13,6 @@ import (
 	"os"
 	"path/filepath"
 
-	cdv2 "github.com/gardener/component-spec/bindings-go/apis/v2"
-	"github.com/gardener/component-spec/bindings-go/apis/v2/cdutils"
-	cdvalidation "github.com/gardener/component-spec/bindings-go/apis/v2/validation"
-	"github.com/gardener/component-spec/bindings-go/ctf"
 	"github.com/ghodss/yaml"
 	"github.com/go-logr/logr"
 	"github.com/mandelsoft/vfs/pkg/osfs"
@@ -25,6 +21,11 @@ import (
 	"github.com/spf13/pflag"
 	"k8s.io/apimachinery/pkg/util/validation/field"
 	yamlutil "k8s.io/apimachinery/pkg/util/yaml"
+
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
+	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2/cdutils"
+	cdvalidation "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2/validation"
+	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/ctf"
 
 	"github.com/openmcp-project/landscaper/legacy-component-cli/pkg/commands/componentarchive/input"
 	"github.com/openmcp-project/landscaper/legacy-component-cli/pkg/componentarchive"
@@ -124,7 +125,7 @@ input:
 func (o *Options) Run(ctx context.Context, log logr.Logger, fs vfs.FileSystem) error {
 	compDescFilePath := filepath.Join(o.ComponentArchivePath, ctf.ComponentDescriptorFileName)
 
-	archive, err := o.BuilderOptions.Build(fs)
+	archive, err := o.Build(fs)
 	if err != nil {
 		return err
 	}
@@ -180,8 +181,8 @@ func (o *Options) Complete(args []string) error {
 		return errors.New("at least a component archive path argument has to be defined")
 	}
 
-	o.BuilderOptions.ComponentArchivePath = args[0]
-	o.BuilderOptions.Default()
+	o.ComponentArchivePath = args[0]
+	o.Default()
 
 	o.SourceObjectPaths = append(o.SourceObjectPaths, args[1:]...)
 	if len(o.SourceObjectPath) != 0 {
@@ -192,7 +193,7 @@ func (o *Options) Complete(args []string) error {
 }
 
 func (o *Options) validate() error {
-	return o.BuilderOptions.Validate()
+	return o.Validate()
 }
 
 func (o *Options) AddFlags(fs *pflag.FlagSet) {

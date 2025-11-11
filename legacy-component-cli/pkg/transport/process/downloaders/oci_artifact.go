@@ -10,8 +10,9 @@ import (
 	"fmt"
 	"io"
 
-	cdv2 "github.com/gardener/component-spec/bindings-go/apis/v2"
 	ocispecv1 "github.com/opencontainers/image-spec/specs-go/v1"
+
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 
 	"github.com/openmcp-project/landscaper/legacy-component-cli/ociclient"
 	"github.com/openmcp-project/landscaper/legacy-component-cli/ociclient/cache"

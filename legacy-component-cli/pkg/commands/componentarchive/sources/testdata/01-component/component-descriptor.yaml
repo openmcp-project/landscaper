@@ -17,7 +17,7 @@ component:
     type: 'git'
     access:
       type: 'git'
-      repository: 'github.com/gardener/component-cli'
+      repository: 'github.com/gardener/landscaper/legacy-component-cli'
 
   componentReferences: []
 

@@ -8,16 +8,16 @@ import (
 	"encoding/hex"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
+	"os"
 	"reflect"
 
 	"github.com/openmcp-project/landscaper/legacy-component-cli/ociclient"
 	"github.com/openmcp-project/landscaper/legacy-component-cli/pkg/logger"
 
-	cdv2 "github.com/gardener/component-spec/bindings-go/apis/v2"
-	"github.com/gardener/component-spec/bindings-go/apis/v2/signatures"
-	cdoci "github.com/gardener/component-spec/bindings-go/oci"
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
+	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2/signatures"
+	cdoci "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/oci"
 )
 
 type Digester struct {
@@ -63,7 +63,7 @@ func (d *Digester) digestForLocalOciBlob(ctx context.Context, componentDescripto
 		return nil, fmt.Errorf("unable to decode repository context: %w", err)
 	}
 
-	tmpfile, err := ioutil.TempFile("", "")
+	tmpfile, err := os.CreateTemp("", "")
 	if err != nil {
 		return nil, fmt.Errorf("unable to create tempfile: %w", err)
 	}
@@ -121,7 +121,7 @@ func (d *Digester) digestForOciArtifact(ctx context.Context, componentDescriptor
 }
 
 func (d *Digester) digestForS3Access(ctx context.Context, componentDescriptor cdv2.ComponentDescriptor, res cdv2.Resource) (*cdv2.DigestSpec, error) {
-	log := logger.Log.WithValues("componentDescriptor", componentDescriptor.ComponentSpec.ObjectMeta, "resource.name", res.Name, "resource.version", res.Version, "resource.extraIdentity", res.ExtraIdentity)
+	log := logger.Log.WithValues("componentDescriptor", componentDescriptor.ObjectMeta, "resource.name", res.Name, "resource.version", res.Version, "resource.extraIdentity", res.ExtraIdentity)
 
 	if res.Access.GetType() != cdv2.S3AccessType {
 		return nil, fmt.Errorf("unsupported access type %s in digestForS3Access", res.Access.Type)
@@ -139,7 +139,7 @@ func (d *Digester) digestForS3Access(ctx context.Context, componentDescriptor cd
 	}
 	defer resp.Body.Close()
 
-	responseBodyBytes, err := ioutil.ReadAll(resp.Body)
+	responseBodyBytes, err := io.ReadAll(resp.Body)
 	if err != nil {
 		return nil, fmt.Errorf("unable to read response body: %w", err)
 	}

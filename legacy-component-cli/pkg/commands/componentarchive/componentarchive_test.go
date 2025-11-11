@@ -8,8 +8,6 @@ import (
 	"bytes"
 	"context"
 
-	cdv2 "github.com/gardener/component-spec/bindings-go/apis/v2"
-	"github.com/gardener/component-spec/bindings-go/ctf"
 	"github.com/go-logr/logr"
 	"github.com/mandelsoft/vfs/pkg/layerfs"
 	"github.com/mandelsoft/vfs/pkg/memoryfs"
@@ -19,6 +17,9 @@ import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	. "github.com/onsi/gomega/gstruct"
+
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
+	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/ctf"
 
 	"github.com/openmcp-project/landscaper/legacy-component-cli/pkg/commands/componentarchive"
 )
@@ -85,7 +86,7 @@ var _ = Describe("Add", func() {
 		Expect(cd.Resources[0].Access.Object).To(HaveKeyWithValue("filename", BeAssignableToTypeOf("")))
 
 		var data bytes.Buffer
-		info, err := ca.BlobResolver.Resolve(ctx, cd.Resources[0], &data)
+		info, err := ca.Resolve(ctx, cd.Resources[0], &data)
 		Expect(err).ToNot(HaveOccurred())
 		Expect(info.MediaType).To(Equal("application/x-tar"))
 		Expect(data.Len()).To(BeNumerically(">", 0))

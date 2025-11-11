@@ -18,4 +18,4 @@ set -e
 
 echo "> Format"
 
-goimports -l -w --local github.com/openmcp-project/landscaper/legacy-component-spec $@
+goimports -l -w --local github.com/gardener/landscaper/legacy-component-spec $@

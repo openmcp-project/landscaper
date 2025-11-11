@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"os"
 
-	cdv2Sign "github.com/gardener/component-spec/bindings-go/apis/v2/signatures"
+	cdv2Sign "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2/signatures"
 
 	"github.com/go-logr/logr"
 	"github.com/mandelsoft/vfs/pkg/osfs"
@@ -57,7 +57,7 @@ func (o *RSAVerifyOptions) Run(ctx context.Context, log logr.Logger, fs vfs.File
 		return fmt.Errorf("unable to create rsa verifier: %w", err)
 	}
 
-	if err := o.GenericVerifyOptions.VerifyWithVerifier(ctx, log, fs, verifier); err != nil {
+	if err := o.VerifyWithVerifier(ctx, log, fs, verifier); err != nil {
 		return fmt.Errorf("unable to verify component descriptor: %w", err)
 	}
 	return nil

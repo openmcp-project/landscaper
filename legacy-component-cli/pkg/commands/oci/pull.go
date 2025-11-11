@@ -12,13 +12,14 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/gardener/component-spec/bindings-go/oci"
 	"github.com/go-logr/logr"
 	"github.com/mandelsoft/vfs/pkg/osfs"
 	"github.com/mandelsoft/vfs/pkg/vfs"
 	ocispecv1 "github.com/opencontainers/image-spec/specs-go/v1"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
+
+	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/oci"
 
 	ociopts "github.com/openmcp-project/landscaper/legacy-component-cli/ociclient/options"
 	"github.com/openmcp-project/landscaper/legacy-component-cli/pkg/logger"

@@ -13,10 +13,11 @@ import (
 	"strings"
 
 	"github.com/go-logr/logr"
+	"sigs.k8s.io/yaml"
+
 	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2/cdutils"
 	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/ctf"
-	"sigs.k8s.io/yaml"
 )
 
 // ParseImageOptions are options to configure the image vector parsing.
@@ -357,7 +358,7 @@ func preventLossOfTargetVersionLabel(res1, res2 *cdv2.Resource) error {
 	}
 
 	if hasLabel1 && hasLabel2 && targetVersion1 != targetVersion2 {
-		tag := res2.IdentityObjectMeta.GetIdentity()[TagExtraIdentity]
+		tag := res2.GetIdentity()[TagExtraIdentity]
 
 		return fmt.Errorf(`there is more than one target version expression specified for name %q and tag %q. `+
 			`A solution might be to combine the target version expressions by using a range, for example: `+
@@ -486,7 +487,7 @@ func tryFindResourceForImage(ctx context.Context, cd *cdv2.ComponentDescriptor, 
 		return matchedImgID, nil
 	}
 
-	return nil, ReferencedResourceNotFoundError
+	return nil, ErrReferencedResourceNotFoundError
 }
 
 // addLabelsToInlineResource adds the image entry labels to the resource that matches the repository

@@ -4,7 +4,7 @@ version: 'v0.0.1'
 type: 'git'
 access:
   type: 'git'
-  repository: 'github.com/gardener/component-cli'
+  repository: 'github.com/gardener/landscaper/legacy-component-cli'
 ...
 ---
 name: 'base-repo'
@@ -12,5 +12,5 @@ version: 'v18.4.0'
 type: 'git'
 access:
   type: 'git'
-  repository: 'github.com/gardener/component-cli'
+  repository: 'github.com/gardener/landscaper/legacy-component-cli'
 ...

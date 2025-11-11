@@ -12,8 +12,6 @@ import (
 	"os"
 	"testing"
 
-	cdv2 "github.com/gardener/component-spec/bindings-go/apis/v2"
-	cdoci "github.com/gardener/component-spec/bindings-go/oci"
 	"github.com/golang/mock/gomock"
 	"github.com/mandelsoft/vfs/pkg/layerfs"
 	"github.com/mandelsoft/vfs/pkg/memoryfs"
@@ -24,6 +22,9 @@ import (
 	. "github.com/onsi/gomega"
 	"github.com/opencontainers/go-digest"
 	ocispecv1 "github.com/opencontainers/image-spec/specs-go/v1"
+
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
+	cdoci "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/oci"
 
 	mock_ociclient "github.com/openmcp-project/landscaper/legacy-component-cli/ociclient/mock"
 	"github.com/openmcp-project/landscaper/legacy-component-cli/pkg/commands/constants"
