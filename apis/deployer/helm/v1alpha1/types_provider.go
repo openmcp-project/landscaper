@@ -9,10 +9,9 @@ import (
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
-	"github.com/openmcp-project/landscaper/apis/deployer/utils/managedresource"
-
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	cr "github.com/openmcp-project/landscaper/apis/deployer/utils/continuousreconcile"
+	"github.com/openmcp-project/landscaper/apis/deployer/utils/managedresource"
 	health "github.com/openmcp-project/landscaper/apis/deployer/utils/readinesschecks"
 )
 
@@ -160,6 +159,8 @@ type HelmInstallConfiguration struct {
 	Atomic               bool `json:"atomic,omitempty"`
 	Force                bool `json:"force,omitempty"`
 	SkipSchemaValidation bool `json:"skipSchemaValidation,omitempty"`
+	TakeOwnership        bool `json:"takeOwnership,omitempty"`
+	Wait                 bool `json:"wait,omitempty"`
 
 	// Timeout is the timeout for the operation in minutes.
 	// +optional
@@ -171,6 +172,8 @@ type HelmUpgradeConfiguration = HelmInstallConfiguration
 
 // HelmUninstallConfiguration defines settings for a helm uninstall operation.
 type HelmUninstallConfiguration struct {
+	Wait bool `json:"wait,omitempty"`
+
 	// Timeout is the timeout for the operation in minutes.
 	// +optional
 	Timeout *lsv1alpha1.Duration `json:"timeout,omitempty"`

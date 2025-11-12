@@ -31,43 +31,43 @@ readinessChecks:
   # especially useful for resources that came in through CRDs
   # optional
   custom:
-  # the name of the custom readiness check, required
-  - name: myCustomReadinessCheck
-    # temporarily disable this custom readiness check, useful for test setups
-    # optional, defaults to false
-    disabled: false
-    # specific resources that should be selected for this readiness check to be performed on
-    # a resource is uniquely defined by its GVK, namespace and name
-    # required if no labelSelector is specified, can be combined with a labelSelector which is potentially harmful
-    resourceSelector:
-    - apiVersion: apps/v1
-      kind: Deployment
-      name: myDeployment
-      namespace: myNamespace
-    # multiple resources for the readiness check to be performed on can be selected through labels
-    # they are identified by their GVK and a set of labels that all need to match
-    # required if no resourceSelector is specified, can be combined with a resourceSelector which is potentially harmful
-    labelSelector:
-      apiVersion: apps/v1
-      kind: Deployment
-      matchLabels:
-        app: myApp
-        component: backendService
-    # requirements specifies what condition must hold true for the given objects to pass the readiness check
-    # multiple requirements can be given and they all need to successfully evaluate
-    requirements:
-    # jsonPath denotes the path of the field of the selected object to be checked and compared
-    - jsonPath: .status.readyReplicas
-      # operator specifies how the contents of the given field should be compared to the desired value
-      # allowed operators are: DoesNotExist(!), Exists(exists), Equals(=, ==), NotEquals(!=), In(in), NotIn(notIn)
-      operator: In
-      # values is a list of values that the field at jsonPath must match to according to the operators
-      values:
-      - value: 1
-      - value: 2
-      - value: 3
-    # alternative cluster to get the resource values
-    targetName: someOtherTargetName
+    # the name of the custom readiness check, required
+    - name: myCustomReadinessCheck
+      # temporarily disable this custom readiness check, useful for test setups
+      # optional, defaults to false
+      disabled: false
+      # specific resources that should be selected for this readiness check to be performed on
+      # a resource is uniquely defined by its GVK, namespace and name
+      # required if no labelSelector is specified, can be combined with a labelSelector which is potentially harmful
+      resourceSelector:
+        - apiVersion: apps/v1
+          kind: Deployment
+          name: myDeployment
+          namespace: myNamespace
+      # multiple resources for the readiness check to be performed on can be selected through labels
+      # they are identified by their GVK and a set of labels that all need to match
+      # required if no resourceSelector is specified, can be combined with a resourceSelector which is potentially harmful
+      labelSelector:
+        apiVersion: apps/v1
+        kind: Deployment
+        matchLabels:
+          app: myApp
+          component: backendService
+      # requirements specifies what condition must hold true for the given objects to pass the readiness check
+      # multiple requirements can be given and they all need to successfully evaluate
+      requirements:
+        # jsonPath denotes the path of the field of the selected object to be checked and compared
+        - jsonPath: .status.readyReplicas
+          # operator specifies how the contents of the given field should be compared to the desired value
+          # allowed operators are: ! (field does not exist), exists (field exists), =, == (equal), != (not equal), in (matches at least one given value), notin (does not match any given value)
+          operator: in
+          # values is a list of values that the field at jsonPath must match to according to the operators
+          values:
+            - value: 1
+            - value: 2
+            - value: 3
+      # alternative cluster to get the resource values
+      targetName: someOtherTargetName
 ```
 
 ## Default readiness checks
@@ -99,15 +99,15 @@ As already mentioned above, these selectors can only select resources that have 
 A field that is specified by its `jsonPath` will be extracted from each of the selected objects. The `jsonPath` is just a blank JSON path, i.e. without surrounding braces `{}`. The contents of the extracted field can be matched against a set of values according to an operator:
 
 - `exists`: the given field must exist, irrelevant of its value
-- `!` (NotExists): the given field must not exist
-- `=` (Equals): the given field must match to the given value, only one value is allowed
-- `!=` (NotEquals): the given fiels must _not_ match to the given value, only one value is allowed
-- `in`: the given field must many to _at least one_ of the given values
-- `notIn`: the given field mut _not_ match _to any_ of the given values
+- `!`: the given field must not exist
+- `=` or `==`: the given field must match to the given value, only one value is allowed
+- `!=`: the given field must _not_ match to the given value, only one value is allowed
+- `in`: the given field must match to _at least one_ of the given values
+- `notin`: the given field must _not_ match _to any_ of the given values
 
 Allowed values are given as a list of key-value pairs with the key always being `value` and the value being a valid desired value. Values can be either primitives like ints, strings or bools as well as complex types.
 
 If some values of k8s resources are checked, the default target of a DeployItem determines the cluster
-from where these values are fetched. You can specify another `targetName`, which is used to get these values 
+from where these values are fetched. You can specify another `targetName`, which is used to get these values
 from a different cluster. This is helpful if your DeployItem deploys something to some cluster which itself
 deploys some stuff to a second cluster and your check requires to access the resources on this second cluster.

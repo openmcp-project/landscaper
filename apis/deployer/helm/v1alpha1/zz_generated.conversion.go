@@ -12,15 +12,14 @@ import (
 	json "encoding/json"
 	unsafe "unsafe"
 
-	conversion "k8s.io/apimachinery/pkg/conversion"
-	runtime "k8s.io/apimachinery/pkg/runtime"
-
 	config "github.com/openmcp-project/landscaper/apis/config"
 	core "github.com/openmcp-project/landscaper/apis/core"
 	corev1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	helm "github.com/openmcp-project/landscaper/apis/deployer/helm"
 	continuousreconcile "github.com/openmcp-project/landscaper/apis/deployer/utils/continuousreconcile"
 	managedresource "github.com/openmcp-project/landscaper/apis/deployer/utils/managedresource"
+	conversion "k8s.io/apimachinery/pkg/conversion"
+	runtime "k8s.io/apimachinery/pkg/runtime"
 )
 
 func init() {
@@ -439,6 +438,8 @@ func autoConvert_v1alpha1_HelmInstallConfiguration_To_helm_HelmInstallConfigurat
 	out.Atomic = in.Atomic
 	out.Force = in.Force
 	out.SkipSchemaValidation = in.SkipSchemaValidation
+	out.TakeOwnership = in.TakeOwnership
+	out.Wait = in.Wait
 	out.Timeout = (*corev1alpha1.Duration)(unsafe.Pointer(in.Timeout))
 	return nil
 }
@@ -452,6 +453,8 @@ func autoConvert_helm_HelmInstallConfiguration_To_v1alpha1_HelmInstallConfigurat
 	out.Atomic = in.Atomic
 	out.Force = in.Force
 	out.SkipSchemaValidation = in.SkipSchemaValidation
+	out.TakeOwnership = in.TakeOwnership
+	out.Wait = in.Wait
 	out.Timeout = (*corev1alpha1.Duration)(unsafe.Pointer(in.Timeout))
 	return nil
 }
@@ -462,6 +465,7 @@ func Convert_helm_HelmInstallConfiguration_To_v1alpha1_HelmInstallConfiguration(
 }
 
 func autoConvert_v1alpha1_HelmUninstallConfiguration_To_helm_HelmUninstallConfiguration(in *HelmUninstallConfiguration, out *helm.HelmUninstallConfiguration, s conversion.Scope) error {
+	out.Wait = in.Wait
 	out.Timeout = (*corev1alpha1.Duration)(unsafe.Pointer(in.Timeout))
 	return nil
 }
@@ -472,6 +476,7 @@ func Convert_v1alpha1_HelmUninstallConfiguration_To_helm_HelmUninstallConfigurat
 }
 
 func autoConvert_helm_HelmUninstallConfiguration_To_v1alpha1_HelmUninstallConfiguration(in *helm.HelmUninstallConfiguration, out *HelmUninstallConfiguration, s conversion.Scope) error {
+	out.Wait = in.Wait
 	out.Timeout = (*corev1alpha1.Duration)(unsafe.Pointer(in.Timeout))
 	return nil
 }
