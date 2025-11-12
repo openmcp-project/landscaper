@@ -17,9 +17,9 @@ import (
 
 	"github.com/openmcp-project/landscaper/pkg/components/model"
 
-	cdv2 "github.com/gardener/component-spec/bindings-go/apis/v2"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 	corev1 "k8s.io/api/core/v1"
 	"ocm.software/ocm/api/datacontext"
 	"ocm.software/ocm/api/ocm"

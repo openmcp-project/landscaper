@@ -8,7 +8,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/gardener/component-spec/bindings-go/codec"
+	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/codec"
 	"k8s.io/apimachinery/pkg/runtime"
 	"ocm.software/ocm/api/ocm/compdesc"
 	_ "ocm.software/ocm/api/ocm/compdesc/versions/ocm.software/v3alpha1"

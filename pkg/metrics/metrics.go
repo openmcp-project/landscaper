@@ -5,7 +5,7 @@
 package metrics
 
 import (
-	componentcliMetrics "github.com/gardener/component-cli/ociclient/metrics"
+	componentcliMetrics "github.com/openmcp-project/landscaper/legacy-component-cli/ociclient/metrics"
 	"github.com/prometheus/client_golang/prometheus"
 )
 

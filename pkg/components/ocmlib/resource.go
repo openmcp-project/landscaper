@@ -8,8 +8,8 @@ import (
 	"context"
 	"fmt"
 
-	cdv2 "github.com/gardener/component-spec/bindings-go/apis/v2"
 	"github.com/mandelsoft/goutils/errors"
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 
 	"ocm.software/ocm/api/oci"
 	"ocm.software/ocm/api/ocm"

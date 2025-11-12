@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"strings"
 
-	cdv2 "github.com/gardener/component-spec/bindings-go/apis/v2"
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 	"ocm.software/ocm/api/ocm/compdesc"
 	v1 "ocm.software/ocm/api/ocm/compdesc/meta/v1"
 	"ocm.software/ocm/api/ocm/compdesc/versions/ocm.software/v3alpha1"
