@@ -13,8 +13,8 @@ import (
 	time "time"
 	unsafe "unsafe"
 
-	v2 "github.com/gardener/component-spec/bindings-go/apis/v2"
 	core "github.com/openmcp-project/landscaper/apis/core"
+	v2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 	v1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	conversion "k8s.io/apimachinery/pkg/conversion"

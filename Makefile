@@ -17,7 +17,7 @@ DOCKER_BUILDER_NAME := "ls-multiarch"
 DISABLE_CLEANUP := false
 ENVTEST_K8S_VERSION = 1.27
 
-CODE_DIRS := $(REPO_ROOT)/cmd/... $(REPO_ROOT)/pkg/... $(REPO_ROOT)/test/... $(REPO_ROOT)/hack/testcluster/... $(REPO_ROOT)/apis/... $(REPO_ROOT)/controller-utils/...
+CODE_DIRS := $(REPO_ROOT)/cmd/... $(REPO_ROOT)/pkg/... $(REPO_ROOT)/test/... $(REPO_ROOT)/hack/testcluster/... $(REPO_ROOT)/apis/... $(REPO_ROOT)/controller-utils/... $(REPO_ROOT)/legacy-component-cli/... $(REPO_ROOT)/legacy-component-spec/bindings-go/... $(REPO_ROOT)/legacy-image-vector/...
 
 ##@ General
 
@@ -138,7 +138,7 @@ CODE_GEN_VERSION ?= $(shell  $(REPO_ROOT)/hack/extract-module-version.sh k8s.io/
 # renovate: datasource=github-releases depName=kubernetes-sigs/controller-tools
 CONTROLLER_TOOLS_VERSION ?= v0.19.0
 # renovate: datasource=github-tags depName=golang/tools
-FORMATTER_VERSION ?= v0.37.0
+FORMATTER_VERSION ?= v0.38.0
 # renovate: datasource=github-releases depName=golangci/golangci-lint
 LINTER_VERSION ?= v2.6.1
 # renovate: datasource=github-releases depName=elastic/crd-ref-docs
@@ -146,7 +146,7 @@ API_REF_GEN_VERSION ?= v0.2.0
 # renovate: datasource=github-releases depName=jqlang/jq
 JQ_VERSION ?= v1.7.1
 # renovate: datasource=github-releases depName=open-component-model/ocm
-OCM_VERSION ?= v0.29.1
+OCM_VERSION ?= v0.32.0
 # renovate: datasource=github-releases depName=golang/mock
 MOCKGEN_VERSION ?= v1.6.0
 # renovate: datasource=github-releases depName=distribution/distribution

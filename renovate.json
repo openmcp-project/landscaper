@@ -42,22 +42,6 @@
       "rangeStrategy": "bump"
     },
     {
-      "description": "Update golang version in pipelines",
-      "groupName": "Update golang version in pipelines",
-      "groupSlug": "golang-pipelines",
-      "matchDatasources": [
-        "docker"
-      ],
-      "matchPackageNames": [
-        "golang"
-      ],
-      "matchFileNames": [
-        ".ci/pipeline_definitions"
-      ],
-      "extractVersion": "^image: 'golang:(?<version>\\d+\\.\\d+\\.\\d+)'$",
-      "versioning": "semver"
-    },
-    {
       "description": "Fixed version for component-cli v0.44.0",
       "matchManagers": [
         "gomod"
@@ -68,7 +52,7 @@
       ]
     },
     {
-      "description": "Ignore version for landscpaer/apis and controller-utils as used locally",
+      "description": "Ignore version for landscaper/apis and controller-utils as used locally",
       "matchManagers": [
         "gomod"
       ],

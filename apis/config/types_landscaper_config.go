@@ -5,7 +5,7 @@
 package config
 
 import (
-	cdv2 "github.com/gardener/component-spec/bindings-go/apis/v2"
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 	lscore "github.com/openmcp-project/landscaper/apis/core"
