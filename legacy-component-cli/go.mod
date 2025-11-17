@@ -17,7 +17,7 @@ require (
 	github.com/onsi/ginkgo v1.16.5
 	github.com/onsi/ginkgo/v2 v2.27.2
 	github.com/onsi/gomega v1.38.2
-	github.com/opencontainers/distribution-spec/specs-go v0.0.0-20251106193519-f27aa17ca2db
+	github.com/opencontainers/distribution-spec/specs-go v0.0.0-20251113233350-e612a6e1e1bc
 	github.com/opencontainers/go-digest v1.0.0
 	github.com/opencontainers/image-spec v1.1.1
 	github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go v0.0.0-00010101000000-000000000000
