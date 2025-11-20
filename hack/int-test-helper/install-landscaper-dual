@@ -58,7 +58,7 @@ if [[ -z $INGRESS_URL ]]; then
     exit 1
 fi
 
-OCI_REPO="ghcr.io/openmcp-project"
+OCI_REPO="ghcr.io/openmcp-project/components"
 COMPONENT_NAME="github.com/openmcp-project/landscaper"
 
 echo "> Pull landscaper charts"
