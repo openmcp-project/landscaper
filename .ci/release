@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# SPDX-FileCopyrightText: 2020 SAP SE or an SAP affiliate company and Gardener contributors
+# SPDX-FileCopyrightText: 2020 SAP SE or an SAP affiliate company and openmcp-project contributors
 #
 # SPDX-License-Identifier: Apache-2.0
 
@@ -26,7 +26,7 @@ sed -i -e "0,/)/{s@github.com/openmcp-project/landscaper/apis .*@github.com/open
 sed -i -e "0,/)/{s@github.com/openmcp-project/landscaper/controller-utils .*@github.com/openmcp-project/landscaper/controller-utils ${VERSION}@}" \
   ${PROJECT_ROOT}/go.mod
 
-sed -i -e "0,/)/{s@github.com/openmcp-project/landscaper/apis .*@github.com/openmcp-project/landscaper/apis ${VERSION}@}" \
+sed -i -e "0,/)/{s@github.com/openmcp-project/landscaper/apis .*@github.com/openmcp-project/openmcp-project/apis ${VERSION}@}" \
   ${PROJECT_ROOT}/controller-utils/go.mod
 
 sed -i -e "0,/)/{s@github.com/openmcp-project/landscaper/legacy-component-cli .*@github.com/openmcp-project/landscaper/legacy-component-cli ${VERSION}@}" \
