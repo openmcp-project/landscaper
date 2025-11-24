@@ -106,11 +106,33 @@ jobs:
           
           sed -i -e "0,/)/{s@github.com/openmcp-project/landscaper/apis .*@github.com/openmcp-project/landscaper/apis v0.0.0-00010101000000-000000000000@}" \
             controller-utils/go.mod
+  
+          sed -i -e "0,/)/{s@github.com/openmcp-project/landscaper/legacy-component-cli  .*@github.com/openmcp-project/landscaper/legacy-component-cli v0.0.0-00010101000000-000000000000@}" \
+            go.mod
+          
+          sed -i -e "0,/)/{s@github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go .*@github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go v0.0.0-00010101000000-000000000000@}" \
+            go.mod
+          
+          sed -i -e "0,/)/{s@github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go .*@github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go v0.0.0-00010101000000-000000000000@}" \
+            apis/go.mod
+          
+          sed -i -e "0,/)/{s@github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go .*@github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go v0.0.0-00010101000000-000000000000@}" \
+            legacy-component-cli/go.mod
+          
+          sed -i -e "0,/)/{s@github.com/openmcp-project/landscaper/legacy-image-vector .*@github.com/openmcp-project/landscaper/legacy-image-vector v0.0.0-00010101000000-000000000000@}" \
+            legacy-component-cli/go.mod
+          
+          sed -i -e "0,/)/{s@github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go .*@github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go v0.0.0-00010101000000-000000000000@}" \
+            legacy-image-vector/go.mod
           
           git config user.name "${{ env.AUTHOR_NAME }}"
           git config user.email "${{ env.AUTHOR_EMAIL }}"
           git add VERSION
           git add go.mod
           git add controller-utils/go.mod
+          git add apis/go.mod
+          git add legacy-component-cli/go.mod
+          git add legacy-image-vector/go.mod
+          
           git commit -m "chore(release): Update VERSION to ${{ env.version }}-dev"
           git push origin main
