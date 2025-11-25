@@ -20,10 +20,10 @@ require (
 	github.com/onsi/gomega v1.38.2
 	github.com/opencontainers/go-digest v1.0.0
 	github.com/opencontainers/image-spec v1.1.1
-	github.com/openmcp-project/landscaper/apis v1.0.1
-	github.com/openmcp-project/landscaper/controller-utils v1.0.1
+	github.com/openmcp-project/landscaper/apis v0.0.0-00010101000000-000000000000
+	github.com/openmcp-project/landscaper/controller-utils v0.0.0-00010101000000-000000000000
 	github.com/openmcp-project/landscaper/legacy-component-cli v1.0.1
-	github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go v1.0.1
+	github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go v0.0.0-00010101000000-000000000000
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus/client_golang v1.23.2
 	github.com/robfig/cron/v3 v3.0.1
