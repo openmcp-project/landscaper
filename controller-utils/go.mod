@@ -8,7 +8,7 @@ require (
 	github.com/golang/mock v1.6.0
 	github.com/onsi/ginkgo/v2 v2.27.2
 	github.com/onsi/gomega v1.38.2
-	github.com/openmcp-project/landscaper/apis v0.0.0-00010101000000-000000000000
+	github.com/openmcp-project/landscaper/apis v1.0.2
 	github.com/pkg/errors v0.9.1
 	github.com/spf13/pflag v1.0.10
 	go.uber.org/zap v1.27.0
@@ -60,7 +60,7 @@ require (
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.3-0.20250322232337-35a7c28c31ee // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
-	github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go v1.0.1 // indirect
+	github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go v1.0.2
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/prometheus/client_golang v1.22.0 // indirect
 	github.com/prometheus/client_model v0.6.1 // indirect

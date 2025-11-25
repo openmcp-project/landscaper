@@ -20,13 +20,13 @@ deployer:
 #  namespace: ""
   initContainer:
     repository: ghcr.io/openmcp-project/github.com/openmcp-project/landscaper/container-deployer/images/container-deployer-init
-#    tag: "latest"
+#    tag: v1.0.2
   waitContainer:
     repository: ghcr.io/openmcp-project/github.com/openmcp-project/landscaper/container-deployer/images/container-deployer-wait
-#    tag: "latest"
+#    tag: v1.0.2
 #  defaultImage:
 #    repository: ubuntu
-#    tag: latest
+#    tag: v1.0.2
   oci:
     allowPlainHttp: false
     insecureSkipVerify: false
