@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest-8core
     steps:
       - name: Create GitHub App token
-        uses: actions/create-github-app-token@67018539274d69449ef7c02e8e71183d1719ab42 # v2
+        uses: actions/create-github-app-token@7e473efe3cb98aa54f8d4bac15400b15fad77d94 # v2
         id: app-token
         with:
           # required
@@ -23,7 +23,7 @@ jobs:
           private-key: ${{ secrets.OPENMCP_CI_APP_PRIVATE_KEY }}
 
       - name: Checkout code
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6
         with:
           token: ${{ steps.app-token.outputs.token }}
           fetch-tags: true
@@ -106,11 +106,33 @@ jobs:
           
           sed -i -e "0,/)/{s@github.com/openmcp-project/landscaper/apis .*@github.com/openmcp-project/landscaper/apis v0.0.0-00010101000000-000000000000@}" \
             controller-utils/go.mod
+  
+          sed -i -e "0,/)/{s@github.com/openmcp-project/landscaper/legacy-component-cli  .*@github.com/openmcp-project/landscaper/legacy-component-cli v0.0.0-00010101000000-000000000000@}" \
+            go.mod
+          
+          sed -i -e "0,/)/{s@github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go .*@github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go v0.0.0-00010101000000-000000000000@}" \
+            go.mod
+          
+          sed -i -e "0,/)/{s@github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go .*@github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go v0.0.0-00010101000000-000000000000@}" \
+            apis/go.mod
+          
+          sed -i -e "0,/)/{s@github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go .*@github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go v0.0.0-00010101000000-000000000000@}" \
+            legacy-component-cli/go.mod
+          
+          sed -i -e "0,/)/{s@github.com/openmcp-project/landscaper/legacy-image-vector .*@github.com/openmcp-project/landscaper/legacy-image-vector v0.0.0-00010101000000-000000000000@}" \
+            legacy-component-cli/go.mod
+          
+          sed -i -e "0,/)/{s@github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go .*@github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go v0.0.0-00010101000000-000000000000@}" \
+            legacy-image-vector/go.mod
           
           git config user.name "${{ env.AUTHOR_NAME }}"
           git config user.email "${{ env.AUTHOR_EMAIL }}"
           git add VERSION
           git add go.mod
           git add controller-utils/go.mod
+          git add apis/go.mod
+          git add legacy-component-cli/go.mod
+          git add legacy-image-vector/go.mod
+          
           git commit -m "chore(release): Update VERSION to ${{ env.version }}-dev"
           git push origin main

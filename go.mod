@@ -22,8 +22,8 @@ require (
 	github.com/opencontainers/image-spec v1.1.1
 	github.com/openmcp-project/landscaper/apis v0.0.0-00010101000000-000000000000
 	github.com/openmcp-project/landscaper/controller-utils v0.0.0-00010101000000-000000000000
-	github.com/openmcp-project/landscaper/legacy-component-cli v0.0.0-00010101000000-000000000000
-	github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go v0.0.98
+	github.com/openmcp-project/landscaper/legacy-component-cli v1.0.1
+	github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go v0.0.0-00010101000000-000000000000
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus/client_golang v1.23.2
 	github.com/robfig/cron/v3 v3.0.1
@@ -31,7 +31,7 @@ require (
 	github.com/spf13/cobra v1.10.1
 	github.com/spf13/pflag v1.0.10
 	github.com/xeipuuv/gojsonschema v1.2.0
-	golang.org/x/crypto v0.44.0
+	golang.org/x/crypto v0.45.0
 	golang.org/x/sync v0.18.0
 	golang.org/x/sys v0.38.0
 	gopkg.in/yaml.v3 v3.0.1
@@ -393,7 +393,7 @@ require (
 	go.yaml.in/yaml/v3 v3.0.4 // indirect
 	golang.org/x/exp v0.0.0-20251023183803-a4bb9ffd2546 // indirect
 	golang.org/x/mod v0.29.0 // indirect
-	golang.org/x/net v0.46.0 // indirect
+	golang.org/x/net v0.47.0 // indirect
 	golang.org/x/oauth2 v0.32.0 // indirect
 	golang.org/x/term v0.37.0 // indirect
 	golang.org/x/text v0.31.0 // indirect
