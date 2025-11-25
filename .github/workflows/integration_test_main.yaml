@@ -1,9 +1,6 @@
 name: Integration Test Main Update
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 permissions:
@@ -24,23 +21,20 @@ jobs:
         with:
           go-version-file: go.mod
 
-      - name: make revendor
-        run: make revendor
+      - name: Install Task
+        uses: arduino/setup-task@v2
+        with:
+          version: 3.x
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: make build
-        run: make build
-
-      - name: make verify
-        run: make verify
-
-      - name: make test
-        run: make test
+      - name: task all
+        run: |
+          task all
 
       - name: run integration test
         env:
           GARDENER_KUBECONFIG: ${{ secrets.GARDENER_LAAS_SERVICE_ACCOUNT }}
         run: |
-          VERSION="$("./hack/get-version.sh")"
+          VERSION="$(task version)"
           PR_ID=1
           "./hack/integration-test-runner.sh" "$GARDENER_KUBECONFIG" "garden-laas" "$VERSION" "$PR_ID"
-
