@@ -1,6 +1,7 @@
 name: Integration Test Pull Request
 on:
   pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -12,7 +13,8 @@ jobs:
       github.actor == 'renovate[bot]' ||
       github.actor == 'dependabot[bot]' ||
       contains(github.event.pull_request.title, 'run-int-tests') ||
-      contains(github.event.head_commit.message, 'run-int-tests')
+      contains(github.event.head_commit.message, 'run-int-tests') ||
+      contains(github.event_name , 'workflow_dispatch')
 
     steps:
       - name: Checkout code
@@ -28,8 +30,11 @@ jobs:
       - name: make revendor
         run: make revendor
 
-      - name: make build
-        run: make build
+      - name: Build and Push Images
+        run: make docker-images
+
+      - name: Build and Push OCM Component
+        run: make component
 
       - name: run integration test
         env:
