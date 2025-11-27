@@ -10,7 +10,7 @@ sidebar_position: 1
 - For all examples, you need a [running Landscaper instance](../installation/install-landscaper-controller.md).
 
 - A convenient tool we will often use in the following examples is the [Landscaper
-  CLI](https://github.com/gardener/landscapercli). 
+  CLI](https://github.com/openmcp-project/landscapercli). 
 
 - For building reusable components you require the [OCM CLI](https://ocm.software/docs/getting-started/prerequisites).
 

@@ -165,6 +165,6 @@ Note that the new reconciliation does not start before the Installation has reac
 
 <!-- References -->
 
-[1]: https://github.com/gardener/landscapercli/blob/master/docs/reference/landscaper-cli_installations_inspect.md
+[1]: https://github.com/openmcp-project/landscapercli/blob/master/docs/reference/landscaper-cli_installations_inspect.md
 
 [2]: https://github.com/gardener/landscaper/blob/master/docs/usage/Annotations.md#reconcile-annotation

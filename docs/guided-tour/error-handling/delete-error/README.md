@@ -61,7 +61,7 @@ Now the installation should be gone and the deployed Helm chart should be uninst
 ### Force Delete
 
 If for some reason it is not possible to resolve the problems as described above and it is ok that the deployed Helm chart is not uninstalled automatically, 
-you could use the [landscaper-cli](https://github.com/gardener/landscapercli) to remove the installation. 
+you could use the [landscaper-cli](https://github.com/openmcp-project/landscapercli) to remove the installation. 
 This is the preferred solution if the target cluster does not exist anymore. You can achieve this with the following command:
 
 ```shell

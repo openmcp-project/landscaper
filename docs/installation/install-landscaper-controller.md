@@ -7,7 +7,7 @@ This document describes the installation of Landscaper.
 #### Option 1: Installation via the landscaper-cli tool
 The easiest way to install the landscaper with its default deployer is to use the _landscaper-cli_. The corresponding 
 documentation can be found 
-[here](https://github.com/gardener/landscapercli/blob/master/docs/commands/quickstart/install.md).
+[here](https://github.com/openmcp-project/landscapercli/blob/master/docs/commands/quickstart/install.md).
 
 #### Option 2: Installation via helm
 Alternatively, the landscaper can also be installed via [helm](https://helm.sh/) using the helm chart in 

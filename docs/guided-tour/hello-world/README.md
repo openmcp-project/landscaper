@@ -44,7 +44,7 @@ and applies both on the resource cluster.
 
 ### Alternative Way to Create a Target
 
-There is an alternative way to create a Target custom resource. It requires the [Landscaper CLI](https://github.com/gardener/landscapercli):
+There is an alternative way to create a Target custom resource. It requires the [Landscaper CLI](https://github.com/openmcp-project/landscapercli):
 
 ```shell
 landscaper-cli targets create kubernetes-cluster \
@@ -86,7 +86,7 @@ status:
   phase: Succeeded
 ```
 
-If you have already installed the [Landscaper CLI](https://github.com/gardener/landscapercli), 
+If you have already installed the [Landscaper CLI](https://github.com/openmcp-project/landscapercli), 
 you can inspect the status of the installation with the following command, executed on the Landscaper resource cluster:
 
 ```shell

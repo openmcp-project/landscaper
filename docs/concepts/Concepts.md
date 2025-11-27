@@ -48,7 +48,7 @@ detail.
 **Index**:
 - [Concept](#concept)
     - [Landscaper Data Plane](#landscaper-data-plane)
-    - [Data-Flow and Installation-Unit-Decoupling](#dataflow-and-installation-unit-decoupling)
+    - [Dataflow and Installation-Unit-Decoupling](#dataflow-and-installation-unit-decoupling)
     - [Decoupling of Concrete Installations from Installation Descriptions](#decoupling-of-concrete-installations-from-installation-descriptions)
     - [Deploy Items and Deployers](#deploy-items-and-deployers)
     - [Deployers and Deploy Targets](#deployers-and-deploy-targets)
