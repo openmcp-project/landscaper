@@ -6,6 +6,12 @@
 
 set -euo pipefail
 
+# Call with PLATFORMS="os/arch,os/arch" to specify target platforms, for example: linux/amd64,linux/arm64
+# Call optionally with NO_LATEST_TAG=1 to skip tagging the images with "latest"
+
+echo "PLATFORMS=${PLATFORMS}"
+echo "NO_LATEST_TAG=${NO_LATEST_TAG:-not set}"
+
 PROJECT_ROOT="$(realpath $(dirname $0)/..)"
 if [[ -z ${EFFECTIVE_VERSION:-} ]]; then
   EFFECTIVE_VERSION=$("$PROJECT_ROOT/hack/get-version.sh")
@@ -13,21 +19,20 @@ fi
 
 DOCKER_BUILDER_NAME="ls-multiarch-builder"
 if ! docker buildx ls | grep "$DOCKER_BUILDER_NAME" >/dev/null; then
-	docker buildx create --name "$DOCKER_BUILDER_NAME"
+ docker buildx create --name "$DOCKER_BUILDER_NAME"
 fi
 
 for pf in ${PLATFORMS//,/ }; do
   echo "> Building docker images for $pf in version $EFFECTIVE_VERSION ..."
-	os=${pf%/*}
-	arch=${pf#*/}
-	docker buildx build --builder ${DOCKER_BUILDER_NAME} --load --build-arg EFFECTIVE_VERSION=${EFFECTIVE_VERSION} --platform ${pf} -t landscaper-controller:${EFFECTIVE_VERSION}-${os}-${arch} -f Dockerfile --target landscaper-controller "${PROJECT_ROOT}"
-	docker buildx build --builder ${DOCKER_BUILDER_NAME} --load --build-arg EFFECTIVE_VERSION=${EFFECTIVE_VERSION} --platform ${pf} -t landscaper-webhooks-server:${EFFECTIVE_VERSION}-${os}-${arch} -f Dockerfile --target landscaper-webhooks-server "${PROJECT_ROOT}"
-	docker buildx build --builder ${DOCKER_BUILDER_NAME} --load --build-arg EFFECTIVE_VERSION=${EFFECTIVE_VERSION} --platform ${pf} -t container-deployer-controller:${EFFECTIVE_VERSION}-${os}-${arch} -f Dockerfile --target container-deployer-controller "${PROJECT_ROOT}"
-	docker buildx build --builder ${DOCKER_BUILDER_NAME} --load --build-arg EFFECTIVE_VERSION=${EFFECTIVE_VERSION} --platform ${pf} -t container-deployer-init:${EFFECTIVE_VERSION}-${os}-${arch} -f Dockerfile --target container-deployer-init "${PROJECT_ROOT}"
-	docker buildx build --builder ${DOCKER_BUILDER_NAME} --load --build-arg EFFECTIVE_VERSION=${EFFECTIVE_VERSION} --platform ${pf} -t container-deployer-wait:${EFFECTIVE_VERSION}-${os}-${arch} -f Dockerfile --target container-deployer-wait "${PROJECT_ROOT}"
-	docker buildx build --builder ${DOCKER_BUILDER_NAME} --load --build-arg EFFECTIVE_VERSION=${EFFECTIVE_VERSION} --platform ${pf} -t helm-deployer-controller:${EFFECTIVE_VERSION}-${os}-${arch} -f Dockerfile --target helm-deployer-controller "${PROJECT_ROOT}"
-	docker buildx build --builder ${DOCKER_BUILDER_NAME} --load --build-arg EFFECTIVE_VERSION=${EFFECTIVE_VERSION} --platform ${pf} -t manifest-deployer-controller:${EFFECTIVE_VERSION}-${os}-${arch} -f Dockerfile --target manifest-deployer-controller "${PROJECT_ROOT}"
-	docker buildx build --builder ${DOCKER_BUILDER_NAME} --load --build-arg EFFECTIVE_VERSION=${EFFECTIVE_VERSION} --platform ${pf} -t mock-deployer-controller:${EFFECTIVE_VERSION}-${os}-${arch} -f Dockerfile --target mock-deployer-controller "${PROJECT_ROOT}"
+  os=${pf%/*}
+  arch=${pf#*/}
+  for img in landscaper-controller landscaper-webhooks-server container-deployer-controller container-deployer-init container-deployer-wait helm-deployer-controller manifest-deployer-controller mock-deployer-controller; do
+    tags="-t ${img}:${EFFECTIVE_VERSION}-${os}-${arch}"
+    if [[ -z "${NO_LATEST_TAG:-}" ]]; then
+      tags="$tags -t ${img}:latest"
+    fi
+    docker buildx build --builder ${DOCKER_BUILDER_NAME} --load --build-arg EFFECTIVE_VERSION=${EFFECTIVE_VERSION} --platform ${pf} $tags -f Dockerfile --target ${img} "${PROJECT_ROOT}"
+  done
 done
 
 docker buildx rm "$DOCKER_BUILDER_NAME"
