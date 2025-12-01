@@ -47,7 +47,7 @@ var (
 
 // OpenSourceRepositoryContext is the base url of the repository context for the gardener open source components.
 // There all landscaper blueprints/components are available.
-const OpenSourceRepositoryContext = "ghcr.io/openmcp-project/component-descriptors"
+const OpenSourceRepositoryContext = "ghcr.io/openmcp-project"
 
 type Options struct {
 	fs                             *flag.FlagSet
