@@ -16,29 +16,29 @@ deployer:
   #   kubeconfig: |
   #     <landscaper-cluster-kubeconfig>
 
-#  identity: ""
-#  namespace: ""
+  #  identity: ""
+  #  namespace: ""
   initContainer:
-    repository: ghcr.io/openmcp-project/github.com/openmcp-project/landscaper/container-deployer/images/container-deployer-init
-#    tag: v1.0.2
+    repository: ghcr.io/openmcp-project/components/github.com/openmcp-project/landscaper/container-deployer/images/container-deployer-init
+  #    tag: v1.0.2
   waitContainer:
-    repository: ghcr.io/openmcp-project/github.com/openmcp-project/landscaper/container-deployer/images/container-deployer-wait
-#    tag: v1.0.2
-#  defaultImage:
-#    repository: ubuntu
-#    tag: v1.0.2
+    repository: ghcr.io/openmcp-project/components/github.com/openmcp-project/landscaper/container-deployer/images/container-deployer-wait
+  #    tag: v1.0.2
+  #  defaultImage:
+  #    repository: ubuntu
+  #    tag: v1.0.2
   oci:
     allowPlainHttp: false
     insecureSkipVerify: false
     secrets: {}
-#     <name>: <docker config json>
-#  verbosityLevel: info
+  #     <name>: <docker config json>
+  #  verbosityLevel: info
 
-#  targetSelector:
-#  - annotations:
-#    - key:
-#      operator:
-#      value:
+  #  targetSelector:
+  #  - annotations:
+  #    - key:
+  #      operator:
+  #      value:
 
   controller:
     workers: 30
@@ -79,10 +79,12 @@ serviceAccount:
 
 podAnnotations: {}
 
-podSecurityContext: {}
+podSecurityContext:
+  {}
   # fsGroup: 2000
 
-securityContext: {}
+securityContext:
+  {}
   # capabilities:
   #   drop:
   #   - ALL
