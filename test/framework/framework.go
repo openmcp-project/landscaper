@@ -20,9 +20,6 @@ import (
 	"github.com/docker/cli/cli/config/configfile"
 	"github.com/onsi/ginkgo/v2"
 	"github.com/onsi/gomega"
-	"github.com/openmcp-project/landscaper/legacy-component-cli/ociclient"
-	"github.com/openmcp-project/landscaper/legacy-component-cli/ociclient/cache"
-	"github.com/openmcp-project/landscaper/legacy-component-cli/ociclient/credentials"
 	v1 "k8s.io/api/admissionregistration/v1"
 	corev1 "k8s.io/api/core/v1"
 	networkingv1 "k8s.io/api/networking/v1"
@@ -35,6 +32,9 @@ import (
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 	utils2 "github.com/openmcp-project/landscaper/hack/testcluster/pkg/utils"
+	"github.com/openmcp-project/landscaper/legacy-component-cli/ociclient"
+	"github.com/openmcp-project/landscaper/legacy-component-cli/ociclient/cache"
+	"github.com/openmcp-project/landscaper/legacy-component-cli/ociclient/credentials"
 	lsscheme "github.com/openmcp-project/landscaper/pkg/api"
 	utils3 "github.com/openmcp-project/landscaper/pkg/utils"
 	"github.com/openmcp-project/landscaper/test/utils"
@@ -47,7 +47,7 @@ var (
 
 // OpenSourceRepositoryContext is the base url of the repository context for the gardener open source components.
 // There all landscaper blueprints/components are available.
-const OpenSourceRepositoryContext = "europe-docker.pkg.dev/sap-gcp-cp-k8s-stable-hub/landscaper"
+const OpenSourceRepositoryContext = "ghcr.io/openmcp-project/component-descriptors"
 
 type Options struct {
 	fs                             *flag.FlagSet
