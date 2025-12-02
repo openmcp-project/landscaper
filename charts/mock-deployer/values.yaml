@@ -18,7 +18,7 @@ deployer:
   #   kubeconfig: |
   #     <landscaper-cluster-kubeconfig>
 
-#  identity: ""
+  #  identity: ""
   namespace: ""
 
   # burst and max queries per second settings for k8s client used in reconciliation
@@ -34,7 +34,7 @@ deployer:
       qps: 40
 
 image:
-  repository: ghcr.io/openmcp-project/github.com/openmcp-project/landscaper/mock-deployer/images/mock-deployer-controller
+  repository: ghcr.io/openmcp-project/components/github.com/openmcp-project/landscaper/mock-deployer/images/mock-deployer-controller
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   #tag: ""
@@ -54,10 +54,12 @@ serviceAccount:
 
 podAnnotations: {}
 
-podSecurityContext: {}
+podSecurityContext:
+  {}
   # fsGroup: 2000
 
-securityContext: {}
+securityContext:
+  {}
   # capabilities:
   #   drop:
   #   - ALL
@@ -65,7 +67,8 @@ securityContext: {}
   # runAsNonRoot: true
   # runAsUser: 1000
 
-resources: {}
+resources:
+  {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
