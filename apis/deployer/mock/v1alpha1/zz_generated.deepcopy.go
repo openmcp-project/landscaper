@@ -69,12 +69,8 @@ func (in *ProviderConfiguration) DeepCopyInto(out *ProviderConfiguration) {
 	}
 	if in.Export != nil {
 		in, out := &in.Export, &out.Export
-		*out = new(json.RawMessage)
-		if **in != nil {
-			in, out := *in, *out
-			*out = make([]byte, len(*in))
-			copy(*out, *in)
-		}
+		*out = make(json.RawMessage, len(*in))
+		copy(*out, *in)
 	}
 	if in.ContinuousReconcile != nil {
 		in, out := &in.ContinuousReconcile, &out.ContinuousReconcile

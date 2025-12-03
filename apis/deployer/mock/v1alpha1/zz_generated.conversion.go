@@ -75,7 +75,7 @@ func autoConvert_v1alpha1_ProviderConfiguration_To_mock_ProviderConfiguration(in
 	out.Phase = (*corev1alpha1.DeployItemPhase)(unsafe.Pointer(in.Phase))
 	out.InitialPhase = (*corev1alpha1.DeployItemPhase)(unsafe.Pointer(in.InitialPhase))
 	out.ProviderStatus = (*runtime.RawExtension)(unsafe.Pointer(in.ProviderStatus))
-	out.Export = (*json.RawMessage)(unsafe.Pointer(in.Export))
+	out.Export = *(*json.RawMessage)(unsafe.Pointer(&in.Export))
 	out.ContinuousReconcile = (*continuousreconcile.ContinuousReconcileSpec)(unsafe.Pointer(in.ContinuousReconcile))
 	return nil
 }
@@ -89,7 +89,7 @@ func autoConvert_mock_ProviderConfiguration_To_v1alpha1_ProviderConfiguration(in
 	out.Phase = (*corev1alpha1.DeployItemPhase)(unsafe.Pointer(in.Phase))
 	out.InitialPhase = (*corev1alpha1.DeployItemPhase)(unsafe.Pointer(in.InitialPhase))
 	out.ProviderStatus = (*runtime.RawExtension)(unsafe.Pointer(in.ProviderStatus))
-	out.Export = (*json.RawMessage)(unsafe.Pointer(in.Export))
+	out.Export = *(*json.RawMessage)(unsafe.Pointer(&in.Export))
 	out.ContinuousReconcile = (*continuousreconcile.ContinuousReconcileSpec)(unsafe.Pointer(in.ContinuousReconcile))
 	return nil
 }
