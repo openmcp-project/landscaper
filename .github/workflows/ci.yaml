@@ -24,12 +24,19 @@ jobs:
         uses: actions/setup-go@4dc6199c7b1a012772edbd06daecab0f50c9053c # v6
         with:
           go-version-file: go.mod
-      
-      # make verify alias check: 
+
+      - name: Install Task
+        uses: arduino/setup-task@v2
+        with:
+          version: 3.x
+
+      # make verify alias check:
       - name: Verify
         run: |
+          # make revendor
           task generate:tidy
           task validate:lint
+          # make verify
           task validate:vet
           make test
 
