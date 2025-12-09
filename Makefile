@@ -30,7 +30,7 @@ help: ## Display this help.
 
 .PHONY: revendor
 revendor: ## Runs 'go mod tidy' for all go modules in this repo.
-	@$(REPO_ROOT)/hack/revendor.sh
+	@task generate:tidy
 
 .PHONY: format
 format: goimports ## Runs the formatter.
@@ -40,7 +40,8 @@ format: goimports ## Runs the formatter.
 check: revendor golangci-lint jq goimports ## Runs linter, 'go vet', and checks if the formatter has been run.
 	@test "$(SKIP_DOCS_INDEX_CHECK)" = "true" || \
 		JQ=$(JQ) $(REPO_ROOT)/hack/verify-docs-index.sh
-	@LINTER=$(LINTER) FORMATTER=$(FORMATTER) $(REPO_ROOT)/hack/check.sh --golangci-lint-config="$(REPO_ROOT)/.golangci.yaml" $(CODE_DIRS)
+	@task validate:lint
+	@task validate:vet
 
 .PHONY: verify
 verify: check ## Alias for 'make check'.

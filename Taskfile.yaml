@@ -6,7 +6,7 @@ includes:
     flatten: true
     excludes: [ ] # put task names in here which are overwritten in this file
     vars:
-      NESTED_MODULES: apis controller-utils legacy-component-cli legacy-component-spec/bindings-go legacy-image-vector
+      NESTED_MODULES: legacy-component-spec/bindings-go legacy-image-vector legacy-component-cli apis controller-utils
       API_DIRS: '{{.ROOT_DIR}}/apis/...'
       MANIFEST_OUT: '{{.ROOT_DIR}}/apis/crds/manifests'
       CODE_DIRS: '{{.ROOT_DIR}}/cmd/... {{.ROOT_DIR}}/pkg/... {{.ROOT_DIR}}/test/... {{.ROOT_DIR}}/hack/testcluster/... {{.ROOT_DIR}}/apis/... {{.ROOT_DIR}}/controller-utils/... {{.ROOT_DIR}}/legacy-component-cli/... {{.ROOT_DIR}}/legacy-component-spec/bindings-go/... {{.ROOT_DIR}}/legacy-image-vector/... '

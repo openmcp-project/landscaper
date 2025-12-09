@@ -24,15 +24,14 @@ jobs:
         uses: actions/setup-go@4dc6199c7b1a012772edbd06daecab0f50c9053c # v6
         with:
           go-version-file: go.mod
+      
+      # make verify alias check: 
+      - name: Verify
+        run: |
+          task generate:tidy
+          task validate:lint
+          task validate:vet
+          make test
 
-      - name: make revendor
-        run: make revendor
-
-      - name: make build
-        run: make build
-
-      - name: make verify
-        run: make verify
-
-      - name: make test
-        run: make test
+      - name: Build (fka component_descriptor_ocm)
+        run: make build-resources
