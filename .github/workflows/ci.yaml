@@ -30,7 +30,7 @@ jobs:
         with:
           version: 3.x
 
-      # make verify alias check:
+      # make verify aka check:
       - name: Verify
         run: |
           # make revendor
@@ -41,4 +41,8 @@ jobs:
           make test
 
       - name: Build (fka component_descriptor_ocm)
-        run: make build-resources
+        run: |
+          # 
+          make build
+          # creates docker-images and component descriptor
+          # make build-resources
