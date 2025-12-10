@@ -15,6 +15,4 @@ includes:
       REPO_URL: 'https://github.com/openmcp-project/landscaper'
       GENERATE_DOCS_INDEX: "false"
       CHART_COMPONENTS: "[]"
-      OS: [linux]
-      ARCH: [amd64, arm64]
 
