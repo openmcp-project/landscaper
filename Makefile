@@ -83,9 +83,9 @@ PLATFORMS ?= linux/arm64,linux/amd64
 build: ## Build binaries for all os/arch combinations specified in PLATFORMS.
 	@PLATFORMS=$(PLATFORMS) COMPONENT=landscaper-controller $(REPO_ROOT)/hack/build.sh
 	@PLATFORMS=$(PLATFORMS) COMPONENT=landscaper-webhooks-server $(REPO_ROOT)/hack/build.sh
-	@PLATFORMS=$(PLATFORMS) COMPONENT=container-deployer-controller COMPONENT_MAIN_PATH=container-deployer/container-deployer-controller $(REPO_ROOT)/hack/build.sh
-	@PLATFORMS=$(PLATFORMS) COMPONENT=container-deployer-init COMPONENT_MAIN_PATH=container-deployer/container-deployer-init $(REPO_ROOT)/hack/build.sh
-	@PLATFORMS=$(PLATFORMS) COMPONENT=container-deployer-wait COMPONENT_MAIN_PATH=container-deployer/container-deployer-wait $(REPO_ROOT)/hack/build.sh
+	@PLATFORMS=$(PLATFORMS) COMPONENT=container-deployer-controller COMPONENT_MAIN_PATH=container-deployer-controller $(REPO_ROOT)/hack/build.sh
+	@PLATFORMS=$(PLATFORMS) COMPONENT=container-deployer-init COMPONENT_MAIN_PATH=container-deployer-init $(REPO_ROOT)/hack/build.sh
+	@PLATFORMS=$(PLATFORMS) COMPONENT=container-deployer-wait COMPONENT_MAIN_PATH=container-deployer-wait $(REPO_ROOT)/hack/build.sh
 	@PLATFORMS=$(PLATFORMS) COMPONENT=helm-deployer-controller $(REPO_ROOT)/hack/build.sh
 	@PLATFORMS=$(PLATFORMS) COMPONENT=manifest-deployer-controller $(REPO_ROOT)/hack/build.sh
 	@PLATFORMS=$(PLATFORMS) COMPONENT=mock-deployer-controller $(REPO_ROOT)/hack/build.sh
