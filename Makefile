@@ -81,15 +81,7 @@ PLATFORMS ?= linux/arm64,linux/amd64
 
 .PHONY: build
 build: ## Build binaries for all os/arch combinations specified in PLATFORMS.
-	@PLATFORMS=$(PLATFORMS) COMPONENT=landscaper-controller $(REPO_ROOT)/hack/build.sh
-	@PLATFORMS=$(PLATFORMS) COMPONENT=landscaper-webhooks-server $(REPO_ROOT)/hack/build.sh
-	@PLATFORMS=$(PLATFORMS) COMPONENT=container-deployer-controller COMPONENT_MAIN_PATH=container-deployer-controller $(REPO_ROOT)/hack/build.sh
-	@PLATFORMS=$(PLATFORMS) COMPONENT=container-deployer-init COMPONENT_MAIN_PATH=container-deployer-init $(REPO_ROOT)/hack/build.sh
-	@PLATFORMS=$(PLATFORMS) COMPONENT=container-deployer-wait COMPONENT_MAIN_PATH=container-deployer-wait $(REPO_ROOT)/hack/build.sh
-	@PLATFORMS=$(PLATFORMS) COMPONENT=helm-deployer-controller $(REPO_ROOT)/hack/build.sh
-	@PLATFORMS=$(PLATFORMS) COMPONENT=manifest-deployer-controller $(REPO_ROOT)/hack/build.sh
-	@PLATFORMS=$(PLATFORMS) COMPONENT=mock-deployer-controller $(REPO_ROOT)/hack/build.sh
-	@PLATFORMS=$(PLATFORMS) COMPONENT=target-sync-controller $(REPO_ROOT)/hack/build.sh
+	@task build:bin:build-multi-raw
 	
 .PHONY: docker-images
 docker-images: build ## Builds images for all controllers locally. The images are suffixed with -$OS-$ARCH
