@@ -19,9 +19,11 @@ deployer:
   #  identity: ""
   #  namespace: ""
   initContainer:
+  # TODO: update repository and tag
     repository: ghcr.io/openmcp-project/components/github.com/openmcp-project/landscaper/container-deployer/images/container-deployer-init
   #    tag: v1.0.3
   waitContainer:
+  # TODO: update repository and tag
     repository: ghcr.io/openmcp-project/components/github.com/openmcp-project/landscaper/container-deployer/images/container-deployer-wait
   #    tag: v1.0.3
   #  defaultImage:
@@ -59,6 +61,7 @@ deployer:
 replicaCount: 1
 
 image:
+  # TODO: update repository and tag
   repository: europe-docker.pkg.dev/sap-gcp-cp-k8s-stable-hub/landscaper/github.com/gardener/landscaper/container-deployer/images/container-deployer-controller
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
