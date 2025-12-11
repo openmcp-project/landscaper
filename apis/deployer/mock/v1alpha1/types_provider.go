@@ -31,7 +31,7 @@ type ProviderConfiguration struct {
 	ProviderStatus *runtime.RawExtension `json:"providerStatus,omitempty"`
 
 	// Export sets the exported configuration to the given value
-	Export *json.RawMessage `json:"export,omitempty"`
+	Export json.RawMessage `json:"export,omitempty"`
 
 	// ContinuousReconcile contains the schedule for continuous reconciliation.
 	// +optional

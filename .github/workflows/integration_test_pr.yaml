@@ -5,6 +5,7 @@ on:
 
 permissions:
   contents: read
+  packages: write
 
 jobs:
   build:
@@ -13,7 +14,6 @@ jobs:
       github.actor == 'renovate[bot]' ||
       github.actor == 'dependabot[bot]' ||
       contains(github.event.pull_request.title, 'run-int-tests') ||
-      contains(github.event.head_commit.message, 'run-int-tests') ||
       contains(github.event_name , 'workflow_dispatch')
 
     steps:
@@ -21,6 +21,27 @@ jobs:
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
         with:
           submodules: recursive
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@c7c53464625b32c7a7e944ae62b3e17d2b600130 # v3
+
+      - name: Set up Docker Context for Buildx
+        id: buildx-context
+        run: |
+          docker context create builders
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef # v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        timeout-minutes: 5
+        uses: docker/setup-buildx-action@e468171a9de216ec08956ac3ada2f0791b6bd435 # v3
+        with:
+          version: latest
 
       - name: Set up Go
         uses: actions/setup-go@4dc6199c7b1a012772edbd06daecab0f50c9053c # v6
@@ -41,8 +62,8 @@ jobs:
           # make verify
           task validate:vet
 
-      - name: Build Images
-        run: make docker-images
+      - name: Build and Push Images
+        run: NO_LATEST_TAG=1 make docker-images
 
       # TODO: renable integration tests when component build is fixed
       # see Error: component transport: https://github.com/openmcp-project/landscaper/actions/runs/20100090751/job/57668372389?pr=49
