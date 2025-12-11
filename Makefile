@@ -12,6 +12,7 @@ BUILD_OS                                       := "linux"
 BUILD_ARCH                                     := "amd64"
 
 REGISTRY                                       := ghcr.io/openmcp-project
+OCM_REGISTRY                                   := $(REGISTRY)/components
 DOCKER_BUILDER_NAME := "ls-multiarch"
 
 DISABLE_CLEANUP := false
@@ -29,7 +30,7 @@ help: ## Display this help.
 
 .PHONY: revendor
 revendor: ## Runs 'go mod tidy' for all go modules in this repo.
-	@$(REPO_ROOT)/hack/revendor.sh
+	@task generate:tidy
 
 .PHONY: format
 format: goimports ## Runs the formatter.
@@ -39,7 +40,8 @@ format: goimports ## Runs the formatter.
 check: revendor golangci-lint jq goimports ## Runs linter, 'go vet', and checks if the formatter has been run.
 	@test "$(SKIP_DOCS_INDEX_CHECK)" = "true" || \
 		JQ=$(JQ) $(REPO_ROOT)/hack/verify-docs-index.sh
-	@LINTER=$(LINTER) FORMATTER=$(FORMATTER) $(REPO_ROOT)/hack/check.sh --golangci-lint-config="$(REPO_ROOT)/.golangci.yaml" $(CODE_DIRS)
+	@task validate:lint
+	@task validate:vet
 
 .PHONY: verify
 verify: check ## Alias for 'make check'.
@@ -79,15 +81,7 @@ PLATFORMS ?= linux/arm64,linux/amd64
 
 .PHONY: build
 build: ## Build binaries for all os/arch combinations specified in PLATFORMS.
-	@PLATFORMS=$(PLATFORMS) COMPONENT=landscaper-controller $(REPO_ROOT)/hack/build.sh
-	@PLATFORMS=$(PLATFORMS) COMPONENT=landscaper-webhooks-server $(REPO_ROOT)/hack/build.sh
-	@PLATFORMS=$(PLATFORMS) COMPONENT=container-deployer-controller COMPONENT_MAIN_PATH=container-deployer/container-deployer-controller $(REPO_ROOT)/hack/build.sh
-	@PLATFORMS=$(PLATFORMS) COMPONENT=container-deployer-init COMPONENT_MAIN_PATH=container-deployer/container-deployer-init $(REPO_ROOT)/hack/build.sh
-	@PLATFORMS=$(PLATFORMS) COMPONENT=container-deployer-wait COMPONENT_MAIN_PATH=container-deployer/container-deployer-wait $(REPO_ROOT)/hack/build.sh
-	@PLATFORMS=$(PLATFORMS) COMPONENT=helm-deployer-controller $(REPO_ROOT)/hack/build.sh
-	@PLATFORMS=$(PLATFORMS) COMPONENT=manifest-deployer-controller $(REPO_ROOT)/hack/build.sh
-	@PLATFORMS=$(PLATFORMS) COMPONENT=mock-deployer-controller $(REPO_ROOT)/hack/build.sh
-	@PLATFORMS=$(PLATFORMS) COMPONENT=target-sync-controller $(REPO_ROOT)/hack/build.sh
+	@task build:bin:build-multi-raw
 	
 .PHONY: docker-images
 docker-images: build ## Builds images for all controllers locally. The images are suffixed with -$OS-$ARCH
@@ -95,7 +89,7 @@ docker-images: build ## Builds images for all controllers locally. The images ar
 
 .PHONY: component
 component: ocm ## Builds and pushes the Component Descriptor. Also pushes the images and combines them into multi-platform images. Requires the docker images to have been built before.
-	@OCM=$(OCM) $(REPO_ROOT)/hack/generate-cd.sh $(REGISTRY)
+	@OCM=$(OCM) $(REPO_ROOT)/hack/generate-cd.sh $(OCM_REGISTRY)
 
 .PHONY: build-resources ## Wrapper for 'make docker-images component'.
 build-resources: docker-images component
@@ -138,15 +132,15 @@ CODE_GEN_VERSION ?= $(shell  $(REPO_ROOT)/hack/extract-module-version.sh k8s.io/
 # renovate: datasource=github-releases depName=kubernetes-sigs/controller-tools
 CONTROLLER_TOOLS_VERSION ?= v0.19.0
 # renovate: datasource=github-tags depName=golang/tools
-FORMATTER_VERSION ?= v0.39.0
+FORMATTER_VERSION ?= v0.40.0
 # renovate: datasource=github-releases depName=golangci/golangci-lint
-LINTER_VERSION ?= v2.6.2
+LINTER_VERSION ?= v2.7.2
 # renovate: datasource=github-releases depName=elastic/crd-ref-docs
 API_REF_GEN_VERSION ?= v0.2.0
 # renovate: datasource=github-releases depName=jqlang/jq
 JQ_VERSION ?= v1.7.1
 # renovate: datasource=github-releases depName=open-component-model/ocm
-OCM_VERSION ?= v0.33.0
+OCM_VERSION ?= v0.34.1
 # renovate: datasource=github-releases depName=golang/mock
 MOCKGEN_VERSION ?= v1.6.0
 # renovate: datasource=github-releases depName=distribution/distribution
