@@ -47,3 +47,4 @@ jobs:
           # in old pipeline "component_descriptor_ocm" was called which
           # creates docker-images and component descriptor
           # make build-resources
+          # TODO: used later for integration tests, should be there

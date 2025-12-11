@@ -74,9 +74,20 @@ jobs:
         with:
           go-version-file: go.mod
 
+      - name: Install Task
+        uses: arduino/setup-task@v2
+        with:
+          version: 3.x
+
       - name: Build and Push Images
         run: |
+          # TODO: when code generation is fixed, use task build:all
+          # creates go and docker builds
           make docker-images
+          # creates only go builds
+          # task build:bin:build-raw
+          # creates only docker images, needs go build in advance
+          # task build:img:build-raw
 
       - name: Build and Push OCM Component
         run: |
