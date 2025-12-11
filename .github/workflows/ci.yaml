@@ -42,8 +42,8 @@ jobs:
 
       - name: Build (fka component_descriptor_ocm)
         run: |
-          # TODO: use task build:bin:build-multi-raw
-          make build
+          # make build
+          task build:bin:build-raw
           # in old pipeline "component_descriptor_ocm" was called which
           # creates docker-images and component descriptor
           # make build-resources

@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/openmcp-project/landscaper/cmd/container-deployer/container-deployer-init/app"
+	"github.com/openmcp-project/landscaper/cmd/container-deployer-init/app"
 )
 
 func main() {
