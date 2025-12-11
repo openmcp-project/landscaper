@@ -13,8 +13,8 @@ import (
 	"github.com/openmcp-project/landscaper/apis/deployer/utils/managedresource"
 
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
-	manifestcore "github.com/openmcp-project/landscaper/apis/deployer/manifest"
 	manifestv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/manifest/v1alpha1"
+	manifestv1alpha2 "github.com/openmcp-project/landscaper/apis/deployer/manifest/v1alpha2"
 )
 
 var _ = Describe("Conversion", func() {
@@ -34,8 +34,8 @@ var _ = Describe("Conversion", func() {
 				},
 			}
 
-			manifestConfig = &manifestcore.ProviderConfiguration{
-				UpdateStrategy: manifestcore.UpdateStrategyPatch,
+			manifestConfig = &manifestv1alpha2.ProviderConfiguration{
+				UpdateStrategy: manifestv1alpha2.UpdateStrategyPatch,
 				Manifests: []managedresource.Manifest{
 					{
 						Policy: managedresource.ManagePolicy,
@@ -53,18 +53,18 @@ var _ = Describe("Conversion", func() {
 			}
 		)
 
-		Context("v1alpha1 to manifestcore", func() {
+		Context("v1alpha1 to v1alpha2", func() {
 			It("should convert all configuration and default the policy", func() {
-				res := &manifestcore.ProviderConfiguration{}
-				Expect(manifestv1alpha1.Convert_v1alpha1_ProviderConfiguration_To_manifest_ProviderConfiguration(v1alpha1Config, res, nil)).To(Succeed())
+				res := &manifestv1alpha2.ProviderConfiguration{}
+				Expect(manifestv1alpha1.Convert_v1alpha1_ProviderConfiguration_To_v1alpha2_ProviderConfiguration(v1alpha1Config, res, nil)).To(Succeed())
 				Expect(res).To(Equal(manifestConfig))
 			})
 		})
 
-		Context("manifestcore to v1alpha1", func() {
+		Context("v1alpha2 to v1alpha1", func() {
 			It("should convert all configuration and default the policy", func() {
 				res := &manifestv1alpha1.ProviderConfiguration{}
-				Expect(manifestv1alpha1.Convert_manifest_ProviderConfiguration_To_v1alpha1_ProviderConfiguration(manifestConfig, res, nil)).To(Succeed())
+				Expect(manifestv1alpha1.Convert_v1alpha2_ProviderConfiguration_To_v1alpha1_ProviderConfiguration(manifestConfig, res, nil)).To(Succeed())
 				Expect(res).To(Equal(v1alpha1Config))
 			})
 		})
@@ -94,7 +94,7 @@ var _ = Describe("Conversion", func() {
 				},
 			}
 
-			manifestStatus = &manifestcore.ProviderStatus{
+			manifestStatus = &manifestv1alpha2.ProviderStatus{
 				ManagedResources: []managedresource.ManagedResourceStatus{
 					{
 						Policy: managedresource.ManagePolicy,
@@ -118,15 +118,15 @@ var _ = Describe("Conversion", func() {
 			}
 		)
 
-		It("v1alpha1 to manifestcore", func() {
-			res := &manifestcore.ProviderStatus{}
-			Expect(manifestv1alpha1.Convert_v1alpha1_ProviderStatus_To_manifest_ProviderStatus(v1alpha1Status, res, nil)).To(Succeed())
+		It("v1alpha1 to v1alpha2", func() {
+			res := &manifestv1alpha2.ProviderStatus{}
+			Expect(manifestv1alpha1.Convert_v1alpha1_ProviderStatus_To_v1alph2_ProviderStatus(v1alpha1Status, res, nil)).To(Succeed())
 			Expect(res).To(Equal(manifestStatus))
 		})
 
-		It("manifestcore to v1alpha1", func() {
+		It("v1alpha2 to v1alpha1", func() {
 			res := &manifestv1alpha1.ProviderStatus{}
-			Expect(manifestv1alpha1.Convert_manifest_ProviderStatus_To_v1alpha1_ProviderStatus(manifestStatus, res, nil)).To(Succeed())
+			Expect(manifestv1alpha1.Convert_v1alpha2_ProviderStatus_To_v1alpha1_ProviderStatus(manifestStatus, res, nil)).To(Succeed())
 			Expect(res).To(Equal(v1alpha1Status))
 		})
 	})

@@ -22,9 +22,8 @@ import (
 	ocmutils "ocm.software/ocm/api/ocm/ocmutils"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	"github.com/openmcp-project/landscaper/apis/config"
+	config "github.com/openmcp-project/landscaper/apis/config/v1alpha1"
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
-	containercore "github.com/openmcp-project/landscaper/apis/deployer/container"
 	containerv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/container/v1alpha1"
 	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 	"github.com/openmcp-project/landscaper/pkg/api"
@@ -197,7 +196,7 @@ func run(ctx context.Context, opts *options, kubeClient client.Client, fs vfs.Fi
 	}
 
 	// copy target to shared volume
-	targetSource := filepath.Join(containercore.TargetInitDir, containercore.TargetFileName)
+	targetSource := filepath.Join(containerv1alpha1.TargetInitDir, containerv1alpha1.TargetFileName)
 	targetContent, err := vfs.ReadFile(fs, targetSource)
 	if err != nil {
 		return fmt.Errorf("error reading target content from '%s': %w", targetSource, err)

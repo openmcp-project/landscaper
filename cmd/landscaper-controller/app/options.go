@@ -15,7 +15,6 @@ import (
 
 	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 
-	"github.com/openmcp-project/landscaper/apis/config"
 	"github.com/openmcp-project/landscaper/apis/config/v1alpha1"
 	"github.com/openmcp-project/landscaper/pkg/api"
 )
@@ -26,7 +25,7 @@ type Options struct {
 	ConfigPath               string
 	landscaperKubeconfigPath string
 
-	Config *config.LandscaperConfiguration
+	Config *v1alpha1.LandscaperConfiguration
 }
 
 func NewOptions() *Options {
@@ -63,7 +62,7 @@ func (o *Options) Complete(ctx context.Context) error {
 	return nil
 }
 
-func (o *Options) parseConfigurationFile(ctx context.Context) (*config.LandscaperConfiguration, error) {
+func (o *Options) parseConfigurationFile(ctx context.Context) (*v1alpha1.LandscaperConfiguration, error) {
 	decoder := serializer.NewCodecFactory(api.ConfigScheme).UniversalDecoder()
 
 	configv1alpha1 := &v1alpha1.LandscaperConfiguration{}
@@ -81,14 +80,7 @@ func (o *Options) parseConfigurationFile(ctx context.Context) (*config.Landscape
 
 	api.ConfigScheme.Default(configv1alpha1)
 
-	config := &config.LandscaperConfiguration{}
-	err := api.ConfigScheme.Convert(configv1alpha1, config, ctx)
-	if err != nil {
-		return nil, err
-	}
-	api.ConfigScheme.Default(config)
-
-	return config, nil
+	return configv1alpha1, nil
 }
 
 // validates the Options

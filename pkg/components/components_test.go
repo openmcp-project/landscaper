@@ -11,6 +11,7 @@ import (
 
 	. "github.com/mandelsoft/goutils/testutils"
 	"github.com/mandelsoft/vfs/pkg/vfs"
+
 	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 
 	. "github.com/onsi/ginkgo/v2"
@@ -19,7 +20,7 @@ import (
 	"ocm.software/ocm/api/ocm"
 	"ocm.software/ocm/api/utils/runtime"
 
-	"github.com/openmcp-project/landscaper/apis/config"
+	config "github.com/openmcp-project/landscaper/apis/config/v1alpha1"
 	"github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 	"github.com/openmcp-project/landscaper/pkg/components/model"

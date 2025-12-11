@@ -10,7 +10,7 @@ import (
 	. "github.com/onsi/gomega/gstruct"
 	"k8s.io/apimachinery/pkg/util/validation/field"
 
-	"github.com/openmcp-project/landscaper/apis/core"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	"github.com/openmcp-project/landscaper/apis/core/validation"
 )
 
@@ -18,7 +18,7 @@ var _ = Describe("Execution", func() {
 
 	Context("ValidateDeployItemTemplate", func() {
 		It("should pass if a DeployItemTemplate is valid", func() {
-			tmpl := core.DeployItemTemplate{}
+			tmpl := lsv1alpha1.DeployItemTemplate{}
 			tmpl.Name = "my-import"
 			tmpl.Type = "mytype"
 
@@ -27,7 +27,7 @@ var _ = Describe("Execution", func() {
 		})
 
 		It("should fail if DeployItemTemplate.name is empty", func() {
-			tmpl := core.DeployItemTemplate{}
+			tmpl := lsv1alpha1.DeployItemTemplate{}
 
 			allErrs := validation.ValidateDeployItemTemplate(field.NewPath("b"), tmpl)
 			Expect(allErrs).To(ContainElement(PointTo(MatchFields(IgnoreExtras, Fields{
@@ -37,7 +37,7 @@ var _ = Describe("Execution", func() {
 		})
 
 		It("should fail if DeployItemTemplate.type is empty", func() {
-			tmpl := core.DeployItemTemplate{}
+			tmpl := lsv1alpha1.DeployItemTemplate{}
 
 			allErrs := validation.ValidateDeployItemTemplate(field.NewPath("b"), tmpl)
 			Expect(allErrs).To(ContainElement(PointTo(MatchFields(IgnoreExtras, Fields{
@@ -49,16 +49,16 @@ var _ = Describe("Execution", func() {
 
 	Context("ValidateDeployItemTemplateList", func() {
 		It("should pass if a DeployItemTemplate is valid", func() {
-			tmpl := core.DeployItemTemplate{}
+			tmpl := lsv1alpha1.DeployItemTemplate{}
 			tmpl.Name = "my-import"
 			tmpl.Type = "mytype"
 
-			allErrs := validation.ValidateDeployItemTemplateList(field.NewPath(""), []core.DeployItemTemplate{tmpl})
+			allErrs := validation.ValidateDeployItemTemplateList(field.NewPath(""), []lsv1alpha1.DeployItemTemplate{tmpl})
 			Expect(allErrs).To(HaveLen(0))
 		})
 
 		It("should fail if duplicated DeployItemTemplates are defined", func() {
-			templates := []core.DeployItemTemplate{
+			templates := []lsv1alpha1.DeployItemTemplate{
 				{
 					Name: "test",
 				},
@@ -76,7 +76,7 @@ var _ = Describe("Execution", func() {
 		})
 
 		It("should fail if cyclic dependencies are defined", func() {
-			templates := []core.DeployItemTemplate{
+			templates := []lsv1alpha1.DeployItemTemplate{
 				{
 					Name:      "a",
 					Type:      "foo",

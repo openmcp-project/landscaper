@@ -12,7 +12,7 @@ import (
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 	"k8s.io/apimachinery/pkg/util/validation/field"
 
-	"github.com/openmcp-project/landscaper/apis/core"
+	core "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	kutil "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"
 	"github.com/openmcp-project/landscaper/pkg/api"

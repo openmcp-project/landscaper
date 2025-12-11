@@ -9,12 +9,13 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"
-
-	"github.com/openmcp-project/landscaper/apis/core"
 )
 
+// GroupName is the name of the Garden API group.
+const GroupName = "landscaper.gardener.cloud"
+
 // SchemeGroupVersion is group version used to register these objects
-var SchemeGroupVersion = schema.GroupVersion{Group: core.GroupName, Version: "v1alpha1"}
+var SchemeGroupVersion = schema.GroupVersion{Group: GroupName, Version: "v1alpha1"}
 
 // Kind takes an unqualified kind and returns back a Group qualified GroupKind
 func Kind(kind string) schema.GroupKind {
@@ -28,7 +29,7 @@ func Resource(resource string) schema.GroupResource {
 
 var (
 	// SchemeBuilder is a new Schema Builder which registers our API.
-	SchemeBuilder      = runtime.NewSchemeBuilder(addKnownTypes, addDefaultingFuncs, addConversionFuncs)
+	SchemeBuilder      = runtime.NewSchemeBuilder(addKnownTypes, addDefaultingFuncs)
 	localSchemeBuilder = &SchemeBuilder
 	// AddToScheme is a reference to the Schema Builder's AddToScheme function.
 	AddToScheme = SchemeBuilder.AddToScheme
@@ -62,9 +63,6 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&CriticalProblems{},
 		&CriticalProblemsList{},
 	)
-	if err := RegisterConversions(scheme); err != nil {
-		return err
-	}
 	metav1.AddToGroupVersion(scheme, SchemeGroupVersion)
 	return nil
 }

@@ -13,12 +13,13 @@ import (
 	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 	"github.com/openmcp-project/landscaper/pkg/utils"
 
-	v2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 	"ocm.software/ocm/api/ocm/compdesc"
 	"ocm.software/ocm/api/ocm/resolvers"
 	"ocm.software/ocm/api/ocm/tools/signing"
 	"ocm.software/ocm/api/tech/signing/handlers/rsa"
 	"ocm.software/ocm/api/tech/signing/signutils"
+
+	v2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 
 	"github.com/openmcp-project/landscaper/pkg/components/model/types"
 

@@ -20,7 +20,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 
-	"github.com/openmcp-project/landscaper/apis/config"
+	config "github.com/openmcp-project/landscaper/apis/config/v1alpha1"
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	lsv1alpha1helper "github.com/openmcp-project/landscaper/apis/core/v1alpha1/helper"
 	lserrors "github.com/openmcp-project/landscaper/apis/errors"

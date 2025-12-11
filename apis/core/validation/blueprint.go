@@ -16,8 +16,8 @@ import (
 	"k8s.io/apimachinery/pkg/util/validation"
 	"k8s.io/apimachinery/pkg/util/validation/field"
 
-	"github.com/openmcp-project/landscaper/apis/core"
 	coreinstall "github.com/openmcp-project/landscaper/apis/core/install"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 )
 
 var landscaperScheme = runtime.NewScheme()
@@ -29,7 +29,7 @@ func init() {
 }
 
 // ValidateBlueprint validates a Blueprint
-func ValidateBlueprint(blueprint *core.Blueprint) field.ErrorList {
+func ValidateBlueprint(blueprint *lsv1alpha1.Blueprint) field.ErrorList {
 	allErrs := field.ErrorList{}
 	allErrs = append(allErrs, ValidateBlueprintImportDefinitions(field.NewPath("imports"), blueprint.Imports)...)
 	allErrs = append(allErrs, ValidateBlueprintExportDefinitions(field.NewPath("exports"), blueprint.Exports)...)
@@ -41,7 +41,7 @@ func ValidateBlueprint(blueprint *core.Blueprint) field.ErrorList {
 }
 
 // ValidateBlueprintWithInstallationTemplates validates a Blueprint
-func ValidateBlueprintWithInstallationTemplates(blueprint *core.Blueprint, installationTemplates []*core.InstallationTemplate) field.ErrorList {
+func ValidateBlueprintWithInstallationTemplates(blueprint *lsv1alpha1.Blueprint, installationTemplates []*lsv1alpha1.InstallationTemplate) field.ErrorList {
 	allErrs := field.ErrorList{}
 	allErrs = append(allErrs, ValidateBlueprint(blueprint)...)
 	allErrs = append(allErrs, ValidateInstallationTemplates(field.NewPath(""), blueprint.Imports, installationTemplates)...)
@@ -49,13 +49,13 @@ func ValidateBlueprintWithInstallationTemplates(blueprint *core.Blueprint, insta
 }
 
 // ValidateBlueprintImportDefinitions validates a list of import definitions
-func ValidateBlueprintImportDefinitions(fldPath *field.Path, imports []core.ImportDefinition) field.ErrorList {
+func ValidateBlueprintImportDefinitions(fldPath *field.Path, imports []lsv1alpha1.ImportDefinition) field.ErrorList {
 	_, allErrs := validateBlueprintImportDefinitions(fldPath, imports, sets.NewString())
 	return allErrs
 }
 
 // validateBlueprintImportDefinitions validates a list of import definitions
-func validateBlueprintImportDefinitions(fldPath *field.Path, imports []core.ImportDefinition, importNames sets.String) (sets.String, field.ErrorList) { //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
+func validateBlueprintImportDefinitions(fldPath *field.Path, imports []lsv1alpha1.ImportDefinition, importNames sets.String) (sets.String, field.ErrorList) { //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
 	allErrs := field.ErrorList{}
 
 	for i, importDef := range imports {
@@ -106,7 +106,7 @@ func validateBlueprintImportDefinitions(fldPath *field.Path, imports []core.Impo
 }
 
 // ValidateBlueprintExportDefinitions validates a list of export definitions
-func ValidateBlueprintExportDefinitions(fldPath *field.Path, exports []core.ExportDefinition) field.ErrorList {
+func ValidateBlueprintExportDefinitions(fldPath *field.Path, exports []lsv1alpha1.ExportDefinition) field.ErrorList {
 	allErrs := field.ErrorList{}
 
 	exportNames := sets.NewString()
@@ -187,7 +187,7 @@ func validateMutuallyExclusiveConfig(fldPath *field.Path, def interface{}, expec
 }
 
 // ValidateFieldValueDefinition validates a field value definition
-func ValidateFieldValueDefinition(fldPath *field.Path, def core.FieldValueDefinition) field.ErrorList {
+func ValidateFieldValueDefinition(fldPath *field.Path, def lsv1alpha1.FieldValueDefinition) field.ErrorList {
 	allErrs := field.ErrorList{}
 	if len(def.Name) == 0 {
 		allErrs = append(allErrs, field.Required(fldPath.Child("name"), "name must not be empty"))
@@ -200,13 +200,13 @@ func ValidateFieldValueDefinition(fldPath *field.Path, def core.FieldValueDefini
 }
 
 // ValidateJsonSchema validates a json schema
-func ValidateJsonSchema(fldPath *field.Path, schema *core.JSONSchemaDefinition) field.ErrorList {
+func ValidateJsonSchema(fldPath *field.Path, schema *lsv1alpha1.JSONSchemaDefinition) field.ErrorList {
 	allErrs := field.ErrorList{}
 	return allErrs
 }
 
 // ValidateTemplateExecutorList validates a list of template executors
-func ValidateTemplateExecutorList(fldPath *field.Path, list []core.TemplateExecutor) field.ErrorList {
+func ValidateTemplateExecutorList(fldPath *field.Path, list []lsv1alpha1.TemplateExecutor) field.ErrorList {
 	allErrs := field.ErrorList{}
 	names := sets.NewString()
 	for i, exec := range list {
@@ -230,7 +230,7 @@ func ValidateTemplateExecutorList(fldPath *field.Path, list []core.TemplateExecu
 }
 
 // ValidateSubinstallations validates all inline subinstallation and installation templates from a file
-func ValidateSubinstallations(fldPath *field.Path, subinstallations []core.SubinstallationTemplate) field.ErrorList {
+func ValidateSubinstallations(fldPath *field.Path, subinstallations []lsv1alpha1.SubinstallationTemplate) field.ErrorList {
 	allErrs := field.ErrorList{}
 
 	for i, subinst := range subinstallations {
@@ -251,7 +251,7 @@ func ValidateSubinstallations(fldPath *field.Path, subinstallations []core.Subin
 
 // ValidateInstallationTemplates validates a list of subinstallations.
 // Take care to also include all templated templates for proper validation.
-func ValidateInstallationTemplates(fldPath *field.Path, blueprintImportDefs []core.ImportDefinition, subinstallations []*core.InstallationTemplate) field.ErrorList {
+func ValidateInstallationTemplates(fldPath *field.Path, blueprintImportDefs []lsv1alpha1.ImportDefinition, subinstallations []*lsv1alpha1.InstallationTemplate) field.ErrorList {
 	var (
 		allErrs             = field.ErrorList{}
 		names               = sets.NewString()
@@ -269,13 +269,13 @@ func ValidateInstallationTemplates(fldPath *field.Path, blueprintImportDefs []co
 	for _, bImport := range blueprintImportDefs {
 		if len(bImport.Type) != 0 {
 			switch bImport.Type {
-			case core.ImportTypeData:
+			case lsv1alpha1.ImportTypeData:
 				blueprintDataImports.Insert(bImport.Name)
-			case core.ImportTypeTarget:
+			case lsv1alpha1.ImportTypeTarget:
 				blueprintTargetImports.Insert(bImport.Name)
-			case core.ImportTypeTargetList:
+			case lsv1alpha1.ImportTypeTargetList:
 				blueprintTargetListImports.Insert(bImport.Name)
-			case core.ImportTypeTargetMap:
+			case lsv1alpha1.ImportTypeTargetMap:
 				blueprintTargetMapImports.Insert(bImport.Name)
 			}
 		} else {
@@ -306,7 +306,7 @@ func ValidateInstallationTemplates(fldPath *field.Path, blueprintImportDefs []co
 		//		continue
 		//	}
 		//
-		//	instTmpl = &core.InstallationTemplate{}
+		//	instTmpl = &lsv1alpha1.InstallationTemplate{}
 		//
 		//	if _, _, err := serializer.NewCodecFactory(landscaperScheme).UniversalDecoder().Decode(data, nil, instTmpl); err != nil {
 		//		allErrs = append(allErrs, field.Invalid(instPath.Child("file"), subinst.File, err.Error()))
@@ -436,7 +436,7 @@ func ValidateSatisfiedImports(blueprintImports, blueprintListImports, blueprintM
 }
 
 // ValidateInstallationTemplate validates a installation template
-func ValidateInstallationTemplate(fldPath *field.Path, template *core.InstallationTemplate) field.ErrorList {
+func ValidateInstallationTemplate(fldPath *field.Path, template *lsv1alpha1.InstallationTemplate) field.ErrorList {
 	allErrs := field.ErrorList{}
 
 	if len(template.Name) == 0 {
@@ -463,7 +463,7 @@ func ValidateInstallationTemplate(fldPath *field.Path, template *core.Installati
 }
 
 // ValidateInstallationTemplateImports validates the imports of an InstallationTemplate
-func ValidateInstallationTemplateImports(imports core.InstallationImports, fldPath *field.Path) field.ErrorList {
+func ValidateInstallationTemplateImports(imports lsv1alpha1.InstallationImports, fldPath *field.Path) field.ErrorList {
 	allErrs := field.ErrorList{}
 	importNames := sets.NewString()
 	var tmpErrs field.ErrorList
@@ -477,7 +477,7 @@ func ValidateInstallationTemplateImports(imports core.InstallationImports, fldPa
 }
 
 // ValidateInstallationTemplateDataImports validates the data imports of an InstallationTemplate
-func ValidateInstallationTemplateDataImports(imports []core.DataImport, fldPath *field.Path, importNames sets.String) (field.ErrorList, sets.String) { //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
+func ValidateInstallationTemplateDataImports(imports []lsv1alpha1.DataImport, fldPath *field.Path, importNames sets.String) (field.ErrorList, sets.String) { //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
 	allErrs := field.ErrorList{}
 
 	for idx, imp := range imports {

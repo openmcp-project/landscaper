@@ -16,7 +16,7 @@ import (
 
 	"github.com/openmcp-project/landscaper/pkg/utils/landscaper"
 
-	"github.com/openmcp-project/landscaper/apis/config"
+	config "github.com/openmcp-project/landscaper/apis/config/v1alpha1"
 
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"

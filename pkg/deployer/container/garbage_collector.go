@@ -23,7 +23,7 @@ import (
 	containerv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/container/v1alpha1"
 	lc "github.com/openmcp-project/landscaper/controller-utils/pkg/logging/constants"
 
-	"github.com/openmcp-project/landscaper/apis/deployer/container"
+	container "github.com/openmcp-project/landscaper/apis/deployer/container/v1alpha1"
 	kutil "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"
 	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 

@@ -15,10 +15,11 @@ import (
 	"github.com/mandelsoft/vfs/pkg/memoryfs"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
-	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 	"ocm.software/ocm/api/utils/runtime"
 
-	"github.com/openmcp-project/landscaper/apis/config"
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
+
+	config "github.com/openmcp-project/landscaper/apis/config/v1alpha1"
 	"github.com/openmcp-project/landscaper/pkg/components/registries"
 
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"

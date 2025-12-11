@@ -20,9 +20,6 @@ import (
 	"github.com/docker/cli/cli/config/configfile"
 	"github.com/onsi/ginkgo/v2"
 	"github.com/onsi/gomega"
-	"github.com/openmcp-project/landscaper/legacy-component-cli/ociclient"
-	"github.com/openmcp-project/landscaper/legacy-component-cli/ociclient/cache"
-	"github.com/openmcp-project/landscaper/legacy-component-cli/ociclient/credentials"
 	v1 "k8s.io/api/admissionregistration/v1"
 	corev1 "k8s.io/api/core/v1"
 	networkingv1 "k8s.io/api/networking/v1"
@@ -31,6 +28,10 @@ import (
 	"k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/clientcmd"
 	"sigs.k8s.io/controller-runtime/pkg/client"
+
+	"github.com/openmcp-project/landscaper/legacy-component-cli/ociclient"
+	"github.com/openmcp-project/landscaper/legacy-component-cli/ociclient/cache"
+	"github.com/openmcp-project/landscaper/legacy-component-cli/ociclient/credentials"
 
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"

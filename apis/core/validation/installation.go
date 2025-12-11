@@ -14,7 +14,7 @@ import (
 	"k8s.io/apimachinery/pkg/util/validation"
 	"k8s.io/apimachinery/pkg/util/validation/field"
 
-	"github.com/openmcp-project/landscaper/apis/core"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	"github.com/openmcp-project/landscaper/apis/core/v1alpha1/helper"
 )
 
@@ -27,7 +27,7 @@ const InstallationGenerateNameMaxLength = InstallationNameMaxLength - 5
 var targetMapKeyRegExp = regexp.MustCompile("^[a-z0-9]([a-z0-9.-]{0,61}[a-z0-9])?$")
 
 // ValidateInstallation validates an Installation
-func ValidateInstallation(inst *core.Installation) field.ErrorList {
+func ValidateInstallation(inst *lsv1alpha1.Installation) field.ErrorList {
 	allErrs := field.ErrorList{}
 	allErrs = append(allErrs, validateInstallationObjectMeta(&inst.ObjectMeta, field.NewPath("metadata"))...)
 	allErrs = append(allErrs, ValidateInstallationSpec(&inst.Spec, field.NewPath("spec"))...)
@@ -49,7 +49,7 @@ func validateInstallationObjectMeta(objMeta *metav1.ObjectMeta, fldPath *field.P
 }
 
 // ValidateInstallationSpec validates the spec of an Installation
-func ValidateInstallationSpec(spec *core.InstallationSpec, fldPath *field.Path) field.ErrorList {
+func ValidateInstallationSpec(spec *lsv1alpha1.InstallationSpec, fldPath *field.Path) field.ErrorList {
 	allErrs := field.ErrorList{}
 
 	allErrs = append(allErrs, ValidateInstallationImports(spec.Imports, fldPath.Child("imports"))...)
@@ -65,7 +65,7 @@ func ValidateInstallationSpec(spec *core.InstallationSpec, fldPath *field.Path) 
 }
 
 // ValidateInstallationBlueprint validates the Blueprint definition of an Installation
-func ValidateInstallationBlueprint(bp core.BlueprintDefinition, fldPath *field.Path) field.ErrorList {
+func ValidateInstallationBlueprint(bp lsv1alpha1.BlueprintDefinition, fldPath *field.Path) field.ErrorList {
 	allErrs := field.ErrorList{}
 
 	// check that either inline blueprint or reference is provided (and not both)
@@ -75,7 +75,7 @@ func ValidateInstallationBlueprint(bp core.BlueprintDefinition, fldPath *field.P
 }
 
 // ValidateInstallationComponentDescriptor validates the ComponentDesriptor of an Installation
-func ValidateInstallationComponentDescriptor(cd *core.ComponentDescriptorDefinition, fldPath *field.Path) field.ErrorList {
+func ValidateInstallationComponentDescriptor(cd *lsv1alpha1.ComponentDescriptorDefinition, fldPath *field.Path) field.ErrorList {
 	allErrs := field.ErrorList{}
 
 	// check that a ComponentDescriptor - if given - is either inline or ref but not both
@@ -86,7 +86,7 @@ func ValidateInstallationComponentDescriptor(cd *core.ComponentDescriptorDefinit
 	return allErrs
 }
 
-func ValidateInstallationAutomaticReconcile(automaticReconcile *core.AutomaticReconcile, fldPath *field.Path) field.ErrorList {
+func ValidateInstallationAutomaticReconcile(automaticReconcile *lsv1alpha1.AutomaticReconcile, fldPath *field.Path) field.ErrorList {
 	allErrs := field.ErrorList{}
 
 	if automaticReconcile != nil {
@@ -97,7 +97,7 @@ func ValidateInstallationAutomaticReconcile(automaticReconcile *core.AutomaticRe
 	return allErrs
 }
 
-func ValidateInstallationFailedReconcile(failedReconcile *core.FailedReconcile, fldPath *field.Path) field.ErrorList {
+func ValidateInstallationFailedReconcile(failedReconcile *lsv1alpha1.FailedReconcile, fldPath *field.Path) field.ErrorList {
 	allErrs := field.ErrorList{}
 
 	if failedReconcile != nil {
@@ -113,7 +113,7 @@ func ValidateInstallationFailedReconcile(failedReconcile *core.FailedReconcile, 
 	return allErrs
 }
 
-func ValidateInstallationSucceededReconcile(succeededReconcile *core.SucceededReconcile, fldPath *field.Path) field.ErrorList {
+func ValidateInstallationSucceededReconcile(succeededReconcile *lsv1alpha1.SucceededReconcile, fldPath *field.Path) field.ErrorList {
 	allErrs := field.ErrorList{}
 
 	if succeededReconcile != nil {
@@ -130,7 +130,7 @@ func ValidateInstallationSucceededReconcile(succeededReconcile *core.SucceededRe
 }
 
 // ValidateInstallationImports validates the imports of an Installation
-func ValidateInstallationImports(imports core.InstallationImports, fldPath *field.Path) field.ErrorList {
+func ValidateInstallationImports(imports lsv1alpha1.InstallationImports, fldPath *field.Path) field.ErrorList {
 	allErrs := field.ErrorList{}
 	importNames := sets.NewString()
 	var tmpErrs field.ErrorList
@@ -144,7 +144,7 @@ func ValidateInstallationImports(imports core.InstallationImports, fldPath *fiel
 }
 
 // ValidateInstallationDataImports validates the data imports of an Installation
-func ValidateInstallationDataImports(imports []core.DataImport, fldPath *field.Path, importNames sets.String) (field.ErrorList, sets.String) { //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
+func ValidateInstallationDataImports(imports []lsv1alpha1.DataImport, fldPath *field.Path, importNames sets.String) (field.ErrorList, sets.String) { //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
 	allErrs := field.ErrorList{}
 
 	for idx, imp := range imports {
@@ -174,7 +174,7 @@ func ValidateInstallationDataImports(imports []core.DataImport, fldPath *field.P
 }
 
 // ValidateInstallationTargetImports validates the target imports of an Installation
-func ValidateInstallationTargetImports(imports []core.TargetImport, fldPath *field.Path, importNames sets.String) (field.ErrorList, sets.String) { //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
+func ValidateInstallationTargetImports(imports []lsv1alpha1.TargetImport, fldPath *field.Path, importNames sets.String) (field.ErrorList, sets.String) { //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
 	allErrs := field.ErrorList{}
 
 	for idx, imp := range imports {
@@ -213,7 +213,7 @@ func ValidateInstallationTargetImports(imports []core.TargetImport, fldPath *fie
 }
 
 // ValidateInstallationExports validates the exports of an Installation
-func ValidateInstallationExports(exports core.InstallationExports, fldPath *field.Path) field.ErrorList {
+func ValidateInstallationExports(exports lsv1alpha1.InstallationExports, fldPath *field.Path) field.ErrorList {
 	allErrs := field.ErrorList{}
 
 	allErrs = append(allErrs, ValidateInstallationDataExports(exports.Data, fldPath.Child("data"))...)
@@ -223,7 +223,7 @@ func ValidateInstallationExports(exports core.InstallationExports, fldPath *fiel
 }
 
 // ValidateInstallationDataExports validates the data exports of an Installation
-func ValidateInstallationDataExports(exports []core.DataExport, fldPath *field.Path) field.ErrorList {
+func ValidateInstallationDataExports(exports []lsv1alpha1.DataExport, fldPath *field.Path) field.ErrorList {
 	allErrs := field.ErrorList{}
 
 	importNames := map[string]bool{}
@@ -245,7 +245,7 @@ func ValidateInstallationDataExports(exports []core.DataExport, fldPath *field.P
 }
 
 // ValidateInstallationTargetExports validates the target exports of an Installation
-func ValidateInstallationTargetExports(exports []core.TargetExport, fldPath *field.Path) field.ErrorList {
+func ValidateInstallationTargetExports(exports []lsv1alpha1.TargetExport, fldPath *field.Path) field.ErrorList {
 	allErrs := field.ErrorList{}
 
 	importNames := map[string]bool{}
@@ -267,7 +267,7 @@ func ValidateInstallationTargetExports(exports []core.TargetExport, fldPath *fie
 }
 
 // ValidateObjectReference validates that the object reference is valid
-func ValidateObjectReference(or core.ObjectReference, fldPath *field.Path) field.ErrorList {
+func ValidateObjectReference(or lsv1alpha1.ObjectReference, fldPath *field.Path) field.ErrorList {
 	allErrs := field.ErrorList{}
 
 	if or.Name == "" {
@@ -281,7 +281,7 @@ func ValidateObjectReference(or core.ObjectReference, fldPath *field.Path) field
 }
 
 // ValidateObjectReferenceList validates a list of object references
-func ValidateObjectReferenceList(orl []core.ObjectReference, fldPath *field.Path) field.ErrorList {
+func ValidateObjectReferenceList(orl []lsv1alpha1.ObjectReference, fldPath *field.Path) field.ErrorList {
 	allErrs := field.ErrorList{}
 
 	for i, e := range orl {
@@ -292,7 +292,7 @@ func ValidateObjectReferenceList(orl []core.ObjectReference, fldPath *field.Path
 }
 
 // ValidateLocalSecretReference validates that the local secret reference is valid
-func ValidateLocalSecretReference(sr core.LocalSecretReference, fldPath *field.Path) field.ErrorList {
+func ValidateLocalSecretReference(sr lsv1alpha1.LocalSecretReference, fldPath *field.Path) field.ErrorList {
 	allErrs := field.ErrorList{}
 	if sr.Name == "" {
 		allErrs = append(allErrs, field.Required(fldPath.Child("name"), "name must not be empty"))
@@ -301,7 +301,7 @@ func ValidateLocalSecretReference(sr core.LocalSecretReference, fldPath *field.P
 }
 
 // ValidateLocalConfigMapReference validates that the local configmap reference is valid
-func ValidateLocalConfigMapReference(cmr core.LocalConfigMapReference, fldPath *field.Path) field.ErrorList {
+func ValidateLocalConfigMapReference(cmr lsv1alpha1.LocalConfigMapReference, fldPath *field.Path) field.ErrorList {
 	allErrs := field.ErrorList{}
 	if cmr.Name == "" {
 		allErrs = append(allErrs, field.Required(fldPath.Child("name"), "name must not be empty"))

@@ -8,7 +8,6 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
 
-	"github.com/openmcp-project/landscaper/apis/deployer/manifest"
 	"github.com/openmcp-project/landscaper/apis/deployer/manifest/v1alpha1"
 	"github.com/openmcp-project/landscaper/apis/deployer/manifest/v1alpha2"
 )
@@ -17,7 +16,6 @@ var (
 	schemeBuilder = runtime.NewSchemeBuilder(
 		v1alpha2.AddToScheme,
 		v1alpha1.AddToScheme,
-		manifest.AddToScheme,
 		setVersionPriority,
 	)
 

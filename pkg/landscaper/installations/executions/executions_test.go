@@ -14,14 +14,14 @@ import (
 
 	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 
-	"github.com/openmcp-project/landscaper/apis/config"
+	config "github.com/openmcp-project/landscaper/apis/config/v1alpha1"
+	core "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 	"k8s.io/client-go/tools/record"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	"github.com/openmcp-project/landscaper/apis/core"
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	"github.com/openmcp-project/landscaper/pkg/api"
 	"github.com/openmcp-project/landscaper/pkg/components/registries"

@@ -15,6 +15,7 @@ import (
 
 	"github.com/mandelsoft/vfs/pkg/memoryfs"
 	"github.com/mandelsoft/vfs/pkg/vfs"
+
 	"github.com/openmcp-project/landscaper/legacy-component-cli/pkg/commands/componentarchive/input"
 	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/ctf"
 

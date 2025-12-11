@@ -9,6 +9,7 @@ import (
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
+
 	v2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 	ctf "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/ctf"
 )

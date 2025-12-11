@@ -11,14 +11,13 @@ import (
 
 	"github.com/openmcp-project/landscaper/apis/deployer/utils/managedresource"
 
-	lscore "github.com/openmcp-project/landscaper/apis/core"
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
-	manifestcore "github.com/openmcp-project/landscaper/apis/deployer/manifest"
+	manifestv1alpha2 "github.com/openmcp-project/landscaper/apis/deployer/manifest/v1alpha2"
 )
 
-// Convert_v1alpha1_ProviderConfiguration_To_manifest_ProviderConfiguration is an manual conversion function.
-func Convert_v1alpha1_ProviderConfiguration_To_manifest_ProviderConfiguration(in *ProviderConfiguration, out *manifestcore.ProviderConfiguration, s conversion.Scope) error {
-	out.UpdateStrategy = manifestcore.UpdateStrategy(in.UpdateStrategy)
+// Convert_v1alpha1_ProviderConfiguration_To_v1alpha2_ProviderConfiguration is an manual conversion function.
+func Convert_v1alpha1_ProviderConfiguration_To_v1alpha2_ProviderConfiguration(in *ProviderConfiguration, out *manifestv1alpha2.ProviderConfiguration, s conversion.Scope) error {
+	out.UpdateStrategy = manifestv1alpha2.UpdateStrategy(in.UpdateStrategy)
 	out.ReadinessChecks = in.ReadinessChecks
 	if in.Manifests != nil {
 		in, out := &in.Manifests, &out.Manifests
@@ -35,8 +34,8 @@ func Convert_v1alpha1_ProviderConfiguration_To_manifest_ProviderConfiguration(in
 	return nil
 }
 
-// Convert_manifest_ProviderConfiguration_To_v1alpha1_ProviderConfiguration is an manual conversion function.
-func Convert_manifest_ProviderConfiguration_To_v1alpha1_ProviderConfiguration(in *manifestcore.ProviderConfiguration, out *ProviderConfiguration, s conversion.Scope) error {
+// Convert_v1alpha2_ProviderConfiguration_To_v1alpha1_ProviderConfiguration is an manual conversion function.
+func Convert_v1alpha2_ProviderConfiguration_To_v1alpha1_ProviderConfiguration(in *manifestv1alpha2.ProviderConfiguration, out *ProviderConfiguration, s conversion.Scope) error {
 	out.UpdateStrategy = UpdateStrategy(in.UpdateStrategy)
 	out.ReadinessChecks = in.ReadinessChecks
 	if in.Manifests != nil {
@@ -51,16 +50,12 @@ func Convert_manifest_ProviderConfiguration_To_v1alpha1_ProviderConfiguration(in
 	return nil
 }
 
-// Convert_v1alpha1_ProviderStatus_To_manifest_ProviderStatus is an manual conversion function.
-func Convert_v1alpha1_ProviderStatus_To_manifest_ProviderStatus(in *ProviderStatus, out *manifestcore.ProviderStatus, s conversion.Scope) error {
+// Convert_v1alpha1_ProviderStatus_To_v1alph2_ProviderStatus is an manual conversion function.
+func Convert_v1alpha1_ProviderStatus_To_v1alph2_ProviderStatus(in *ProviderStatus, out *manifestv1alpha2.ProviderStatus, s conversion.Scope) error {
 	if in.ManagedResources != nil {
 		in, out := &in.ManagedResources, &out.ManagedResources
 		*out = make([]managedresource.ManagedResourceStatus, len(*in))
 		for i := range *in {
-			tmpOut := &lscore.TypedObjectReference{}
-			if err := lsv1alpha1.Convert_v1alpha1_TypedObjectReference_To_core_TypedObjectReference(&(*in)[i], tmpOut, s); err != nil {
-				return err
-			}
 			tmp := (*in)[i]
 			(*out)[i] = managedresource.ManagedResourceStatus{
 				Policy: managedresource.ManagePolicy,
@@ -78,8 +73,8 @@ func Convert_v1alpha1_ProviderStatus_To_manifest_ProviderStatus(in *ProviderStat
 	return nil
 }
 
-// Convert_manifest_ProviderStatus_To_v1alpha1_ProviderStatus is an manual conversion function.
-func Convert_manifest_ProviderStatus_To_v1alpha1_ProviderStatus(in *manifestcore.ProviderStatus, out *ProviderStatus, s conversion.Scope) error {
+// Convert_v1alpha2_ProviderStatus_To_v1alpha1_ProviderStatus is an manual conversion function.
+func Convert_v1alpha2_ProviderStatus_To_v1alpha1_ProviderStatus(in *manifestv1alpha2.ProviderStatus, out *ProviderStatus, s conversion.Scope) error {
 	if in.ManagedResources != nil {
 		in, out := &in.ManagedResources, &out.ManagedResources
 		*out = make([]lsv1alpha1.TypedObjectReference, len(*in))

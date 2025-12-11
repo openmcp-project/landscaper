@@ -14,8 +14,9 @@ import (
 	"github.com/opencontainers/go-digest"
 	"github.com/opencontainers/image-spec/specs-go"
 	ocispecv1 "github.com/opencontainers/image-spec/specs-go/v1"
-	"github.com/openmcp-project/landscaper/legacy-component-cli/ociclient/cache"
 	"k8s.io/apimachinery/pkg/runtime/serializer"
+
+	"github.com/openmcp-project/landscaper/legacy-component-cli/ociclient/cache"
 
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	"github.com/openmcp-project/landscaper/apis/mediatype"

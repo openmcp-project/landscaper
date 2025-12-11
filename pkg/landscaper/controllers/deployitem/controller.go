@@ -11,7 +11,6 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 
-	lscore "github.com/openmcp-project/landscaper/apis/core"
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 	"github.com/openmcp-project/landscaper/pkg/utils"
@@ -24,7 +23,7 @@ import (
 // the controller marks the deploy item as failed.
 // pickupTimeout is a string containing the pickup timeout duration, either as 'none' or as a duration that can be parsed by time.ParseDuration.
 func NewController(lsUncachedClient, lsCachedClient client.Client,
-	logger logging.Logger, scheme *runtime.Scheme, pickupTimeout *lscore.Duration,
+	logger logging.Logger, scheme *runtime.Scheme, pickupTimeout *lsv1alpha1.Duration,
 	maxNumberOfWorkers int) (reconcile.Reconciler, error) {
 
 	wc := utils.NewWorkerCounter(maxNumberOfWorkers)

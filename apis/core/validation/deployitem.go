@@ -7,11 +7,11 @@ package validation
 import (
 	"k8s.io/apimachinery/pkg/util/validation/field"
 
-	"github.com/openmcp-project/landscaper/apis/core"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 )
 
 // ValidateDeployItem validates a DeployItem
-func ValidateDeployItem(di *core.DeployItem) field.ErrorList {
+func ValidateDeployItem(di *lsv1alpha1.DeployItem) field.ErrorList {
 	allErrs := field.ErrorList{}
 	allErrs = append(allErrs, ValidateDeployItemSpec(field.NewPath("spec"), di.Spec)...)
 
@@ -19,7 +19,7 @@ func ValidateDeployItem(di *core.DeployItem) field.ErrorList {
 }
 
 // ValidateDeployItemSpec validates a DeployItem spec
-func ValidateDeployItemSpec(fldPath *field.Path, diSpec core.DeployItemSpec) field.ErrorList {
+func ValidateDeployItemSpec(fldPath *field.Path, diSpec lsv1alpha1.DeployItemSpec) field.ErrorList {
 	allErrs := field.ErrorList{}
 
 	if diSpec.Type == "" {

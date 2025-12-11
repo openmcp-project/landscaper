@@ -7,11 +7,13 @@ package subinstallations
 import (
 	"fmt"
 
-	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/codec"
 	"github.com/pkg/errors"
 	"k8s.io/apimachinery/pkg/util/validation/field"
 
-	"github.com/openmcp-project/landscaper/apis/core"
+	core "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+
+	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/codec"
+
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	"github.com/openmcp-project/landscaper/apis/core/validation"
 	"github.com/openmcp-project/landscaper/pkg/components/model"

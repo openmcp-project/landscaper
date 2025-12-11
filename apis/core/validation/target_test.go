@@ -10,7 +10,7 @@ import (
 	. "github.com/onsi/gomega/gstruct"
 	"k8s.io/apimachinery/pkg/util/validation/field"
 
-	"github.com/openmcp-project/landscaper/apis/core"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	"github.com/openmcp-project/landscaper/apis/core/validation"
 )
 
@@ -18,8 +18,8 @@ var _ = Describe("Target", func() {
 	Context("Spec", func() {
 
 		It("should accept a Target with an empty spec", func() {
-			t := &core.Target{
-				Spec: core.TargetSpec{},
+			t := &lsv1alpha1.Target{
+				Spec: lsv1alpha1.TargetSpec{},
 			}
 
 			allErrs := validation.ValidateTarget(t)
@@ -27,10 +27,10 @@ var _ = Describe("Target", func() {
 		})
 
 		It("should reject a Target with secretRef and config set", func() {
-			t := &core.Target{
-				Spec: core.TargetSpec{
-					Configuration: core.NewAnyJSONPointer([]byte("foo")),
-					SecretRef: &core.LocalSecretReference{
+			t := &lsv1alpha1.Target{
+				Spec: lsv1alpha1.TargetSpec{
+					Configuration: lsv1alpha1.NewAnyJSONPointer([]byte("foo")),
+					SecretRef: &lsv1alpha1.LocalSecretReference{
 						Name: "foo",
 					},
 				},
@@ -44,9 +44,9 @@ var _ = Describe("Target", func() {
 		})
 
 		It("should accept a Target with a secretRef", func() {
-			t := &core.Target{
-				Spec: core.TargetSpec{
-					SecretRef: &core.LocalSecretReference{
+			t := &lsv1alpha1.Target{
+				Spec: lsv1alpha1.TargetSpec{
+					SecretRef: &lsv1alpha1.LocalSecretReference{
 						Name: "foo",
 					},
 				},
@@ -57,9 +57,9 @@ var _ = Describe("Target", func() {
 		})
 
 		It("should accept a Target with an inline config", func() {
-			t := &core.Target{
-				Spec: core.TargetSpec{
-					Configuration: core.NewAnyJSONPointer([]byte("foo")),
+			t := &lsv1alpha1.Target{
+				Spec: lsv1alpha1.TargetSpec{
+					Configuration: lsv1alpha1.NewAnyJSONPointer([]byte("foo")),
 				},
 			}
 

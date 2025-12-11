@@ -14,8 +14,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/manager"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 
-	"github.com/openmcp-project/landscaper/apis/config"
-	lscore "github.com/openmcp-project/landscaper/apis/core"
+	config "github.com/openmcp-project/landscaper/apis/config/v1alpha1"
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 	"github.com/openmcp-project/landscaper/pkg/utils"
@@ -25,7 +24,7 @@ func AddControllerToManager(lsUncachedClient, lsCachedClient client.Client,
 	logger logging.Logger,
 	lsMgr manager.Manager,
 	config config.DeployItemsController,
-	deployItemPickupTimeout *lscore.Duration) error {
+	deployItemPickupTimeout *lsv1alpha1.Duration) error {
 
 	log := logger.Reconciles("", "DeployItem")
 

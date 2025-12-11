@@ -8,17 +8,18 @@ import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 	. "github.com/onsi/gomega/gstruct"
-	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 	"k8s.io/apimachinery/pkg/util/validation/field"
 
-	"github.com/openmcp-project/landscaper/apis/core"
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
+
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	"github.com/openmcp-project/landscaper/apis/core/validation"
 )
 
 var _ = Describe("Installation", func() {
 	Context("ObjectReference", func() {
 		It("should pass if ObjectReference is valid", func() {
-			or := core.ObjectReference{
+			or := lsv1alpha1.ObjectReference{
 				Name:      "foo",
 				Namespace: "bar",
 			}
@@ -28,7 +29,7 @@ var _ = Describe("Installation", func() {
 		})
 
 		It("should fail if ObjectReference.name is empty", func() {
-			or := core.ObjectReference{
+			or := lsv1alpha1.ObjectReference{
 				Name:      "",
 				Namespace: "bar",
 			}
@@ -41,7 +42,7 @@ var _ = Describe("Installation", func() {
 		})
 
 		It("should fail if ObjectReference.namespace is empty", func() {
-			or := core.ObjectReference{
+			or := lsv1alpha1.ObjectReference{
 				Name:      "foo",
 				Namespace: "",
 			}
@@ -56,7 +57,7 @@ var _ = Describe("Installation", func() {
 
 	Context("ObjectReferenceList", func() {
 		It("should fail if ObjectReferenceList contains invalid ObjectReferences", func() {
-			orl := []core.ObjectReference{
+			orl := []lsv1alpha1.ObjectReference{
 				{
 					Name:      "foo",
 					Namespace: "bar",
@@ -88,8 +89,8 @@ var _ = Describe("Installation", func() {
 
 	Context("InstallationBlueprint", func() {
 		It("should accept a Blueprint reference", func() {
-			bpDef := core.BlueprintDefinition{
-				Reference: &core.RemoteBlueprintReference{
+			bpDef := lsv1alpha1.BlueprintDefinition{
+				Reference: &lsv1alpha1.RemoteBlueprintReference{
 					ResourceName: "foo",
 				},
 				Inline: nil,
@@ -99,10 +100,10 @@ var _ = Describe("Installation", func() {
 		})
 
 		It("should accept an inline Blueprint", func() {
-			bpDef := core.BlueprintDefinition{
+			bpDef := lsv1alpha1.BlueprintDefinition{
 				Reference: nil,
-				Inline: &core.InlineBlueprint{
-					Filesystem: core.AnyJSON{RawMessage: []byte("raw-string-representing-inline-blueprint-for-test")},
+				Inline: &lsv1alpha1.InlineBlueprint{
+					Filesystem: lsv1alpha1.AnyJSON{RawMessage: []byte("raw-string-representing-inline-blueprint-for-test")},
 				},
 			}
 			allErrs := validation.ValidateInstallationBlueprint(bpDef, field.NewPath("blueprint"))
@@ -110,7 +111,7 @@ var _ = Describe("Installation", func() {
 		})
 
 		It("should reject empty Blueprint reference and inline definition to be nil at the same time", func() {
-			bpDef := core.BlueprintDefinition{
+			bpDef := lsv1alpha1.BlueprintDefinition{
 				Reference: nil,
 				Inline:    nil,
 			}
@@ -122,12 +123,12 @@ var _ = Describe("Installation", func() {
 		})
 
 		It("should reject Blueprint reference and inline definition to be given at the same time", func() {
-			bpDef := core.BlueprintDefinition{
-				Reference: &core.RemoteBlueprintReference{
+			bpDef := lsv1alpha1.BlueprintDefinition{
+				Reference: &lsv1alpha1.RemoteBlueprintReference{
 					ResourceName: "foo",
 				},
-				Inline: &core.InlineBlueprint{
-					Filesystem: core.AnyJSON{RawMessage: []byte("raw-string-representing-inline-blueprint-for-test")},
+				Inline: &lsv1alpha1.InlineBlueprint{
+					Filesystem: lsv1alpha1.AnyJSON{RawMessage: []byte("raw-string-representing-inline-blueprint-for-test")},
 				},
 			}
 			allErrs := validation.ValidateInstallationBlueprint(bpDef, field.NewPath("blueprint"))
@@ -140,7 +141,7 @@ var _ = Describe("Installation", func() {
 
 	Context("InstallationComponentDescriptor", func() {
 		It("should accept a nil ComponentDescriptor definition", func() {
-			var cdDef *core.ComponentDescriptorDefinition = nil
+			var cdDef *lsv1alpha1.ComponentDescriptorDefinition = nil
 
 			allErrs := validation.ValidateInstallationComponentDescriptor(cdDef, field.NewPath("componentDescriptor"))
 			Expect(allErrs).To(HaveLen(0))
@@ -148,8 +149,8 @@ var _ = Describe("Installation", func() {
 
 		It("should accept a ComponentDescriptor reference", func() {
 			repoCtx, _ := cdv2.NewUnstructured(cdv2.NewOCIRegistryRepository("http://foo.invalid", ""))
-			cdDef := &core.ComponentDescriptorDefinition{
-				Reference: &core.ComponentDescriptorReference{
+			cdDef := &lsv1alpha1.ComponentDescriptorDefinition{
+				Reference: &lsv1alpha1.ComponentDescriptorReference{
 					RepositoryContext: &repoCtx,
 					ComponentName:     "foo",
 					Version:           "123",
@@ -162,7 +163,7 @@ var _ = Describe("Installation", func() {
 		})
 
 		It("should accept an inline ComponentDescriptor", func() {
-			cdDef := &core.ComponentDescriptorDefinition{
+			cdDef := &lsv1alpha1.ComponentDescriptorDefinition{
 				Reference: nil,
 				Inline:    &cdv2.ComponentDescriptor{},
 			}
@@ -172,7 +173,7 @@ var _ = Describe("Installation", func() {
 		})
 
 		It("should reject ComponentDescriptor reference and inline definition to be nil at the same time", func() {
-			cdDef := &core.ComponentDescriptorDefinition{
+			cdDef := &lsv1alpha1.ComponentDescriptorDefinition{
 				Reference: nil,
 				Inline:    nil,
 			}
@@ -186,8 +187,8 @@ var _ = Describe("Installation", func() {
 
 		It("should reject ComponentDescriptor reference and inline definition to be given at the same time", func() {
 			repoCtx, _ := cdv2.NewUnstructured(cdv2.NewOCIRegistryRepository("http://foo.invalid", ""))
-			cdDef := &core.ComponentDescriptorDefinition{
-				Reference: &core.ComponentDescriptorReference{
+			cdDef := &lsv1alpha1.ComponentDescriptorDefinition{
+				Reference: &lsv1alpha1.ComponentDescriptorReference{
 					RepositoryContext: &repoCtx,
 					ComponentName:     "foo",
 					Version:           "123",
@@ -205,28 +206,28 @@ var _ = Describe("Installation", func() {
 
 	Context("InstallationImports", func() {
 		It("should pass if imports are valid", func() {
-			imp := core.InstallationImports{
-				Data: []core.DataImport{
+			imp := lsv1alpha1.InstallationImports{
+				Data: []lsv1alpha1.DataImport{
 					{
 						Name:    "foo",
 						DataRef: "fooRef",
 					},
 					{
 						Name: "bar",
-						SecretRef: &core.LocalSecretReference{
+						SecretRef: &lsv1alpha1.LocalSecretReference{
 							Name: "mysecret",
 							Key:  "config",
 						},
 					},
 					{
 						Name: "foobar",
-						ConfigMapRef: &core.LocalConfigMapReference{
+						ConfigMapRef: &lsv1alpha1.LocalConfigMapReference{
 							Name: "myconfigmap",
 							Key:  "config",
 						},
 					},
 				},
-				Targets: []core.TargetImport{
+				Targets: []lsv1alpha1.TargetImport{
 					{
 						Name:   "foobaz",
 						Target: "fooTarget",
@@ -255,8 +256,8 @@ var _ = Describe("Installation", func() {
 		})
 
 		It("should fail if imports contain duplicate values", func() {
-			imp := core.InstallationImports{
-				Data: []core.DataImport{
+			imp := lsv1alpha1.InstallationImports{
+				Data: []lsv1alpha1.DataImport{
 					{
 						Name:    "foo",
 						DataRef: "fooRef",
@@ -266,7 +267,7 @@ var _ = Describe("Installation", func() {
 						DataRef: "bar",
 					},
 				},
-				Targets: []core.TargetImport{
+				Targets: []lsv1alpha1.TargetImport{
 					{
 						Name:   "bar",
 						Target: "barTarget",
@@ -299,14 +300,14 @@ var _ = Describe("Installation", func() {
 		})
 
 		It("should fail if imports contain empty values", func() {
-			imp := core.InstallationImports{
-				Data: []core.DataImport{
+			imp := lsv1alpha1.InstallationImports{
+				Data: []lsv1alpha1.DataImport{
 					{
 						Name:    "",
 						DataRef: "",
 					},
 				},
-				Targets: []core.TargetImport{
+				Targets: []lsv1alpha1.TargetImport{
 					{
 						Name:   "",
 						Target: "",
@@ -344,13 +345,13 @@ var _ = Describe("Installation", func() {
 		})
 
 		It("should fail if imports are lacking configuration fields", func() {
-			imp := core.InstallationImports{
-				Data: []core.DataImport{
+			imp := lsv1alpha1.InstallationImports{
+				Data: []lsv1alpha1.DataImport{
 					{
 						Name: "foo",
 					},
 				},
-				Targets: []core.TargetImport{
+				Targets: []lsv1alpha1.TargetImport{
 					{
 						Name: "bar",
 					},
@@ -372,8 +373,8 @@ var _ = Describe("Installation", func() {
 		})
 
 		It("should fail if multiple of target, targets, and targetListReference are specified", func() {
-			imp := core.InstallationImports{
-				Targets: []core.TargetImport{
+			imp := lsv1alpha1.InstallationImports{
+				Targets: []lsv1alpha1.TargetImport{
 					{
 						Name:   "foo",
 						Target: "foobar",
@@ -405,8 +406,8 @@ var _ = Describe("Installation", func() {
 		})
 
 		It("should fail if a key in a targetmap is invalid", func() {
-			imp := core.InstallationImports{
-				Targets: []core.TargetImport{
+			imp := lsv1alpha1.InstallationImports{
+				Targets: []lsv1alpha1.TargetImport{
 					{
 						Name: "foo",
 						TargetMap: map[string]string{
@@ -458,11 +459,11 @@ var _ = Describe("Installation", func() {
 		})
 
 		It("should fail if secret imports contain empty values", func() {
-			imp := core.InstallationImports{
-				Data: []core.DataImport{
+			imp := lsv1alpha1.InstallationImports{
+				Data: []lsv1alpha1.DataImport{
 					{
 						Name:      "imp",
-						SecretRef: &core.LocalSecretReference{},
+						SecretRef: &lsv1alpha1.LocalSecretReference{},
 					},
 				},
 			}
@@ -475,11 +476,11 @@ var _ = Describe("Installation", func() {
 		})
 
 		It("should fail if secret imports contain empty values", func() {
-			imp := core.InstallationImports{
-				Data: []core.DataImport{
+			imp := lsv1alpha1.InstallationImports{
+				Data: []lsv1alpha1.DataImport{
 					{
 						Name:         "imp",
-						ConfigMapRef: &core.LocalConfigMapReference{},
+						ConfigMapRef: &lsv1alpha1.LocalConfigMapReference{},
 					},
 				},
 			}
@@ -492,12 +493,12 @@ var _ = Describe("Installation", func() {
 		})
 
 		It("should fail if a secret and a configmap is defined for the same import", func() {
-			imp := core.InstallationImports{
-				Data: []core.DataImport{
+			imp := lsv1alpha1.InstallationImports{
+				Data: []lsv1alpha1.DataImport{
 					{
 						Name:         "imp",
-						SecretRef:    &core.LocalSecretReference{},
-						ConfigMapRef: &core.LocalConfigMapReference{},
+						SecretRef:    &lsv1alpha1.LocalSecretReference{},
+						ConfigMapRef: &lsv1alpha1.LocalConfigMapReference{},
 					},
 				},
 			}

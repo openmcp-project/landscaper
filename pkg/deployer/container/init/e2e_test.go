@@ -16,7 +16,7 @@ import (
 	. "github.com/onsi/gomega"
 
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
-	"github.com/openmcp-project/landscaper/apis/deployer/container"
+	container "github.com/openmcp-project/landscaper/apis/deployer/container/v1alpha1"
 	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 	"github.com/openmcp-project/landscaper/pkg/deployer/container/state"
 	"github.com/openmcp-project/landscaper/test/utils"

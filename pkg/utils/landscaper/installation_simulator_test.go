@@ -14,13 +14,14 @@ import (
 	"github.com/mandelsoft/vfs/pkg/projectionfs"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
-	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"ocm.software/ocm/api/datacontext"
 	"ocm.software/ocm/api/ocm"
 	"sigs.k8s.io/yaml"
 
-	"github.com/openmcp-project/landscaper/apis/config"
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
+
+	config "github.com/openmcp-project/landscaper/apis/config/v1alpha1"
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	"github.com/openmcp-project/landscaper/apis/core/v1alpha1/targettypes"
 	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"

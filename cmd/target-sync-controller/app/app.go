@@ -18,7 +18,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/manager"
 	metricsserver "sigs.k8s.io/controller-runtime/pkg/metrics/server"
 
-	lsconfig "github.com/openmcp-project/landscaper/apis/config"
+	lsconfig "github.com/openmcp-project/landscaper/apis/config/v1alpha1"
 	lsinstall "github.com/openmcp-project/landscaper/apis/core/install"
 	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 	lc "github.com/openmcp-project/landscaper/controller-utils/pkg/logging/constants"

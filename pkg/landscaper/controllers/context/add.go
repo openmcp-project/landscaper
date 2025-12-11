@@ -16,7 +16,7 @@ import (
 	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 	"github.com/openmcp-project/landscaper/pkg/utils"
 
-	"github.com/openmcp-project/landscaper/apis/config"
+	config "github.com/openmcp-project/landscaper/apis/config/v1alpha1"
 )
 
 // AddControllerToManager adds the context defaulterController to the defaulterController manager.

@@ -16,7 +16,7 @@ import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 
-	"github.com/openmcp-project/landscaper/apis/config"
+	config "github.com/openmcp-project/landscaper/apis/config/v1alpha1"
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	hdv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/helm/v1alpha1"
 	kutil "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"

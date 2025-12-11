@@ -26,12 +26,13 @@ import (
 
 	"github.com/openmcp-project/landscaper/pkg/landscaper/jsonschema/testreg"
 
-	apiconfig "github.com/openmcp-project/landscaper/apis/config"
+	apiconfig "github.com/openmcp-project/landscaper/apis/config/v1alpha1"
 
 	"github.com/mandelsoft/vfs/pkg/memoryfs"
 	"github.com/mandelsoft/vfs/pkg/vfs"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
+
 	"github.com/openmcp-project/landscaper/legacy-component-cli/ociclient"
 	"github.com/openmcp-project/landscaper/legacy-component-cli/ociclient/cache"
 	testcred "github.com/openmcp-project/landscaper/legacy-component-cli/ociclient/credentials"

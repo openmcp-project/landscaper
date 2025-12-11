@@ -28,7 +28,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
-	"github.com/openmcp-project/landscaper/apis/deployer/container"
+	container "github.com/openmcp-project/landscaper/apis/deployer/container/v1alpha1"
 	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 	lc "github.com/openmcp-project/landscaper/controller-utils/pkg/logging/constants"
 	"github.com/openmcp-project/landscaper/pkg/components/model/tar"

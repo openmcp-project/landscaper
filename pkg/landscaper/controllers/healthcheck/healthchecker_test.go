@@ -12,7 +12,7 @@ import (
 	. "github.com/onsi/gomega"
 	"k8s.io/apimachinery/pkg/types"
 
-	"github.com/openmcp-project/landscaper/apis/config"
+	config "github.com/openmcp-project/landscaper/apis/config/v1alpha1"
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 	"github.com/openmcp-project/landscaper/pkg/landscaper/controllers/healthcheck"

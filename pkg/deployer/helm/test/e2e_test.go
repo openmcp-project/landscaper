@@ -21,7 +21,6 @@ import (
 
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	"github.com/openmcp-project/landscaper/apis/core/v1alpha1/targettypes"
-	"github.com/openmcp-project/landscaper/apis/deployer/helm"
 	helmv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/helm/v1alpha1"
 	"github.com/openmcp-project/landscaper/apis/deployer/helm/v1alpha1/helper"
 	kutil "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"
@@ -123,7 +122,7 @@ var _ = Describe("Helm Deployer", func() {
 
 		// Get the managed objects from status and set them in ready status
 		Expect(di.Status.ProviderStatus).ToNot(BeNil())
-		status := &helm.ProviderStatus{}
+		status := &helmv1alpha1.ProviderStatus{}
 		helmDecoder := serializer.NewCodecFactory(helmctrl.HelmScheme).UniversalDecoder()
 		_, _, err = helmDecoder.Decode(di.Status.ProviderStatus.Raw, nil, status)
 		Expect(err).ToNot(HaveOccurred())

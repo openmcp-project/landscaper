@@ -16,14 +16,14 @@ import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 	. "github.com/onsi/gomega/gstruct"
-	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 	"ocm.software/ocm/api/datacontext"
 	"ocm.software/ocm/api/ocm"
 	"ocm.software/ocm/api/utils/runtime"
 	"sigs.k8s.io/yaml"
 
-	apiconfig "github.com/openmcp-project/landscaper/apis/config"
-	"github.com/openmcp-project/landscaper/apis/core"
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
+
+	apiconfig "github.com/openmcp-project/landscaper/apis/config/v1alpha1"
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 	"github.com/openmcp-project/landscaper/pkg/components/model"
@@ -159,7 +159,7 @@ func runTestSuite(testdataDir, sharedTestdataDir string) {
 			Expect(res).To(HaveLen(1))
 			Expect(res[0]).To(MatchFields(IgnoreExtras, Fields{
 				"Name": Equal("init"),
-				"Type": Equal(core.DeployItemType("container")),
+				"Type": Equal(lsv1alpha1.DeployItemType("container")),
 			}))
 		})
 

@@ -17,7 +17,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 
-	"github.com/openmcp-project/landscaper/apis/deployer/container"
+	container "github.com/openmcp-project/landscaper/apis/deployer/container/v1alpha1"
 	lserrors "github.com/openmcp-project/landscaper/apis/errors"
 
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"

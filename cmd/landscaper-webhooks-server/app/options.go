@@ -7,8 +7,7 @@ package app
 import (
 	goflag "flag"
 
-	"github.com/openmcp-project/landscaper/apis/core"
-
+	"github.com/gardener/landscaper-service/pkg/apis/core"
 	flag "github.com/spf13/pflag"
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"

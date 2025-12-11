@@ -11,18 +11,18 @@ import (
 
 	"k8s.io/apimachinery/pkg/util/validation/field"
 
-	"github.com/openmcp-project/landscaper/apis/core"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 )
 
 var importTypesWithExpectedConfig = map[string][]string{
-	string(core.ImportTypeData):       {"Schema"},
-	string(core.ImportTypeTarget):     {"TargetType"},
-	string(core.ImportTypeTargetList): {"TargetType"},
-	string(core.ImportTypeTargetMap):  {"TargetType"},
+	string(lsv1alpha1.ImportTypeData):       {"Schema"},
+	string(lsv1alpha1.ImportTypeTarget):     {"TargetType"},
+	string(lsv1alpha1.ImportTypeTargetList): {"TargetType"},
+	string(lsv1alpha1.ImportTypeTargetMap):  {"TargetType"},
 }
 var exportTypesWithExpectedConfig = map[string][]string{
-	string(core.ExportTypeData):   {"Schema"},
-	string(core.ExportTypeTarget): {"TargetType"},
+	string(lsv1alpha1.ExportTypeData):   {"Schema"},
+	string(lsv1alpha1.ExportTypeTarget): {"TargetType"},
 }
 
 var relevantConfigFields map[string]bool

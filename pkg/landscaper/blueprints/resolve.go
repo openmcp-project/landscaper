@@ -13,9 +13,10 @@ import (
 	"github.com/mandelsoft/vfs/pkg/readonlyfs"
 	"github.com/mandelsoft/vfs/pkg/vfs"
 	"github.com/mandelsoft/vfs/pkg/yamlfs"
+	"k8s.io/apimachinery/pkg/runtime/serializer"
+
 	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/utils/selector"
-	"k8s.io/apimachinery/pkg/runtime/serializer"
 
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	"github.com/openmcp-project/landscaper/apis/mediatype"

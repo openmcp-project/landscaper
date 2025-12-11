@@ -16,7 +16,7 @@ import (
 	"k8s.io/apimachinery/pkg/util/validation/field"
 	"sigs.k8s.io/controller-runtime/pkg/webhook/admission"
 
-	lscore "github.com/openmcp-project/landscaper/apis/core"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	"github.com/openmcp-project/landscaper/apis/core/validation"
 	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 	webhooklib "github.com/openmcp-project/landscaper/controller-utils/pkg/webhook"
@@ -26,7 +26,7 @@ import (
 
 var InstallationWebhookLogic webhooklib.WebhookLogic = func(ctx context.Context, req admission.Request, dec runtime.Decoder) admission.Response {
 	logger, _ := logging.FromContextOrNew(ctx, []interface{}{lc.KeyMethod, "InstallationWebhookLogic"})
-	inst := &lscore.Installation{}
+	inst := &lsv1alpha1.Installation{}
 	if _, _, err := dec.Decode(req.Object.Raw, nil, inst); err != nil {
 		logger.Debug("Decoding failed: " + err.Error())
 		return admission.Errored(http.StatusBadRequest, err)
@@ -46,7 +46,7 @@ var InstallationWebhookLogic webhooklib.WebhookLogic = func(ctx context.Context,
 var DeployItemWebhookLogic webhooklib.WebhookLogic = func(ctx context.Context, req admission.Request, dec runtime.Decoder) admission.Response {
 	logger, _ := logging.FromContextOrNew(ctx, []interface{}{lc.KeyMethod, "DeployItemWebhookLogic"})
 
-	di := &lscore.DeployItem{}
+	di := &lsv1alpha1.DeployItem{}
 	if _, _, err := dec.Decode(req.Object.Raw, nil, di); err != nil {
 		logger.Debug("Decoding failed: " + err.Error())
 		return admission.Errored(http.StatusBadRequest, err)
@@ -60,7 +60,7 @@ var DeployItemWebhookLogic webhooklib.WebhookLogic = func(ctx context.Context, r
 
 	// check if the type was updated for update events
 	if req.Operation == admissionv1.Update {
-		oldDi := &lscore.DeployItem{}
+		oldDi := &lsv1alpha1.DeployItem{}
 		if _, _, err := dec.Decode(req.OldObject.Raw, nil, oldDi); err != nil {
 			logger.Debug("Decoding old failed: " + err.Error())
 			return admission.Errored(http.StatusBadRequest, err)
@@ -79,7 +79,7 @@ var DeployItemWebhookLogic webhooklib.WebhookLogic = func(ctx context.Context, r
 var ExecutionWebhookLogic webhooklib.WebhookLogic = func(ctx context.Context, req admission.Request, dec runtime.Decoder) admission.Response {
 	logger, _ := logging.FromContextOrNew(ctx, []interface{}{lc.KeyMethod, "ExecutionWebhookLogic"})
 
-	exec := &lscore.Execution{}
+	exec := &lsv1alpha1.Execution{}
 	if _, _, err := dec.Decode(req.Object.Raw, nil, exec); err != nil {
 		logger.Debug("Decoding failed: " + err.Error())
 		return admission.Errored(http.StatusBadRequest, err)
@@ -99,7 +99,7 @@ var ExecutionWebhookLogic webhooklib.WebhookLogic = func(ctx context.Context, re
 var TargetWebhookLogic webhooklib.WebhookLogic = func(ctx context.Context, req admission.Request, dec runtime.Decoder) admission.Response {
 	logger, _ := logging.FromContextOrNew(ctx, []interface{}{lc.KeyMethod, "ExecutionWebhookLogic"})
 
-	t := &lscore.Target{}
+	t := &lsv1alpha1.Target{}
 	if _, _, err := dec.Decode(req.Object.Raw, nil, t); err != nil {
 		logger.Debug("Decoding failed: " + err.Error())
 		return admission.Errored(http.StatusBadRequest, err)

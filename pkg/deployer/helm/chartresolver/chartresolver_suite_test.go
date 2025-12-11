@@ -19,13 +19,14 @@ import (
 
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
-	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 	corev1 "k8s.io/api/core/v1"
 	"ocm.software/ocm/api/datacontext"
 	"ocm.software/ocm/api/ocm"
 	"ocm.software/ocm/api/utils/runtime"
 
-	"github.com/openmcp-project/landscaper/apis/config"
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
+
+	config "github.com/openmcp-project/landscaper/apis/config/v1alpha1"
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	helmv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/helm/v1alpha1"
 	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"

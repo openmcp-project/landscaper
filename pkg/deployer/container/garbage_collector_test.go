@@ -23,7 +23,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/manager"
 	metricsserver "sigs.k8s.io/controller-runtime/pkg/metrics/server"
 
-	"github.com/openmcp-project/landscaper/apis/deployer/container"
+	container "github.com/openmcp-project/landscaper/apis/deployer/container/v1alpha1"
 
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	"github.com/openmcp-project/landscaper/pkg/utils/simplelogger"

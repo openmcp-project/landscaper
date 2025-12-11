@@ -9,7 +9,7 @@ import (
 
 	lsconfigv1alpha1 "github.com/openmcp-project/landscaper/apis/config/v1alpha1"
 
-	"github.com/openmcp-project/landscaper/apis/config"
+	cfgv1alpha1 "github.com/openmcp-project/landscaper/apis/config/v1alpha1"
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 )
 
@@ -30,7 +30,7 @@ type Configuration struct {
 	// +optional
 	Identity string `json:"identity,omitempty"`
 	// OCI configures the oci client of the controller
-	OCI *config.OCIConfiguration `json:"oci,omitempty"`
+	OCI *cfgv1alpha1.OCIConfiguration `json:"oci,omitempty"`
 	// TargetSelector describes all selectors the deployer should depend on.
 	TargetSelector []lsv1alpha1.TargetSelector `json:"targetSelector,omitempty"`
 	// Export defines the export configuration.

@@ -10,7 +10,7 @@ import (
 	. "github.com/onsi/gomega/gstruct"
 	"k8s.io/apimachinery/pkg/util/validation/field"
 
-	"github.com/openmcp-project/landscaper/apis/core"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	"github.com/openmcp-project/landscaper/apis/core/validation"
 )
 
@@ -18,7 +18,7 @@ var _ = Describe("DeployItem", func() {
 
 	Context("Spec", func() {
 		It("should pass if a DeployItem spec is valid (without target)", func() {
-			diSpec := core.DeployItemSpec{}
+			diSpec := lsv1alpha1.DeployItemSpec{}
 			diSpec.Type = "foo"
 
 			allErrs := validation.ValidateDeployItemSpec(field.NewPath(""), diSpec)
@@ -26,9 +26,9 @@ var _ = Describe("DeployItem", func() {
 		})
 
 		It("should pass if a DeployItem spec is valid (with target)", func() {
-			diSpec := core.DeployItemSpec{}
+			diSpec := lsv1alpha1.DeployItemSpec{}
 			diSpec.Type = "foo"
-			diSpec.Target = &core.ObjectReference{}
+			diSpec.Target = &lsv1alpha1.ObjectReference{}
 			diSpec.Target.Name = "bar"
 			diSpec.Target.Namespace = "baz"
 
@@ -37,7 +37,7 @@ var _ = Describe("DeployItem", func() {
 		})
 
 		It("should fail if a DeployItem spec is invalid (empty type)", func() {
-			diSpec := core.DeployItemSpec{}
+			diSpec := lsv1alpha1.DeployItemSpec{}
 			diSpec.Type = ""
 
 			allErrs := validation.ValidateDeployItemSpec(field.NewPath("di"), diSpec)
@@ -48,9 +48,9 @@ var _ = Describe("DeployItem", func() {
 		})
 
 		It("should fail if a DeployItem spec is invalid (empty target)", func() {
-			diSpec := core.DeployItemSpec{}
+			diSpec := lsv1alpha1.DeployItemSpec{}
 			diSpec.Type = "foo"
-			diSpec.Target = &core.ObjectReference{}
+			diSpec.Target = &lsv1alpha1.ObjectReference{}
 			diSpec.Target.Name = ""
 			diSpec.Target.Namespace = ""
 

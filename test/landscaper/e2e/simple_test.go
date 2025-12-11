@@ -21,7 +21,7 @@ import (
 	"k8s.io/utils/clock"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 
-	"github.com/openmcp-project/landscaper/apis/config"
+	config "github.com/openmcp-project/landscaper/apis/config/v1alpha1"
 	v1alpha1config "github.com/openmcp-project/landscaper/apis/config/v1alpha1"
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	mockv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/mock/v1alpha1"

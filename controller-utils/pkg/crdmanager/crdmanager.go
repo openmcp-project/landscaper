@@ -22,7 +22,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/manager"
 
-	"github.com/openmcp-project/landscaper/apis/config"
+	config "github.com/openmcp-project/landscaper/apis/config/v1alpha1"
 	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 	lc "github.com/openmcp-project/landscaper/controller-utils/pkg/logging/constants"
 )

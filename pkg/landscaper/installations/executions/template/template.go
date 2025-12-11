@@ -8,14 +8,15 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/codec"
 	"k8s.io/apimachinery/pkg/runtime"
 	"ocm.software/ocm/api/ocm/compdesc"
 	_ "ocm.software/ocm/api/ocm/compdesc/versions/ocm.software/v3alpha1"
 	_ "ocm.software/ocm/api/ocm/compdesc/versions/v2"
 	ocmruntime "ocm.software/ocm/api/utils/runtime"
 
-	"github.com/openmcp-project/landscaper/apis/core"
+	core "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/codec"
+
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	"github.com/openmcp-project/landscaper/pkg/api"
 	"github.com/openmcp-project/landscaper/pkg/components/model"

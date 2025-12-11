@@ -10,7 +10,7 @@ import (
 
 	lsconfigv1alpha1 "github.com/openmcp-project/landscaper/apis/config/v1alpha1"
 
-	"github.com/openmcp-project/landscaper/apis/config"
+	cfgv1alpha1 "github.com/openmcp-project/landscaper/apis/config/v1alpha1"
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 )
 
@@ -26,7 +26,7 @@ type Configuration struct {
 
 	// OCI configures the oci client of the controller
 	// +optional
-	OCI *config.OCIConfiguration `json:"oci,omitempty"`
+	OCI *cfgv1alpha1.OCIConfiguration `json:"oci,omitempty"`
 
 	// Namespace defines the namespace where the pods should be executed.
 	// Defaults to default

@@ -10,12 +10,11 @@ import (
 	v1 "k8s.io/api/core/v1"
 	"k8s.io/utils/ptr"
 
-	"github.com/openmcp-project/landscaper/apis/core"
-	"github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 )
 
 // KubernetesClusterTargetType defines the landscaper kubernetes cluster target.
-const KubernetesClusterTargetType v1alpha1.TargetType = core.GroupName + "/kubernetes-cluster"
+const KubernetesClusterTargetType lsv1alpha1.TargetType = lsv1alpha1.GroupName + "/kubernetes-cluster"
 
 // KubernetesClusterTargetConfig defines the landscaper kubernetes cluster target config.
 type KubernetesClusterTargetConfig struct {

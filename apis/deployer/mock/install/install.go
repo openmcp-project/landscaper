@@ -8,23 +8,16 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
 
-	"github.com/openmcp-project/landscaper/apis/deployer/mock"
 	"github.com/openmcp-project/landscaper/apis/deployer/mock/v1alpha1"
 )
 
 var (
 	schemeBuilder = runtime.NewSchemeBuilder(
 		v1alpha1.AddToScheme,
-		mock.AddToScheme,
-		setVersionPriority,
 	)
 
 	AddToScheme = schemeBuilder.AddToScheme
 )
-
-func setVersionPriority(scheme *runtime.Scheme) error {
-	return scheme.SetVersionPriority(v1alpha1.SchemeGroupVersion)
-}
 
 // Install installs all APIs in the scheme.
 func Install(scheme *runtime.Scheme) {

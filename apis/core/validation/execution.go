@@ -9,25 +9,25 @@ import (
 	"k8s.io/apimachinery/pkg/util/sets"
 	"k8s.io/apimachinery/pkg/util/validation/field"
 
-	"github.com/openmcp-project/landscaper/apis/core"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 )
 
 // ValidateExecution validates an Execution
-func ValidateExecution(execution *core.Execution) field.ErrorList {
+func ValidateExecution(execution *lsv1alpha1.Execution) field.ErrorList {
 	allErrs := field.ErrorList{}
 	allErrs = append(allErrs, ValidateExecutionSpec(field.NewPath("spec"), execution.Spec)...)
 	return allErrs
 }
 
 // ValidateExecutionSpec validtes the spec of a execution object
-func ValidateExecutionSpec(fldpath *field.Path, spec core.ExecutionSpec) field.ErrorList {
+func ValidateExecutionSpec(fldpath *field.Path, spec lsv1alpha1.ExecutionSpec) field.ErrorList {
 	allErrs := field.ErrorList{}
 	allErrs = append(allErrs, ValidateDeployItemTemplateList(fldpath.Child("deployItems"), spec.DeployItems)...)
 	return allErrs
 }
 
 // ValidateDeployItemTemplateList validates a list of deploy item templates.
-func ValidateDeployItemTemplateList(fldPath *field.Path, list core.DeployItemTemplateList) field.ErrorList {
+func ValidateDeployItemTemplateList(fldPath *field.Path, list lsv1alpha1.DeployItemTemplateList) field.ErrorList {
 	allErrs := field.ErrorList{}
 	names := sets.NewString()
 	hasDuplicates := false
@@ -75,7 +75,7 @@ func ValidateDeployItemTemplateList(fldPath *field.Path, list core.DeployItemTem
 // 1. a list of Cycle objects, representing found cyclic dependencies
 // 2. a list of UndefinedDeployItemReference objects, representing found dependencies to undefined deploy items
 // 3. a set of all deploy item templates (referenced by name) that have already been checked (necessary to avoid finding the same cycle multiple times)
-func getCyclesAndUndefinedDependencies(list core.DeployItemTemplateList, index int, visited visitedList, done sets.String) ([]Cycle, []UndefinedDeployItemReference, sets.String) { //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
+func getCyclesAndUndefinedDependencies(list lsv1alpha1.DeployItemTemplateList, index int, visited visitedList, done sets.String) ([]Cycle, []UndefinedDeployItemReference, sets.String) { //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
 	current := list[index]
 	cycles := []Cycle{}
 	undefined := []UndefinedDeployItemReference{}
@@ -141,9 +141,9 @@ func (visited visitedList) getCycle(new string) Cycle {
 
 // Given a DeployItemTemplateList and a name, this function returns the index and the DeployItemTemplate with that name.
 // If no element with that name exists, the returned index is -1 and the returned DeployItemTemplate is undefined.
-func getDeployItemTemplateByName(list core.DeployItemTemplateList, name string) (int, core.DeployItemTemplate) {
+func getDeployItemTemplateByName(list lsv1alpha1.DeployItemTemplateList, name string) (int, lsv1alpha1.DeployItemTemplate) {
 	resIndex := -1
-	var resDit = core.DeployItemTemplate{}
+	var resDit = lsv1alpha1.DeployItemTemplate{}
 	for idx, elem := range list {
 		if elem.Name == name {
 			resIndex = idx
@@ -155,7 +155,7 @@ func getDeployItemTemplateByName(list core.DeployItemTemplateList, name string) 
 }
 
 // ValidateDeployItemTemplate validates a deploy item template.
-func ValidateDeployItemTemplate(fldPath *field.Path, tmpl core.DeployItemTemplate) field.ErrorList {
+func ValidateDeployItemTemplate(fldPath *field.Path, tmpl lsv1alpha1.DeployItemTemplate) field.ErrorList {
 	allErrs := field.ErrorList{}
 	if len(tmpl.Name) == 0 {
 		allErrs = append(allErrs, field.Required(fldPath.Child("name"), "name must not be empty"))

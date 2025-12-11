@@ -14,7 +14,7 @@ import (
 	"k8s.io/apimachinery/pkg/util/wait"
 
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
-	"github.com/openmcp-project/landscaper/apis/deployer/container"
+	container "github.com/openmcp-project/landscaper/apis/deployer/container/v1alpha1"
 )
 
 type options struct {

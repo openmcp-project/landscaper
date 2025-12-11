@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	lscore "github.com/openmcp-project/landscaper/apis/core"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
@@ -23,7 +23,7 @@ func TestConfig(t *testing.T) {
 }
 
 var (
-	testPickupTimeoutDuration = lscore.Duration{
+	testPickupTimeoutDuration = lsv1alpha1.Duration{
 		Duration: 10 * time.Second,
 	}
 )

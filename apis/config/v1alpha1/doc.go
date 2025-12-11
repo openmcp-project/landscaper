@@ -2,11 +2,7 @@
 //
 // SPDX-License-Identifier: Apache-2.0
 
-// Package core is the internal version of the API.
-// +k8s:deepcopy-gen=package
-// +k8s:conversion-gen=github.com/openmcp-project/landscaper/apis/config
-// +k8s:openapi-gen=true
-// +k8s:defaulter-gen=TypeMeta
+// Package v1alpha1 is the internal version of the API.
 
 // +groupName=config.landscaper.gardener.cloud
 package v1alpha1

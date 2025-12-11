@@ -7,8 +7,6 @@ package validation
 import (
 	"k8s.io/apimachinery/pkg/util/validation/field"
 
-	"github.com/openmcp-project/landscaper/apis/core"
-	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	"github.com/openmcp-project/landscaper/apis/core/validation"
 	containerv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/container/v1alpha1"
 	crval "github.com/openmcp-project/landscaper/apis/deployer/utils/continuousreconcile/validation"
@@ -18,11 +16,7 @@ import (
 func ValidateProviderConfiguration(config *containerv1alpha1.ProviderConfiguration) error {
 	var allErrs field.ErrorList
 	for i, secretRef := range config.RegistryPullSecrets {
-		coreSecretRef := core.ObjectReference{}
-		if err := lsv1alpha1.Convert_v1alpha1_ObjectReference_To_core_ObjectReference(&secretRef, &coreSecretRef, nil); err != nil {
-			return err
-		}
-		allErrs = append(allErrs, validation.ValidateObjectReference(coreSecretRef, field.NewPath("registryPullSecrets").Index(i))...)
+		allErrs = append(allErrs, validation.ValidateObjectReference(secretRef, field.NewPath("registryPullSecrets").Index(i))...)
 	}
 
 	allErrs = append(allErrs, crval.ValidateContinuousReconcileSpec(field.NewPath("continuousReconcile"), config.ContinuousReconcile)...)

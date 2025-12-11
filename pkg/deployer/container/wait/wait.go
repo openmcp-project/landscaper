@@ -16,7 +16,7 @@ import (
 	"k8s.io/apimachinery/pkg/util/wait"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	"github.com/openmcp-project/landscaper/apis/deployer/container"
+	container "github.com/openmcp-project/landscaper/apis/deployer/container/v1alpha1"
 	kubernetesutil "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"
 	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 	lc "github.com/openmcp-project/landscaper/controller-utils/pkg/logging/constants"

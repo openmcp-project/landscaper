@@ -17,7 +17,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
-	"github.com/openmcp-project/landscaper/apis/deployer/container"
+	container "github.com/openmcp-project/landscaper/apis/deployer/container/v1alpha1"
 	kutil "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"
 	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 	containeractuator "github.com/openmcp-project/landscaper/pkg/deployer/container"

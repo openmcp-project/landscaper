@@ -12,7 +12,7 @@ import (
 
 	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 
-	"github.com/openmcp-project/landscaper/apis/config"
+	config "github.com/openmcp-project/landscaper/apis/config/v1alpha1"
 
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
@@ -20,7 +20,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
-	"github.com/openmcp-project/landscaper/apis/deployer/container"
+	container "github.com/openmcp-project/landscaper/apis/deployer/container/v1alpha1"
 	"github.com/openmcp-project/landscaper/pkg/components/model"
 	"github.com/openmcp-project/landscaper/pkg/components/model/types"
 	"github.com/openmcp-project/landscaper/pkg/components/registries"

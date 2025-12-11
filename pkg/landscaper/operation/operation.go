@@ -5,10 +5,11 @@
 package operation
 
 import (
-	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/ctf"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/client-go/tools/record"
 	"sigs.k8s.io/controller-runtime/pkg/client"
+
+	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/ctf"
 
 	"github.com/openmcp-project/landscaper/pkg/components/model"
 	"github.com/openmcp-project/landscaper/pkg/utils/read_write_layer"

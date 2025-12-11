@@ -1,10 +1,9 @@
 package utils
 
 import (
+	"github.com/gardener/landscaper-service/pkg/apis/core"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime/schema"
-
-	"github.com/openmcp-project/landscaper/apis/core"
 )
 
 const (

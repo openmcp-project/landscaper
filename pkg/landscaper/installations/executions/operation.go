@@ -8,6 +8,7 @@ import (
 	"context"
 	"fmt"
 
+	core "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	lserrors "github.com/openmcp-project/landscaper/apis/errors"
 
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
@@ -16,7 +17,6 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 
-	"github.com/openmcp-project/landscaper/apis/core"
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	lsv1alpha1helper "github.com/openmcp-project/landscaper/apis/core/v1alpha1/helper"
 	"github.com/openmcp-project/landscaper/apis/core/validation"

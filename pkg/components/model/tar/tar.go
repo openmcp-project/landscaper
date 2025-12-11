@@ -16,6 +16,7 @@ import (
 	"github.com/mandelsoft/vfs/pkg/vfs"
 	"github.com/opencontainers/go-digest"
 	ocispecv1 "github.com/opencontainers/image-spec/specs-go/v1"
+
 	"github.com/openmcp-project/landscaper/legacy-component-cli/ociclient"
 	"github.com/openmcp-project/landscaper/legacy-component-cli/ociclient/cache"
 )

@@ -11,7 +11,7 @@ import (
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
-	"github.com/openmcp-project/landscaper/apis/deployer/container"
+	container "github.com/openmcp-project/landscaper/apis/deployer/container/v1alpha1"
 	containerv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/container/v1alpha1"
 	crval "github.com/openmcp-project/landscaper/apis/deployer/utils/continuousreconcile/validation"
 	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
