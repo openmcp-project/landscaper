@@ -132,7 +132,7 @@ func (d *deployer) ensureExport(ctx context.Context, item *lsv1alpha1.DeployItem
 
 	_, err := kubernetesutil.CreateOrUpdate(ctx, d.lsUncachedClient, secret, func() error {
 		secret.Data = map[string][]byte{
-			lsv1alpha1.DataObjectSecretDataKey: *config.Export,
+			lsv1alpha1.DataObjectSecretDataKey: config.Export,
 		}
 		return controllerutil.SetOwnerReference(item, secret, api.LandscaperScheme)
 	})
