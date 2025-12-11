@@ -43,11 +43,19 @@ jobs:
         with:
           go-version-file: go.mod
 
-      - name: make revendor
-        run: make revendor
+      - name: Install Task
+        uses: arduino/setup-task@v2
+        with:
+          version: 3.x
 
-      - name: make verify
-        run: make verify
+      # make verify aka check:
+      - name: Verify
+        run: |
+          # make revendor
+          task generate:tidy
+          task validate:lint
+          # make verify
+          task validate:vet
 
       - name: Build and Push Images
         run: NO_LATEST_TAG=1 make docker-images

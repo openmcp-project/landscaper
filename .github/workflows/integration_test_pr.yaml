@@ -63,7 +63,8 @@ jobs:
           task validate:vet
 
       - name: Build and Push Images
-        run: NO_LATEST_TAG=1 make docker-images
+        run: |
+          NO_LATEST_TAG=1 make docker-images
 
       # TODO: renable integration tests when component build is fixed
       # see Error: component transport: https://github.com/openmcp-project/landscaper/actions/runs/20100090751/job/57668372389?pr=49
