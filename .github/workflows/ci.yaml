@@ -43,6 +43,7 @@ jobs:
       - name: Build (fka component_descriptor_ocm)
         run: |
           # make build
+          # creates only go builds
           task build:bin:build-raw
           # in old pipeline "component_descriptor_ocm" was called which
           # creates docker-images and component descriptor
