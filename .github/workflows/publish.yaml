@@ -79,6 +79,10 @@ jobs:
         with:
           version: 3.x
 
+      - name: Setup OCM
+        id: setup_ocm
+        uses: open-component-model/ocm-setup-action@main
+
       - name: Build and Push Images
         run: |
           # TODO: when code generation is fixed, use task build:all
