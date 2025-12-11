@@ -9,13 +9,13 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/openmcp-project/landscaper/cmd/container-deployer/container-deployer-controller/app"
+	"github.com/openmcp-project/landscaper/cmd/container-deployer-wait/app"
 )
 
 func main() {
 	ctx := context.Background()
 	defer ctx.Done()
-	cmd := app.NewContainerDeployerControllerCommand(ctx)
+	cmd := app.NewContainerDeployerWaitCommand(ctx)
 
 	if err := cmd.Execute(); err != nil {
 		fmt.Print(err)

@@ -27,12 +27,25 @@ jobs:
         with:
           go-version-file: go.mod
 
+      - name: Install Task
+        uses: arduino/setup-task@v2
+        with:
+          version: 3.x
+
+      # make verify aka check:
       - name: Verify
-        run: make verify
+        run: |
+          # make revendor
+          task generate:tidy
+          task validate:lint
+          # make verify
+          task validate:vet
 
       - name: Build Images
         run: make docker-images
 
+      # TODO: renable integration tests when component build is fixed
+      # see Error: component transport: https://github.com/openmcp-project/landscaper/actions/runs/20100090751/job/57668372389?pr=49
       # - name: Build and Push OCM Component
       #   run: make component
 

@@ -1,6 +1,6 @@
 module github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go
 
-go 1.25.4
+go 1.25.5
 
 require (
 	github.com/ghodss/yaml v1.0.0
@@ -14,8 +14,8 @@ require (
 	github.com/opencontainers/image-spec v1.1.1
 	github.com/xeipuuv/gojsonschema v1.2.0
 	golang.org/x/lint v0.0.0-20241112194109-818c5a804067
-	k8s.io/apimachinery v0.34.2
-	k8s.io/code-generator v0.34.2
+	k8s.io/apimachinery v0.34.3
+	k8s.io/code-generator v0.34.3
 	sigs.k8s.io/yaml v1.6.0
 )
 
