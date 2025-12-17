@@ -177,17 +177,9 @@ func (o *ExecutionOperation) Ensure(ctx context.Context, inst *installations.Ins
 	exec.Name = inst.GetInstallation().Name
 	exec.Namespace = inst.GetInstallation().Namespace
 
-	versionedDeployItemTemplateList := lsv1alpha1.DeployItemTemplateList{}
-	if err := lsv1alpha1.Convert_core_DeployItemTemplateList_To_v1alpha1_DeployItemTemplateList(&execTemplates, &versionedDeployItemTemplateList, nil); err != nil {
-		err2 := fmt.Errorf("error converting internal representation of deployitem templates to versioned one: %w", err)
-		inst.MergeConditions(lsv1alpha1helper.UpdatedCondition(cond, lsv1alpha1.ConditionFalse,
-			TemplatingFailedReason, err2.Error()))
-		return err2
-	}
-
 	if _, err := o.WriterToLsUncachedClient().CreateOrUpdateExecution(ctx, read_write_layer.W000022, exec, func() error {
 		exec.Spec.Context = inst.GetInstallation().Spec.Context
-		exec.Spec.DeployItems = versionedDeployItemTemplateList
+		exec.Spec.DeployItems = execTemplates
 
 		if lsv1alpha1helper.HasOperation(inst.GetInstallation().ObjectMeta, lsv1alpha1.ForceReconcileOperation) {
 			metav1.SetMetaDataAnnotation(&exec.ObjectMeta, lsv1alpha1.OperationAnnotation, string(lsv1alpha1.ForceReconcileOperation))

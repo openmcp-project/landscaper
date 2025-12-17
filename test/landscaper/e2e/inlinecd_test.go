@@ -21,7 +21,6 @@ import (
 	"k8s.io/utils/clock"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 
-	config "github.com/openmcp-project/landscaper/apis/config/v1alpha1"
 	v1alpha1config "github.com/openmcp-project/landscaper/apis/config/v1alpha1"
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	mockv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/mock/v1alpha1"
@@ -53,10 +52,8 @@ var _ = Describe("Inline Component Descriptor", func() {
 			},
 		}
 		v1alpha1config.SetDefaults_LandscaperConfiguration(lsConfig)
-		lsConfigCore := &config.LandscaperConfiguration{}
-		Expect(v1alpha1config.Convert_v1alpha1_LandscaperConfiguration_To_config_LandscaperConfiguration(lsConfig, lsConfigCore, nil)).ToNot(HaveOccurred())
 		instActuator = instctlr.NewTestActuator(testenv.Client, testenv.Client, testenv.Client, *op, logging.Discard(), clock.RealClock{},
-			lsConfigCore, "test-inst3-"+testutils.GetNextCounter())
+			lsConfig, "test-inst3-"+testutils.GetNextCounter())
 
 		execActuator, err = execctlr.NewController(testenv.Client, testenv.Client, testenv.Client, testenv.Client,
 			logging.Discard(), api.LandscaperScheme,

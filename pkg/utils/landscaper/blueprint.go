@@ -290,13 +290,8 @@ func (r *BlueprintRenderer) renderDeployItems(input *ResolvedInstallation, impor
 		}
 	}
 
-	versionedDeployItemTemplateList := lsv1alpha1.DeployItemTemplateList{}
-	if err := lsv1alpha1.Convert_core_DeployItemTemplateList_To_v1alpha1_DeployItemTemplateList(&deployItemTemplates, &versionedDeployItemTemplateList, nil); err != nil {
-		return nil, nil, fmt.Errorf("error converting internal representation of deployitem templates to versioned one: %w", err)
-	}
-
-	deployItems := make([]*lsv1alpha1.DeployItem, len(versionedDeployItemTemplateList))
-	for i, tmpl := range versionedDeployItemTemplateList {
+	deployItems := make([]*lsv1alpha1.DeployItem, len(deployItemTemplates))
+	for i, tmpl := range deployItemTemplates {
 		di := &lsv1alpha1.DeployItem{}
 		if err := kutil.InjectTypeInformation(di, api.LandscaperScheme); err != nil {
 			return nil, nil, fmt.Errorf("unable to inject deploy item type information for %q: %w", tmpl.Name, err)

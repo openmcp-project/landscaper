@@ -27,7 +27,7 @@ func Resource(resource string) schema.GroupResource {
 }
 
 var (
-	SchemeBuilder      = runtime.NewSchemeBuilder(addKnownTypes, addDefaultingFuncs)
+	SchemeBuilder      = runtime.NewSchemeBuilder(addKnownTypes)
 	localSchemeBuilder = &SchemeBuilder
 	AddToScheme        = localSchemeBuilder.AddToScheme
 )
@@ -38,5 +38,5 @@ func addKnownTypes(scheme *runtime.Scheme) error {
 		&LandscaperConfiguration{},
 	)
 	metav1.AddToGroupVersion(scheme, SchemeGroupVersion)
-	return addDefaultingFuncs(scheme)
+	return nil
 }

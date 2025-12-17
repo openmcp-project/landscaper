@@ -4,5 +4,6 @@
 
 // Package v1alpha1 is the internal version of the API.
 
+// +kubebuilder:object:generate=true
 // +groupName=config.landscaper.gardener.cloud
 package v1alpha1

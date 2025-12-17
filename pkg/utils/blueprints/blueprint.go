@@ -11,8 +11,6 @@ import (
 	"github.com/mandelsoft/vfs/pkg/vfs"
 	"k8s.io/apimachinery/pkg/util/validation/field"
 
-	core "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
-
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	"github.com/openmcp-project/landscaper/apis/core/validation"
 	"github.com/openmcp-project/landscaper/pkg/api"
@@ -83,22 +81,16 @@ func (b *Blueprint) GetSubinstallations() ([]*lsv1alpha1.InstallationTemplate, e
 			continue
 		}
 
-		coreInstTmpl := &core.InstallationTemplate{}
-		if _, _, err := api.Decoder.Decode(data, nil, coreInstTmpl); err != nil {
+		instTmpl := &lsv1alpha1.InstallationTemplate{}
+		if _, _, err := api.Decoder.Decode(data, nil, instTmpl); err != nil {
 			allErrs = append(allErrs, field.Invalid(
 				instPath.Child("file"),
 				subInstTmpl.File,
 				fmt.Sprintf("unable to decode installation template: %s", err.Error())))
 			continue
 		}
-		if valErrs := validation.ValidateInstallationTemplate(instPath, coreInstTmpl); len(valErrs) != 0 {
+		if valErrs := validation.ValidateInstallationTemplate(instPath, instTmpl); len(valErrs) != 0 {
 			allErrs = append(allErrs, valErrs...)
-			continue
-		}
-
-		instTmpl := &lsv1alpha1.InstallationTemplate{}
-		if err := lsv1alpha1.Convert_core_InstallationTemplate_To_v1alpha1_InstallationTemplate(coreInstTmpl, instTmpl, nil); err != nil {
-			allErrs = append(allErrs, field.InternalError(instPath, err))
 			continue
 		}
 		templates[i] = instTmpl

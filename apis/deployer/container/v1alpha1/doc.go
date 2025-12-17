@@ -8,5 +8,6 @@
 // +k8s:openapi-gen=true
 // +k8s:defaulter-gen=TypeMeta
 
+// +kubebuilder:object:generate=true
 // +groupName=container.deployer.landscaper.gardener.cloud
 package v1alpha1

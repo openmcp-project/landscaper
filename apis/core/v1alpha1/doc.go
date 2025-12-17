@@ -8,5 +8,6 @@
 // +k8s:defaulter-gen=TypeMeta
 
 // Package v1alpha1 is a version of the API.
+// +kubebuilder:object:generate=true
 // +groupName=landscaper.gardener.cloud
 package v1alpha1

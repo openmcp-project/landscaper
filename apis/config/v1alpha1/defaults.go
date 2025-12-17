@@ -8,15 +8,10 @@ import (
 	"time"
 
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/utils/ptr"
 
 	"github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 )
-
-func addDefaultingFuncs(scheme *runtime.Scheme) error {
-	return RegisterDefaults(scheme)
-}
 
 // SetDefaults_LandscaperConfiguration sets the defaults for the landscaper configuration.
 func SetDefaults_LandscaperConfiguration(obj *LandscaperConfiguration) {

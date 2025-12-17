@@ -7,14 +7,8 @@ package v1alpha2
 import (
 	lsconfigv1alpha1 "github.com/openmcp-project/landscaper/apis/config/v1alpha1"
 
-	"k8s.io/apimachinery/pkg/runtime"
-
 	"github.com/openmcp-project/landscaper/apis/deployer/utils/managedresource"
 )
-
-func addDefaultingFuncs(scheme *runtime.Scheme) error {
-	return RegisterDefaults(scheme)
-}
 
 // SetDefaults_ProviderConfiguration sets the defaults for the manifest deployer provider configuration.
 func SetDefaults_ProviderConfiguration(obj *ProviderConfiguration) {

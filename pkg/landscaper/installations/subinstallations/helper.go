@@ -101,55 +101,33 @@ func GetBlueprintDefinitionFromInstallationTemplate(
 
 // ValidateSubinstallations validates the installation templates in context of the current blueprint.
 func (o *Operation) ValidateSubinstallations(installationTmpl []*lsv1alpha1.InstallationTemplate) error {
-	coreInstTmpls, err := convertToCoreInstallationTemplates(installationTmpl)
+	imps, err := o.buildImports(o.Inst.GetBlueprint().Info.Imports)
 	if err != nil {
 		return err
 	}
 
-	coreImports, err := o.buildCoreImports(o.Inst.GetBlueprint().Info.Imports)
-	if err != nil {
-		return err
-	}
-
-	if allErrs := validation.ValidateInstallationTemplates(field.NewPath("subinstallations"), coreImports, coreInstTmpls); len(allErrs) != 0 {
+	if allErrs := validation.ValidateInstallationTemplates(field.NewPath("subinstallations"), imps, installationTmpl); len(allErrs) != 0 {
 		return o.NewError(allErrs.ToAggregate(), "ValidateSubInstallations", allErrs.ToAggregate().Error())
 	}
 	return nil
 }
 
-// convertToCoreInstallationTemplates converts a list of v1alpha1 InstallationTemplates to their core version
-func convertToCoreInstallationTemplates(installationTmpl []*lsv1alpha1.InstallationTemplate) ([]*core.InstallationTemplate, error) {
-	coreInstTmpls := make([]*core.InstallationTemplate, len(installationTmpl))
-	for i, tmpl := range installationTmpl {
-		coreTmpl := &core.InstallationTemplate{}
-		if err := lsv1alpha1.Convert_v1alpha1_InstallationTemplate_To_core_InstallationTemplate(tmpl, coreTmpl, nil); err != nil {
-			return nil, err
-		}
-		coreInstTmpls[i] = coreTmpl
-	}
-	return coreInstTmpls, nil
-}
-
-// buildCoreImports converts the given list of versioned ImportDefinitions (potentially containing nested conditional imports) into a flattened list of core ImportDefinitions.
-func (o *Operation) buildCoreImports(importList lsv1alpha1.ImportDefinitionList) ([]core.ImportDefinition, error) {
-	coreImports := []core.ImportDefinition{}
+// buildImports converts the given list of versioned ImportDefinitions (potentially containing nested conditional imports) into a flattened list of core ImportDefinitions.
+func (o *Operation) buildImports(importList lsv1alpha1.ImportDefinitionList) ([]core.ImportDefinition, error) {
+	imps := []core.ImportDefinition{}
 	for _, importDef := range importList {
-		coreImport := core.ImportDefinition{}
-		if err := lsv1alpha1.Convert_v1alpha1_ImportDefinition_To_core_ImportDefinition(&importDef, &coreImport, nil); err != nil {
-			return nil, err
-		}
-		coreImports = append(coreImports, coreImport)
+		imps = append(imps, importDef)
 		// recursively check for conditional imports
 		_, ok := o.Inst.GetImports()[importDef.Name]
 		if ok && len(importDef.ConditionalImports) > 0 {
-			conditionalCoreImports, err := o.buildCoreImports(importDef.ConditionalImports)
+			conditionalCoreImports, err := o.buildImports(importDef.ConditionalImports)
 			if err != nil {
 				return nil, err
 			}
-			coreImports = append(coreImports, conditionalCoreImports...)
+			imps = append(imps, conditionalCoreImports...)
 		}
 	}
-	return coreImports, nil
+	return imps, nil
 }
 
 // getInstallationTemplate returns the installation template by name
