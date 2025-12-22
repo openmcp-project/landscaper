@@ -1,4 +1,5 @@
 components:
+	# TODO: update repository and tag
   - name: github.com/gardener/landscaper/integration-tests/container-deployer/container-1
     version: v0.1.0
     provider:
@@ -17,4 +18,5 @@ components:
         relation: external
         access:
           type: ociRegistry
+	# TODO: update repository and tag
           imageReference: europe-docker.pkg.dev/sap-gcp-cp-k8s-stable-hub/landscaper-examples/integration-tests/images/container-deployer:v0.1.0
