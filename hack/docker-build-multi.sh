@@ -27,7 +27,7 @@ for pf in ${PLATFORMS//,/ }; do
   os=${pf%/*}
   arch=${pf#*/}
   for img in landscaper-controller landscaper-webhooks-server container-deployer-controller container-deployer-init container-deployer-wait helm-deployer-controller manifest-deployer-controller mock-deployer-controller; do
-    tags="-t ${img}:${EFFECTIVE_VERSION}.${os}-${arch}"
+    tags="-t ${img}:${EFFECTIVE_VERSION}-${os}-${arch}"
     if [[ -z "${NO_LATEST_TAG:-}" ]]; then
       tags="$tags -t ${img}:latest"
     fi
