@@ -28,8 +28,8 @@ github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/distribution/reference v0.6.0 h1:0IXCQ5g4/QMHHkarYzh5l+u8T3t73zM5QvfrDyIgxBk=
 github.com/distribution/reference v0.6.0/go.mod h1:BbU0aIcezP1/5jX/8MP0YiH4SdvB5Y4f/wlDRiLyi3E=
-github.com/docker/cli v29.1.4+incompatible h1:AI8fwZhqsAsrqZnVv9h6lbexeW/LzNTasf6A4vcNN8M=
-github.com/docker/cli v29.1.4+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
+github.com/docker/cli v29.1.5+incompatible h1:GckbANUt3j+lsnQ6eCcQd70mNSOismSHWt8vk2AX8ao=
+github.com/docker/cli v29.1.5+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/distribution v2.8.3+incompatible h1:AtKxIZ36LoNK51+Z6RpzLpddBirtxJnzDrHLEKxTAYk=
 github.com/docker/distribution v2.8.3+incompatible/go.mod h1:J2gT2udsDAN96Uj4KfcMRqY0/ypR+oyYUYmja8H+y+w=
 github.com/docker/docker-credential-helpers v0.9.4 h1:76ItO69/AP/V4yT9V4uuuItG0B1N8hvt0T0c0NN/DzI=
@@ -145,8 +145,8 @@ github.com/onsi/gomega v1.7.1/go.mod h1:XdKZgCCFLUoM/7CFJVPcG8C1xQ1AJ0vpAezJrB7J
 github.com/onsi/gomega v1.10.1/go.mod h1:iN09h71vgCQne3DLsj+A5owkum+a2tYe+TOCB1ybHNo=
 github.com/onsi/gomega v1.39.0 h1:y2ROC3hKFmQZJNFeGAMeHZKkjBL65mIZcvrLQBF9k6Q=
 github.com/onsi/gomega v1.39.0/go.mod h1:ZCU1pkQcXDO5Sl9/VVEGlDyp+zm0m1cmeG5TOzLgdh4=
-github.com/opencontainers/distribution-spec/specs-go v0.0.0-20251113233350-e612a6e1e1bc h1:Q6UJPY0KLdWmGuACKl7aoq2BJoIxiu32ImFcyqRWroY=
-github.com/opencontainers/distribution-spec/specs-go v0.0.0-20251113233350-e612a6e1e1bc/go.mod h1:Va0IMqkjv62YSEytL4sgxrkiD9IzU0T0bX/ZZEtMnSQ=
+github.com/opencontainers/distribution-spec/specs-go v0.0.0-20260120190050-fa23d950713c h1:RJBu/KErcXSNB+tOdn1mekEnmc56SEsSzHn5VcZ+3io=
+github.com/opencontainers/distribution-spec/specs-go v0.0.0-20260120190050-fa23d950713c/go.mod h1:Va0IMqkjv62YSEytL4sgxrkiD9IzU0T0bX/ZZEtMnSQ=
 github.com/opencontainers/go-digest v1.0.0 h1:apOUWs51W5PlhuyGyz9FCeeBIOUDA/6nW8Oi/yOhh5U=
 github.com/opencontainers/go-digest v1.0.0/go.mod h1:0JzlMkj0TRzQZfJkVvzbP0HBR3IKzErnv2BNG4W4MAM=
 github.com/opencontainers/image-spec v1.1.1 h1:y0fUlFfIZhPF1W537XOLg0/fcx6zcHCJwooC2xJA040=
