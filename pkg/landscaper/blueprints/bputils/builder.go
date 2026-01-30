@@ -15,10 +15,10 @@ import (
 
 	"github.com/mandelsoft/vfs/pkg/memoryfs"
 	"github.com/mandelsoft/vfs/pkg/vfs"
-	"github.com/openmcp-project/landscaper/legacy-component-cli/pkg/commands/componentarchive/input"
-	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/ctf"
 
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	"github.com/openmcp-project/landscaper/legacy-component-cli/pkg/commands/componentarchive/input"
+	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/ctf"
 )
 
 // Builder describes a blueprint builder

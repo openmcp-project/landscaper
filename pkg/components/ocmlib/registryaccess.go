@@ -10,25 +10,22 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
-	"github.com/openmcp-project/landscaper/pkg/utils"
-
-	v2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
+	"ocm.software/ocm/api/ocm"
 	"ocm.software/ocm/api/ocm/compdesc"
 	"ocm.software/ocm/api/ocm/resolvers"
 	"ocm.software/ocm/api/ocm/tools/signing"
 	"ocm.software/ocm/api/tech/signing/handlers/rsa"
 	"ocm.software/ocm/api/tech/signing/signutils"
-
-	"github.com/openmcp-project/landscaper/pkg/components/model/types"
-
-	"ocm.software/ocm/api/ocm"
 	"ocm.software/ocm/api/utils/runtime"
 
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	v2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 	"github.com/openmcp-project/landscaper/pkg/components/model"
+	"github.com/openmcp-project/landscaper/pkg/components/model/types"
 	_ "github.com/openmcp-project/landscaper/pkg/components/ocmlib/repository/inline"
 	_ "github.com/openmcp-project/landscaper/pkg/components/ocmlib/repository/local"
+	"github.com/openmcp-project/landscaper/pkg/utils"
 )
 
 type RegistryAccess struct {

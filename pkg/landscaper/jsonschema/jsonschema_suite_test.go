@@ -17,35 +17,30 @@ import (
 	"testing"
 	"time"
 
-	testutils2 "github.com/openmcp-project/landscaper/pkg/components/testutils"
-
-	"ocm.software/ocm/api/datacontext"
-	"ocm.software/ocm/api/ocm"
-
-	corev1 "k8s.io/api/core/v1"
-
-	"github.com/openmcp-project/landscaper/pkg/landscaper/jsonschema/testreg"
-
-	apiconfig "github.com/openmcp-project/landscaper/apis/config"
-
 	"github.com/mandelsoft/vfs/pkg/memoryfs"
 	"github.com/mandelsoft/vfs/pkg/vfs"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
+	corev1 "k8s.io/api/core/v1"
+	"ocm.software/ocm/api/datacontext"
+	"ocm.software/ocm/api/ocm"
+
+	apiconfig "github.com/openmcp-project/landscaper/apis/config"
+	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	"github.com/openmcp-project/landscaper/apis/mediatype"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 	"github.com/openmcp-project/landscaper/legacy-component-cli/ociclient"
 	"github.com/openmcp-project/landscaper/legacy-component-cli/ociclient/cache"
 	testcred "github.com/openmcp-project/landscaper/legacy-component-cli/ociclient/credentials"
 	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/ctf"
 	cdoci "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/oci"
-
-	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
-	"github.com/openmcp-project/landscaper/apis/mediatype"
-	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 	"github.com/openmcp-project/landscaper/pkg/components/model"
 	"github.com/openmcp-project/landscaper/pkg/components/model/types"
 	"github.com/openmcp-project/landscaper/pkg/components/registries"
+	testutils2 "github.com/openmcp-project/landscaper/pkg/components/testutils"
 	"github.com/openmcp-project/landscaper/pkg/landscaper/jsonschema"
+	"github.com/openmcp-project/landscaper/pkg/landscaper/jsonschema/testreg"
 	testutils "github.com/openmcp-project/landscaper/test/utils"
 )
 

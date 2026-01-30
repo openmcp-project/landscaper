@@ -15,11 +15,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/openmcp-project/landscaper/pkg/components/model"
-
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
-	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 	corev1 "k8s.io/api/core/v1"
 	"ocm.software/ocm/api/datacontext"
 	"ocm.software/ocm/api/ocm"
@@ -29,6 +26,8 @@ import (
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	helmv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/helm/v1alpha1"
 	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
+	"github.com/openmcp-project/landscaper/pkg/components/model"
 	"github.com/openmcp-project/landscaper/pkg/components/registries"
 	"github.com/openmcp-project/landscaper/pkg/landscaper/installations/executions/template/gotemplate"
 	"github.com/openmcp-project/landscaper/pkg/utils/blueprints"

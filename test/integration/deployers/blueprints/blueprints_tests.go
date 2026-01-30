@@ -11,7 +11,6 @@ import (
 
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
-	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes/scheme"
@@ -24,6 +23,7 @@ import (
 	"github.com/openmcp-project/landscaper/apis/deployer/utils/managedresource"
 	kutil "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"
 	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 	"github.com/openmcp-project/landscaper/pkg/deployer/container"
 	"github.com/openmcp-project/landscaper/pkg/deployer/helm"
 	"github.com/openmcp-project/landscaper/pkg/deployer/manifest"

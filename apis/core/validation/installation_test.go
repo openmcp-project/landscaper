@@ -8,11 +8,11 @@ import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 	. "github.com/onsi/gomega/gstruct"
-	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 	"k8s.io/apimachinery/pkg/util/validation/field"
 
 	"github.com/openmcp-project/landscaper/apis/core"
 	"github.com/openmcp-project/landscaper/apis/core/validation"
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 )
 
 var _ = Describe("Installation", func() {

@@ -9,6 +9,7 @@ import (
 	"fmt"
 
 	"github.com/mandelsoft/goutils/errors"
+
 	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 
 	"ocm.software/ocm/api/oci"

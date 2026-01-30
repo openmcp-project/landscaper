@@ -8,7 +8,6 @@ import (
 	"context"
 	"fmt"
 
-	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/labels"
 	"k8s.io/apimachinery/pkg/runtime/schema"
@@ -21,6 +20,7 @@ import (
 	lsv1alpha1helper "github.com/openmcp-project/landscaper/apis/core/v1alpha1/helper"
 	"github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"
 	lscutils "github.com/openmcp-project/landscaper/controller-utils/pkg/landscaper"
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 	lscheme "github.com/openmcp-project/landscaper/pkg/api"
 	"github.com/openmcp-project/landscaper/pkg/components/model"
 	"github.com/openmcp-project/landscaper/pkg/components/model/componentoverwrites"

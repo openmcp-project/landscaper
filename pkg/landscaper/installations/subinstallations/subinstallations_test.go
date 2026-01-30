@@ -8,33 +8,27 @@ import (
 	"context"
 	"strings"
 
-	"github.com/openmcp-project/landscaper/pkg/components/model"
-
-	"github.com/openmcp-project/landscaper/pkg/components/testutils"
-
-	"ocm.software/ocm/api/datacontext"
-	"ocm.software/ocm/api/ocm"
-
-	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
-
-	"github.com/openmcp-project/landscaper/pkg/utils/landscaper"
-
-	"github.com/openmcp-project/landscaper/apis/config"
-
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
-	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 	"k8s.io/apimachinery/pkg/util/json"
 	"k8s.io/client-go/tools/record"
+	"ocm.software/ocm/api/datacontext"
+	"ocm.software/ocm/api/ocm"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
+	"github.com/openmcp-project/landscaper/apis/config"
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 	"github.com/openmcp-project/landscaper/pkg/api"
+	"github.com/openmcp-project/landscaper/pkg/components/model"
 	lstypes "github.com/openmcp-project/landscaper/pkg/components/model/types"
 	"github.com/openmcp-project/landscaper/pkg/components/registries"
+	"github.com/openmcp-project/landscaper/pkg/components/testutils"
 	"github.com/openmcp-project/landscaper/pkg/landscaper/installations"
 	"github.com/openmcp-project/landscaper/pkg/landscaper/installations/subinstallations"
 	lsoperation "github.com/openmcp-project/landscaper/pkg/landscaper/operation"
+	"github.com/openmcp-project/landscaper/pkg/utils/landscaper"
 	"github.com/openmcp-project/landscaper/test/utils"
 	"github.com/openmcp-project/landscaper/test/utils/envtest"
 )

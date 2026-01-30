@@ -12,9 +12,9 @@ import (
 
 	"github.com/mandelsoft/vfs/pkg/vfs"
 	"github.com/opencontainers/go-digest"
+
 	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/ctf"
-
 	"github.com/openmcp-project/landscaper/pkg/components/model/tar"
 	"github.com/openmcp-project/landscaper/pkg/components/model/types"
 )

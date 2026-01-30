@@ -7,23 +7,20 @@ package cdutils_test
 import (
 	"context"
 
-	"ocm.software/ocm/api/datacontext"
-	"ocm.software/ocm/api/ocm"
-
-	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
-
 	"github.com/mandelsoft/vfs/pkg/memoryfs"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
-	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
+	"ocm.software/ocm/api/datacontext"
+	"ocm.software/ocm/api/ocm"
 	"ocm.software/ocm/api/utils/runtime"
 
 	"github.com/openmcp-project/landscaper/apis/config"
-	"github.com/openmcp-project/landscaper/pkg/components/registries"
-
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 	"github.com/openmcp-project/landscaper/pkg/components/model"
 	"github.com/openmcp-project/landscaper/pkg/components/model/types"
+	"github.com/openmcp-project/landscaper/pkg/components/registries"
 	"github.com/openmcp-project/landscaper/pkg/landscaper/registry/components/cdutils"
 	testutils "github.com/openmcp-project/landscaper/test/utils"
 )

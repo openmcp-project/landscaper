@@ -9,14 +9,15 @@
 package apis
 
 import (
-	core "github.com/openmcp-project/landscaper/apis/core"
-	v1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
-	v2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 	v1 "k8s.io/api/core/v1"
 	resource "k8s.io/apimachinery/pkg/api/resource"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	common "k8s.io/kube-openapi/pkg/common"
 	spec "k8s.io/kube-openapi/pkg/validation/spec"
+
+	core "github.com/openmcp-project/landscaper/apis/core"
+	v1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	v2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 )
 
 func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenAPIDefinition {

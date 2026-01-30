@@ -16,13 +16,13 @@ import (
 	"github.com/mandelsoft/vfs/pkg/vfs"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
-	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/codec"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 
 	"github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	"github.com/openmcp-project/landscaper/apis/deployer/container"
 	mock_client "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes/mock"
+	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/codec"
 	"github.com/openmcp-project/landscaper/pkg/components/model/types"
 	"github.com/openmcp-project/landscaper/test/utils"
 )

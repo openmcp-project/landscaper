@@ -12,22 +12,15 @@ import (
 	"strconv"
 
 	"github.com/distribution/reference"
-
-	"github.com/openmcp-project/landscaper/pkg/components/model"
-
-	"sigs.k8s.io/controller-runtime/pkg/client"
-
 	dockerconfig "github.com/docker/cli/cli/config"
 	dockerconfigfile "github.com/docker/cli/cli/config/configfile"
 	"github.com/docker/cli/cli/config/types"
 	"github.com/mandelsoft/vfs/pkg/osfs"
 	"github.com/mandelsoft/vfs/pkg/vfs"
-	"github.com/openmcp-project/landscaper/legacy-component-cli/ociclient/credentials"
-	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
-	cdoci "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/oci"
 	corev1 "k8s.io/api/core/v1"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/utils/ptr"
+	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
@@ -38,7 +31,11 @@ import (
 	kutil "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"
 	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 	lc "github.com/openmcp-project/landscaper/controller-utils/pkg/logging/constants"
+	"github.com/openmcp-project/landscaper/legacy-component-cli/ociclient/credentials"
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
+	cdoci "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/oci"
 	"github.com/openmcp-project/landscaper/pkg/api"
+	"github.com/openmcp-project/landscaper/pkg/components/model"
 	"github.com/openmcp-project/landscaper/pkg/components/registries"
 	"github.com/openmcp-project/landscaper/pkg/deployer/lib"
 	"github.com/openmcp-project/landscaper/pkg/deployer/lib/timeout"
