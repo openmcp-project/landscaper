@@ -16,7 +16,7 @@ require (
 	github.com/mandelsoft/goutils v0.0.0-20251225170327-b32fc0dd2706
 	github.com/mandelsoft/spiff v1.7.0-beta-8
 	github.com/mandelsoft/vfs v0.4.5-0.20250514111339-d7b067920e91
-	github.com/onsi/ginkgo/v2 v2.28.0
+	github.com/onsi/ginkgo/v2 v2.28.1
 	github.com/onsi/gomega v1.39.1
 	github.com/opencontainers/go-digest v1.0.0
 	github.com/opencontainers/image-spec v1.1.1
