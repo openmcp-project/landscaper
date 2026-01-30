@@ -11,7 +11,7 @@ import (
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/types"
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
-	"k8s.io/client-go/tools/record"
+	"k8s.io/client-go/tools/events"
 	"k8s.io/utils/ptr"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
@@ -72,7 +72,7 @@ var _ = Describe("Deletion Manager", func() {
 			testenv.Client, testenv.Client, testenv.Client, testenv.Client,
 			utils.NewFinishedObjectCache(),
 			api.LandscaperScheme,
-			record.NewFakeRecorder(1024),
+			events.NewFakeRecorder(1024),
 			api.LandscaperScheme,
 			deployerlib.DeployerArgs{Type: helm.Type, Deployer: deployer},
 			5, false, "deletiongroup-test"+testutils.GetNextCounter())

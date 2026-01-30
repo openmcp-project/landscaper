@@ -11,18 +11,17 @@ import (
 	. "github.com/onsi/gomega"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/apimachinery/pkg/runtime"
-	"k8s.io/client-go/tools/record"
+	"k8s.io/client-go/tools/events"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
-
-	"github.com/openmcp-project/landscaper/pkg/utils/read_write_layer"
 
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	kutil "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"
 	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 	"github.com/openmcp-project/landscaper/pkg/api"
 	"github.com/openmcp-project/landscaper/pkg/landscaper/controllers/execution"
+	"github.com/openmcp-project/landscaper/pkg/utils/read_write_layer"
 	testutils "github.com/openmcp-project/landscaper/test/utils"
 	"github.com/openmcp-project/landscaper/test/utils/envtest"
 )
@@ -36,7 +35,7 @@ var _ = Describe("Reconcile", func() {
 	BeforeEach(func() {
 		var err error
 		ctrl, err = execution.NewController(testenv.Client, testenv.Client, testenv.Client, testenv.Client, logging.Discard(), api.Scheme,
-			record.NewFakeRecorder(1024), 1000, false, "exec-test-"+testutils.GetNextCounter())
+			events.NewFakeRecorder(1024), 1000, false, "exec-test-"+testutils.GetNextCounter())
 		Expect(err).ToNot(HaveOccurred())
 		state, err = testenv.InitState(context.TODO())
 		Expect(err).ToNot(HaveOccurred())

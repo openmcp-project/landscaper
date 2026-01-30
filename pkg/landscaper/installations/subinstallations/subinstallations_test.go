@@ -11,7 +11,7 @@ import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 	"k8s.io/apimachinery/pkg/util/json"
-	"k8s.io/client-go/tools/record"
+	"k8s.io/client-go/tools/events"
 	"ocm.software/ocm/api/datacontext"
 	"ocm.software/ocm/api/ocm"
 	"sigs.k8s.io/controller-runtime/pkg/client"
@@ -139,7 +139,7 @@ var _ = Describe("SubInstallation", func() {
 
 		op, err = lsoperation.NewBuilder().
 			WithLsUncachedClient(fakeClient).Scheme(api.LandscaperScheme).
-			WithEventRecorder(record.NewFakeRecorder(1024)).
+			WithEventRecorder(events.NewFakeRecorder(1024)).
 			ComponentRegistry(registryAccess).
 			Build(ctx)
 		Expect(err).ToNot(HaveOccurred())

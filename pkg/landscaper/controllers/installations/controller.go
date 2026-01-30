@@ -14,7 +14,7 @@ import (
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
-	"k8s.io/client-go/tools/record"
+	"k8s.io/client-go/tools/events"
 	"k8s.io/utils/clock"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
@@ -44,7 +44,7 @@ func NewController(ctx context.Context,
 	lsUncachedClient, lsCachedClient, hostUncachedClient, hostCachedClient client.Client,
 	logger logging.Logger,
 	scheme *runtime.Scheme,
-	eventRecorder record.EventRecorder,
+	eventRecorder events.EventRecorder,
 	lsConfig *config.LandscaperConfiguration,
 	maxNumberOfWorkers int,
 	lockingEnabled bool,
@@ -467,7 +467,7 @@ func (c *Controller) setInstallationPhaseAndUpdate(ctx context.Context, inst *ls
 
 	if inst.Status.LastError != nil {
 		lastErr := inst.Status.LastError
-		c.EventRecorder().Event(inst, corev1.EventTypeWarning, lastErr.Reason, lastErr.Message)
+		c.EventRecorder().Eventf(inst, nil, corev1.EventTypeWarning, lastErr.Reason, "ReconcileInstallation", lastErr.Message)
 	}
 
 	if phase != inst.Status.InstallationPhase {

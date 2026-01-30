@@ -10,7 +10,7 @@ import (
 
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
-	"k8s.io/client-go/tools/record"
+	"k8s.io/client-go/tools/events"
 	"k8s.io/utils/clock/testing"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 
@@ -37,7 +37,7 @@ var _ = Describe("Retry handler", func() {
 		)
 
 		BeforeEach(func() {
-			op = lsoperation.NewOperation(api.LandscaperScheme, record.NewFakeRecorder(1024), testenv.Client)
+			op = lsoperation.NewOperation(api.LandscaperScheme, events.NewFakeRecorder(1024), testenv.Client)
 			clok = &testing.FakePassiveClock{}
 
 			ctrl = installationsctl.NewTestActuator(testenv.Client, testenv.Client, testenv.Client, *op,

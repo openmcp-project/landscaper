@@ -8,15 +8,12 @@ import (
 	"context"
 	"time"
 
-	"k8s.io/utils/ptr"
-
-	"github.com/openmcp-project/landscaper/pkg/utils"
-
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 	appsv1 "k8s.io/api/apps/v1"
 	"k8s.io/apimachinery/pkg/runtime/serializer"
-	"k8s.io/client-go/tools/record"
+	"k8s.io/client-go/tools/events"
+	"k8s.io/utils/ptr"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
@@ -30,6 +27,7 @@ import (
 	helmctrl "github.com/openmcp-project/landscaper/pkg/deployer/helm"
 	deployerlib "github.com/openmcp-project/landscaper/pkg/deployer/lib"
 	"github.com/openmcp-project/landscaper/pkg/deployer/lib/timeout"
+	"github.com/openmcp-project/landscaper/pkg/utils"
 	testutil "github.com/openmcp-project/landscaper/test/utils"
 	"github.com/openmcp-project/landscaper/test/utils/envtest"
 )
@@ -61,7 +59,7 @@ var _ = Describe("Helm Deployer", func() {
 			testenv.Client, testenv.Client, testenv.Client, testenv.Client,
 			utils.NewFinishedObjectCache(),
 			api.LandscaperScheme,
-			record.NewFakeRecorder(1024),
+			events.NewFakeRecorder(1024),
 			api.LandscaperScheme,
 			deployerlib.DeployerArgs{
 				Type:     helmctrl.Type,

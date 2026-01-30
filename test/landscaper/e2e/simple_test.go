@@ -8,17 +8,12 @@ import (
 	"context"
 	"path/filepath"
 
-	"github.com/openmcp-project/landscaper/pkg/utils"
-
-	clientlib "sigs.k8s.io/controller-runtime/pkg/client"
-
-	"github.com/openmcp-project/landscaper/pkg/utils/read_write_layer"
-
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
-	"k8s.io/client-go/tools/record"
+	"k8s.io/client-go/tools/events"
 	"k8s.io/utils/clock"
+	clientlib "sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 
 	"github.com/openmcp-project/landscaper/apis/config"
@@ -31,6 +26,8 @@ import (
 	execctlr "github.com/openmcp-project/landscaper/pkg/landscaper/controllers/execution"
 	instctlr "github.com/openmcp-project/landscaper/pkg/landscaper/controllers/installations"
 	"github.com/openmcp-project/landscaper/pkg/landscaper/operation"
+	"github.com/openmcp-project/landscaper/pkg/utils"
+	"github.com/openmcp-project/landscaper/pkg/utils/read_write_layer"
 	testutils "github.com/openmcp-project/landscaper/test/utils"
 	"github.com/openmcp-project/landscaper/test/utils/envtest"
 )
@@ -46,7 +43,7 @@ var _ = Describe("Simple", func() {
 	BeforeEach(func() {
 		var err error
 
-		op := operation.NewOperation(api.LandscaperScheme, record.NewFakeRecorder(1024), testenv.Client)
+		op := operation.NewOperation(api.LandscaperScheme, events.NewFakeRecorder(1024), testenv.Client)
 		lsConfig := &v1alpha1config.LandscaperConfiguration{
 			Registry: v1alpha1config.RegistryConfiguration{
 				Local: &v1alpha1config.LocalRegistryConfiguration{RootPath: filepath.Join(projectRoot, "examples", "01-simple")},
@@ -59,13 +56,13 @@ var _ = Describe("Simple", func() {
 			clock.RealClock{}, lsConfigCore, "test-inst4-"+testutils.GetNextCounter())
 
 		execActuator, err = execctlr.NewController(testenv.Client, testenv.Client, testenv.Client, testenv.Client, logging.Discard(), api.LandscaperScheme,
-			record.NewFakeRecorder(1024), 1000, false, "exec-test-"+testutils.GetNextCounter())
+			events.NewFakeRecorder(1024), 1000, false, "exec-test-"+testutils.GetNextCounter())
 		Expect(err).ToNot(HaveOccurred())
 
 		mockActuator, err = mockctlr.NewController(testenv.Client, testenv.Client, testenv.Client, testenv.Client,
 			utils.NewFinishedObjectCache(),
 			logging.Discard(), api.LandscaperScheme,
-			record.NewFakeRecorder(1024), mockv1alpha1.Configuration{}, "test-simple"+testutils.GetNextCounter())
+			events.NewFakeRecorder(1024), mockv1alpha1.Configuration{}, "test-simple"+testutils.GetNextCounter())
 		Expect(err).ToNot(HaveOccurred())
 	})
 

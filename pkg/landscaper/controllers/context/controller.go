@@ -8,20 +8,18 @@ import (
 	"context"
 	"time"
 
-	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
-	"github.com/openmcp-project/landscaper/pkg/utils/read_write_layer"
-
 	corev1 "k8s.io/api/core/v1"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/util/sets"
-	"k8s.io/client-go/tools/record"
+	"k8s.io/client-go/tools/events"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 
 	"github.com/openmcp-project/landscaper/apis/config"
-
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	"github.com/openmcp-project/landscaper/pkg/utils/read_write_layer"
 )
 
 const (
@@ -32,7 +30,7 @@ const (
 func NewDefaulterController(lsUncachedClient, lsCachedClient client.Client,
 	logger logging.Logger,
 	scheme *runtime.Scheme,
-	eventRecorder record.EventRecorder,
+	eventRecorder events.EventRecorder,
 	config config.ContextControllerConfig) (reconcile.Reconciler, error) {
 	return &defaulterController{
 		lsUncachedClient:  lsUncachedClient,
@@ -49,7 +47,7 @@ type defaulterController struct {
 	lsUncachedClient  client.Client
 	lsCachedClient    client.Client
 	log               logging.Logger
-	eventRecorder     record.EventRecorder
+	eventRecorder     events.EventRecorder
 	scheme            *runtime.Scheme
 	config            config.ContextControllerConfig
 	excludeNamespaces sets.String //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set

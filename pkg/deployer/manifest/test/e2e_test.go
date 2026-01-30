@@ -21,7 +21,7 @@ import (
 	"k8s.io/apimachinery/pkg/selection"
 	"k8s.io/apimachinery/pkg/util/wait"
 	"k8s.io/client-go/kubernetes/scheme"
-	"k8s.io/client-go/tools/record"
+	"k8s.io/client-go/tools/events"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
@@ -62,7 +62,7 @@ var _ = Describe("Manifest Deployer", func() {
 			testenv.Client, testenv.Client, testenv.Client, testenv.Client,
 			utils.NewFinishedObjectCache(),
 			api.LandscaperScheme,
-			record.NewFakeRecorder(1024),
+			events.NewFakeRecorder(1024),
 			api.LandscaperScheme,
 			deployerlib.DeployerArgs{
 				Type:     manifestctlr.Type,

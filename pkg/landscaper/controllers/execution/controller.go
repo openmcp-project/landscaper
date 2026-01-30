@@ -12,7 +12,7 @@ import (
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
-	"k8s.io/client-go/tools/record"
+	"k8s.io/client-go/tools/events"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
@@ -31,7 +31,7 @@ import (
 
 // NewController creates a new execution controller that reconcile Execution resources.
 func NewController(lsUncachedClient, lsCachedClient, hostUncachedClient, hostCachedClient client.Client,
-	logger logging.Logger, scheme *runtime.Scheme, eventRecorder record.EventRecorder, maxNumberOfWorker int,
+	logger logging.Logger, scheme *runtime.Scheme, eventRecorder events.EventRecorder, maxNumberOfWorker int,
 	lockingEnabled bool, callerName string) (reconcile.Reconciler, error) {
 
 	ctx := logging.NewContext(context.Background(), logger)
@@ -67,7 +67,7 @@ type controller struct {
 	finishedObjectCache *lsutil.FinishedObjectCache
 
 	log            logging.Logger
-	eventRecorder  record.EventRecorder
+	eventRecorder  events.EventRecorder
 	scheme         *runtime.Scheme
 	workerCounter  *lsutil.WorkerCounter
 	lockingEnabled bool

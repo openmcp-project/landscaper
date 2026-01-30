@@ -13,7 +13,7 @@ import (
 	corev1 "k8s.io/api/core/v1"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"k8s.io/client-go/tools/record"
+	"k8s.io/client-go/tools/events"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/controller/controllerutil"
 
@@ -90,7 +90,9 @@ func GetRegistryPullSecretsFromContext(lsCtx *lsv1alpha1.Context) []lsv1alpha1.O
 }
 
 func HandleReconcileResult(ctx context.Context, err lserrors.LsError, oldDeployItem, deployItem *lsv1alpha1.DeployItem,
-	lsClient client.Client, lsEventRecorder record.EventRecorder, finishedObjectCache *lsutil.FinishedObjectCache) error {
+	lsClient client.Client, lsEventRecorder events.EventRecorder, finishedObjectCache *lsutil.FinishedObjectCache) error {
+
+	const actionReconcileDeployItem = "ReconcileDeployItem"
 
 	logger, ctx := logging.FromContextOrNew(ctx, nil)
 	lsutil.SetLastError(&deployItem.Status, lserrors.TryUpdateLsError(deployItem.Status.GetLastError(), err))
@@ -101,7 +103,7 @@ func HandleReconcileResult(ctx context.Context, err lserrors.LsError, oldDeployI
 		}
 
 		lastErr := deployItem.Status.GetLastError()
-		lsEventRecorder.Event(deployItem, corev1.EventTypeWarning, lastErr.Reason, lastErr.Message)
+		lsEventRecorder.Eventf(deployItem, nil, corev1.EventTypeWarning, lastErr.Reason, actionReconcileDeployItem, lastErr.Message)
 	}
 
 	// if a reconciliation ends in a final phase, the current job is done

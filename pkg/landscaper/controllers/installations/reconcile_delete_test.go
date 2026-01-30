@@ -15,7 +15,7 @@ import (
 	. "github.com/onsi/gomega"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"k8s.io/client-go/tools/record"
+	"k8s.io/client-go/tools/events"
 	"k8s.io/utils/clock"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/manager"
@@ -46,7 +46,7 @@ var _ = Describe("Delete", func() {
 		)
 
 		BeforeEach(func() {
-			op = lsoperation.NewOperation(api.LandscaperScheme, record.NewFakeRecorder(1024), testenv.Client)
+			op = lsoperation.NewOperation(api.LandscaperScheme, events.NewFakeRecorder(1024), testenv.Client)
 			ctrl = installationsctl.NewTestActuator(testenv.Client, testenv.Client, testenv.Client,
 				*op, logging.Discard(), clock.RealClock{},
 				&config.LandscaperConfiguration{}, "test-inst1-"+testutils.GetNextCounter())

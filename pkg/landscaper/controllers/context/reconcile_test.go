@@ -7,12 +7,10 @@ package context_test
 import (
 	"context"
 
-	testutils2 "github.com/openmcp-project/landscaper/pkg/components/testutils"
-
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 	corev1 "k8s.io/api/core/v1"
-	"k8s.io/client-go/tools/record"
+	"k8s.io/client-go/tools/events"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 
@@ -21,6 +19,7 @@ import (
 	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 	"github.com/openmcp-project/landscaper/pkg/api"
 	"github.com/openmcp-project/landscaper/pkg/components/model/types"
+	testutils2 "github.com/openmcp-project/landscaper/pkg/components/testutils"
 	contextctrl "github.com/openmcp-project/landscaper/pkg/landscaper/controllers/context"
 	testutils "github.com/openmcp-project/landscaper/test/utils"
 	"github.com/openmcp-project/landscaper/test/utils/envtest"
@@ -43,7 +42,7 @@ var _ = Describe("Reconcile", func() {
 			testenv.Client, testenv.Client,
 			logging.Discard(),
 			api.Scheme,
-			record.NewFakeRecorder(1024),
+			events.NewFakeRecorder(1024),
 			config.ContextControllerConfig{
 				Default: config.ContextControllerDefaultConfig{
 					RepositoryContext: &repoCtx,
@@ -97,7 +96,7 @@ var _ = Describe("Reconcile", func() {
 			testenv.Client, testenv.Client,
 			logging.Discard(),
 			api.Scheme,
-			record.NewFakeRecorder(1024),
+			events.NewFakeRecorder(1024),
 			config.ContextControllerConfig{
 				Default: config.ContextControllerDefaultConfig{
 					RepositoryContext:  &repoCtx,

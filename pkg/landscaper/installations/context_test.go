@@ -10,7 +10,7 @@ import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 	"github.com/onsi/gomega/gstruct"
-	"k8s.io/client-go/tools/record"
+	"k8s.io/client-go/tools/events"
 	"ocm.software/ocm/api/datacontext"
 	"ocm.software/ocm/api/ocm"
 	"sigs.k8s.io/controller-runtime/pkg/client"
@@ -61,7 +61,7 @@ var _ = Describe("Context", func() {
 			LocalRegistryConfig: localregistryconfig,
 		})
 		Expect(err).ToNot(HaveOccurred())
-		op = lsoperation.NewOperation(api.LandscaperScheme, record.NewFakeRecorder(1024), fakeClient).SetComponentsRegistry(registryAccess)
+		op = lsoperation.NewOperation(api.LandscaperScheme, events.NewFakeRecorder(1024), fakeClient).SetComponentsRegistry(registryAccess)
 	})
 
 	AfterEach(func() {
