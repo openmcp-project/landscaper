@@ -5,18 +5,16 @@
 package context
 
 import (
+	"github.com/go-logr/logr"
 	corev1 "k8s.io/api/core/v1"
 	"sigs.k8s.io/controller-runtime/pkg/builder"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/manager"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 
-	"github.com/go-logr/logr"
-
+	"github.com/openmcp-project/landscaper/apis/config"
 	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 	"github.com/openmcp-project/landscaper/pkg/utils"
-
-	"github.com/openmcp-project/landscaper/apis/config"
 )
 
 // AddControllerToManager adds the context defaulterController to the defaulterController manager.
@@ -33,7 +31,7 @@ func AddControllerToManager(lsUncachedClient, lsCachedClient client.Client,
 		lsUncachedClient, lsCachedClient,
 		log,
 		lsMgr.GetScheme(),
-		lsMgr.GetEventRecorderFor("Landscaper"),
+		lsMgr.GetEventRecorder("Landscaper"),
 		config.Controllers.Contexts.Config,
 	)
 	if err != nil {

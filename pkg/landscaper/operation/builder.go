@@ -9,7 +9,7 @@ import (
 	"errors"
 
 	"k8s.io/apimachinery/pkg/runtime"
-	"k8s.io/client-go/tools/record"
+	"k8s.io/client-go/tools/events"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
 	"github.com/openmcp-project/landscaper/pkg/api"
@@ -20,7 +20,7 @@ import (
 type Builder struct {
 	lsUncachedClient  client.Client
 	scheme            *runtime.Scheme
-	eventRecorder     record.EventRecorder
+	eventRecorder     events.EventRecorder
 	componentRegistry model.RegistryAccess
 }
 
@@ -48,7 +48,7 @@ func (b *Builder) ComponentRegistry(registry model.RegistryAccess) *Builder {
 }
 
 // WithEventRecorder sets a event recorder.
-func (b *Builder) WithEventRecorder(er record.EventRecorder) *Builder {
+func (b *Builder) WithEventRecorder(er events.EventRecorder) *Builder {
 	b.eventRecorder = er
 	return b
 }
@@ -58,7 +58,7 @@ func (b *Builder) applyDefaults(ctx context.Context) {
 		b.scheme = api.LandscaperScheme
 	}
 	if b.eventRecorder == nil {
-		b.eventRecorder = record.NewFakeRecorder(1024)
+		b.eventRecorder = events.NewFakeRecorder(1024)
 	}
 }
 

@@ -8,10 +8,9 @@ import (
 	"context"
 	"fmt"
 
-	"sigs.k8s.io/controller-runtime/pkg/client"
-
 	"k8s.io/apimachinery/pkg/runtime"
-	"k8s.io/client-go/tools/record"
+	"k8s.io/client-go/tools/events"
+	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/manager"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 
@@ -61,7 +60,7 @@ func AddDeployerToManager(lsUncachedClient, lsCachedClient, hostUncachedClient, 
 // This method should only be used for testing.
 func NewController(lsUncachedClient, lsCachedClient, hostUncachedClient, hostCachedClient client.Client,
 	finishedObjectCache *utils.FinishedObjectCache,
-	log logging.Logger, scheme *runtime.Scheme, eventRecorder record.EventRecorder,
+	log logging.Logger, scheme *runtime.Scheme, eventRecorder events.EventRecorder,
 	config mockv1alpha1.Configuration, callerName string) (reconcile.Reconciler, error) {
 	d, err := NewDeployer(lsUncachedClient, lsCachedClient, hostUncachedClient, hostCachedClient,
 		log,

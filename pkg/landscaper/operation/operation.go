@@ -6,7 +6,7 @@ package operation
 
 import (
 	"k8s.io/apimachinery/pkg/runtime"
-	"k8s.io/client-go/tools/record"
+	"k8s.io/client-go/tools/events"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
 	"github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/ctf"
@@ -24,13 +24,13 @@ type RegistriesAccessor interface {
 type Operation struct {
 	lsUncachedClient  client.Client
 	scheme            *runtime.Scheme
-	eventRecorder     record.EventRecorder
+	eventRecorder     events.EventRecorder
 	componentRegistry model.RegistryAccess
 }
 
 // NewOperation creates a new internal installation Operation object.
 // DEPRECATED: use the Builder instead.
-func NewOperation(scheme *runtime.Scheme, recorder record.EventRecorder, lsUncachedClient client.Client) *Operation {
+func NewOperation(scheme *runtime.Scheme, recorder events.EventRecorder, lsUncachedClient client.Client) *Operation {
 	return &Operation{
 		lsUncachedClient: lsUncachedClient,
 		scheme:           scheme,
@@ -63,7 +63,7 @@ func (o *Operation) Scheme() *runtime.Scheme {
 }
 
 // EventRecorder returns an event recorder to create events.
-func (o *Operation) EventRecorder() record.EventRecorder {
+func (o *Operation) EventRecorder() events.EventRecorder {
 	return o.eventRecorder
 }
 

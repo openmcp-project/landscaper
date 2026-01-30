@@ -45,7 +45,7 @@ func AddControllerToManager(ctx context.Context, lsUncachedClient, lsCachedClien
 		lsUncachedClient, lsCachedClient, hostUncachedClient, hostCachedClient,
 		log,
 		lsMgr.GetScheme(),
-		lsMgr.GetEventRecorderFor("Landscaper"),
+		lsMgr.GetEventRecorder("Landscaper"),
 		config.Controllers.Executions.Workers,
 		lockingEnabled,
 		"executions",

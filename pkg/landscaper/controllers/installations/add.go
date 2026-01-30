@@ -8,12 +8,9 @@ import (
 	"context"
 	"fmt"
 
-	"sigs.k8s.io/controller-runtime/pkg/client"
-
-	"github.com/openmcp-project/landscaper/pkg/utils/lock"
-
 	"github.com/go-logr/logr"
 	"sigs.k8s.io/controller-runtime/pkg/builder"
+	"sigs.k8s.io/controller-runtime/pkg/client"
 	"sigs.k8s.io/controller-runtime/pkg/manager"
 	"sigs.k8s.io/controller-runtime/pkg/reconcile"
 
@@ -21,6 +18,7 @@ import (
 	"github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 	"github.com/openmcp-project/landscaper/pkg/utils"
+	"github.com/openmcp-project/landscaper/pkg/utils/lock"
 )
 
 // AddControllerToManager register the installation Controller in a manager.
@@ -48,7 +46,7 @@ func AddControllerToManager(controllerName string,
 		lsUncachedClient, lsCachedClient, hostUncachedClient, hostCachedClient,
 		log,
 		lsMgr.GetScheme(),
-		lsMgr.GetEventRecorderFor("Landscaper"),
+		lsMgr.GetEventRecorder("Landscaper"),
 		config,
 		config.Controllers.Installations.Workers,
 		lockingEnabled,

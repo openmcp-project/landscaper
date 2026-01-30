@@ -11,7 +11,7 @@ import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 	"k8s.io/apimachinery/pkg/selection"
-	"k8s.io/client-go/tools/record"
+	"k8s.io/client-go/tools/events"
 
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	mockv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/mock/v1alpha1"
@@ -89,7 +89,7 @@ var _ = Describe("E2E", func() {
 
 		ctrl, err := mock.NewController(testenv.Client, testenv.Client, testenv.Client, testenv.Client,
 			utils.NewFinishedObjectCache(),
-			logging.Discard(), api.LandscaperScheme, record.NewFakeRecorder(1024), mockv1alpha1.Configuration{
+			logging.Discard(), api.LandscaperScheme, events.NewFakeRecorder(1024), mockv1alpha1.Configuration{
 				TargetSelector: []lsv1alpha1.TargetSelector{
 					{
 						Annotations: []lsv1alpha1.Requirement{
@@ -141,7 +141,7 @@ var _ = Describe("E2E", func() {
 
 		ctrl, err := mock.NewController(testenv.Client, testenv.Client, testenv.Client, testenv.Client,
 			utils.NewFinishedObjectCache(),
-			logging.Discard(), api.LandscaperScheme, record.NewFakeRecorder(1024), mockv1alpha1.Configuration{
+			logging.Discard(), api.LandscaperScheme, events.NewFakeRecorder(1024), mockv1alpha1.Configuration{
 				TargetSelector: []lsv1alpha1.TargetSelector{
 					{
 						Annotations: []lsv1alpha1.Requirement{

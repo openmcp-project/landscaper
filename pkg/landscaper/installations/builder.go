@@ -8,15 +8,14 @@ import (
 	"context"
 	"errors"
 
-	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
-	"github.com/openmcp-project/landscaper/pkg/utils"
-
 	"k8s.io/apimachinery/pkg/runtime"
-	"k8s.io/client-go/tools/record"
+	"k8s.io/client-go/tools/events"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
 	"github.com/openmcp-project/landscaper/pkg/components/model"
 	lsoperation "github.com/openmcp-project/landscaper/pkg/landscaper/operation"
+	"github.com/openmcp-project/landscaper/pkg/utils"
 )
 
 // OperationBuilder is a builder helper struct for building an installation operation.
@@ -91,7 +90,7 @@ func (b *OperationBuilder) ComponentRegistry(registry model.RegistryAccess) *Ope
 }
 
 // WithEventRecorder sets a event recorder.
-func (b *OperationBuilder) WithEventRecorder(er record.EventRecorder) *OperationBuilder {
+func (b *OperationBuilder) WithEventRecorder(er events.EventRecorder) *OperationBuilder {
 	b.Builder.WithEventRecorder(er)
 	return b
 }

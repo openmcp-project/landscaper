@@ -358,7 +358,7 @@ func (o *Operation) NewError(err error, reason, message string, codes ...lsv1alp
 
 // CreateEventFromCondition creates a new event based on the given condition
 func (o *Operation) CreateEventFromCondition(ctx context.Context, inst *lsv1alpha1.Installation, cond lsv1alpha1.Condition) error {
-	o.Operation.EventRecorder().Event(inst, corev1.EventTypeWarning, cond.Reason, cond.Message)
+	o.Operation.EventRecorder().Eventf(inst, nil, corev1.EventTypeWarning, cond.Reason, "ReconcileInstallation", cond.Message)
 	return nil
 }
 

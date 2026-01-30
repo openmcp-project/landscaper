@@ -17,7 +17,7 @@ import (
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/util/errors"
 	"k8s.io/client-go/rest"
-	"k8s.io/client-go/tools/record"
+	"k8s.io/client-go/tools/events"
 	"ocm.software/ocm/api/datacontext"
 	"ocm.software/ocm/api/ocm"
 	"sigs.k8s.io/controller-runtime/pkg/builder"
@@ -104,7 +104,7 @@ func Add(lsUncachedClient, lsCachedClient, hostUncachedClient, hostCachedClient 
 		lsUncachedClient, lsCachedClient, hostUncachedClient, hostCachedClient,
 		finishedObjectCache,
 		lsMgr.GetScheme(),
-		lsMgr.GetEventRecorderFor(args.Name),
+		lsMgr.GetEventRecorder(args.Name),
 		hostMgr.GetScheme(),
 		args,
 		maxNumberOfWorkers,
@@ -138,7 +138,7 @@ type controller struct {
 	targetSelectors []lsv1alpha1.TargetSelector
 
 	lsScheme        *runtime.Scheme
-	lsEventRecorder record.EventRecorder
+	lsEventRecorder events.EventRecorder
 	hostScheme      *runtime.Scheme
 
 	workerCounter  *lsutil.WorkerCounter
@@ -152,7 +152,7 @@ func NewController(lsRestConfig *rest.Config,
 	lsUncachedClient, lsCachedClient, hostUncachedClient, hostCachedClient client.Client,
 	finishedObjectCache *lsutil.FinishedObjectCache,
 	lsScheme *runtime.Scheme,
-	lsEventRecorder record.EventRecorder,
+	lsEventRecorder events.EventRecorder,
 	hostScheme *runtime.Scheme,
 	args DeployerArgs,
 	maxNumberOfWorkers int,
