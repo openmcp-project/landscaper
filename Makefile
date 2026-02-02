@@ -136,7 +136,7 @@ FORMATTER_VERSION ?= v0.41.0
 # renovate: datasource=github-releases depName=golangci/golangci-lint
 LINTER_VERSION ?= v2.8.0
 # renovate: datasource=github-releases depName=elastic/crd-ref-docs
-API_REF_GEN_VERSION ?= v0.2.0
+API_REF_GEN_VERSION ?= v0.3.0
 # renovate: datasource=github-releases depName=jqlang/jq
 JQ_VERSION ?= v1.7.1
 # renovate: datasource=github-releases depName=open-component-model/ocm
