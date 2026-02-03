@@ -16,7 +16,7 @@ spec:
       runtimeConfig:
         apps/v1: true
         batch/v1: true
-    version: "1.31"
+    version: "1.32"
   hibernation:
     schedules:
       - start: 00 {{ .hour }} * * 1,2,3,4,5,6,0
