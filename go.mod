@@ -7,13 +7,13 @@ require (
 	github.com/Masterminds/sprig/v3 v3.3.0
 	github.com/cloudflare/cfssl v1.6.5
 	github.com/distribution/reference v0.6.0
-	github.com/docker/cli v29.2.0+incompatible
+	github.com/docker/cli v29.2.1+incompatible
 	github.com/go-logr/logr v1.4.3
 	github.com/golang/mock v1.7.0-rc.1
 	github.com/google/uuid v1.6.0
 	github.com/hashicorp/go-multierror v1.1.1
 	github.com/mandelsoft/filepath v0.0.0-20240223090642-3e2777258aa3
-	github.com/mandelsoft/goutils v0.0.0-20251225170327-b32fc0dd2706
+	github.com/mandelsoft/goutils v0.0.0-20260209132453-cd86279dc63b
 	github.com/mandelsoft/spiff v1.7.0-beta-8
 	github.com/mandelsoft/vfs v0.4.5-0.20250514111339-d7b067920e91
 	github.com/onsi/ginkgo/v2 v2.28.1
@@ -36,12 +36,12 @@ require (
 	golang.org/x/sys v0.41.0
 	gopkg.in/yaml.v3 v3.0.1
 	helm.sh/helm/v3 v3.20.0
-	k8s.io/api v0.35.0
-	k8s.io/apiextensions-apiserver v0.35.0
-	k8s.io/apimachinery v0.35.0
-	k8s.io/client-go v0.35.0
-	k8s.io/code-generator v0.35.0
-	k8s.io/utils v0.0.0-20260108192941-914a6e750570
+	k8s.io/api v0.35.1
+	k8s.io/apiextensions-apiserver v0.35.1
+	k8s.io/apimachinery v0.35.1
+	k8s.io/client-go v0.35.1
+	k8s.io/code-generator v0.35.1
+	k8s.io/utils v0.0.0-20260210185600-b8788abfbbc2
 	ocm.software/ocm v0.35.0
 	sigs.k8s.io/controller-runtime v0.23.1
 	sigs.k8s.io/yaml v1.6.0
@@ -390,9 +390,9 @@ require (
 	gopkg.in/op/go-logging.v1 v1.0.0-20160211212156-b2cb9fa56473 // indirect
 	gopkg.in/warnings.v0 v0.1.2 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
-	k8s.io/apiserver v0.35.0 // indirect
+	k8s.io/apiserver v0.35.1 // indirect
 	k8s.io/cli-runtime v0.35.0 // indirect
-	k8s.io/component-base v0.35.0 // indirect
+	k8s.io/component-base v0.35.1 // indirect
 	k8s.io/gengo/v2 v2.0.0-20250922181213-ec3ebc5fd46b // indirect
 	k8s.io/klog/v2 v2.130.1 // indirect
 	k8s.io/kube-openapi v0.0.0-20260127142750-a19766b6e2d4 // indirect

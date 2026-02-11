@@ -5,7 +5,7 @@ go 1.25.7
 require (
 	github.com/containerd/containerd v1.7.30
 	github.com/distribution/reference v0.6.0
-	github.com/docker/cli v29.2.0+incompatible
+	github.com/docker/cli v29.2.1+incompatible
 	github.com/drone/envsubst v1.0.3
 	github.com/ghodss/yaml v1.0.0
 	github.com/go-logr/logr v1.4.3
@@ -28,8 +28,8 @@ require (
 	github.com/spf13/pflag v1.0.10
 	go.uber.org/zap v1.27.1
 	golang.org/x/crypto v0.47.0
-	k8s.io/api v0.35.0
-	k8s.io/apimachinery v0.35.0
+	k8s.io/api v0.35.1
+	k8s.io/apimachinery v0.35.1
 	sigs.k8s.io/yaml v1.6.0
 )
 
