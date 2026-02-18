@@ -222,8 +222,6 @@ func (s *State) splitFileAndUploadChunks(ctx context.Context, filePath string) (
 			}
 			return nil, err
 		}
-		// remove NULL characters
-		buffer = bytes.Trim(buffer, "\x00")
 
 		secret := &corev1.Secret{}
 		secret.GenerateName = fmt.Sprintf("state-%s-%s-", s.deployItem.Namespace, s.deployItem.Name)
