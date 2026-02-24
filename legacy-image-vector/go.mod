@@ -9,7 +9,7 @@ require (
 	github.com/onsi/gomega v1.39.1
 	github.com/opencontainers/go-digest v1.0.0
 	github.com/opencontainers/image-spec v1.1.1
-	github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go v1.0.3
+	github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go v1.0.6
 	sigs.k8s.io/yaml v1.6.0
 )
 
