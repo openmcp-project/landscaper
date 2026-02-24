@@ -50,7 +50,7 @@ func (e *NoValueError) buildErrorMessage() {
 		builder = strings.Builder{}
 	)
 
-	builder.WriteString(fmt.Sprintf("template \"%s\" contains fields with \"no value\":\n", e.templateName))
+	fmt.Fprintf(&builder, "template \"%s\" contains fields with \"no value\":\n", e.templateName)
 
 	lines := strings.Split(e.templateResult, "\n")
 
@@ -59,7 +59,7 @@ func (e *NoValueError) buildErrorMessage() {
 		column := strings.Index(content, noValue)
 
 		if column > -1 {
-			builder.WriteString(fmt.Sprintf("\nline %d:%d\n", line, column))
+			fmt.Fprintf(&builder, "\nline %d:%d\n", line, column)
 			builder.WriteString(CreateSourceSnippet(line, column, lines))
 		}
 	}

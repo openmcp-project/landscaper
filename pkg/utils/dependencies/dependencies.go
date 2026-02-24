@@ -107,7 +107,7 @@ func (r *installationNode) fetchPredecessors(otherNodes []*installationNode) (se
 					dupExpFound = true
 					msg.WriteString("\n  data exports:")
 				}
-				msg.WriteString(fmt.Sprintf("\n    '%s' is exported by [%s]", exp, strings.Join(sources.List(), ", ")))
+				fmt.Fprintf(&msg, "\n    '%s' is exported by [%s]", exp, strings.Join(sources.List(), ", "))
 			}
 		}
 		dupExpFound = false
@@ -117,7 +117,7 @@ func (r *installationNode) fetchPredecessors(otherNodes []*installationNode) (se
 					dupExpFound = true
 					msg.WriteString("\n  target exports:")
 				}
-				msg.WriteString(fmt.Sprintf("\n    '%s' is exported by [%s]", exp, strings.Join(sources.List(), ", ")))
+				fmt.Fprintf(&msg, "\n    '%s' is exported by [%s]", exp, strings.Join(sources.List(), ", "))
 			}
 		}
 		return nil, errors.New(msg.String())

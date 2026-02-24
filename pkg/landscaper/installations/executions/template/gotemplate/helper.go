@@ -69,10 +69,10 @@ func CreateSourceSnippet(errorLine, errorColumn int, source []string) string {
 		}
 		// the prefix contains the line number and some amount of whitespaces to keep the correct indentation
 		prefix := fmt.Sprintf("%d:%s", realLine, strings.Repeat(" ", repeat))
-		formatted.WriteString(fmt.Sprintf("%s%s\n", prefix, line))
+		fmt.Fprintf(&formatted, "%s%s\n", prefix, line)
 
 		if i == errorLine {
-			formatted.WriteString(fmt.Sprintf("%s\u02c6≈≈≈≈≈≈≈\n", strings.Repeat(" ", errorColumn+len(prefix))))
+			fmt.Fprintf(&formatted, "%s\u02c6≈≈≈≈≈≈≈\n", strings.Repeat(" ", errorColumn+len(prefix)))
 		}
 	}
 
