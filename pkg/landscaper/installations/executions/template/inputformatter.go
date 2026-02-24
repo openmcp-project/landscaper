@@ -85,9 +85,9 @@ func (f *TemplateInputFormatter) Format(input map[string]interface{}, prefix str
 
 		// compress values if pretty print is not enabled and the length exceeds the threshold.
 		if !f.prettyPrint && len(marshaled) > compressThresholdBytes {
-			formatted.WriteString(fmt.Sprintf("%s%s: >gzip>base64> %s\n", prefix, k, compressAndEncode(string(marshaled))))
+			fmt.Fprintf(&formatted, "%s%s: >gzip>base64> %s\n", prefix, k, compressAndEncode(string(marshaled)))
 		} else {
-			formatted.WriteString(fmt.Sprintf("%s%s: %s\n", prefix, k, string(marshaled)))
+			fmt.Fprintf(&formatted, "%s%s: %s\n", prefix, k, string(marshaled))
 		}
 	}
 
