@@ -58,7 +58,7 @@ func DeployerBlueprintTests(f *framework.Framework) {
 		BeforeEach(func() {
 			log, err := logging.GetLogger()
 			if err != nil {
-				f.Log().Logfln("Error fetching logger: %w", err)
+				f.Log().Logfln("Error fetching logger: %v", err)
 				return
 			}
 			ctx = logging.NewContext(context.Background(), log)
@@ -277,11 +277,11 @@ func executeTest(ctx context.Context, f *framework.Framework, state *framework.S
 	err = utils.UpdateJobIdForDeployItemC(ctx, f.Client, di, metav1.Now())
 
 	if err != nil {
-		f.TestLog().Logfln(itemStringInit)
-		f.TestLog().Logfln(itemStringCreate)
-		f.TestLog().Logfln(itemStringBefore)
+		f.TestLog().Logln(itemStringInit)
+		f.TestLog().Logln(itemStringCreate)
+		f.TestLog().Logln(itemStringBefore)
 		utils.ExpectNoError(state.Client.Get(ctx, kutil.ObjectKeyFromObject(di), di))
-		f.TestLog().Logfln("Found DI after: " + fmt.Sprintf("%+v\n", *di))
+		f.TestLog().Logfln("Found DI after: %+v\n", *di)
 	}
 
 	utils.ExpectNoError(err)
