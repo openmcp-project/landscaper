@@ -46,7 +46,7 @@ func LogMemStatsPeriodically(ctx context.Context, interval time.Duration, hostUn
 	log.Info("Starting LogMemStats loop")
 	for {
 		if err := ctx.Err(); err != nil {
-			log.Info("LogMemStats loop was cancelled: %w", err)
+			log.Info("LogMemStats loop was cancelled: %v", err)
 			return
 		}
 

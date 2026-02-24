@@ -96,17 +96,17 @@ func NewShootClusterManager(log utils.Logger, gardenClusterKubeconfigPath, names
 	authDirectoryPath string, maxNumOfClusters, numClustersStartDeleteOldest int, durationForClusterDeletion,
 	prID string, nginxIngressEnabled, disableShootDeletion, workerless bool) (*ShootClusterManager, error) {
 
-	log.Logfln("Create cluster manager with:")
-	log.Logfln("  GardenClusterKubeconfigPath: " + gardenClusterKubeconfigPath)
-	log.Logfln("  Namespace: " + namespace)
-	log.Logfln("  AuthDirectoryPath: " + authDirectoryPath)
-	log.Logfln("  MaxNumOfClusters: " + strconv.Itoa(maxNumOfClusters))
-	log.Logfln("  NumClustersStartDeleteOldest: " + strconv.Itoa(numClustersStartDeleteOldest))
-	log.Logfln("  DurationForClusterDeletion: " + durationForClusterDeletion)
-	log.Logfln("  PrID: " + prID)
-	log.Logfln("  NginxEnabled: " + strconv.FormatBool(nginxIngressEnabled))
-	log.Logfln("  DisableShootDeletion: " + strconv.FormatBool(disableShootDeletion))
-	log.Logfln("  Workerless: " + strconv.FormatBool(workerless))
+	log.Logln("Create cluster manager with:")
+	log.Logfln("  GardenClusterKubeconfigPath: %s", gardenClusterKubeconfigPath)
+	log.Logfln("  Namespace: %s", namespace)
+	log.Logfln("  AuthDirectoryPath: %s", authDirectoryPath)
+	log.Logfln("  MaxNumOfClusters: %s", strconv.Itoa(maxNumOfClusters))
+	log.Logfln("  NumClustersStartDeleteOldest: %s", strconv.Itoa(numClustersStartDeleteOldest))
+	log.Logfln("  DurationForClusterDeletion: %s", durationForClusterDeletion)
+	log.Logfln("  PrID: %s", prID)
+	log.Logfln("  NginxEnabled: %s", strconv.FormatBool(nginxIngressEnabled))
+	log.Logfln("  DisableShootDeletion: %s", strconv.FormatBool(disableShootDeletion))
+	log.Logfln("  Workerless: %s", strconv.FormatBool(workerless))
 
 	duration, err := time.ParseDuration(durationForClusterDeletion)
 	if err != nil {
@@ -188,20 +188,20 @@ func (o *ShootClusterManager) CreateShootCluster(ctx context.Context) error {
 	o.log.Logfln("read shoot extract for test cluster")
 	shootExtract, err := o.readShootExtract(ctx, gardenClientForShoots, clusterName)
 	if err != nil {
-		o.log.Logfln("failed to read shoot extract for test cluster: %w", err)
+		o.log.Logfln("failed to read shoot extract for test cluster: %v", err)
 		return err
 	}
 
 	o.log.Logfln("write oidc issuer url for test cluster")
 	if err := o.writeOIDCIssuerURL(shootExtract); err != nil {
-		o.log.Logfln("failed to write oidc issuer url for test cluster: %w", err)
+		o.log.Logfln("failed to write oidc issuer url for test cluster: %v", err)
 		return err
 	}
 
 	if o.nginxIngressEnabled {
 		o.log.Logfln("write ingress domain for test cluster")
 		if err := o.writeIngressDomain(shootExtract); err != nil {
-			o.log.Logfln("failed to write ingress domain for test cluster: %w", err)
+			o.log.Logfln("failed to write ingress domain for test cluster: %v", err)
 			return err
 		}
 	}
@@ -405,20 +405,20 @@ func (o *ShootClusterManager) waitUntilShootClusterIsReady(ctx context.Context, 
 		o.log.Logfln("wait for cluster is ready")
 		shoot, getError := gardenClient.Get(ctx, clusterName, metav1.GetOptions{})
 		if getError != nil {
-			o.log.Logfln("failed to get cluster status: failed to get shoot: %w", err)
+			o.log.Logfln("failed to get cluster status: failed to get shoot: %v", err)
 			return false, nil
 		}
 
 		// check conditions (maybe .lastOperation.state == "Succeeded" suffices?)
 		jp := jsonpath.New("conditions")
 		if err := jp.Parse("{.status.conditions}"); err != nil {
-			o.log.Logfln("failed to get cluster status: template parsing failed: %w", err)
+			o.log.Logfln("failed to get cluster status: template parsing failed: %v", err)
 			return false, nil
 		}
 
 		result, err := jp.FindResults(shoot.Object)
 		if err != nil {
-			o.log.Logfln("failed to get cluster status: result not found: %w", err)
+			o.log.Logfln("failed to get cluster status: result not found: %v", err)
 			return false, nil
 		}
 
@@ -430,7 +430,7 @@ func (o *ShootClusterManager) waitUntilShootClusterIsReady(ctx context.Context, 
 		if !ok {
 			return false, fmt.Errorf("failed to get cluster status: unexpected type")
 		}
-		o.log.Logfln("conditions: ", conditions)
+		o.log.Logfln("conditions: %v", conditions)
 
 		checkList := map[string]bool{
 			"APIServerAvailable":      false,
@@ -457,7 +457,7 @@ func (o *ShootClusterManager) waitUntilShootClusterIsReady(ctx context.Context, 
 				}
 			}
 		}
-		o.log.Logfln("checklist: ", checkList)
+		o.log.Logfln("checklist: %v", checkList)
 		statusOfAllConditions := true
 		for checkListKey := range checkList {
 			statusOfAllConditions = statusOfAllConditions && checkList[checkListKey]

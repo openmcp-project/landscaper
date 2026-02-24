@@ -36,7 +36,7 @@ func ImportExecutionsTests(f *framework.Framework) {
 
 		log, err := logging.GetLogger()
 		if err != nil {
-			f.Log().Logfln("Error fetching logger: %w", err)
+			f.Log().Logfln("Error fetching logger: %v", err)
 			return
 		}
 

@@ -586,7 +586,7 @@ func (s *State) addReconcileAnnotation(ctx context.Context, c client.Client, obj
 		if apierrors.IsNotFound(err) {
 			return nil
 		}
-		s.log.Logfln("addReconcileAnnotation: failed to get object: %w", err)
+		s.log.Logfln("addReconcileAnnotation: failed to get object: %v", err)
 		return err
 	}
 
@@ -596,7 +596,7 @@ func (s *State) addReconcileAnnotation(ctx context.Context, c client.Client, obj
 			if readError := c.Get(ctx, kutil.ObjectKeyFromObject(obj), obj); apierrors.IsNotFound(readError) {
 				return nil
 			}
-			s.log.Logfln("addReconcileAnnotation: update failed: %w", err)
+			s.log.Logfln("addReconcileAnnotation: update failed: %v", err)
 			err = errors.Wrap(err, "Failed to add reconcile annotation during cleanup")
 			return err
 		}
@@ -663,7 +663,7 @@ func WaitForObjectToBeDeleted(ctx context.Context, log utils.Logger, c client.Cl
 			if apierrors.IsNotFound(err) {
 				return true, nil
 			}
-			log.Logfln("WaitForObjectToBeDeleted: failed to get object: %w", err)
+			log.Logfln("WaitForObjectToBeDeleted: failed to get object: %v", err)
 			lastErr = err
 			return false, nil
 		}

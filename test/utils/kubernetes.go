@@ -137,14 +137,14 @@ func WaitForContextToBeReady(ctx context.Context, logger utils.Logger, kubeClien
 	err := wait.PollUntilContextTimeout(ctx, 1*time.Second, timeout, true, func(ctx context.Context) (done bool, err error) {
 		context := &v1alpha1.Context{}
 		if err := kubeClient.Get(ctx, objKey, context); err != nil {
-			logger.Logfln("failed to get context %q: %w - retried in 1 second", objKey.String(), err)
+			logger.Logfln("failed to get context %q: %v - retried in 1 second", objKey.String(), err)
 			return false, nil
 		}
 
 		return true, nil
 	})
 	if err != nil {
-		logger.Logfln("unable to wait for context to be ready %q: %w", objKey.String(), err)
+		logger.Logfln("unable to wait for context to be ready %q: %v", objKey.String(), err)
 		return fmt.Errorf("unable to wait for context to be ready %q: %w", objKey.String(), err)
 	}
 	logger.Logfln("context is ready %q", objKey.String())
