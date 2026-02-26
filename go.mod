@@ -13,7 +13,7 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/hashicorp/go-multierror v1.1.1
 	github.com/mandelsoft/filepath v0.0.0-20240223090642-3e2777258aa3
-	github.com/mandelsoft/goutils v0.0.0-20260209132453-cd86279dc63b
+	github.com/mandelsoft/goutils v0.0.0-20260226120828-1ef06f3d9aa1
 	github.com/mandelsoft/spiff v1.7.0-beta-8
 	github.com/mandelsoft/vfs v0.4.5-0.20250514111339-d7b067920e91
 	github.com/onsi/ginkgo/v2 v2.28.1
@@ -220,7 +220,7 @@ require (
 	github.com/google/certificate-transparency-go v1.3.2 // indirect
 	github.com/google/gnostic-models v0.7.0 // indirect
 	github.com/google/go-cmp v0.7.0 // indirect
-	github.com/google/go-containerregistry v0.21.0 // indirect
+	github.com/google/go-containerregistry v0.21.1 // indirect
 	github.com/google/go-github/v45 v45.2.0 // indirect
 	github.com/google/go-github/v73 v73.0.0 // indirect
 	github.com/google/go-querystring v1.2.0 // indirect

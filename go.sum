@@ -542,8 +542,8 @@ github.com/google/go-cmp v0.5.5/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/
 github.com/google/go-cmp v0.6.0/go.mod h1:17dUlkBOakJ0+DkrSSNjCkIjxS6bF9zb3elmeNGIjoY=
 github.com/google/go-cmp v0.7.0 h1:wk8382ETsv4JYUZwIsn6YpYiWiBsYLSJiTsyBybVuN8=
 github.com/google/go-cmp v0.7.0/go.mod h1:pXiqmnSA92OHEEa9HXL2W4E7lf9JzCmGVUdgjX3N/iU=
-github.com/google/go-containerregistry v0.21.0 h1:ocqxUOczFwAZQBMNE7kuzfqvDe0VWoZxQMOesXreCDI=
-github.com/google/go-containerregistry v0.21.0/go.mod h1:ctO5aCaewH4AK1AumSF5DPW+0+R+d2FmylMJdp5G7p0=
+github.com/google/go-containerregistry v0.21.1 h1:sOt/o9BS2b87FnR7wxXPvRKU1XVJn2QCwOS5g8zQXlc=
+github.com/google/go-containerregistry v0.21.1/go.mod h1:ctO5aCaewH4AK1AumSF5DPW+0+R+d2FmylMJdp5G7p0=
 github.com/google/go-github/v45 v45.2.0 h1:5oRLszbrkvxDDqBCNj2hjDZMKmvexaZ1xw/FCD+K3FI=
 github.com/google/go-github/v45 v45.2.0/go.mod h1:FObaZJEDSTa/WGCzZ2Z3eoCDXWJKMenWWTrd8jrta28=
 github.com/google/go-github/v73 v73.0.0 h1:aR+Utnh+Y4mMkS+2qLQwcQ/cF9mOTpdwnzlaw//rG24=
@@ -691,8 +691,8 @@ github.com/magiconair/properties v1.8.10 h1:s31yESBquKXCV9a/ScB3ESkOjUYYv+X0rg8S
 github.com/magiconair/properties v1.8.10/go.mod h1:Dhd985XPs7jluiymwWYZ0G4Z61jb3vdS329zhj2hYo0=
 github.com/mandelsoft/filepath v0.0.0-20240223090642-3e2777258aa3 h1:oo9nIgnyiBgYPbcZslRT4y29siuL5EoNJ/t1tr0xEVQ=
 github.com/mandelsoft/filepath v0.0.0-20240223090642-3e2777258aa3/go.mod h1:LxhqC7khDoRENwooP6f/vWvia9ivj6TqLYrR39zqkN0=
-github.com/mandelsoft/goutils v0.0.0-20260209132453-cd86279dc63b h1:b2EqVJ3JvjzUudzopUZ4/9JrvgTYZ6RiNkvNmvV4qfw=
-github.com/mandelsoft/goutils v0.0.0-20260209132453-cd86279dc63b/go.mod h1:fTCyGFCMm+ugUn1FqcHeWelCjoSYtkJaqnJvSmgkx1M=
+github.com/mandelsoft/goutils v0.0.0-20260226120828-1ef06f3d9aa1 h1:8j5TKQoYsGDXpoi7aL5wHExbjOomkaTNuVAfq3caZ50=
+github.com/mandelsoft/goutils v0.0.0-20260226120828-1ef06f3d9aa1/go.mod h1:fTCyGFCMm+ugUn1FqcHeWelCjoSYtkJaqnJvSmgkx1M=
 github.com/mandelsoft/logging v0.0.0-20240618075559-fdca28a87b0a h1:MAvh0gbP2uwKmf7wWCkYCzrYa6vPjBvYeGhoUlVHwtI=
 github.com/mandelsoft/logging v0.0.0-20240618075559-fdca28a87b0a/go.mod h1:uO460C1lIB3IOOgrbXhAlz3AKsOv4T2K6ALBn3PwuSg=
 github.com/mandelsoft/spiff v1.7.0-beta-8 h1:qfQOhorydo9aeRRNtywaDwSPqzvaNEIAXfgXV9ebTEU=
