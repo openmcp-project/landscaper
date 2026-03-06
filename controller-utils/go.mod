@@ -1,6 +1,6 @@
 module github.com/openmcp-project/landscaper/controller-utils
 
-go 1.26.0
+go 1.26.1
 
 require (
 	github.com/go-logr/logr v1.4.3
