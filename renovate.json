@@ -30,6 +30,17 @@
   ],
   "packageRules": [
     {
+      "description": "Group all ocm updates together",
+      "matchDatasources": [
+        "go",
+        "custom"
+      ],
+      "groupName": "ocm",
+      "matchPackageNames": [
+        "^ocm\\.software/ocm"
+      ]
+    },
+    {
       "matchManagers": [
         "gomod"
       ],
