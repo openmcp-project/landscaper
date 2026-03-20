@@ -1,0 +1,8 @@
+# path to the kubeconfig of the resource cluster, i.e. the cluster on which installations, targets, etc. are created
+RESOURCE_CLUSTER_KUBECONFIG_PATH=""
+
+# path to the kubeconfig of the target cluster used in the target of the resource cluster
+TARGET_CLUSTER_KUBECONFIG_PATH=""
+
+# namespace for resources in the resource cluster
+NAMESPACE="cu-example"
