@@ -68,40 +68,42 @@ You can find a list of error messages and corresponding solutions in
 
 [11. Export Parameters](./import-export/export-parameters)
 
+[12. Deploying a Job with the Manifest Deployer](./import-export/job)
+
 ### Subinstallations
 
-[12. Data flow between Subinstallations](./subinstallations/export-import)
+[13. Data flow between Subinstallations](./subinstallations/export-import)
 
-[13. Reuse of Components](./subinstallations/component-references)
+[14. Reuse of Components](./subinstallations/component-references)
 
-[14. Subinstallation Templates](./subinstallations/subinst-templates)
+[15. Subinstallation Templates](./subinstallations/subinst-templates)
 
 ### Templating
 
-[15. Templating: Accessing Component Descriptors ](./templating/components)
+[16. Templating: Accessing Component Descriptors ](./templating/components)
 
 ### Target Maps
 
-[16. Target Maps: Multiple Deploy Items](./target-maps/01-multiple-deploy-items)
+[17. Target Maps: Multiple Deploy Items](./target-maps/01-multiple-deploy-items)
 
-[17. Target Maps: Target Map References](./target-maps/02-targetmap-ref)
+[18. Target Maps: Target Map References](./target-maps/02-targetmap-ref)
 
-[18. Target Maps: Multiple Subinstallations](./target-maps/03-multiple-subinst)
+[19. Target Maps: Multiple Subinstallations](./target-maps/03-multiple-subinst)
 
-[19. Target Maps: Target Map on Subinstallation Level](./target-maps/04-forward-map)
+[20. Target Maps: Target Map on Subinstallation Level](./target-maps/04-forward-map)
 
-[20. Target Maps: Other Target Map Examples](./target-maps/05-other-examples)
+[21. Target Maps: Other Target Map Examples](./target-maps/05-other-examples)
 
 ### Kustomize
 
-[21. Introduction to Kustomize Examples](./kustomize/01-kustomize-introduction)
+[22. Introduction to Kustomize Examples](./kustomize/01-kustomize-introduction)
 
-[22. Deploying the PodInfo Application with Landscaper and Flux](./kustomize/02-podinfo)
+[23. Deploying the PodInfo Application with Landscaper and Flux](./kustomize/02-podinfo)
 
-[23. Deploying the PodInfo Application with Landscaper and Flux - controlled by Landscaper](./kustomize/03-podinfo-landscaper-controlled)
+[24. Deploying the PodInfo Application with Landscaper and Flux - controlled by Landscaper](./kustomize/03-podinfo-landscaper-controlled)
 
-[24. Dataflow Example](./kustomize/04-dataflow)
+[25. Dataflow Example](./kustomize/04-dataflow)
 
 ### Optimization
 
-[25. Optimization Hints ](../usage/Optimization.md)
+[26. Optimization Hints ](../usage/Optimization.md)
