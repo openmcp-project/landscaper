@@ -81,7 +81,7 @@ jobs:
 
       - name: Setup OCM
         id: setup_ocm
-        uses: open-component-model/ocm-setup-action@main
+        uses: open-component-model/ocm-setup-action@8c71929f38d3486e352e5d7aaf813f36accaaf43 # main
 
       - name: Build and Push Images
         run: |
