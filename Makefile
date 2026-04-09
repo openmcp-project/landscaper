@@ -144,7 +144,7 @@ OCM_VERSION ?= v0.39.0
 # renovate: datasource=github-releases depName=golang/mock
 MOCKGEN_VERSION ?= v1.6.0
 # renovate: datasource=github-releases depName=distribution/distribution
-REGISTRY_VERSION ?= v3.0.0-alpha.1
+REGISTRY_VERSION ?= v3.1.0
 # This cannot be handled properly e.g. with renovate, because the controller-runtime maintainers refuse to tag the
 # setup-envtest module (https://github.com/kubernetes-sigs/controller-runtime/issues/2720)
 SETUP_ENVTEST_VERSION ?= release-0.21
@@ -213,7 +213,7 @@ jq: localbin ## Download jq locally if necessary. If wrong version is installed,
 .PHONY: registry
 registry: localbin ## Download registry locally if necessary. If wrong version is installed, it will be overwritten.
 	@test -s $(REGISTRY_BINARY) && $(REGISTRY_BINARY) --version | grep -q $(REGISTRY_VERSION) || \
-	( echo "Installing local registry ..."; \
+	( echo "Installing local registry $(REGISTRY_VERSION) from https://github.com/distribution/distribution..."; \
 	REGISTRY=$(REGISTRY_BINARY) LOCALBIN=$(LOCALBIN) $(REPO_ROOT)/hack/install-registry.sh $(REGISTRY_VERSION) )
 
 .PHONY: release
