@@ -19,7 +19,7 @@ import (
 
 	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
 
-	"helm.sh/helm/v3/pkg/registry"
+	"helm.sh/helm/v4/pkg/registry"
 	"k8s.io/utils/ptr"
 
 	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"

@@ -3,8 +3,8 @@ package chartresolver_test
 import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
-	"helm.sh/helm/v3/pkg/chart"
-	"helm.sh/helm/v3/pkg/chart/loader"
+	chart "helm.sh/helm/v4/pkg/chart/v2"
+	chartloader "helm.sh/helm/v4/pkg/chart/v2/loader"
 
 	"github.com/openmcp-project/landscaper/pkg/deployer/helm/chartresolver"
 )
@@ -12,7 +12,7 @@ import (
 var _ = Describe("Chart tree", func() {
 
 	It("should marshal and unmarshal a chart", func() {
-		c1, err := loader.LoadDir("./testdata/testchart2")
+		c1, err := chartloader.LoadDir("./testdata/testchart2")
 		Expect(err).NotTo(HaveOccurred())
 
 		raw, err := chartresolver.MarshalChart(c1)

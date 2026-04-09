@@ -13,12 +13,12 @@ import (
 	"strings"
 	"sync"
 
-	"helm.sh/helm/v3/pkg/action"
-	"helm.sh/helm/v3/pkg/chart"
-	"helm.sh/helm/v3/pkg/kube"
-	"helm.sh/helm/v3/pkg/release"
-	"helm.sh/helm/v3/pkg/storage"
-	"helm.sh/helm/v3/pkg/storage/driver"
+	"helm.sh/helm/v4/pkg/action"
+	chart "helm.sh/helm/v4/pkg/chart/v2"
+	"helm.sh/helm/v4/pkg/kube"
+	release "helm.sh/helm/v4/pkg/release"
+	"helm.sh/helm/v4/pkg/storage"
+	"helm.sh/helm/v4/pkg/storage/driver"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"
@@ -118,7 +118,7 @@ func (c *RealHelmDeployer) Undeploy(ctx context.Context) error {
 	return c.deleteRelease(ctx)
 }
 
-func (c *RealHelmDeployer) getRelease(ctx context.Context) (*release.Release, error) {
+func (c *RealHelmDeployer) getRelease(ctx context.Context) (release.Releaser, error) {
 	currOp := "GetHelmRelease"
 
 	actionConfig, err := c.initActionConfig(ctx)
@@ -135,16 +135,20 @@ func (c *RealHelmDeployer) getRelease(ctx context.Context) (*release.Release, er
 	// If `namespace` is an empty string we do not do that check
 	// This check is to prevent users of for example updating releases that might be
 	// in namespaces that they do not have access to.
-	if c.defaultNamespace != "" && rls.Namespace != c.defaultNamespace {
+	accessor, err := release.NewAccessor(rls)
+	if err != nil {
+		return nil, lserrors.NewWrappedError(err, currOp, "NewAccessor", err.Error())
+	}
+	if c.defaultNamespace != "" && accessor.Namespace() != c.defaultNamespace {
 		err := fmt.Errorf("release %q not found in namespace %q", c.releaseName, c.defaultNamespace)
 		return nil, lserrors.NewWrappedError(err, currOp, "CheckNamespace", err.Error())
 	}
 
-	return rls, err
+	return rls, nil
 }
 
 // installRelease creates a helm release
-func (c *RealHelmDeployer) installRelease(ctx context.Context, values map[string]interface{}) (*release.Release, error) {
+func (c *RealHelmDeployer) installRelease(ctx context.Context, values map[string]interface{}) (release.Releaser, error) {
 	currOp := "InstallHelmRelease"
 	logger, ctx := logging.FromContextOrNew(ctx, []interface{}{lc.KeyMethod, currOp})
 
@@ -164,11 +168,13 @@ func (c *RealHelmDeployer) installRelease(ctx context.Context, values map[string
 	install.ReleaseName = c.releaseName
 	install.Namespace = c.defaultNamespace
 	install.CreateNamespace = c.createNamespace
-	install.Atomic = installConfig.Atomic
-	install.Force = installConfig.Force
+	install.RollbackOnFailure = installConfig.Atomic
+	install.ForceReplace = installConfig.Force
 	install.SkipSchemaValidation = installConfig.SkipSchemaValidation
 	install.TakeOwnership = installConfig.TakeOwnership
-	install.Wait = installConfig.Wait
+	if installConfig.Wait || installConfig.Atomic {
+		install.WaitStrategy = kube.StatusWatcherStrategy
+	}
 
 	timeout, err := timeout.TimeoutExceeded(ctx, c.di, TimeoutCheckpointHelmBeforeInstallingRelease)
 	if err != nil {
@@ -201,7 +207,7 @@ func (c *RealHelmDeployer) isHelmInstallMessage(message string) bool {
 }
 
 // upgradeRelease upgrades a helm release
-func (c *RealHelmDeployer) upgradeRelease(ctx context.Context, values map[string]interface{}) (*release.Release, error) {
+func (c *RealHelmDeployer) upgradeRelease(ctx context.Context, values map[string]interface{}) (release.Releaser, error) {
 	currOp := "UpgradeHelmRelease"
 	logger, ctx := logging.FromContextOrNew(ctx, []interface{}{lc.KeyMethod, currOp})
 
@@ -220,11 +226,13 @@ func (c *RealHelmDeployer) upgradeRelease(ctx context.Context, values map[string
 	upgrade := action.NewUpgrade(actionConfig)
 	upgrade.Namespace = c.defaultNamespace
 	upgrade.MaxHistory = 10
-	upgrade.Atomic = upgradeConfig.Atomic
-	upgrade.Force = upgradeConfig.Force
+	upgrade.RollbackOnFailure = upgradeConfig.Atomic
+	upgrade.ForceReplace = upgradeConfig.Force
 	upgrade.SkipSchemaValidation = upgradeConfig.SkipSchemaValidation
 	upgrade.TakeOwnership = upgradeConfig.TakeOwnership
-	upgrade.Wait = upgradeConfig.Wait
+	if upgradeConfig.Wait || upgradeConfig.Atomic {
+		upgrade.WaitStrategy = kube.StatusWatcherStrategy
+	}
 
 	timeout, err := timeout.TimeoutExceeded(ctx, c.di, TimeoutCheckpointHelmBeforeUpgradingRelease)
 	if err != nil {
@@ -286,7 +294,9 @@ func (c *RealHelmDeployer) deleteRelease(ctx context.Context) error {
 
 	uninstall := action.NewUninstall(actionConfig)
 	uninstall.KeepHistory = false
-	uninstall.Wait = uninstallConfig.Wait
+	if uninstallConfig.Wait {
+		uninstall.WaitStrategy = kube.StatusWatcherStrategy
+	}
 
 	timeout, err := timeout.TimeoutExceeded(ctx, c.di, TimeoutCheckpointHelmBeforeDeletingRelease)
 	if err != nil {
@@ -306,13 +316,10 @@ func (c *RealHelmDeployer) deleteRelease(ctx context.Context) error {
 }
 
 func (c *RealHelmDeployer) initActionConfig(ctx context.Context) (*action.Configuration, error) {
-	logf := c.createLogFunc(ctx)
-
 	currOp := "InitHelmAction"
 
 	restClientGetter := newRemoteRESTClientGetter(c.targetRestConfig, c.defaultNamespace)
 	kc := kube.New(restClientGetter)
-	kc.Log = logf
 
 	clientset, err := kc.Factory.KubernetesClientSet()
 	if err != nil {
@@ -325,24 +332,19 @@ func (c *RealHelmDeployer) initActionConfig(ctx context.Context) (*action.Config
 		RESTClientGetter: restClientGetter,
 		Releases:         store,
 		KubeClient:       kc,
-		Log:              logf,
 	}
 
 	return &actionConfig, nil
 }
 
 func (c *RealHelmDeployer) getStorageType(ctx context.Context, clientset *kubernetes.Clientset, namespace string) *storage.Storage {
-	logf := c.createLogFunc(ctx)
-
 	var store *storage.Storage
 	switch os.Getenv("HELM_DRIVER") {
 	case "secret", "secrets", "":
 		d := driver.NewSecrets(clientset.CoreV1().Secrets(namespace))
-		d.Log = logf
 		store = storage.Init(d)
 	case "configmap", "configmaps":
 		d := driver.NewConfigMaps(clientset.CoreV1().ConfigMaps(namespace))
-		d.Log = logf
 		store = storage.Init(d)
 	case "memory":
 		d := driver.NewMemory()
@@ -418,13 +420,18 @@ func (o *ManifestObject) toManagedResourceStatus() *managedresource.ManagedResou
 }
 
 func (c *RealHelmDeployer) GetManagedResourcesStatus(ctx context.Context) ([]managedresource.ManagedResourceStatus, error) {
-	release, err := c.getRelease(ctx)
+	rel, err := c.getRelease(ctx)
 	if err != nil {
 		return nil, err
 	}
 
+	accessor, err := release.NewAccessor(rel)
+	if err != nil {
+		return nil, fmt.Errorf("unable to create release accessor: %w", err)
+	}
+
 	result := make([]managedresource.ManagedResourceStatus, 0)
-	reader := strings.NewReader(release.Manifest)
+	reader := strings.NewReader(accessor.Manifest())
 	decoder := apimachineryyaml.NewYAMLOrJSONDecoder(reader, 1024)
 	for {
 		obj := &ManifestObject{}

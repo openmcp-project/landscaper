@@ -17,9 +17,9 @@ import (
 	"github.com/google/uuid"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
-	helmc "helm.sh/helm/v3/pkg/chart"
-	helmr "helm.sh/helm/v3/pkg/release"
-	helmt "helm.sh/helm/v3/pkg/time"
+	helmc "helm.sh/helm/v4/pkg/chart/v2"
+	helmstatus "helm.sh/helm/v4/pkg/release/common"
+	helmr "helm.sh/helm/v4/pkg/release/v1"
 	corev1 "k8s.io/api/core/v1"
 	apierrors "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -699,10 +699,10 @@ var _ = Describe("Template", func() {
 			helmRelease := helmr.Release{
 				Name: "test",
 				Info: &helmr.Info{
-					FirstDeployed: helmt.Now(),
-					LastDeployed:  helmt.Now(),
+					FirstDeployed: time.Now(),
+					LastDeployed:  time.Now(),
 					Description:   "Pending Installation",
-					Status:        helmr.StatusPendingInstall,
+					Status:        helmstatus.StatusPendingInstall,
 				},
 				Chart: &helmc.Chart{
 					Metadata: &helmc.Metadata{

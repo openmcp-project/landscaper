@@ -12,13 +12,10 @@ import (
 	"fmt"
 	"net/http"
 
-	"os"
-	"strings"
-
 	"github.com/mandelsoft/filepath/pkg/filepath"
 	"github.com/mandelsoft/vfs/pkg/memoryfs"
-	"github.com/mandelsoft/vfs/pkg/vfs"
 	"ocm.software/ocm/api/ocm/extensions/download"
+	"ocm.software/ocm/api/tech/helm/loader"
 
 	"github.com/mandelsoft/goutils/finalizer"
 	"ocm.software/ocm/api/ocm"
@@ -32,8 +29,8 @@ import (
 	"github.com/openmcp-project/landscaper/pkg/components/ocmlib"
 	"github.com/openmcp-project/landscaper/pkg/deployer/lib"
 
-	"helm.sh/helm/v3/pkg/chart"
-	chartloader "helm.sh/helm/v3/pkg/chart/loader"
+	chart "helm.sh/helm/v4/pkg/chart/v2"
+	chartloader "helm.sh/helm/v4/pkg/chart/v2/loader"
 	corev1 "k8s.io/api/core/v1"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
@@ -198,65 +195,11 @@ func getChartFromResourceRef(ctx context.Context, ocmConfig *corev1.ConfigMap, r
 	if err != nil {
 		return nil, err
 	}
-	ch, err := loadChartFromVFS(fs, path)
+	chartData, err := loader.Load(path, fs)
 	if err != nil {
 		return nil, err
 	}
-	return ch, nil
-}
-
-// loadChartFromVFS loads a helm v3 chart from a virtual filesystem path.
-// If the path is a file, it is loaded as an archive. If it is a directory,
-// the files are collected and loaded via chartloader.LoadFiles.
-func loadChartFromVFS(fs vfs.FileSystem, path string) (*chart.Chart, error) {
-	fi, err := fs.Stat(path)
-	if err != nil {
-		return nil, fmt.Errorf("cannot stat chart path %q: %w", path, err)
-	}
-	if !fi.IsDir() {
-		f, err := fs.Open(path)
-		if err != nil {
-			return nil, fmt.Errorf("cannot open chart archive %q: %w", path, err)
-		}
-		defer f.Close()
-		return chartloader.LoadArchive(f)
-	}
-
-	// Directory case: walk the directory and collect files for chartloader.LoadFiles
-	topdir, err := vfs.Abs(fs, path)
-	if err != nil {
-		return nil, fmt.Errorf("cannot determine absolute path: %w", err)
-	}
-	topdir += string(os.PathSeparator)
-
-	var files []*chartloader.BufferedFile
-	err = vfs.Walk(fs, path, func(name string, info os.FileInfo, err error) error {
-		if err != nil {
-			return err
-		}
-		n := strings.TrimPrefix(name, topdir)
-		if n == "" {
-			return nil
-		}
-		n = filepath.ToSlash(n)
-		if info.IsDir() {
-			return nil
-		}
-		if !info.Mode().IsRegular() {
-			return fmt.Errorf("cannot load irregular file %s", name)
-		}
-		data, err := vfs.ReadFile(fs, name)
-		if err != nil {
-			return fmt.Errorf("error reading %s: %w", n, err)
-		}
-		data = bytes.TrimPrefix(data, []byte{0xEF, 0xBB, 0xBF})
-		files = append(files, &chartloader.BufferedFile{Name: n, Data: data})
-		return nil
-	})
-	if err != nil {
-		return nil, err
-	}
-	return chartloader.LoadFiles(files)
+	return chartData, nil
 }
 
 func getChartFromArchive(archiveConfig *helmv1alpha1.ArchiveAccess) (*chart.Chart, error) {
