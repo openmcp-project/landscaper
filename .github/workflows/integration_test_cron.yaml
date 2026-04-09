@@ -11,11 +11,6 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: |
-      github.actor == 'renovate[bot]' ||
-      github.actor == 'dependabot[bot]' ||
-      contains(github.event.pull_request.title, 'run-int-tests') ||
-      contains(github.event_name , 'workflow_dispatch')
 
     steps:
       - name: Checkout code
