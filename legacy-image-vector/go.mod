@@ -1,6 +1,6 @@
 module github.com/openmcp-project/landscaper/legacy-image-vector
 
-go 1.26.1
+go 1.26.2
 
 require (
 	github.com/Masterminds/semver/v3 v3.4.0
@@ -9,7 +9,7 @@ require (
 	github.com/onsi/gomega v1.39.1
 	github.com/opencontainers/go-digest v1.0.0
 	github.com/opencontainers/image-spec v1.1.1
-	github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go v1.0.6
+	github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go v1.1.0
 	sigs.k8s.io/yaml v1.6.0
 )
 
@@ -36,5 +36,5 @@ require (
 	golang.org/x/tools v0.41.0 // indirect
 	gopkg.in/check.v1 v1.0.0-20201130134442-10cb98267c6c // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
-	k8s.io/apimachinery v0.35.2 // indirect
+	k8s.io/apimachinery v0.35.3 // indirect
 )

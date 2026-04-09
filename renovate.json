@@ -18,7 +18,7 @@
     "config:best-practices",
     "default:automergeDigest",
     "docker:pinDigests",
-    "group:kubernetes",
+    "group:kubernetesMonorepo",
     "group:goOpenapi",
     "helpers:pinGitHubActionDigests",
     "security:openssf-scorecard",
@@ -115,7 +115,7 @@
       "customType": "regex",
       "description": "Gardenlinux in several yaml files",
       "managerFilePatterns": [
-         "/.landscaper/blueprint/shoot-config.json/"
+        "/.landscaper/blueprint/shoot-config.json/"
       ],
       "matchStrings": [
         "gardenlinux\\s.*version:\\s*(?<currentValue>\\d+\\.\\d+\\.\\d+)"

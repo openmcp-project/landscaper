@@ -12,10 +12,10 @@ permissions:
 jobs:
   release_tag:
     name: Release version
-    runs-on: ubuntu-latest-8core
+    runs-on: ubuntu-latest
     steps:
       - name: Create GitHub App token
-        uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2
+        uses: actions/create-github-app-token@f8d387b68d61c58ab83c6c016672934102569859 # v3
         id: app-token
         with:
           # required
@@ -64,18 +64,18 @@ jobs:
           AUTHOR_NAME=$(git log -1 --pretty=format:'%an')
           AUTHOR_EMAIL=$(git log -1 --pretty=format:'%ae')
           echo "Tagging as $AUTHOR_NAME <$AUTHOR_EMAIL>"
-          
+
           echo "AUTHOR_NAME=$AUTHOR_NAME" >> $GITHUB_ENV
           echo "AUTHOR_EMAIL=$AUTHOR_EMAIL" >> $GITHUB_ENV
-          
+
           git config user.name "$AUTHOR_NAME"
           git config user.email "$AUTHOR_EMAIL"
-          
+
           git tag -a "${{ env.version }}" -m "Release ${{ env.version }}"
           git push origin "${{ env.version }}"
-          
+
           NESTED_GO_MODULES="apis controller-utils legacy-component-cli legacy-component-spec/bindings-go legacy-image-vector"
-          
+
           for MODULE in $NESTED_GO_MODULES; do
             git tag -a "${MODULE}/${{ env.version }}" -m "Release ${{ env.version }}"
             git push origin "${MODULE}/${{ env.version }}"
@@ -83,7 +83,7 @@ jobs:
 
       - name: Create GitHub release
         if: ${{ env.SKIP != 'true' }}
-        uses: softprops/action-gh-release@a06a81a03ee405af7f2048a818ed3f03bbf83c7b # v2
+        uses: softprops/action-gh-release@153bb8e04406b158c6c84fc1615b65b24149a1fe # v2
         with:
           tag_name: ${{ env.version }}
           name: Release ${{ env.version }}
@@ -97,7 +97,7 @@ jobs:
         if: ${{ env.SKIP != 'true' }}
         run: |
           echo "${{ env.version }}-dev" > VERSION
-                    
+
           git config user.name "${{ env.AUTHOR_NAME }}"
           git config user.email "${{ env.AUTHOR_EMAIL }}"
           git add VERSION
@@ -106,6 +106,6 @@ jobs:
           git add apis/go.mod
           git add legacy-component-cli/go.mod
           git add legacy-image-vector/go.mod
-          
+
           git commit -m "chore(release): Update VERSION to ${{ env.version }}-dev"
           git push origin main

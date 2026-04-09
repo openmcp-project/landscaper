@@ -134,17 +134,17 @@ CONTROLLER_TOOLS_VERSION ?= v0.20.1
 # renovate: datasource=github-tags depName=golang/tools
 FORMATTER_VERSION ?= v0.43.0
 # renovate: datasource=github-releases depName=golangci/golangci-lint
-LINTER_VERSION ?= v2.11.3
+LINTER_VERSION ?= v2.11.4
 # renovate: datasource=github-releases depName=elastic/crd-ref-docs
 API_REF_GEN_VERSION ?= v0.3.0
 # renovate: datasource=github-releases depName=jqlang/jq
 JQ_VERSION ?= v1.7.1
 # renovate: datasource=github-releases depName=open-component-model/ocm
-OCM_VERSION ?= v0.37.0
+OCM_VERSION ?= v0.39.0
 # renovate: datasource=github-releases depName=golang/mock
 MOCKGEN_VERSION ?= v1.6.0
 # renovate: datasource=github-releases depName=distribution/distribution
-REGISTRY_VERSION ?= v3.0.0-alpha.1
+REGISTRY_VERSION ?= v3.1.0
 # This cannot be handled properly e.g. with renovate, because the controller-runtime maintainers refuse to tag the
 # setup-envtest module (https://github.com/kubernetes-sigs/controller-runtime/issues/2720)
 SETUP_ENVTEST_VERSION ?= release-0.21

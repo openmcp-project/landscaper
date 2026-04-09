@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest-8core
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -20,8 +20,30 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Cleanup ubuntu image to free up space for GO build
+        run: |
+          if [ "$GITHUB_ACTIONS" = "true" ]; then
+              echo "Running in GitHub Actions, performing cleanup to free up space"
+              # echo "=== disk-usage for /usr Level 2 ==="
+              # sudo du -xh --exclude=/proc --max-depth=2 / | sort -hr
+              echo "free space: $(df -h . | tail -1 | awk '{print $4}')"
+
+              echo "=== Deleting un-needed framework/tool dirs ==="
+
+              sudo rm -rf /usr/local/.ghcup || true # haskell installer: ~6.4GB
+              sudo rm -rf /usr/share/dotnet || true # dotnet: ~4GB
+              sudo rm -rf /usr/share/swift  || true # swift: ~3.2GB
+              sudo rm -rf /usr/lib/jvm || true      # jvm: ~1.5GB
+
+              echo "free space after cleanup: $(df -h . | tail -1 | awk '{print $4}')"
+              # echo "=== Github Workspace Usage for $GITHUB_WORKSPACE ==="
+              # du -h --max-depth=1 "$GITHUB_WORKSPACE" | sort -hr
+          else
+              echo "Not running in GitHub Actions, skipping cleanup"
+          fi
+
       - name: Set up Go
-        uses: actions/setup-go@4b73464bb391d4059bd26b0524d20df3927bd417 # v6
+        uses: actions/setup-go@4a3601121dd01d1626a1e23e37211e3254c1c06c # v6
         with:
           go-version-file: go.mod
 
