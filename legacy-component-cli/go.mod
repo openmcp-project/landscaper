@@ -21,7 +21,6 @@ require (
 	github.com/opencontainers/go-digest v1.0.0
 	github.com/opencontainers/image-spec v1.1.1
 	github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go v1.1.0
-	github.com/openmcp-project/landscaper/legacy-image-vector v1.1.0
 	github.com/prometheus/client_golang v1.23.2
 	github.com/sirupsen/logrus v1.9.4
 	github.com/spf13/cobra v1.10.2
@@ -35,7 +34,6 @@ require (
 
 replace (
 	github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go => ../legacy-component-spec/bindings-go
-	github.com/openmcp-project/landscaper/legacy-image-vector => ../legacy-image-vector
 )
 
 require (
