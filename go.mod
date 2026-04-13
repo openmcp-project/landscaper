@@ -19,7 +19,6 @@ require (
 	github.com/onsi/ginkgo/v2 v2.28.1
 	github.com/onsi/gomega v1.39.1
 	github.com/opencontainers/go-digest v1.0.0
-	github.com/opencontainers/image-spec v1.1.1
 	github.com/openmcp-project/landscaper/apis v1.1.0
 	github.com/openmcp-project/landscaper/controller-utils v1.1.0
 	github.com/openmcp-project/landscaper/legacy-component-cli v1.1.0
@@ -291,6 +290,7 @@ require (
 	github.com/oklog/ulid v1.3.1 // indirect
 	github.com/oleiade/reflections v1.1.0 // indirect
 	github.com/opencontainers/distribution-spec v1.0.1 // indirect
+	github.com/opencontainers/image-spec v1.1.1 // indirect
 	github.com/opencontainers/runtime-spec v1.3.0 // indirect
 	github.com/pborman/uuid v1.2.1 // indirect
 	github.com/pelletier/go-toml/v2 v2.2.4 // indirect

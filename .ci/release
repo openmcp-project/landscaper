@@ -41,12 +41,6 @@ sed -i -e "0,/)/{s@github.com/openmcp-project/landscaper/legacy-component-spec/b
 sed -i -e "0,/)/{s@github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go .*@github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go ${VERSION}@}" \
   ${PROJECT_ROOT}/legacy-component-cli/go.mod
 
-sed -i -e "0,/)/{s@github.com/openmcp-project/landscaper/legacy-image-vector .*@github.com/openmcp-project/landscaper/legacy-image-vector ${VERSION}@}" \
-  ${PROJECT_ROOT}/legacy-component-cli/go.mod
-
-sed -i -e "0,/)/{s@github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go .*@github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go ${VERSION}@}" \
-  ${PROJECT_ROOT}/legacy-image-vector/go.mod
-
 echo "Landscaper release: starting revendor"
 
 (
