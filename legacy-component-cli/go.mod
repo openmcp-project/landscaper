@@ -4,6 +4,7 @@ go 1.26.2
 
 require (
 	github.com/containerd/containerd v1.7.30
+	github.com/containerd/containerd/v2 v2.2.2
 	github.com/distribution/reference v0.6.0
 	github.com/docker/cli v29.4.0+incompatible
 	github.com/drone/envsubst v1.0.3
@@ -45,7 +46,7 @@ require (
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/containerd/errdefs v1.0.0 // indirect
 	github.com/containerd/log v0.1.0 // indirect
-	github.com/containerd/platforms v0.2.1 // indirect
+	github.com/containerd/platforms v1.0.0-rc.2 // indirect
 	github.com/docker/docker-credential-helpers v0.9.4 // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
 	github.com/fxamacker/cbor/v2 v2.9.0 // indirect
