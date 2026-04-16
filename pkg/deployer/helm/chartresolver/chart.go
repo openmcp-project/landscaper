@@ -13,31 +13,28 @@ import (
 	"net/http"
 
 	"github.com/mandelsoft/filepath/pkg/filepath"
-	"github.com/mandelsoft/vfs/pkg/memoryfs"
-	"ocm.software/ocm/api/ocm/extensions/download"
-	"ocm.software/ocm/api/tech/helm/loader"
-
 	"github.com/mandelsoft/goutils/finalizer"
-	"ocm.software/ocm/api/ocm"
-	helmid "ocm.software/ocm/api/tech/helm/identity"
-	"ocm.software/ocm/api/utils/runtime"
-	"sigs.k8s.io/yaml"
-
-	lserrors "github.com/openmcp-project/landscaper/apis/errors"
-	kutil "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"
-	"github.com/openmcp-project/landscaper/pkg/components/model"
-	"github.com/openmcp-project/landscaper/pkg/components/ocmlib"
-	"github.com/openmcp-project/landscaper/pkg/deployer/lib"
-
-	"helm.sh/helm/v3/pkg/chart"
-	chartloader "helm.sh/helm/v3/pkg/chart/loader"
+	"github.com/mandelsoft/vfs/pkg/memoryfs"
+	chart "helm.sh/helm/v4/pkg/chart/v2"
+	chartloader "helm.sh/helm/v4/pkg/chart/v2/loader"
 	corev1 "k8s.io/api/core/v1"
+	"ocm.software/ocm/api/ocm"
+	"ocm.software/ocm/api/ocm/extensions/download"
+	helmid "ocm.software/ocm/api/tech/helm/identity"
+	"ocm.software/ocm/api/tech/helm/loader"
+	"ocm.software/ocm/api/utils/runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
+	"sigs.k8s.io/yaml"
 
 	"github.com/openmcp-project/landscaper/apis/config"
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
 	helmv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/helm/v1alpha1"
+	lserrors "github.com/openmcp-project/landscaper/apis/errors"
+	kutil "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"
+	"github.com/openmcp-project/landscaper/pkg/components/model"
+	"github.com/openmcp-project/landscaper/pkg/components/ocmlib"
 	"github.com/openmcp-project/landscaper/pkg/components/registries"
+	"github.com/openmcp-project/landscaper/pkg/deployer/lib"
 )
 
 // NoChartDefinedError is the error that is returned if no Helm chart was provided

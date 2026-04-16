@@ -9,16 +9,16 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log/slog"
 	"os"
 	"strings"
-	"sync"
 
-	"helm.sh/helm/v3/pkg/action"
-	"helm.sh/helm/v3/pkg/chart"
-	"helm.sh/helm/v3/pkg/kube"
-	"helm.sh/helm/v3/pkg/release"
-	"helm.sh/helm/v3/pkg/storage"
-	"helm.sh/helm/v3/pkg/storage/driver"
+	"helm.sh/helm/v4/pkg/action"
+	chart "helm.sh/helm/v4/pkg/chart/v2"
+	"helm.sh/helm/v4/pkg/kube"
+	"helm.sh/helm/v4/pkg/release"
+	"helm.sh/helm/v4/pkg/storage"
+	"helm.sh/helm/v4/pkg/storage/driver"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"
@@ -60,8 +60,7 @@ type RealHelmDeployer struct {
 	apiResourceHandler *resourcemanager.ApiResourceHandler
 	helmSecretManager  *HelmSecretManager
 	di                 *lsv1alpha1.DeployItem
-	messages           []string
-	mutex              sync.RWMutex
+	msgBuf             *messageBuffer
 }
 
 func NewRealHelmDeployer(ch *chart.Chart, providerConfig *helmv1alpha1.ProviderConfiguration,
@@ -79,7 +78,7 @@ func NewRealHelmDeployer(ch *chart.Chart, providerConfig *helmv1alpha1.ProviderC
 		apiResourceHandler: resourcemanager.CreateApiResourceHandler(targetAccess.TargetClientSet()),
 		helmSecretManager:  nil,
 		di:                 di,
-		messages:           make([]string, 0),
+		msgBuf:             &messageBuffer{},
 	}
 }
 
@@ -96,9 +95,7 @@ func (c *RealHelmDeployer) Deploy(ctx context.Context) error {
 		_, err = c.installRelease(ctx, values)
 
 		if err != nil {
-			helmMsg := c.getMessages()
-			helmMsg = helmMsg + "\n" + err.Error()
-			return lserrors.NewWrappedError(err, op, "installRelease", helmMsg)
+			return lserrors.NewWrappedError(err, op, "installRelease", c.msgBuf.get()+"\n"+err.Error())
 		}
 		return nil
 	} else if err != nil {
@@ -106,9 +103,7 @@ func (c *RealHelmDeployer) Deploy(ctx context.Context) error {
 	} else {
 		_, err = c.upgradeRelease(ctx, values)
 		if err != nil {
-			helmMsg := c.getMessages()
-			helmMsg = helmMsg + "\n" + err.Error()
-			return lserrors.NewWrappedError(err, op, "upgradeRelease", helmMsg)
+			return lserrors.NewWrappedError(err, op, "upgradeRelease", c.msgBuf.get()+"\n"+err.Error())
 		}
 		return nil
 	}
@@ -118,10 +113,10 @@ func (c *RealHelmDeployer) Undeploy(ctx context.Context) error {
 	return c.deleteRelease(ctx)
 }
 
-func (c *RealHelmDeployer) getRelease(ctx context.Context) (*release.Release, error) {
+func (c *RealHelmDeployer) getRelease(ctx context.Context) (release.Releaser, error) {
 	currOp := "GetHelmRelease"
 
-	actionConfig, err := c.initActionConfig(ctx)
+	actionConfig, err := c.initActionConfig(ctx, newSlogHandler(ctx, c.msgBuf))
 	if err != nil {
 		return nil, err
 	}
@@ -135,22 +130,29 @@ func (c *RealHelmDeployer) getRelease(ctx context.Context) (*release.Release, er
 	// If `namespace` is an empty string we do not do that check
 	// This check is to prevent users of for example updating releases that might be
 	// in namespaces that they do not have access to.
-	if c.defaultNamespace != "" && rls.Namespace != c.defaultNamespace {
-		err := fmt.Errorf("release %q not found in namespace %q", c.releaseName, c.defaultNamespace)
-		return nil, lserrors.NewWrappedError(err, currOp, "CheckNamespace", err.Error())
+	if c.defaultNamespace != "" {
+		accessor, err := release.NewAccessor(rls)
+		if err != nil {
+			return nil, lserrors.NewWrappedError(err, currOp, "GetAccessor", err.Error())
+		}
+		if accessor.Namespace() != c.defaultNamespace {
+			err := fmt.Errorf("release %q not found in namespace %q", c.releaseName, c.defaultNamespace)
+			return nil, lserrors.NewWrappedError(err, currOp, "CheckNamespace", err.Error())
+		}
 	}
 
 	return rls, err
 }
 
 // installRelease creates a helm release
-func (c *RealHelmDeployer) installRelease(ctx context.Context, values map[string]interface{}) (*release.Release, error) {
+func (c *RealHelmDeployer) installRelease(ctx context.Context, values map[string]interface{}) (release.Releaser, error) {
 	currOp := "InstallHelmRelease"
 	logger, ctx := logging.FromContextOrNew(ctx, []interface{}{lc.KeyMethod, currOp})
 
 	logger.Info(fmt.Sprintf("installing release %s into namespace %s", c.releaseName, c.defaultNamespace))
 
-	actionConfig, err := c.initActionConfig(ctx)
+	handler := newSlogHandler(ctx, c.msgBuf)
+	actionConfig, err := c.initActionConfig(ctx, handler)
 	if err != nil {
 		return nil, err
 	}
@@ -164,11 +166,15 @@ func (c *RealHelmDeployer) installRelease(ctx context.Context, values map[string
 	install.ReleaseName = c.releaseName
 	install.Namespace = c.defaultNamespace
 	install.CreateNamespace = c.createNamespace
-	install.Atomic = installConfig.Atomic
-	install.Force = installConfig.Force
+	if installConfig.Atomic {
+		install.RollbackOnFailure = true
+		install.WaitStrategy = kube.StatusWatcherStrategy
+	} else if installConfig.Wait {
+		install.WaitStrategy = kube.StatusWatcherStrategy
+	}
+	install.ForceReplace = installConfig.Force
 	install.SkipSchemaValidation = installConfig.SkipSchemaValidation
 	install.TakeOwnership = installConfig.TakeOwnership
-	install.Wait = installConfig.Wait
 
 	timeout, err := timeout.TimeoutExceeded(ctx, c.di, TimeoutCheckpointHelmBeforeInstallingRelease)
 	if err != nil {
@@ -180,7 +186,7 @@ func (c *RealHelmDeployer) installRelease(ctx context.Context, values map[string
 
 	rel, err := install.Run(c.chart, values)
 	if err != nil {
-		c.unblockPendingHelmRelease(ctx, logger)
+		c.unblockPendingHelmRelease(ctx, logger, handler)
 
 		message := fmt.Sprintf("unable to install helm chart release: %s", err.Error())
 		logger.Info(message)
@@ -201,13 +207,14 @@ func (c *RealHelmDeployer) isHelmInstallMessage(message string) bool {
 }
 
 // upgradeRelease upgrades a helm release
-func (c *RealHelmDeployer) upgradeRelease(ctx context.Context, values map[string]interface{}) (*release.Release, error) {
+func (c *RealHelmDeployer) upgradeRelease(ctx context.Context, values map[string]interface{}) (release.Releaser, error) {
 	currOp := "UpgradeHelmRelease"
 	logger, ctx := logging.FromContextOrNew(ctx, []interface{}{lc.KeyMethod, currOp})
 
 	logger.Info(fmt.Sprintf("upgrading release %s", c.releaseName))
 
-	actionConfig, err := c.initActionConfig(ctx)
+	handler := newSlogHandler(ctx, c.msgBuf)
+	actionConfig, err := c.initActionConfig(ctx, handler)
 	if err != nil {
 		return nil, err
 	}
@@ -220,11 +227,15 @@ func (c *RealHelmDeployer) upgradeRelease(ctx context.Context, values map[string
 	upgrade := action.NewUpgrade(actionConfig)
 	upgrade.Namespace = c.defaultNamespace
 	upgrade.MaxHistory = 10
-	upgrade.Atomic = upgradeConfig.Atomic
-	upgrade.Force = upgradeConfig.Force
+	if upgradeConfig.Atomic {
+		upgrade.RollbackOnFailure = true
+		upgrade.WaitStrategy = kube.StatusWatcherStrategy
+	} else if upgradeConfig.Wait {
+		upgrade.WaitStrategy = kube.StatusWatcherStrategy
+	}
+	upgrade.ForceReplace = upgradeConfig.Force
 	upgrade.SkipSchemaValidation = upgradeConfig.SkipSchemaValidation
 	upgrade.TakeOwnership = upgradeConfig.TakeOwnership
-	upgrade.Wait = upgradeConfig.Wait
 
 	timeout, err := timeout.TimeoutExceeded(ctx, c.di, TimeoutCheckpointHelmBeforeUpgradingRelease)
 	if err != nil {
@@ -236,7 +247,7 @@ func (c *RealHelmDeployer) upgradeRelease(ctx context.Context, values map[string
 
 	rel, err := upgrade.Run(c.releaseName, c.chart, values)
 	if err != nil {
-		c.unblockPendingHelmRelease(ctx, logger)
+		c.unblockPendingHelmRelease(ctx, logger, handler)
 
 		message := fmt.Sprintf("unable to upgrade helm chart release: %s", err.Error())
 		logger.Info(message)
@@ -274,7 +285,7 @@ func (c *RealHelmDeployer) deleteRelease(ctx context.Context) error {
 		return err
 	}
 
-	actionConfig, err := c.initActionConfig(ctx)
+	actionConfig, err := c.initActionConfig(ctx, newSlogHandler(ctx, c.msgBuf))
 	if err != nil {
 		return err
 	}
@@ -286,7 +297,9 @@ func (c *RealHelmDeployer) deleteRelease(ctx context.Context) error {
 
 	uninstall := action.NewUninstall(actionConfig)
 	uninstall.KeepHistory = false
-	uninstall.Wait = uninstallConfig.Wait
+	if uninstallConfig.Wait {
+		uninstall.WaitStrategy = kube.StatusWatcherStrategy
+	}
 
 	timeout, err := timeout.TimeoutExceeded(ctx, c.di, TimeoutCheckpointHelmBeforeDeletingRelease)
 	if err != nil {
@@ -305,14 +318,12 @@ func (c *RealHelmDeployer) deleteRelease(ctx context.Context) error {
 	return nil
 }
 
-func (c *RealHelmDeployer) initActionConfig(ctx context.Context) (*action.Configuration, error) {
-	logf := c.createLogFunc(ctx)
-
+func (c *RealHelmDeployer) initActionConfig(ctx context.Context, handler slog.Handler) (*action.Configuration, error) {
 	currOp := "InitHelmAction"
 
 	restClientGetter := newRemoteRESTClientGetter(c.targetRestConfig, c.defaultNamespace)
 	kc := kube.New(restClientGetter)
-	kc.Log = logf
+	kc.SetLogger(handler)
 
 	clientset, err := kc.Factory.KubernetesClientSet()
 	if err != nil {
@@ -325,24 +336,19 @@ func (c *RealHelmDeployer) initActionConfig(ctx context.Context) (*action.Config
 		RESTClientGetter: restClientGetter,
 		Releases:         store,
 		KubeClient:       kc,
-		Log:              logf,
 	}
 
 	return &actionConfig, nil
 }
 
 func (c *RealHelmDeployer) getStorageType(ctx context.Context, clientset *kubernetes.Clientset, namespace string) *storage.Storage {
-	logf := c.createLogFunc(ctx)
-
 	var store *storage.Storage
 	switch os.Getenv("HELM_DRIVER") {
 	case "secret", "secrets", "":
 		d := driver.NewSecrets(clientset.CoreV1().Secrets(namespace))
-		d.Log = logf
 		store = storage.Init(d)
 	case "configmap", "configmaps":
 		d := driver.NewConfigMaps(clientset.CoreV1().ConfigMaps(namespace))
-		d.Log = logf
 		store = storage.Init(d)
 	case "memory":
 		d := driver.NewMemory()
@@ -352,33 +358,6 @@ func (c *RealHelmDeployer) getStorageType(ctx context.Context, clientset *kubern
 		panic("Unknown driver in HELM_DRIVER: " + os.Getenv("HELM_DRIVER"))
 	}
 	return store
-}
-
-func (c *RealHelmDeployer) createLogFunc(ctx context.Context) func(format string, v ...interface{}) {
-	logger, _ := logging.FromContextOrNew(ctx, []interface{}{lc.KeyMethod, "RealHelmDeployer.createLogFunc"})
-	return func(format string, v ...interface{}) {
-		c.mutex.Lock()
-		defer c.mutex.Unlock()
-		msg := fmt.Sprintf(format, v...)
-
-		found := false
-		for i := range c.messages {
-			if c.messages[i] == msg {
-				found = true
-				break
-			}
-		}
-
-		if !found {
-			c.messages = append(c.messages, msg)
-			length := len(c.messages)
-			if length > 10 {
-				c.messages = c.messages[length-10:]
-			}
-		}
-
-		logger.Info(msg)
-	}
 }
 
 type ManifestObject struct {
@@ -418,13 +397,18 @@ func (o *ManifestObject) toManagedResourceStatus() *managedresource.ManagedResou
 }
 
 func (c *RealHelmDeployer) GetManagedResourcesStatus(ctx context.Context) ([]managedresource.ManagedResourceStatus, error) {
-	release, err := c.getRelease(ctx)
+	rls, err := c.getRelease(ctx)
 	if err != nil {
 		return nil, err
 	}
 
+	accessor, err := release.NewAccessor(rls)
+	if err != nil {
+		return nil, fmt.Errorf("unable to get release accessor: %w", err)
+	}
+
 	result := make([]managedresource.ManagedResourceStatus, 0)
-	reader := strings.NewReader(release.Manifest)
+	reader := strings.NewReader(accessor.Manifest())
 	decoder := apimachineryyaml.NewYAMLOrJSONDecoder(reader, 1024)
 	for {
 		obj := &ManifestObject{}
@@ -465,11 +449,11 @@ func (c *RealHelmDeployer) isReleaseNotFoundErr(err error) bool {
 	return strings.Contains(strings.ToLower(err.Error()), "release: not found")
 }
 
-func (c *RealHelmDeployer) getHelmSecretManager(ctx context.Context) (*HelmSecretManager, error) {
+func (c *RealHelmDeployer) getHelmSecretManager(handler slog.Handler) (*HelmSecretManager, error) {
 	var err error
 
 	if c.helmSecretManager == nil {
-		c.helmSecretManager, err = NewHelmSecretManager(c.targetRestConfig, c.defaultNamespace, c.createLogFunc(ctx))
+		c.helmSecretManager, err = NewHelmSecretManager(c.targetRestConfig, c.defaultNamespace, handler)
 
 		if err != nil {
 			return nil, fmt.Errorf("failed to create helm secret manager: %w", err)
@@ -479,8 +463,8 @@ func (c *RealHelmDeployer) getHelmSecretManager(ctx context.Context) (*HelmSecre
 	return c.helmSecretManager, nil
 }
 
-func (c *RealHelmDeployer) unblockPendingHelmRelease(ctx context.Context, logger logging.Logger) {
-	helmSecretManager, err := c.getHelmSecretManager(ctx)
+func (c *RealHelmDeployer) unblockPendingHelmRelease(ctx context.Context, logger logging.Logger, handler slog.Handler) {
+	helmSecretManager, err := c.getHelmSecretManager(handler)
 	if err != nil {
 		logger.Error(err, "get helm secret manager", lc.KeyResource, types.NamespacedName{Name: c.releaseName, Namespace: c.defaultNamespace}.String())
 	} else {
@@ -489,14 +473,4 @@ func (c *RealHelmDeployer) unblockPendingHelmRelease(ctx context.Context, logger
 			logger.Error(err, "delete helm secret", lc.KeyResource, types.NamespacedName{Name: c.releaseName, Namespace: c.defaultNamespace}.String())
 		}
 	}
-}
-
-func (c *RealHelmDeployer) getMessages() string {
-	c.mutex.RLock()
-	defer c.mutex.RUnlock()
-	result := ""
-	for i := range c.messages {
-		result += "\n" + c.messages[i]
-	}
-	return result
 }

@@ -17,4 +17,4 @@ includes:
       CHART_COMPONENTS: "[]"
       OS: [linux]
       ARCH: [amd64, arm64]
-
+      ENVTEST_REQUIRED: true
