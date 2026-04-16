@@ -13,7 +13,7 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/hashicorp/go-multierror v1.1.1
 	github.com/mandelsoft/filepath v0.0.0-20240223090642-3e2777258aa3
-	github.com/mandelsoft/goutils v0.0.0-20260407151801-9d4576be49b3
+	github.com/mandelsoft/goutils v0.0.0-20260414123113-d90bf06bf110
 	github.com/mandelsoft/spiff v1.7.0-beta-8
 	github.com/mandelsoft/vfs v0.4.5-0.20250514111339-d7b067920e91
 	github.com/onsi/ginkgo/v2 v2.28.1
@@ -136,11 +136,11 @@ require (
 	github.com/clipperhouse/uax29/v2 v2.3.0 // indirect
 	github.com/cloudflare/circl v1.6.3 // indirect
 	github.com/common-nighthawk/go-figure v0.0.0-20210622060536-734e95fb86be // indirect
-	github.com/containerd/containerd v1.7.30 // indirect
+	github.com/containerd/containerd v1.7.31 // indirect
 	github.com/containerd/errdefs v1.0.0 // indirect
 	github.com/containerd/errdefs/pkg v0.3.0 // indirect
 	github.com/containerd/log v0.1.0 // indirect
-	github.com/containerd/platforms v0.2.1 // indirect
+	github.com/containerd/platforms v1.0.0-rc.2 // indirect
 	github.com/containerd/stargz-snapshotter/estargz v0.18.2 // indirect
 	github.com/containers/image/v5 v5.36.2 // indirect
 	github.com/containers/libtrust v0.0.0-20230121012942-c1716e8a8d01 // indirect
@@ -272,7 +272,7 @@ require (
 	github.com/moby/locker v1.0.1 // indirect
 	github.com/moby/moby/api v1.54.1 // indirect
 	github.com/moby/moby/client v0.4.0 // indirect
-	github.com/moby/spdystream v0.5.0 // indirect
+	github.com/moby/spdystream v0.5.1 // indirect
 	github.com/moby/sys/atomicwriter v0.1.0 // indirect
 	github.com/moby/sys/capability v0.4.0 // indirect
 	github.com/moby/sys/mountinfo v0.7.2 // indirect
@@ -392,7 +392,7 @@ require (
 	k8s.io/component-base v0.35.3 // indirect
 	k8s.io/gengo/v2 v2.0.0-20250922181213-ec3ebc5fd46b // indirect
 	k8s.io/klog/v2 v2.130.1 // indirect
-	k8s.io/kube-openapi v0.0.0-20260330154417-16be699c7b31 // indirect
+	k8s.io/kube-openapi v0.0.0-20260414162039-ec9c827d403f // indirect
 	k8s.io/kubectl v0.35.1 // indirect
 	oras.land/oras-go/v2 v2.6.0 // indirect
 	sigs.k8s.io/json v0.0.0-20250730193827-2d320260d730 // indirect
