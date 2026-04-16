@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"strconv"
 
-	"helm.sh/helm/v3/pkg/kube"
+	"helm.sh/helm/v4/pkg/kube"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/types"
@@ -32,7 +32,6 @@ func NewHelmSecretManager(targetRestConfig *rest.Config, defaultNamespace string
 
 	restClientGetter := newRemoteRESTClientGetter(targetRestConfig, defaultNamespace)
 	kc := kube.New(restClientGetter)
-	kc.Log = logf
 
 	clientset, err := kc.Factory.KubernetesClientSet()
 	if err != nil {

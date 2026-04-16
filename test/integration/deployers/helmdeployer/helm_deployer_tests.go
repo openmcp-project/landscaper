@@ -17,32 +17,26 @@ import (
 	"strings"
 	"time"
 
-	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
-
-	"helm.sh/helm/v3/pkg/registry"
-	"k8s.io/utils/ptr"
-
-	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
-
+	. "github.com/onsi/ginkgo/v2"
+	. "github.com/onsi/gomega"
+	"helm.sh/helm/v4/pkg/registry"
+	corev1 "k8s.io/api/core/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/selection"
 	"k8s.io/apimachinery/pkg/util/json"
-
-	kutil "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"
+	"k8s.io/utils/ptr"
 
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
-	"github.com/openmcp-project/landscaper/pkg/deployer/helm"
-	lsutils "github.com/openmcp-project/landscaper/pkg/utils/landscaper"
-
-	. "github.com/onsi/ginkgo/v2"
-	. "github.com/onsi/gomega"
-	corev1 "k8s.io/api/core/v1"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-
 	helmv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/helm/v1alpha1"
 	"github.com/openmcp-project/landscaper/apis/deployer/helm/v1alpha1/helper"
 	"github.com/openmcp-project/landscaper/apis/deployer/utils/managedresource"
 	"github.com/openmcp-project/landscaper/apis/deployer/utils/readinesschecks"
+	kutil "github.com/openmcp-project/landscaper/controller-utils/pkg/kubernetes"
+	"github.com/openmcp-project/landscaper/controller-utils/pkg/logging"
+	cdv2 "github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go/apis/v2"
+	"github.com/openmcp-project/landscaper/pkg/deployer/helm"
+	lsutils "github.com/openmcp-project/landscaper/pkg/utils/landscaper"
 	"github.com/openmcp-project/landscaper/test/framework"
 	"github.com/openmcp-project/landscaper/test/utils"
 	"github.com/openmcp-project/landscaper/test/utils/envtest"

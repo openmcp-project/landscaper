@@ -9,9 +9,8 @@ import (
 	"os"
 
 	. "github.com/onsi/gomega"
-
-	chartloader "helm.sh/helm/v3/pkg/chart/loader"
-	"helm.sh/helm/v3/pkg/chartutil"
+	chartloader "helm.sh/helm/v4/pkg/chart/v2/loader"
+	chartutil "helm.sh/helm/v4/pkg/chart/v2/util"
 	"sigs.k8s.io/yaml"
 
 	lsv1alpha1 "github.com/openmcp-project/landscaper/apis/core/v1alpha1"
