@@ -22,6 +22,21 @@ var _ = Describe("Cyclic Dependency Determination Tests", func() {
 
 		It("should not detect cyclic dependencies if there aren't any", func() {
 			deps := map[string]sets.String{ //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
+				"a": sets.NewString().Insert("b", "c", "f"),
+				"b": sets.NewString().Insert("c", "f"),
+				"c": sets.NewString().Insert("d", "f"),
+				"d": sets.NewString().Insert("f"),
+				"e": sets.NewString().Insert("f"),
+				"f": sets.NewString().Insert(),
+			}
+
+			hasCycle, cycle := newGraph(deps).hasCycle()
+			Expect(hasCycle).To(BeFalse())
+			Expect(cycle).To(BeEmpty())
+		})
+
+		It("should not detect cyclic dependencies if there aren't any", func() {
+			deps := map[string]sets.String{ //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
 				"c": sets.NewString().Insert("b"),
 				"b": sets.NewString().Insert("a"),
 				"a": sets.NewString(),
