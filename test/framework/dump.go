@@ -33,7 +33,7 @@ import (
 type Dumper struct {
 	kubeClient    client.Client
 	kubeClientSet kubernetes.Interface
-	namespaces    sets.String //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
+	namespaces    sets.Set[string]
 	lsNamespace   string
 	logger        utils.Logger
 	startTime     time.Time
@@ -46,7 +46,7 @@ func NewDumper(logger utils.Logger, kubeClient client.Client, kubeClientSet kube
 		logger:        logger,
 		kubeClient:    kubeClient,
 		kubeClientSet: kubeClientSet,
-		namespaces:    sets.NewString(namespaces...),
+		namespaces:    sets.New(namespaces...),
 		lsNamespace:   lsNamespace,
 	}
 }
@@ -58,7 +58,7 @@ func (d *Dumper) AddNamespaces(namespaces ...string) {
 
 // ClearNamespaces removes all current namespaces
 func (d *Dumper) ClearNamespaces() {
-	d.namespaces = sets.NewString()
+	d.namespaces = sets.New[string]()
 }
 
 // Dump searches for known objects in the given namespaces and dumps useful information about their state.

@@ -227,7 +227,7 @@ func (o *Operation) createOrUpdateSubinstallations(ctx context.Context,
 	}
 
 	if _, err := dependencies.CheckForCyclesAndDuplicateExports(installationTmpl, false); err != nil {
-		return nil, nil
+		return nil, err
 	}
 
 	for _, subInstTmpl := range installationTmpl {

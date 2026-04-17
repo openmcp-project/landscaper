@@ -141,7 +141,7 @@ type Options struct {
 	Cache cache.Cache
 
 	// CustomMediaTypes defines the custom known media types
-	CustomMediaTypes sets.String //nolint:all
+	CustomMediaTypes sets.Set[string]
 
 	HTTPClient *http.Client
 }
@@ -203,7 +203,7 @@ type WithKnownMediaType string
 
 func (c WithKnownMediaType) ApplyOption(options *Options) {
 	if options.CustomMediaTypes == nil {
-		options.CustomMediaTypes = sets.NewString(string(c))
+		options.CustomMediaTypes = sets.New(string(c))
 		return
 	}
 

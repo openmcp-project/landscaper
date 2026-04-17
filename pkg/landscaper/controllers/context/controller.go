@@ -39,7 +39,7 @@ func NewDefaulterController(lsUncachedClient, lsCachedClient client.Client,
 		scheme:            scheme,
 		eventRecorder:     eventRecorder,
 		config:            config,
-		excludeNamespaces: sets.NewString(config.Default.ExcludedNamespaces...),
+		excludeNamespaces: sets.New(config.Default.ExcludedNamespaces...),
 	}, nil
 }
 
@@ -50,7 +50,7 @@ type defaulterController struct {
 	eventRecorder     events.EventRecorder
 	scheme            *runtime.Scheme
 	config            config.ContextControllerConfig
-	excludeNamespaces sets.String //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
+	excludeNamespaces sets.Set[string]
 }
 
 func (c *defaulterController) Reconcile(ctx context.Context, req reconcile.Request) (reconcile.Result, error) {
