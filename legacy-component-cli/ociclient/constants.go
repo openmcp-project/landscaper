@@ -13,7 +13,7 @@ const MediaTypeTarGzip = "application/tar+gzip"
 const MediaTypeTar = "application/tar"
 
 // DefaultKnownMediaTypes contain also known media types of the oci client
-var DefaultKnownMediaTypes = sets.NewString(
+var DefaultKnownMediaTypes = sets.New(
 	MediaTypeTarGzip,
 	MediaTypeTar,
 )

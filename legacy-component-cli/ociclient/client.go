@@ -47,7 +47,7 @@ type client struct {
 	allowPlainHttp bool
 	getHostConfig  docker.RegistryHosts
 
-	knownMediaTypes sets.String //nolint:all
+	knownMediaTypes sets.Set[string]
 }
 
 // NewClient creates a new OCI Client.

@@ -21,13 +21,13 @@ var _ = Describe("Cyclic Dependency Determination Tests", func() {
 	Context("DetermineCyclicDependencies", func() {
 
 		It("should not detect cyclic dependencies if there aren't any", func() {
-			deps := map[string]sets.String{ //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
-				"a": sets.NewString().Insert("b", "c", "f"),
-				"b": sets.NewString().Insert("c", "f"),
-				"c": sets.NewString().Insert("d", "f"),
-				"d": sets.NewString().Insert("f"),
-				"e": sets.NewString().Insert("f"),
-				"f": sets.NewString().Insert(),
+			deps := map[string]sets.Set[string]{
+				"a": sets.New("b", "c", "f"),
+				"b": sets.New("c", "f"),
+				"c": sets.New("d", "f"),
+				"d": sets.New("f"),
+				"e": sets.New("f"),
+				"f": sets.New[string](),
 			}
 
 			hasCycle, cycle := newGraph(deps).hasCycle()
@@ -36,10 +36,10 @@ var _ = Describe("Cyclic Dependency Determination Tests", func() {
 		})
 
 		It("should not detect cyclic dependencies if there aren't any", func() {
-			deps := map[string]sets.String{ //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
-				"c": sets.NewString().Insert("b"),
-				"b": sets.NewString().Insert("a"),
-				"a": sets.NewString(),
+			deps := map[string]sets.Set[string]{
+				"c": sets.New("b"),
+				"b": sets.New("a"),
+				"a": sets.New[string](),
 			}
 
 			hasCycle, cycle := newGraph(deps).hasCycle()
@@ -48,10 +48,10 @@ var _ = Describe("Cyclic Dependency Determination Tests", func() {
 		})
 
 		It("should detect simple cyclic dependencies", func() {
-			deps := map[string]sets.String{ //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
-				"c": sets.NewString().Insert("b"),
-				"b": sets.NewString().Insert("a"),
-				"a": sets.NewString().Insert("c"),
+			deps := map[string]sets.Set[string]{
+				"c": sets.New("b"),
+				"b": sets.New("a"),
+				"a": sets.New("c"),
 			}
 
 			hasCycle, cycle := newGraph(deps).hasCycle()
@@ -60,8 +60,8 @@ var _ = Describe("Cyclic Dependency Determination Tests", func() {
 		})
 
 		It("should detect one-elemented cyclic dependencies", func() {
-			deps := map[string]sets.String{ //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
-				"a": sets.NewString().Insert("a"),
+			deps := map[string]sets.Set[string]{
+				"a": sets.New("a"),
 			}
 
 			hasCycle, cycle := newGraph(deps).hasCycle()
@@ -70,11 +70,11 @@ var _ = Describe("Cyclic Dependency Determination Tests", func() {
 		})
 
 		It("should detect multiple independent cycles", func() {
-			deps := map[string]sets.String{ //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
-				"d": sets.NewString().Insert("c"),
-				"c": sets.NewString().Insert("d"),
-				"b": sets.NewString().Insert("a"),
-				"a": sets.NewString().Insert("b"),
+			deps := map[string]sets.Set[string]{
+				"d": sets.New("c"),
+				"c": sets.New("d"),
+				"b": sets.New("a"),
+				"a": sets.New("b"),
 			}
 
 			hasCycle, cycle := newGraph(deps).hasCycle()
@@ -83,11 +83,11 @@ var _ = Describe("Cyclic Dependency Determination Tests", func() {
 		})
 
 		It("should detect multiple connected cycles", func() {
-			deps := map[string]sets.String{ //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
-				"b": sets.NewString().Insert("a"),
-				"a": sets.NewString().Insert("d"),
-				"d": sets.NewString().Insert("c"),
-				"c": sets.NewString().Insert("d", "b"),
+			deps := map[string]sets.Set[string]{
+				"b": sets.New("a"),
+				"a": sets.New("d"),
+				"d": sets.New("c"),
+				"c": sets.New("d", "b"),
 			}
 
 			hasCycle, cycle := newGraph(deps).hasCycle()
@@ -97,17 +97,17 @@ var _ = Describe("Cyclic Dependency Determination Tests", func() {
 		})
 
 		It("should order the graph correctly according to its edges", func() {
-			deps := map[string]sets.String{ //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
-				"a": sets.NewString().Insert("c"),
-				"b": sets.NewString().Insert("f", "e"),
-				"c": sets.NewString().Insert("d", "e"),
-				"d": sets.NewString().Insert("i"),
-				"e": sets.NewString().Insert("h"),
-				"f": sets.NewString().Insert("e", "g"),
-				"g": sets.NewString().Insert("h"),
-				"h": sets.NewString().Insert("i", "j"),
-				"i": sets.NewString(),
-				"j": sets.NewString(),
+			deps := map[string]sets.Set[string]{
+				"a": sets.New("c"),
+				"b": sets.New("f", "e"),
+				"c": sets.New("d", "e"),
+				"d": sets.New("i"),
+				"e": sets.New("h"),
+				"f": sets.New("e", "g"),
+				"g": sets.New("h"),
+				"h": sets.New("i", "j"),
+				"i": sets.New[string](),
+				"j": sets.New[string](),
 			}
 
 			g := newGraph(deps)

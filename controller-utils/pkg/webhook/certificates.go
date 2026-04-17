@@ -153,7 +153,7 @@ func loadAndUpdateSecret(ctx context.Context, kubeClient client.Client, secret *
 	}
 
 	// update certificates if the dns names have changed
-	if !sets.NewString(serverCert.Certificate.DNSNames...).HasAll(dnsNames...) {
+	if !sets.New(serverCert.Certificate.DNSNames...).HasAll(dnsNames...) {
 		logger.Info("loadAndUpdateSecret: dns names have changed")
 
 		caCert, serverCert, err = generateNewCAAndServerCert(name, dnsNames, *caConfig)
@@ -292,6 +292,6 @@ func writeCertificate(certDir string, cert *certificates.Certificate) error {
 // }
 
 func StringArrayIncludes(list []string, expects ...string) bool {
-	actual := sets.NewString(list...)
+	actual := sets.New(list...)
 	return actual.HasAll(expects...)
 }

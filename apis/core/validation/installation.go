@@ -132,7 +132,7 @@ func ValidateInstallationSucceededReconcile(succeededReconcile *core.SucceededRe
 // ValidateInstallationImports validates the imports of an Installation
 func ValidateInstallationImports(imports core.InstallationImports, fldPath *field.Path) field.ErrorList {
 	allErrs := field.ErrorList{}
-	importNames := sets.NewString()
+	importNames := sets.New[string]()
 	var tmpErrs field.ErrorList
 
 	tmpErrs, importNames = ValidateInstallationDataImports(imports.Data, fldPath.Child("data"), importNames)
@@ -144,7 +144,7 @@ func ValidateInstallationImports(imports core.InstallationImports, fldPath *fiel
 }
 
 // ValidateInstallationDataImports validates the data imports of an Installation
-func ValidateInstallationDataImports(imports []core.DataImport, fldPath *field.Path, importNames sets.String) (field.ErrorList, sets.String) { //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
+func ValidateInstallationDataImports(imports []core.DataImport, fldPath *field.Path, importNames sets.Set[string]) (field.ErrorList, sets.Set[string]) {
 	allErrs := field.ErrorList{}
 
 	for idx, imp := range imports {
@@ -174,7 +174,7 @@ func ValidateInstallationDataImports(imports []core.DataImport, fldPath *field.P
 }
 
 // ValidateInstallationTargetImports validates the target imports of an Installation
-func ValidateInstallationTargetImports(imports []core.TargetImport, fldPath *field.Path, importNames sets.String) (field.ErrorList, sets.String) { //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
+func ValidateInstallationTargetImports(imports []core.TargetImport, fldPath *field.Path, importNames sets.Set[string]) (field.ErrorList, sets.Set[string]) {
 	allErrs := field.ErrorList{}
 
 	for idx, imp := range imports {

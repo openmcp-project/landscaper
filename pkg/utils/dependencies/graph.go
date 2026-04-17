@@ -13,11 +13,11 @@ import (
 )
 
 type graph struct {
-	edges map[string]sets.String //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
+	edges map[string]sets.Set[string]
 
 	// alreadyCheckedElements contains elements of which it is already known that they cannot reach a cycle.
 	// The set is initially empty and grows during the algorithm.
-	alreadyCheckedElements sets.String //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
+	alreadyCheckedElements sets.Set[string]
 }
 
 // nodeWithPath stores a node of a graph as well as the path that led to this node.
@@ -36,10 +36,10 @@ func (nwp nodeWithPath) hasVisitedBefore(elem string) bool {
 	return false
 }
 
-func newGraph(edges map[string]sets.String) *graph { //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
+func newGraph(edges map[string]sets.Set[string]) *graph {
 	return &graph{
 		edges:                  edges,
-		alreadyCheckedElements: sets.NewString(),
+		alreadyCheckedElements: sets.New[string](),
 	}
 }
 
@@ -63,7 +63,7 @@ func (g *graph) breadthFirstSearchForCycles(todo queue.Queue[nodeWithPath]) []st
 	for !todo.IsEmpty() {
 		cur, _ := todo.Pop()
 		successors := g.edges[cur.node]
-		for _, succ := range successors.List() {
+		for _, succ := range sets.List(successors) {
 			newPath := make([]string, len(cur.path)+1)
 			copy(newPath, cur.path)
 			newPath[len(cur.path)] = succ
@@ -114,7 +114,7 @@ func (g *graph) getReverseOrder() ([]string, error) {
 
 func (g *graph) allSuccessorAlreadyAdded(node string, alreadyAddedNodes map[string]bool) bool {
 	succs := g.edges[node]
-	for _, nextSucc := range succs.List() {
+	for _, nextSucc := range sets.List(succs) {
 		if _, ok := alreadyAddedNodes[nextSucc]; !ok {
 			return false
 		}
