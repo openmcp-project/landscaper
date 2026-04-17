@@ -64,7 +64,9 @@ func (g *graph) breadthFirstSearchForCycles(todo queue.Queue[nodeWithPath]) []st
 		cur, _ := todo.Pop()
 		successors := g.edges[cur.node]
 		for _, succ := range successors.List() {
-			newPath := append(cur.path, succ)
+			newPath := make([]string, len(cur.path)+1)
+			copy(newPath, cur.path)
+			newPath[len(cur.path)] = succ
 			if cur.hasVisitedBefore(succ) {
 				return newPath
 			}
