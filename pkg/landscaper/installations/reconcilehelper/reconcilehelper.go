@@ -55,8 +55,7 @@ func NewReconcileHelper(ctx context.Context, op *installations.Operation) (*Reco
 
 ///// VALIDATION METHODS /////
 
-//nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
-func (rh *ReconcileHelper) GetPredecessors(ctx context.Context, predecessorNames sets.String) (map[string]*installations.InstallationAndImports, error) {
+func (rh *ReconcileHelper) GetPredecessors(ctx context.Context, predecessorNames sets.Set[string]) (map[string]*installations.InstallationAndImports, error) {
 	logger, _ := logging.FromContextOrNew(ctx, nil)
 	pm := utils.StartPerformanceMeasurement(&logger, "GetPredecessors")
 	defer pm.StopDebug()
@@ -198,8 +197,7 @@ func (rh *ReconcileHelper) fetchImports() error {
 	return nil
 }
 
-//nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
-func (rh *ReconcileHelper) FetchPredecessors(ctx context.Context) (sets.String, error) {
+func (rh *ReconcileHelper) FetchPredecessors(ctx context.Context) (sets.Set[string], error) {
 	logger, _ := logging.FromContextOrNew(ctx, nil)
 	pm := utils.StartPerformanceMeasurement(&logger, "FetchPredecessors")
 	defer pm.StopDebug()

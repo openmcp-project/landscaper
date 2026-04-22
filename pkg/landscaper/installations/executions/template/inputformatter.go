@@ -32,7 +32,7 @@ func init() {
 // The TemplateInputFormatter formats the input parameter of a template in a human-readable format.
 type TemplateInputFormatter struct {
 	prettyPrint   bool
-	sensitiveKeys sets.String //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
+	sensitiveKeys sets.Set[string]
 }
 
 // NewTemplateInputFormatter creates a new template input formatter.
@@ -42,7 +42,7 @@ type TemplateInputFormatter struct {
 func NewTemplateInputFormatter(prettyPrint bool, sensitiveKeys ...string) *TemplateInputFormatter {
 	return &TemplateInputFormatter{
 		prettyPrint:   prettyPrint,
-		sensitiveKeys: sets.NewString(sensitiveKeys...),
+		sensitiveKeys: sets.New(sensitiveKeys...),
 	}
 }
 

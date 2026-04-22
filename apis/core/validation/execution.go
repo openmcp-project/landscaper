@@ -29,7 +29,7 @@ func ValidateExecutionSpec(fldpath *field.Path, spec core.ExecutionSpec) field.E
 // ValidateDeployItemTemplateList validates a list of deploy item templates.
 func ValidateDeployItemTemplateList(fldPath *field.Path, list core.DeployItemTemplateList) field.ErrorList {
 	allErrs := field.ErrorList{}
-	names := sets.NewString()
+	names := sets.New[string]()
 	hasDuplicates := false
 	for i, tmpl := range list {
 		tmplPath := fldPath.Index(i)
@@ -45,7 +45,7 @@ func ValidateDeployItemTemplateList(fldPath *field.Path, list core.DeployItemTem
 	}
 
 	if !hasDuplicates { // cycle check identifies items by name and the behaviour is undefined if duplicate items are present
-		done := sets.NewString()
+		done := sets.New[string]()
 		cycles := []Cycle{}
 		undefined := []UndefinedDeployItemReference{}
 		for i := range list {
@@ -75,7 +75,7 @@ func ValidateDeployItemTemplateList(fldPath *field.Path, list core.DeployItemTem
 // 1. a list of Cycle objects, representing found cyclic dependencies
 // 2. a list of UndefinedDeployItemReference objects, representing found dependencies to undefined deploy items
 // 3. a set of all deploy item templates (referenced by name) that have already been checked (necessary to avoid finding the same cycle multiple times)
-func getCyclesAndUndefinedDependencies(list core.DeployItemTemplateList, index int, visited visitedList, done sets.String) ([]Cycle, []UndefinedDeployItemReference, sets.String) { //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
+func getCyclesAndUndefinedDependencies(list core.DeployItemTemplateList, index int, visited visitedList, done sets.Set[string]) ([]Cycle, []UndefinedDeployItemReference, sets.Set[string]) {
 	current := list[index]
 	cycles := []Cycle{}
 	undefined := []UndefinedDeployItemReference{}

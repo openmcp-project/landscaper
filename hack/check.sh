@@ -22,7 +22,6 @@ apis_module_paths=()
 controller_utils_module_paths=()
 legacy_component_cli_paths=()
 legacy_component_spec_paths=()
-legacy_image_vector_paths=()
 for arg in "$@"; do
   case $arg in
     --golangci-lint-config=*)
@@ -40,9 +39,6 @@ for arg in "$@"; do
       ;;
    $PROJECT_ROOT/legacy-component-spec/bindings-go/*)
       legacy_component_spec_paths+=("./$(realpath "--relative-base=$PROJECT_ROOT/legacy-component-spec/bindings-go" "$arg")")
-      ;;
-   $PROJECT_ROOT/legacy-image-vector/*)
-      legacy_image_vector_paths+=("./$(realpath "--relative-base=$PROJECT_ROOT/legacy-image-vector" "$arg")")
       ;;
     *)
       landscaper_module_paths+=("./$(realpath "--relative-base=$PROJECT_ROOT" "$arg")")
@@ -68,15 +64,6 @@ echo "legacy-component-spec module: ${legacy_component_spec_paths[@]}"
   "$LINTER" run $GOLANGCI_LINT_CONFIG_FILE --timeout 10m "${legacy_component_spec_paths[@]}"
   echo "  Executing go vet"
   go vet "${legacy_component_spec_paths[@]}"
-)
-
-echo "legacy-image-vector module: ${legacy_image_vector_paths[@]}"
-(
-  cd "$PROJECT_ROOT/legacy-image-vector"
-  echo "  Executing golangci-lint"
-  "$LINTER" run $GOLANGCI_LINT_CONFIG_FILE --timeout 10m "${legacy_image_vector_paths[@]}"
-  echo "  Executing go vet"
-  go vet "${legacy_image_vector_paths[@]}"
 )
 
 echo "apis module: ${apis_module_paths[@]}"

@@ -6,7 +6,6 @@ package tar
 
 import (
 	"archive/tar"
-	"bytes"
 	"compress/gzip"
 	"context"
 	"io"
@@ -14,11 +13,6 @@ import (
 	"path/filepath"
 
 	"github.com/mandelsoft/vfs/pkg/vfs"
-	"github.com/opencontainers/go-digest"
-	ocispecv1 "github.com/opencontainers/image-spec/specs-go/v1"
-
-	"github.com/openmcp-project/landscaper/legacy-component-cli/ociclient"
-	"github.com/openmcp-project/landscaper/legacy-component-cli/ociclient/cache"
 )
 
 // BuildTarGzip creates a new compressed tar based on a filesystem and a path.
@@ -177,27 +171,4 @@ func ExtractTarGzip(ctx context.Context, gzipStream io.Reader, fs vfs.FileSystem
 		return err
 	}
 	return ExtractTar(ctx, uncompStream, fs, opts...)
-}
-
-// BuildTarGzipLayer tar and gzips the given path and adds the layer to the cache.
-// It returns the newly creates ocispec Description for the tar.
-func BuildTarGzipLayer(cache cache.Cache, fs vfs.FileSystem, path string, annotations map[string]string) (ocispecv1.Descriptor, error) {
-
-	var blob bytes.Buffer
-	if err := BuildTarGzip(fs, path, &blob); err != nil {
-		return ocispecv1.Descriptor{}, err
-	}
-
-	desc := ocispecv1.Descriptor{
-		MediaType:   ociclient.MediaTypeTarGzip,
-		Digest:      digest.FromBytes(blob.Bytes()),
-		Size:        int64(blob.Len()),
-		Annotations: annotations,
-	}
-
-	if err := cache.Add(desc, io.NopCloser(&blob)); err != nil {
-		return ocispecv1.Descriptor{}, err
-	}
-
-	return desc, nil
 }

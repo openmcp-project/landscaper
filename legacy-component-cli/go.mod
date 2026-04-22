@@ -14,29 +14,24 @@ require (
 	github.com/google/go-containerregistry v0.21.5
 	github.com/google/uuid v1.6.0
 	github.com/mandelsoft/vfs v0.4.4
-	github.com/onsi/ginkgo v1.16.5
 	github.com/onsi/ginkgo/v2 v2.28.1
 	github.com/onsi/gomega v1.39.1
 	github.com/opencontainers/distribution-spec/specs-go v0.0.0-20260413194130-13a5d3ee2857
 	github.com/opencontainers/go-digest v1.0.0
 	github.com/opencontainers/image-spec v1.1.1
-	github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go v1.1.0
-	github.com/openmcp-project/landscaper/legacy-image-vector v1.1.0
+	github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go v1.2.0
 	github.com/prometheus/client_golang v1.23.2
 	github.com/sirupsen/logrus v1.9.4
 	github.com/spf13/cobra v1.10.2
 	github.com/spf13/pflag v1.0.10
 	go.uber.org/zap v1.27.1
 	golang.org/x/crypto v0.50.0
-	k8s.io/api v0.35.3
-	k8s.io/apimachinery v0.35.3
+	k8s.io/api v0.35.4
+	k8s.io/apimachinery v0.35.4
 	sigs.k8s.io/yaml v1.6.0
 )
 
-replace (
-	github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go => ../legacy-component-spec/bindings-go
-	github.com/openmcp-project/landscaper/legacy-image-vector => ../legacy-image-vector
-)
+replace github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go => ../legacy-component-spec/bindings-go
 
 require (
 	github.com/AdaLogics/go-fuzz-headers v0.0.0-20240806141605-e8a1dd7889d6 // indirect

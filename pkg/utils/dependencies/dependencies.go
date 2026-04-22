@@ -15,7 +15,7 @@ import (
 )
 
 func FetchPredecessorsFromInstallation(installation *lsv1alpha1.Installation,
-	otherInstallations []*lsv1alpha1.Installation) sets.String { //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
+	otherInstallations []*lsv1alpha1.Installation) sets.Set[string] {
 	instNode := newInstallationNodeFromInstallation(installation)
 
 	otherNodes := []*installationNode{}
@@ -34,7 +34,7 @@ func CheckForCyclesAndDuplicateExports(instTemplates []*lsv1alpha1.InstallationT
 		instNodes = append(instNodes, newInstallationNodeFromInstallationTemplate(next))
 	}
 
-	edges := map[string]sets.String{} //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
+	edges := map[string]sets.Set[string]{}
 	for _, next := range instNodes {
 		predecessors, err := next.fetchPredecessors(instNodes)
 		if err != nil {
@@ -94,7 +94,7 @@ func newInstallationNodeFromInstallationTemplate(installation *lsv1alpha1.Instal
 	}
 }
 
-func (r *installationNode) fetchPredecessors(otherNodes []*installationNode) (sets.String, error) { //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
+func (r *installationNode) fetchPredecessors(otherNodes []*installationNode) (sets.Set[string], error) {
 	dataExports, targetExports, hasDuplicateExports := r.getExportMaps(otherNodes)
 
 	if hasDuplicateExports {
@@ -107,7 +107,7 @@ func (r *installationNode) fetchPredecessors(otherNodes []*installationNode) (se
 					dupExpFound = true
 					msg.WriteString("\n  data exports:")
 				}
-				fmt.Fprintf(&msg, "\n    '%s' is exported by [%s]", exp, strings.Join(sources.List(), ", "))
+				fmt.Fprintf(&msg, "\n    '%s' is exported by [%s]", exp, strings.Join(sets.List(sources), ", "))
 			}
 		}
 		dupExpFound = false
@@ -117,13 +117,13 @@ func (r *installationNode) fetchPredecessors(otherNodes []*installationNode) (se
 					dupExpFound = true
 					msg.WriteString("\n  target exports:")
 				}
-				fmt.Fprintf(&msg, "\n    '%s' is exported by [%s]", exp, strings.Join(sources.List(), ", "))
+				fmt.Fprintf(&msg, "\n    '%s' is exported by [%s]", exp, strings.Join(sets.List(sources), ", "))
 			}
 		}
 		return nil, errors.New(msg.String())
 	}
 
-	predecessors := sets.NewString()
+	predecessors := sets.New[string]()
 	for _, imp := range r.imports.Data {
 		if len(imp.DataRef) == 0 {
 			// only dataRef imports can refer to sibling exports
@@ -170,9 +170,9 @@ func (r *installationNode) fetchPredecessors(otherNodes []*installationNode) (se
 // getExportMaps returns a mapping from sibling export names to the exporting siblings' names.
 // If for any given key the length of its value (a set) is greater than 1, this means that two or more siblings define the same export.
 // The third returned parameter indicates whether this has happened or not (true in case of duplicate exports).
-func (r *installationNode) getExportMaps(otherNodes []*installationNode) (map[string]sets.String, map[string]sets.String, bool) { //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
-	dataExports := map[string]sets.String{}   //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
-	targetExports := map[string]sets.String{} //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
+func (r *installationNode) getExportMaps(otherNodes []*installationNode) (map[string]sets.Set[string], map[string]sets.Set[string], bool) {
+	dataExports := map[string]sets.Set[string]{}
+	targetExports := map[string]sets.Set[string]{}
 	hasDuplicateExports := false
 
 	for _, sibling := range otherNodes {
@@ -181,11 +181,11 @@ func (r *installationNode) getExportMaps(otherNodes []*installationNode) (map[st
 			continue
 		}
 		for _, exp := range sibling.exports.Data {
-			var de sets.String //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
+			var de sets.Set[string]
 			var ok bool
 			de, ok = dataExports[exp.DataRef]
 			if !ok {
-				de = sets.NewString()
+				de = sets.New[string]()
 			}
 			de.Insert(sibling.name)
 			if !hasDuplicateExports && de.Len() > 1 {
@@ -194,11 +194,11 @@ func (r *installationNode) getExportMaps(otherNodes []*installationNode) (map[st
 			dataExports[exp.DataRef] = de
 		}
 		for _, exp := range sibling.exports.Targets {
-			var te sets.String //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
+			var te sets.Set[string]
 			var ok bool
 			te, ok = targetExports[exp.Target]
 			if !ok {
-				te = sets.NewString()
+				te = sets.New[string]()
 			}
 			te.Insert(sibling.name)
 			if !hasDuplicateExports && te.Len() > 1 {

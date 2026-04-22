@@ -43,7 +43,7 @@ func ValidateProviderConfiguration(config *helmv1alpha1.ProviderConfiguration) e
 	}
 
 	expPath := field.NewPath("exportsFromManifests")
-	keys := sets.NewString()
+	keys := sets.New[string]()
 	for i, export := range config.ExportsFromManifests {
 		indexFldPath := expPath.Index(i)
 		if len(export.Key) == 0 {

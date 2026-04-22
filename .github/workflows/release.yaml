@@ -74,7 +74,7 @@ jobs:
           git tag -a "${{ env.version }}" -m "Release ${{ env.version }}"
           git push origin "${{ env.version }}"
 
-          NESTED_GO_MODULES="apis controller-utils legacy-component-cli legacy-component-spec/bindings-go legacy-image-vector"
+          NESTED_GO_MODULES="apis controller-utils legacy-component-cli legacy-component-spec/bindings-go"
 
           for MODULE in $NESTED_GO_MODULES; do
             git tag -a "${MODULE}/${{ env.version }}" -m "Release ${{ env.version }}"
@@ -105,7 +105,6 @@ jobs:
           git add controller-utils/go.mod
           git add apis/go.mod
           git add legacy-component-cli/go.mod
-          git add legacy-image-vector/go.mod
 
           git commit -m "chore(release): Update VERSION to ${{ env.version }}-dev"
           git push origin main

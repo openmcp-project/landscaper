@@ -50,12 +50,12 @@ func ValidateBlueprintWithInstallationTemplates(blueprint *core.Blueprint, insta
 
 // ValidateBlueprintImportDefinitions validates a list of import definitions
 func ValidateBlueprintImportDefinitions(fldPath *field.Path, imports []core.ImportDefinition) field.ErrorList {
-	_, allErrs := validateBlueprintImportDefinitions(fldPath, imports, sets.NewString())
+	_, allErrs := validateBlueprintImportDefinitions(fldPath, imports, sets.New[string]())
 	return allErrs
 }
 
 // validateBlueprintImportDefinitions validates a list of import definitions
-func validateBlueprintImportDefinitions(fldPath *field.Path, imports []core.ImportDefinition, importNames sets.String) (sets.String, field.ErrorList) { //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
+func validateBlueprintImportDefinitions(fldPath *field.Path, imports []core.ImportDefinition, importNames sets.Set[string]) (sets.Set[string], field.ErrorList) {
 	allErrs := field.ErrorList{}
 
 	for i, importDef := range imports {
@@ -109,7 +109,7 @@ func validateBlueprintImportDefinitions(fldPath *field.Path, imports []core.Impo
 func ValidateBlueprintExportDefinitions(fldPath *field.Path, exports []core.ExportDefinition) field.ErrorList {
 	allErrs := field.ErrorList{}
 
-	exportNames := sets.NewString()
+	exportNames := sets.New[string]()
 	for i, exportDef := range exports {
 		defPath := fldPath.Index(i)
 		if len(exportDef.Name) != 0 {
@@ -208,7 +208,7 @@ func ValidateJsonSchema(fldPath *field.Path, schema *core.JSONSchemaDefinition) 
 // ValidateTemplateExecutorList validates a list of template executors
 func ValidateTemplateExecutorList(fldPath *field.Path, list []core.TemplateExecutor) field.ErrorList {
 	allErrs := field.ErrorList{}
-	names := sets.NewString()
+	names := sets.New[string]()
 	for i, exec := range list {
 		execPath := fldPath.Index(i)
 		if len(exec.Name) == 0 {
@@ -254,16 +254,16 @@ func ValidateSubinstallations(fldPath *field.Path, subinstallations []core.Subin
 func ValidateInstallationTemplates(fldPath *field.Path, blueprintImportDefs []core.ImportDefinition, subinstallations []*core.InstallationTemplate) field.ErrorList {
 	var (
 		allErrs             = field.ErrorList{}
-		names               = sets.NewString()
+		names               = sets.New[string]()
 		importedDataObjects = make([]Import, 0)
 		exportedDataObjects = map[string]string{}
 		importedTargets     = make([]Import, 0)
 		exportedTargets     = map[string]string{}
 
-		blueprintDataImports       = sets.NewString()
-		blueprintTargetImports     = sets.NewString()
-		blueprintTargetListImports = sets.NewString()
-		blueprintTargetMapImports  = sets.NewString()
+		blueprintDataImports       = sets.New[string]()
+		blueprintTargetImports     = sets.New[string]()
+		blueprintTargetListImports = sets.New[string]()
+		blueprintTargetMapImports  = sets.New[string]()
 	)
 
 	for _, bImport := range blueprintImportDefs {
@@ -387,8 +387,8 @@ func ValidateInstallationTemplates(fldPath *field.Path, blueprintImportDefs []co
 	}
 
 	// validate that all imported values are either satisfied by the blueprint or by another sibling
-	allErrs = append(allErrs, ValidateSatisfiedImports(blueprintDataImports, nil, nil, sets.StringKeySet(exportedDataObjects), importedDataObjects)...)
-	allErrs = append(allErrs, ValidateSatisfiedImports(blueprintTargetImports, blueprintTargetListImports, blueprintTargetMapImports, sets.StringKeySet(exportedTargets), importedTargets)...)
+	allErrs = append(allErrs, ValidateSatisfiedImports(blueprintDataImports, nil, nil, sets.KeySet(exportedDataObjects), importedDataObjects)...)
+	allErrs = append(allErrs, ValidateSatisfiedImports(blueprintTargetImports, blueprintTargetListImports, blueprintTargetMapImports, sets.KeySet(exportedTargets), importedTargets)...)
 
 	return allErrs
 }
@@ -402,7 +402,7 @@ type Import struct {
 }
 
 // ValidateSatisfiedImports validates that all imports are satisfied.
-func ValidateSatisfiedImports(blueprintImports, blueprintListImports, blueprintMapImports, exports sets.String, imports []Import) field.ErrorList { //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
+func ValidateSatisfiedImports(blueprintImports, blueprintListImports, blueprintMapImports, exports sets.Set[string], imports []Import) field.ErrorList {
 	allErrs := field.ErrorList{}
 	for _, imp := range imports {
 		if len(blueprintListImports) > 0 || len(blueprintMapImports) > 0 { // no need to check for references to elements from targetlist/map imports, if there aren't any targetlist/map imports
@@ -465,7 +465,7 @@ func ValidateInstallationTemplate(fldPath *field.Path, template *core.Installati
 // ValidateInstallationTemplateImports validates the imports of an InstallationTemplate
 func ValidateInstallationTemplateImports(imports core.InstallationImports, fldPath *field.Path) field.ErrorList {
 	allErrs := field.ErrorList{}
-	importNames := sets.NewString()
+	importNames := sets.New[string]()
 	var tmpErrs field.ErrorList
 
 	tmpErrs, importNames = ValidateInstallationTemplateDataImports(imports.Data, fldPath.Child("data"), importNames)
@@ -477,7 +477,7 @@ func ValidateInstallationTemplateImports(imports core.InstallationImports, fldPa
 }
 
 // ValidateInstallationTemplateDataImports validates the data imports of an InstallationTemplate
-func ValidateInstallationTemplateDataImports(imports []core.DataImport, fldPath *field.Path, importNames sets.String) (field.ErrorList, sets.String) { //nolint:staticcheck // Ignore SA1019 // TODO: change to generic set
+func ValidateInstallationTemplateDataImports(imports []core.DataImport, fldPath *field.Path, importNames sets.Set[string]) (field.ErrorList, sets.Set[string]) {
 	allErrs := field.ErrorList{}
 
 	for idx, imp := range imports {

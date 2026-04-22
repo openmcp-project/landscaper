@@ -98,7 +98,7 @@ func (crdmgr *CRDManager) EnsureCRDs(ctx context.Context) error {
 
 	err = wait.PollUntilContextTimeout(ctx, 1*time.Second, 30*time.Second, false, func(ctx context.Context) (bool, error) {
 		aggregatedStatus := true
-		causingCRDs := sets.NewString()
+		causingCRDs := sets.New[string]()
 
 		for _, crd := range crdList {
 			if !aggregatedStatus {
@@ -125,7 +125,7 @@ func (crdmgr *CRDManager) EnsureCRDs(ctx context.Context) error {
 				}
 			}
 		}
-		logger.Debug("Not all CRDs are ready", "unreadyCRDs", causingCRDs.List())
+		logger.Debug("Not all CRDs are ready", "unreadyCRDs", sets.List(causingCRDs))
 		return aggregatedStatus, nil
 	})
 
