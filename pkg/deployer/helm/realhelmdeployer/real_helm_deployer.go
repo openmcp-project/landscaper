@@ -9,6 +9,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log/slog"
 	"os"
 	"strings"
 	"sync"
@@ -320,6 +321,7 @@ func (c *RealHelmDeployer) initActionConfig(ctx context.Context) (*action.Config
 
 	restClientGetter := newRemoteRESTClientGetter(c.targetRestConfig, c.defaultNamespace)
 	kc := kube.New(restClientGetter)
+	kc.SetLogger(c.createSlogHandler(ctx))
 
 	clientset, err := kc.Factory.KubernetesClientSet()
 	if err != nil {
@@ -338,13 +340,17 @@ func (c *RealHelmDeployer) initActionConfig(ctx context.Context) (*action.Config
 }
 
 func (c *RealHelmDeployer) getStorageType(ctx context.Context, clientset *kubernetes.Clientset, namespace string) *storage.Storage {
+	slogHandler := c.createSlogHandler(ctx)
+
 	var store *storage.Storage
 	switch os.Getenv("HELM_DRIVER") {
 	case "secret", "secrets", "":
 		d := driver.NewSecrets(clientset.CoreV1().Secrets(namespace))
+		d.SetLogger(slogHandler)
 		store = storage.Init(d)
 	case "configmap", "configmaps":
 		d := driver.NewConfigMaps(clientset.CoreV1().ConfigMaps(namespace))
+		d.SetLogger(slogHandler)
 		store = storage.Init(d)
 	case "memory":
 		d := driver.NewMemory()
@@ -356,30 +362,69 @@ func (c *RealHelmDeployer) getStorageType(ctx context.Context, clientset *kubern
 	return store
 }
 
-func (c *RealHelmDeployer) createLogFunc(ctx context.Context) func(format string, v ...interface{}) {
-	logger, _ := logging.FromContextOrNew(ctx, []interface{}{lc.KeyMethod, "RealHelmDeployer.createLogFunc"})
-	return func(format string, v ...interface{}) {
-		c.mutex.Lock()
-		defer c.mutex.Unlock()
-		msg := fmt.Sprintf(format, v...)
+// helmSlogHandler is a custom slog.Handler that intercepts log messages,
+// stores them in the RealHelmDeployer's message buffer, and forwards them
+// to the landscaper logger.
+type helmSlogHandler struct {
+	deployer *RealHelmDeployer
+	logger   logging.Logger
+	attrs    []slog.Attr
+	groups   []string
+}
 
-		found := false
-		for i := range c.messages {
-			if c.messages[i] == msg {
-				found = true
-				break
-			}
+func (c *RealHelmDeployer) createSlogHandler(ctx context.Context) slog.Handler {
+	logger, _ := logging.FromContextOrNew(ctx, []interface{}{lc.KeyMethod, "RealHelmDeployer.createSlogHandler"})
+	return &helmSlogHandler{
+		deployer: c,
+		logger:   logger,
+	}
+}
+
+func (h *helmSlogHandler) Enabled(_ context.Context, _ slog.Level) bool {
+	return true
+}
+
+func (h *helmSlogHandler) Handle(_ context.Context, r slog.Record) error {
+	msg := r.Message
+
+	h.deployer.mutex.Lock()
+	defer h.deployer.mutex.Unlock()
+
+	found := false
+	for i := range h.deployer.messages {
+		if h.deployer.messages[i] == msg {
+			found = true
+			break
 		}
+	}
 
-		if !found {
-			c.messages = append(c.messages, msg)
-			length := len(c.messages)
-			if length > 10 {
-				c.messages = c.messages[length-10:]
-			}
+	if !found {
+		h.deployer.messages = append(h.deployer.messages, msg)
+		length := len(h.deployer.messages)
+		if length > 10 {
+			h.deployer.messages = h.deployer.messages[length-10:]
 		}
+	}
 
-		logger.Info(msg)
+	h.logger.Info(msg)
+	return nil
+}
+
+func (h *helmSlogHandler) WithAttrs(attrs []slog.Attr) slog.Handler {
+	return &helmSlogHandler{
+		deployer: h.deployer,
+		logger:   h.logger,
+		attrs:    append(h.attrs, attrs...),
+		groups:   h.groups,
+	}
+}
+
+func (h *helmSlogHandler) WithGroup(name string) slog.Handler {
+	return &helmSlogHandler{
+		deployer: h.deployer,
+		logger:   h.logger,
+		attrs:    h.attrs,
+		groups:   append(h.groups, name),
 	}
 }
 
@@ -476,7 +521,7 @@ func (c *RealHelmDeployer) getHelmSecretManager(ctx context.Context) (*HelmSecre
 	var err error
 
 	if c.helmSecretManager == nil {
-		c.helmSecretManager, err = NewHelmSecretManager(c.targetRestConfig, c.defaultNamespace, c.createLogFunc(ctx))
+		c.helmSecretManager, err = NewHelmSecretManager(c.targetRestConfig, c.defaultNamespace, c.createSlogHandler(ctx))
 
 		if err != nil {
 			return nil, fmt.Errorf("failed to create helm secret manager: %w", err)
