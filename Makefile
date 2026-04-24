@@ -213,7 +213,7 @@ jq: localbin ## Download jq locally if necessary. If wrong version is installed,
 .PHONY: registry
 registry: localbin ## Download registry locally if necessary. If wrong version is installed, it will be overwritten.
 	@test -s $(REGISTRY_BINARY) && $(REGISTRY_BINARY) --version | grep -q $(REGISTRY_VERSION) || \
-	( echo "Installing local registry ..."; \
+	( echo "Installing local registry $(REGISTRY_VERSION) from https://github.com/distribution/distribution..."; \
 	REGISTRY=$(REGISTRY_BINARY) LOCALBIN=$(LOCALBIN) $(REPO_ROOT)/hack/install-registry.sh $(REGISTRY_VERSION) )
 
 .PHONY: release

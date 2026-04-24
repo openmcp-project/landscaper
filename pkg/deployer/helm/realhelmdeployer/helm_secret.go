@@ -7,9 +7,10 @@ package realhelmdeployer
 import (
 	"context"
 	"fmt"
+	"log/slog"
 	"strconv"
 
-	"helm.sh/helm/v3/pkg/kube"
+	"helm.sh/helm/v4/pkg/kube"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/types"
@@ -27,12 +28,12 @@ type HelmSecretManager struct {
 }
 
 // NewHelmSecretManager creates a new helm secret manager.
-func NewHelmSecretManager(targetRestConfig *rest.Config, defaultNamespace string, logf func(string, ...interface{})) (*HelmSecretManager, error) {
+func NewHelmSecretManager(targetRestConfig *rest.Config, defaultNamespace string, logHandler slog.Handler) (*HelmSecretManager, error) {
 	manager := &HelmSecretManager{}
 
 	restClientGetter := newRemoteRESTClientGetter(targetRestConfig, defaultNamespace)
 	kc := kube.New(restClientGetter)
-	kc.Log = logf
+	kc.SetLogger(logHandler)
 
 	clientset, err := kc.Factory.KubernetesClientSet()
 	if err != nil {

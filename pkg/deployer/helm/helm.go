@@ -8,9 +8,10 @@ import (
 	"context"
 	"strings"
 
-	"helm.sh/helm/v3/pkg/chart"
-	"helm.sh/helm/v3/pkg/chartutil"
-	"helm.sh/helm/v3/pkg/engine"
+	common "helm.sh/helm/v4/pkg/chart/common"
+	commonutil "helm.sh/helm/v4/pkg/chart/common/util"
+	chart "helm.sh/helm/v4/pkg/chart/v2"
+	"helm.sh/helm/v4/pkg/engine"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/util/yaml"
 	"k8s.io/client-go/rest"
@@ -151,7 +152,7 @@ func (h *Helm) Template(ctx context.Context) (map[string]string, map[string]stri
 	}
 
 	//template chart
-	options := chartutil.ReleaseOptions{
+	options := common.ReleaseOptions{
 		Name:      h.ProviderConfiguration.Name,
 		Namespace: h.ProviderConfiguration.Namespace,
 		Revision:  0,
@@ -166,7 +167,7 @@ func (h *Helm) Template(ctx context.Context) (map[string]string, map[string]stri
 
 	// At this point, we always set skipSchemaValidation=true, because the schema validation is also done later
 	// during the helm install/upgrade action (except if skipped).
-	values, err = chartutil.ToRenderValuesWithSchemaValidation(ch, values, options, nil, true)
+	values, err = commonutil.ToRenderValuesWithSchemaValidation(ch, values, options, nil, true)
 	if err != nil {
 		return nil, nil, nil, nil, lserrors.NewWrappedError(
 			err, currOp, "PrepareHelmValues", err.Error(), lsv1alpha1.ErrorConfigurationProblem)

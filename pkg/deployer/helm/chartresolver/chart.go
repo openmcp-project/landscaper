@@ -29,8 +29,8 @@ import (
 	"github.com/openmcp-project/landscaper/pkg/components/ocmlib"
 	"github.com/openmcp-project/landscaper/pkg/deployer/lib"
 
-	"helm.sh/helm/v3/pkg/chart"
-	chartloader "helm.sh/helm/v3/pkg/chart/loader"
+	chart "helm.sh/helm/v4/pkg/chart/v2"
+	chartloader "helm.sh/helm/v4/pkg/chart/v2/loader"
 	corev1 "k8s.io/api/core/v1"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
@@ -195,11 +195,11 @@ func getChartFromResourceRef(ctx context.Context, ocmConfig *corev1.ConfigMap, r
 	if err != nil {
 		return nil, err
 	}
-	chart, err := loader.Load(path, fs)
+	chartData, err := loader.Load(path, fs)
 	if err != nil {
 		return nil, err
 	}
-	return chart, nil
+	return chartData, nil
 }
 
 func getChartFromArchive(archiveConfig *helmv1alpha1.ArchiveAccess) (*chart.Chart, error) {
