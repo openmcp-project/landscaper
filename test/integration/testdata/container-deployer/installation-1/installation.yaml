@@ -12,8 +12,10 @@ spec:
 
   componentDescriptor:
     ref:
+	# TODO: update repository and tag
       componentName: github.com/gardener/landscaper/integration-tests/container-deployer/container-1
       repositoryContext:
+	# TODO: update repository and tag
         baseUrl: europe-docker.pkg.dev/sap-gcp-cp-k8s-stable-hub/landscaper-examples/integration-tests
         type: ociRegistry
       version: v0.1.0
