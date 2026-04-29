@@ -17,7 +17,7 @@ require (
 	github.com/mandelsoft/spiff v1.7.0-beta-8
 	github.com/mandelsoft/vfs v0.4.5-0.20250514111339-d7b067920e91
 	github.com/onsi/ginkgo/v2 v2.28.1
-	github.com/onsi/gomega v1.39.1
+	github.com/onsi/gomega v1.40.0
 	github.com/opencontainers/go-digest v1.0.0
 	github.com/openmcp-project/landscaper/apis v1.2.0
 	github.com/openmcp-project/landscaper/controller-utils v1.2.0
