@@ -15,7 +15,7 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/mandelsoft/vfs v0.4.4
 	github.com/onsi/ginkgo/v2 v2.28.1
-	github.com/onsi/gomega v1.39.1
+	github.com/onsi/gomega v1.40.0
 	github.com/opencontainers/distribution-spec/specs-go v0.0.0-20260422183030-ed885fa76559
 	github.com/opencontainers/go-digest v1.0.0
 	github.com/opencontainers/image-spec v1.1.1
