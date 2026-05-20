@@ -1,6 +1,6 @@
 module github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go
 
-go 1.26.2
+go 1.26.3
 
 require (
 	github.com/ghodss/yaml v1.0.0
@@ -9,7 +9,7 @@ require (
 	// this old ginkgo v1 is imported by github.com/mandelsoft/vfs v0.4.4
 	github.com/onsi/ginkgo v1.16.5
 	github.com/onsi/ginkgo/v2 v2.29.0
-	github.com/onsi/gomega v1.40.0
+	github.com/onsi/gomega v1.41.0
 	github.com/opencontainers/go-digest v1.0.0
 	github.com/opencontainers/image-spec v1.1.1
 	github.com/xeipuuv/gojsonschema v1.2.0
@@ -53,7 +53,7 @@ require (
 	golang.org/x/mod v0.35.0 // indirect
 	golang.org/x/net v0.53.0 // indirect
 	golang.org/x/sync v0.20.0 // indirect
-	golang.org/x/sys v0.43.0 // indirect
+	golang.org/x/sys v0.44.0 // indirect
 	golang.org/x/text v0.36.0 // indirect
 	golang.org/x/tools v0.44.0 // indirect
 	google.golang.org/protobuf v1.36.10 // indirect
