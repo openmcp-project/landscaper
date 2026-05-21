@@ -1,6 +1,6 @@
 module github.com/openmcp-project/landscaper/legacy-component-cli
 
-go 1.26.2
+go 1.26.3
 
 require (
 	github.com/containerd/containerd v1.7.31
@@ -14,8 +14,8 @@ require (
 	github.com/google/go-containerregistry v0.21.5
 	github.com/google/uuid v1.6.0
 	github.com/mandelsoft/vfs v0.4.4
-	github.com/onsi/ginkgo/v2 v2.28.1
-	github.com/onsi/gomega v1.39.1
+	github.com/onsi/ginkgo/v2 v2.29.0
+	github.com/onsi/gomega v1.41.0
 	github.com/opencontainers/distribution-spec/specs-go v0.0.0-20260422183030-ed885fa76559
 	github.com/opencontainers/go-digest v1.0.0
 	github.com/opencontainers/image-spec v1.1.1
@@ -24,8 +24,8 @@ require (
 	github.com/sirupsen/logrus v1.9.4
 	github.com/spf13/cobra v1.10.2
 	github.com/spf13/pflag v1.0.10
-	go.uber.org/zap v1.27.1
-	golang.org/x/crypto v0.50.0
+	go.uber.org/zap v1.28.0
+	golang.org/x/crypto v0.51.0
 	k8s.io/api v0.35.4
 	k8s.io/apimachinery v0.35.4
 	sigs.k8s.io/yaml v1.6.0
@@ -81,8 +81,8 @@ require (
 	golang.org/x/mod v0.35.0 // indirect
 	golang.org/x/net v0.53.0 // indirect
 	golang.org/x/sync v0.20.0 // indirect
-	golang.org/x/sys v0.43.0 // indirect
-	golang.org/x/text v0.36.0 // indirect
+	golang.org/x/sys v0.44.0 // indirect
+	golang.org/x/text v0.37.0 // indirect
 	golang.org/x/tools v0.44.0 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20251202230838-ff82c1b0f217 // indirect
 	google.golang.org/grpc v1.79.3 // indirect
