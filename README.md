@@ -34,3 +34,19 @@ This repository is a fork of https://github.com/gardener/landscaper. The support
 Maintainenance and development of the Landscaper project will continue in the https://github.com/openmcp-project/landscaper repository.
 This doesn't affect any feature or functionality of the Landscaper project.
 OCI images and OCM components can be consumed directly from within this repository GitHub Container Registry.
+
+---
+
+<p align="center">
+  <a href="https://apeirora.eu/content/projects/">
+    <img alt="BMWK-EU funding logo" src="https://apeirora.eu/assets/img/BMWK-EU.png" width="300"/>
+  </a>
+</p>
+
+<p align="center">
+  OpenControlPlane is part of <a href="https://apeirora.eu/content/projects/">ApeiroRA</a>, an EU Important Project of Common European Interest (IPCEI-CIS).
+</p>
+
+<p align="center">
+  Copyright Linux Foundation Europe. For web site terms of use, trademark policy and other project policies please see <a href="https://linuxfoundation.eu/en/policies">https://linuxfoundation.eu/en/policies</a>.
+</p>
