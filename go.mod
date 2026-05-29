@@ -47,7 +47,7 @@ require (
 )
 
 replace (
-	github.com/ThalesIgnite/crypto11 => github.com/ThalesGroup/crypto11 v1.6.0
+	github.com/ThalesIgnite/crypto11 => github.com/ThalesGroup/crypto11 v1.6.1
 	github.com/openmcp-project/landscaper/apis => ./apis
 	github.com/openmcp-project/landscaper/controller-utils => ./controller-utils
 	github.com/openmcp-project/landscaper/legacy-component-cli => ./legacy-component-cli
@@ -261,7 +261,7 @@ require (
 	github.com/mattn/go-colorable v0.1.14 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.19 // indirect
-	github.com/miekg/pkcs11 v1.1.1 // indirect
+	github.com/miekg/pkcs11 v1.1.2 // indirect
 	github.com/mikefarah/yq/v4 v4.48.1 // indirect
 	github.com/mitchellh/copystructure v1.2.0 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
