@@ -5,7 +5,7 @@ go 1.26.3
 require (
 	github.com/containerd/containerd v1.7.32
 	github.com/distribution/reference v0.6.0
-	github.com/docker/cli v29.5.2+incompatible
+	github.com/docker/cli v29.5.3+incompatible
 	github.com/drone/envsubst v1.0.3
 	github.com/ghodss/yaml v1.0.0
 	github.com/go-logr/logr v1.4.3
@@ -16,7 +16,7 @@ require (
 	github.com/mandelsoft/vfs v0.4.4
 	github.com/onsi/ginkgo/v2 v2.29.0
 	github.com/onsi/gomega v1.41.0
-	github.com/opencontainers/distribution-spec/specs-go v0.0.0-20260514170709-dc18cea874b0
+	github.com/opencontainers/distribution-spec/specs-go v0.0.0-20260527210441-d40ddd746adc
 	github.com/opencontainers/go-digest v1.0.0
 	github.com/opencontainers/image-spec v1.1.1
 	github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go v1.2.0
