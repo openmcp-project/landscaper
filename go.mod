@@ -1,13 +1,13 @@
 module github.com/openmcp-project/landscaper
 
-go 1.26.3
+go 1.26.4
 
 require (
 	dario.cat/mergo v1.0.2
 	github.com/Masterminds/sprig/v3 v3.3.0
 	github.com/cloudflare/cfssl v1.6.5
 	github.com/distribution/reference v0.6.0
-	github.com/docker/cli v29.5.2+incompatible
+	github.com/docker/cli v29.5.3+incompatible
 	github.com/go-logr/logr v1.4.3
 	github.com/golang/mock v1.7.0-rc.1
 	github.com/google/uuid v1.6.0
@@ -26,13 +26,13 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus/client_golang v1.23.2
 	github.com/robfig/cron/v3 v3.0.1
-	github.com/shirou/gopsutil/v4 v4.26.4
+	github.com/shirou/gopsutil/v4 v4.26.5
 	github.com/spf13/cobra v1.10.2
 	github.com/spf13/pflag v1.0.10
 	github.com/xeipuuv/gojsonschema v1.2.0
-	golang.org/x/crypto v0.51.0
-	golang.org/x/sync v0.20.0
-	golang.org/x/sys v0.44.0
+	golang.org/x/crypto v0.53.0
+	golang.org/x/sync v0.21.0
+	golang.org/x/sys v0.46.0
 	gopkg.in/yaml.v3 v3.0.1
 	helm.sh/helm/v3 v3.21.0
 	k8s.io/api v0.35.4
@@ -47,7 +47,7 @@ require (
 )
 
 replace (
-	github.com/ThalesIgnite/crypto11 => github.com/ThalesGroup/crypto11 v1.6.0
+	github.com/ThalesIgnite/crypto11 => github.com/ThalesGroup/crypto11 v1.6.1
 	github.com/openmcp-project/landscaper/apis => ./apis
 	github.com/openmcp-project/landscaper/controller-utils => ./controller-utils
 	github.com/openmcp-project/landscaper/legacy-component-cli => ./legacy-component-cli
@@ -261,7 +261,7 @@ require (
 	github.com/mattn/go-colorable v0.1.14 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.19 // indirect
-	github.com/miekg/pkcs11 v1.1.1 // indirect
+	github.com/miekg/pkcs11 v1.1.2 // indirect
 	github.com/mikefarah/yq/v4 v4.48.1 // indirect
 	github.com/mitchellh/copystructure v1.2.0 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
@@ -368,10 +368,10 @@ require (
 	go.yaml.in/yaml/v2 v2.4.4 // indirect
 	go.yaml.in/yaml/v3 v3.0.4 // indirect
 	golang.org/x/mod v0.36.0 // indirect
-	golang.org/x/net v0.54.0 // indirect
+	golang.org/x/net v0.55.0 // indirect
 	golang.org/x/oauth2 v0.36.0 // indirect
-	golang.org/x/term v0.43.0 // indirect
-	golang.org/x/text v0.37.0 // indirect
+	golang.org/x/term v0.44.0 // indirect
+	golang.org/x/text v0.38.0 // indirect
 	golang.org/x/time v0.14.0 // indirect
 	golang.org/x/tools v0.45.0 // indirect
 	gomodules.xyz/jsonpatch/v2 v2.4.0 // indirect
@@ -391,7 +391,7 @@ require (
 	k8s.io/component-base v0.35.4 // indirect
 	k8s.io/gengo/v2 v2.0.0-20250922181213-ec3ebc5fd46b // indirect
 	k8s.io/klog/v2 v2.140.0 // indirect
-	k8s.io/kube-openapi v0.0.0-20260520065146-aa012df4f4af // indirect
+	k8s.io/kube-openapi v0.0.0-20260603220949-865597e52e25 // indirect
 	k8s.io/kubectl v0.35.1 // indirect
 	oras.land/oras-go/v2 v2.6.0 // indirect
 	sigs.k8s.io/json v0.0.0-20250730193827-2d320260d730 // indirect
