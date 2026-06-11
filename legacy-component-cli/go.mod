@@ -19,7 +19,7 @@ require (
 	github.com/opencontainers/distribution-spec/specs-go v0.0.0-20260527210441-d40ddd746adc
 	github.com/opencontainers/go-digest v1.0.0
 	github.com/opencontainers/image-spec v1.1.1
-	github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go v1.2.0
+	github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go v1.3.0
 	github.com/prometheus/client_golang v1.23.2
 	github.com/sirupsen/logrus v1.9.4
 	github.com/spf13/cobra v1.10.2
