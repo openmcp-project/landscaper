@@ -14,7 +14,7 @@ require (
 	github.com/google/go-containerregistry v0.21.6
 	github.com/google/uuid v1.6.0
 	github.com/mandelsoft/vfs v0.4.4
-	github.com/onsi/ginkgo/v2 v2.29.0
+	github.com/onsi/ginkgo/v2 v2.30.0
 	github.com/onsi/gomega v1.41.0
 	github.com/opencontainers/distribution-spec/specs-go v0.0.0-20260527210441-d40ddd746adc
 	github.com/opencontainers/go-digest v1.0.0
