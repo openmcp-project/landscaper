@@ -51,10 +51,15 @@ fi
 
 echo "Pull landscaper helm chart"
 export HELM_EXPERIMENTAL_OCI=1
+# TODO: update repository and tag
 helm pull oci://europe-docker.pkg.dev/sap-gcp-cp-k8s-stable-hub/landscaper/github.com/gardener/landscaper/charts/landscaper --version $VERSION --untar --destination $TMP_GEN
+# TODO: update repository and tag
 helm pull oci://europe-docker.pkg.dev/sap-gcp-cp-k8s-stable-hub/landscaper/github.com/gardener/landscaper/manifest-deployer/charts/manifest-deployer --version $VERSION --untar --destination $TMP_GEN
+# TODO: update repository and tag
 helm pull oci://europe-docker.pkg.dev/sap-gcp-cp-k8s-stable-hub/landscaper/github.com/gardener/landscaper/helm-deployer/charts/helm-deployer --version $VERSION --untar --destination $TMP_GEN
+# TODO: update repository and tag
 helm pull oci://europe-docker.pkg.dev/sap-gcp-cp-k8s-stable-hub/landscaper/github.com/gardener/landscaper/container-deployer/charts/container-deployer --version $VERSION --untar --destination $TMP_GEN
+# TODO: update repository and tag
 helm pull oci://europe-docker.pkg.dev/sap-gcp-cp-k8s-stable-hub/landscaper/github.com/gardener/landscaper/mock-deployer/charts/mock-deployer --version $VERSION --untar --destination $TMP_GEN
 
 echo "Upgrade landscaper"
