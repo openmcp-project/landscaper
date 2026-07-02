@@ -18,4 +18,5 @@ var (
 // RegisterTests registers all tests of this package
 func RegisterTests(f *framework.Framework) {
 	ImportExportTests(f)
+	RenderErrorTests(f)
 }

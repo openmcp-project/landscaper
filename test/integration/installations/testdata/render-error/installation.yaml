@@ -1,0 +1,46 @@
+# SPDX-FileCopyrightText: 2026 SAP SE or an SAP affiliate company and Gardener contributors
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# Reproduces the scenario from issue #174: a deploy execution template that
+# renders to syntactically invalid YAML. The rendered "manifest broken line"
+# entry has no colon, so sigs.k8s.io/yaml fails to convert the generated
+# document. The installation must end up in phase Failed and status.lastError
+# must carry enough context to locate the offending item and line.
+apiVersion: landscaper.gardener.cloud/v1alpha1
+kind: Installation
+metadata:
+  name: invalid-yaml
+  annotations:
+    landscaper.gardener.cloud/operation: reconcile
+spec:
+  imports:
+    targets:
+      - name: cluster
+        target: my-cluster
+  blueprint:
+    inline:
+      filesystem:
+        blueprint.yaml: |
+          apiVersion: landscaper.gardener.cloud/v1alpha1
+          kind: Blueprint
+          imports:
+            - name: cluster
+              targetType: landscaper.gardener.cloud/kubernetes-cluster
+          deployExecutions:
+            - name: default
+              type: GoTemplate
+              template: |
+                deployItems:
+                  - name: myfirstitem
+                    type: landscaper.gardener.cloud/kubernetes-manifest
+                    target:
+                      import: cluster
+                    config:
+                      apiVersion: manifest.deployer.landscaper.gardener.cloud/v1alpha2
+                      kind: ProviderConfiguration
+                      updateStrategy: update
+                      manifests:
+                        - policy: manage
+                          manifest broken line
+                          apiVersion: v1

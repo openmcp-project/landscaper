@@ -1030,6 +1030,33 @@ line 10:11
 12:       image: {{ ( print .imports.config.image.name ":" .imports.config.image.version ) }}
 13:   `))
 		})
+
+		It("should include the rendered template output when the generated YAML is invalid (issue #174)", func() {
+			res, err := executeTemplate("template-25.yaml", nil)
+
+			Expect(err).To(HaveOccurred())
+			Expect(res).To(BeNil())
+
+			// The upstream yaml error only points at a line number in the
+			// generated document, which is invisible to the user. The error
+			// must name the failing template execution, include the template
+			// source snippet, and the rendered output snippet with a marker
+			// on the offending line - so the developer can locate the
+			// problem without hand-rendering the template.
+			snippet := "3:      type: container\n" +
+				"4:      config:\n" +
+				"5:        apiVersion: example.test/v1\n" +
+				"6:        kind: Configuration\n" +
+				"7:        verbosity 10\n" +
+				"8:        memory:\n" +
+				"      ˆ≈≈≈≈≈≈≈\n" +
+				"9:          min: 128\n" +
+				"10:   \n"
+			expected := `item "init", template execution "one": unable to store state: error converting YAML to JSON: yaml: line 8: could not find expected ':'` + "\n" +
+				"template source:\n" + snippet +
+				"\ntemplated output:\n" + snippet
+			Expect(err.Error()).To(Equal(expected))
+		})
 	})
 }
 
