@@ -165,11 +165,11 @@ func (t *Templater) TemplateSubinstallationExecutions(tmplExec lsv1alpha1.Templa
 	}
 
 	if err := t.storeDeployExecutionState(ctx, tmplExec, data); err != nil {
-		return nil, fmt.Errorf("unable to store state: %w", err)
+		return nil, wrapPostTemplateError("unable to store state", err, tmplExec, &rawTemplate, data)
 	}
 	output := &lstmpl.SubinstallationExecutorOutput{}
 	if err := yaml.Unmarshal(data, output); err != nil {
-		return nil, fmt.Errorf("error while decoding templated execution: %w", err)
+		return nil, wrapPostTemplateError("error while decoding templated execution", err, tmplExec, &rawTemplate, data)
 	}
 	return output, nil
 }
@@ -199,7 +199,7 @@ func (t *Templater) TemplateImportExecutions(tmplExec lsv1alpha1.TemplateExecuto
 
 	output := &lstmpl.ImportExecutorOutput{}
 	if err := yaml.Unmarshal(data, output); err != nil {
-		return nil, fmt.Errorf("error while decoding templated execution: %w", err)
+		return nil, wrapPostTemplateError("error while decoding templated execution", err, tmplExec, &rawTemplate, data)
 	}
 	return output, nil
 }
@@ -239,11 +239,11 @@ func (t *Templater) TemplateDeployExecutions(tmplExec lsv1alpha1.TemplateExecuto
 	}
 
 	if err := t.storeDeployExecutionState(ctx, tmplExec, data); err != nil {
-		return nil, fmt.Errorf("unable to store state: %w", err)
+		return nil, wrapPostTemplateError("unable to store state", err, tmplExec, &rawTemplate, data)
 	}
 	output := &lstmpl.DeployExecutorOutput{}
 	if err := yaml.Unmarshal(data, output); err != nil {
-		return nil, fmt.Errorf("error while decoding templated execution: %w", err)
+		return nil, wrapPostTemplateError("error while decoding templated execution", err, tmplExec, &rawTemplate, data)
 	}
 	return output, nil
 }
@@ -284,11 +284,11 @@ func (t *Templater) TemplateExportExecutions(tmplExec lsv1alpha1.TemplateExecuto
 		return nil, fmt.Errorf("unable to execute template: %w", err)
 	}
 	if err := t.storeExportExecutionState(ctx, tmplExec, data); err != nil {
-		return nil, fmt.Errorf("unable to store state: %w", err)
+		return nil, wrapPostTemplateError("unable to store state", err, tmplExec, &rawTemplate, data)
 	}
 	output := &lstmpl.ExportExecutorOutput{}
 	if err := yaml.Unmarshal(data, output); err != nil {
-		return nil, err
+		return nil, wrapPostTemplateError("error while decoding templated execution", err, tmplExec, &rawTemplate, data)
 	}
 	return output, nil
 }
