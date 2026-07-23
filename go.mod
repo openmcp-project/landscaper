@@ -7,8 +7,8 @@ require (
 	github.com/Masterminds/sprig/v3 v3.3.0
 	github.com/cloudflare/cfssl v1.6.5
 	github.com/distribution/reference v0.6.0
-	github.com/docker/cli v29.6.1+incompatible
-	github.com/go-logr/logr v1.4.3
+	github.com/docker/cli v29.6.2+incompatible
+	github.com/go-logr/logr v1.4.4
 	github.com/golang/mock v1.7.0-rc.1
 	github.com/google/uuid v1.6.0
 	github.com/hashicorp/go-multierror v1.1.1
@@ -34,20 +34,20 @@ require (
 	golang.org/x/sync v0.22.0
 	golang.org/x/sys v0.47.0
 	gopkg.in/yaml.v3 v3.0.1
-	helm.sh/helm/v3 v3.21.1
+	helm.sh/helm/v3 v3.21.3
 	k8s.io/api v0.35.4
 	k8s.io/apiextensions-apiserver v0.35.4
 	k8s.io/apimachinery v0.35.4
 	k8s.io/client-go v0.35.4
 	k8s.io/code-generator v0.35.4
-	k8s.io/utils v0.0.0-20260507154919-ff6756f316d2
+	k8s.io/utils v0.0.0-20260707023825-cf1189d6abe3
 	ocm.software/ocm v0.36.0
 	sigs.k8s.io/controller-runtime v0.23.3
 	sigs.k8s.io/yaml v1.6.0
 )
 
 replace (
-	github.com/ThalesIgnite/crypto11 => github.com/ThalesGroup/crypto11 v1.6.1
+	github.com/ThalesIgnite/crypto11 => github.com/ThalesGroup/crypto11 v1.6.5
 	github.com/openmcp-project/landscaper/apis => ./apis
 	github.com/openmcp-project/landscaper/controller-utils => ./controller-utils
 	github.com/openmcp-project/landscaper/legacy-component-cli => ./legacy-component-cli
