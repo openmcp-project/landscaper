@@ -1,6 +1,6 @@
 name: Integration Test Pull Request
 on:
-  pull_request:
+#  pull_request:
   workflow_dispatch:
 
 permissions:
