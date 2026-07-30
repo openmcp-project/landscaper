@@ -71,4 +71,4 @@ jobs:
           PULL_REQUEST_ID: ${{ github.event.pull_request.number }}
         run: |
           VERSION="$('./hack/get-version.sh')"
-          "./hack/integration-test-runner.sh" "$GARDENER_KUBECONFIG" "garden-laas" "$VERSION" "$PULL_REQUEST_ID"
+          "./hack/integration-test-runner.sh" "$GARDENER_KUBECONFIG" "garden-laas" "$VERSION" "$GITHUB_SHA"
