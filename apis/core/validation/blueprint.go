@@ -172,12 +172,12 @@ func validateMutuallyExclusiveConfig(fldPath *field.Path, def interface{}, expec
 			}
 		}
 		if expected {
-			if ((kind == reflect.Ptr || kind == reflect.Slice || kind == reflect.Map || kind == reflect.Interface) && f.IsNil()) || f.IsZero() {
+			if ((kind == reflect.Pointer || kind == reflect.Slice || kind == reflect.Map || kind == reflect.Interface) && f.IsNil()) || f.IsZero() {
 				// field should be set but is empty
 				allErrs = append(allErrs, field.Required(fldPath, fmt.Sprintf("%s must not be empty for type %s", key, defType)))
 			}
 		} else {
-			if ((kind == reflect.Ptr || kind == reflect.Slice || kind == reflect.Map || kind == reflect.Interface) && !f.IsNil()) || !f.IsZero() {
+			if ((kind == reflect.Pointer || kind == reflect.Slice || kind == reflect.Map || kind == reflect.Interface) && !f.IsNil()) || !f.IsZero() {
 				// field should not be set but it is
 				allErrs = append(allErrs, field.Invalid(fldPath, def, fmt.Sprintf("unexpected config '%s', only [%s] should be set", key, strings.Join(expectedConfigs, ", "))))
 			}

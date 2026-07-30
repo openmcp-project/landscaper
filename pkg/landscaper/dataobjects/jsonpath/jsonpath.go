@@ -18,7 +18,7 @@ import (
 
 func GetValue(path string, data interface{}, out interface{}) error {
 	outVal := reflect.ValueOf(out)
-	if outVal.Kind() != reflect.Ptr {
+	if outVal.Kind() != reflect.Pointer {
 		return errors.New("expected pointer")
 	}
 
