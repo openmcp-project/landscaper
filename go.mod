@@ -47,7 +47,8 @@ require (
 )
 
 replace (
-	github.com/ThalesIgnite/crypto11 => github.com/ThalesGroup/crypto11 v1.6.1
+	// The repository renamed from ThalesIgnite (and later ThalesGroup) to eclipse-keypont because the project was donated to the Eclipse Foundation.
+	github.com/ThalesIgnite/crypto11 => github.com/eclipse-keypont/crypto11 v1.6.8
 	github.com/openmcp-project/landscaper/apis => ./apis
 	github.com/openmcp-project/landscaper/controller-utils => ./controller-utils
 	github.com/openmcp-project/landscaper/legacy-component-cli => ./legacy-component-cli
