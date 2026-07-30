@@ -14,7 +14,6 @@ import (
 
 	"github.com/mandelsoft/filepath/pkg/filepath"
 	"github.com/mandelsoft/vfs/pkg/memoryfs"
-	"github.com/mandelsoft/vfs/pkg/vfs"
 	"ocm.software/ocm/api/ocm/extensions/download"
 
 	"github.com/mandelsoft/goutils/finalizer"
@@ -195,59 +194,16 @@ func getChartFromResourceRef(ctx context.Context, ocmConfig *corev1.ConfigMap, r
 	if err != nil {
 		return nil, err
 	}
-	chart, err := loadChartFromVFS(fs, path)
+	f, err := fs.Open(path)
+	if err != nil {
+		return nil, err
+	}
+	defer f.Close()
+	chart, err := chartloader.LoadArchive(f)
 	if err != nil {
 		return nil, err
 	}
 	return chart, nil
-}
-
-// loadChartFromVFS loads a helm chart from a path within the given virtual filesystem.
-// The path may point to a chart archive file (tarball) or to a chart directory.
-func loadChartFromVFS(fs vfs.FileSystem, path string) (*chart.Chart, error) {
-	fi, err := fs.Stat(path)
-	if err != nil {
-		return nil, fmt.Errorf("cannot stat chart path %q: %w", path, err)
-	}
-	if fi.IsDir() {
-		files, err := loadChartFilesFromVFSDir(fs, path)
-		if err != nil {
-			return nil, fmt.Errorf("cannot load chart from directory %q: %w", path, err)
-		}
-		return chartloader.LoadFiles(files)
-	}
-	f, err := fs.Open(path)
-	if err != nil {
-		return nil, fmt.Errorf("cannot open chart archive %q: %w", path, err)
-	}
-	defer f.Close()
-	return chartloader.LoadArchive(f)
-}
-
-func loadChartFilesFromVFSDir(fs vfs.FileSystem, root string) ([]*chartloader.BufferedFile, error) {
-	var files []*chartloader.BufferedFile
-	err := vfs.Walk(fs, root, func(path string, info vfs.FileInfo, walkErr error) error {
-		if walkErr != nil {
-			return walkErr
-		}
-		if info.IsDir() {
-			return nil
-		}
-		rel, err := filepath.Rel(root, path)
-		if err != nil {
-			return err
-		}
-		data, err := vfs.ReadFile(fs, path)
-		if err != nil {
-			return err
-		}
-		files = append(files, &chartloader.BufferedFile{Name: rel, Data: data})
-		return nil
-	})
-	if err != nil {
-		return nil, err
-	}
-	return files, nil
 }
 
 func getChartFromArchive(archiveConfig *helmv1alpha1.ArchiveAccess) (*chart.Chart, error) {
