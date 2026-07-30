@@ -32,7 +32,7 @@ import (
 // The obj is expected to be of type v2.ComponentDescriptor or v2.ComponentDescriptorList.
 func Decode(data []byte, obj interface{}, opts ...DecodeOption) error {
 	objType := reflect.TypeOf(obj)
-	if objType.Kind() != reflect.Ptr {
+	if objType.Kind() != reflect.Pointer {
 		return fmt.Errorf("object is expected to be of type pointer but is of type %T", obj)
 	}
 
@@ -106,7 +106,7 @@ func Decode(data []byte, obj interface{}, opts ...DecodeOption) error {
 // The obj is expected to be of type v2.ComponentDescriptor or v2.ComponentDescriptorList.
 func Encode(obj interface{}) ([]byte, error) {
 	objType := reflect.TypeOf(obj)
-	if objType.Kind() != reflect.Ptr {
+	if objType.Kind() != reflect.Pointer {
 		return nil, fmt.Errorf("object is expected to be of type pointer but is of type %T", obj)
 	}
 

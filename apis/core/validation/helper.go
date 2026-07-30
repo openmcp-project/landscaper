@@ -79,7 +79,7 @@ func stringContains(data []string, value string) bool {
 func ValidateExactlyOneOf(fldPath *field.Path, input interface{}, configs ...string) field.ErrorList {
 	setFields := []string{}
 	val := reflect.ValueOf(input)
-	if val.Kind() == reflect.Ptr {
+	if val.Kind() == reflect.Pointer {
 		if val.IsNil() {
 			return field.ErrorList{field.Required(fldPath, fmt.Sprintf("exactly one of [%s] must be set (currently set: none)", strings.Join(configs, ", ")))}
 		}
@@ -94,7 +94,7 @@ func ValidateExactlyOneOf(fldPath *field.Path, input interface{}, configs ...str
 			continue
 		}
 		// check if field is set
-		if ((kind == reflect.Ptr || kind == reflect.Slice || kind == reflect.Map || kind == reflect.Interface) && !f.IsNil()) || !f.IsZero() {
+		if ((kind == reflect.Pointer || kind == reflect.Slice || kind == reflect.Map || kind == reflect.Interface) && !f.IsNil()) || !f.IsZero() {
 			// field is set
 			setFields = append(setFields, fieldName)
 		}
