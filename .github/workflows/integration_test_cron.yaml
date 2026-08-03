@@ -68,7 +68,6 @@ jobs:
       - name: run integration test
         env:
           GARDENER_KUBECONFIG: ${{ secrets.GARDENER_LAAS_SERVICE_ACCOUNT }}
-          PULL_REQUEST_ID: ${{ github.event.pull_request.number }}
         run: |
           VERSION="$('./hack/get-version.sh')"
           "./hack/integration-test-runner.sh" "$GARDENER_KUBECONFIG" "garden-laas" "$VERSION" "$GITHUB_SHA"
