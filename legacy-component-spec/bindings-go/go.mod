@@ -4,7 +4,7 @@ go 1.26.5
 
 require (
 	github.com/ghodss/yaml v1.0.0
-	github.com/go-logr/logr v1.4.3
+	github.com/go-logr/logr v1.4.4
 	github.com/mandelsoft/vfs v0.4.5-0.20250514111339-d7b067920e91
 	// this old ginkgo v1 is imported by github.com/mandelsoft/vfs v0.4.4
 	github.com/onsi/ginkgo v1.16.5

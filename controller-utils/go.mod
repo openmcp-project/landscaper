@@ -3,7 +3,7 @@ module github.com/openmcp-project/landscaper/controller-utils
 go 1.26.5
 
 require (
-	github.com/go-logr/logr v1.4.3
+	github.com/go-logr/logr v1.4.4
 	github.com/go-logr/zapr v1.3.0
 	github.com/golang/mock v1.7.0-rc.1
 	github.com/onsi/ginkgo/v2 v2.32.0
