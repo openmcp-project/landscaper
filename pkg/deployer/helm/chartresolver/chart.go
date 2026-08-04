@@ -91,6 +91,7 @@ func GetChart(ctx context.Context,
 		if err != nil {
 			return nil, err
 		}
+		stripModTimes(chart)
 	}
 
 	if useChartCache {
