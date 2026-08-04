@@ -205,7 +205,7 @@ func (c *RealHelmDeployer) installRelease(ctx context.Context, values map[string
 }
 
 func (c *RealHelmDeployer) isHelmInstallMessage(message string) bool {
-	return strings.Contains(message, "rendered manifests contain a resource that already exists. Unable to continue with install")
+	return strings.Contains(strings.ToLower(message), "unable to continue with install")
 }
 
 // upgradeRelease upgrades a helm release
@@ -268,10 +268,11 @@ func (c *RealHelmDeployer) upgradeRelease(ctx context.Context, values map[string
 }
 
 func (c *RealHelmDeployer) isHelmUpgradeMessage(message string) bool {
-	return strings.Contains(message, "rendered manifests contain a resource that already exists. Unable to continue with update") ||
-		strings.Contains(message, "pre-upgrade hooks failed") ||
-		strings.Contains(message, "The order in patch list") ||
-		strings.Contains(message, "YAML parse error on")
+	lower := strings.ToLower(message)
+	return strings.Contains(lower, "unable to continue with update") ||
+		strings.Contains(lower, "pre-upgrade hooks failed") ||
+		strings.Contains(lower, "the order in patch list") ||
+		strings.Contains(lower, "yaml parse error on")
 }
 
 func (c *RealHelmDeployer) deleteRelease(ctx context.Context) error {
