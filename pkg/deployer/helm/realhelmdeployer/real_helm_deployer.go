@@ -166,6 +166,7 @@ func (c *RealHelmDeployer) installRelease(ctx context.Context, values map[string
 	install.ReleaseName = c.releaseName
 	install.Namespace = c.defaultNamespace
 	install.CreateNamespace = c.createNamespace
+	install.ServerSideApply = false
 	if installConfig.Atomic {
 		install.RollbackOnFailure = true
 		install.WaitStrategy = kube.StatusWatcherStrategy
@@ -229,6 +230,7 @@ func (c *RealHelmDeployer) upgradeRelease(ctx context.Context, values map[string
 	upgrade := action.NewUpgrade(actionConfig)
 	upgrade.Namespace = c.defaultNamespace
 	upgrade.MaxHistory = 10
+	upgrade.ServerSideApply = "false"
 	if upgradeConfig.Atomic {
 		upgrade.RollbackOnFailure = true
 		upgrade.WaitStrategy = kube.StatusWatcherStrategy
