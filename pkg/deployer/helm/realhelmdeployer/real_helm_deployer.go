@@ -171,6 +171,8 @@ func (c *RealHelmDeployer) installRelease(ctx context.Context, values map[string
 		install.WaitStrategy = kube.StatusWatcherStrategy
 	} else if installConfig.Wait {
 		install.WaitStrategy = kube.StatusWatcherStrategy
+	} else {
+		install.WaitStrategy = kube.HookOnlyStrategy
 	}
 	install.ForceReplace = installConfig.Force
 	install.SkipSchemaValidation = installConfig.SkipSchemaValidation
@@ -232,6 +234,8 @@ func (c *RealHelmDeployer) upgradeRelease(ctx context.Context, values map[string
 		upgrade.WaitStrategy = kube.StatusWatcherStrategy
 	} else if upgradeConfig.Wait {
 		upgrade.WaitStrategy = kube.StatusWatcherStrategy
+	} else {
+		upgrade.WaitStrategy = kube.HookOnlyStrategy
 	}
 	upgrade.ForceReplace = upgradeConfig.Force
 	upgrade.SkipSchemaValidation = upgradeConfig.SkipSchemaValidation
@@ -299,6 +303,8 @@ func (c *RealHelmDeployer) deleteRelease(ctx context.Context) error {
 	uninstall.KeepHistory = false
 	if uninstallConfig.Wait {
 		uninstall.WaitStrategy = kube.StatusWatcherStrategy
+	} else {
+		uninstall.WaitStrategy = kube.HookOnlyStrategy
 	}
 
 	timeout, err := timeout.TimeoutExceeded(ctx, c.di, TimeoutCheckpointHelmBeforeDeletingRelease)
