@@ -10,7 +10,7 @@ import (
 	"sync"
 	"time"
 
-	"helm.sh/helm/v3/pkg/chart"
+	chart "helm.sh/helm/v4/pkg/chart/v2"
 
 	helmv1alpha1 "github.com/openmcp-project/landscaper/apis/deployer/helm/v1alpha1"
 	"github.com/openmcp-project/landscaper/apis/utils"

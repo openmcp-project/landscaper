@@ -8,9 +8,10 @@ import (
 	"context"
 	"strings"
 
-	"helm.sh/helm/v3/pkg/chart"
-	"helm.sh/helm/v3/pkg/chartutil"
-	"helm.sh/helm/v3/pkg/engine"
+	"helm.sh/helm/v4/pkg/chart/common"
+	chartutil "helm.sh/helm/v4/pkg/chart/common/util"
+	chart "helm.sh/helm/v4/pkg/chart/v2"
+	"helm.sh/helm/v4/pkg/engine"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/util/yaml"
 	"k8s.io/client-go/rest"
@@ -151,7 +152,7 @@ func (h *Helm) Template(ctx context.Context) (map[string]string, map[string]stri
 	}
 
 	//template chart
-	options := chartutil.ReleaseOptions{
+	options := common.ReleaseOptions{
 		Name:      h.ProviderConfiguration.Name,
 		Namespace: h.ProviderConfiguration.Namespace,
 		Revision:  0,

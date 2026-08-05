@@ -2,8 +2,10 @@ package chartresolver
 
 import (
 	"encoding/json"
+	"time"
 
-	"helm.sh/helm/v3/pkg/chart"
+	"helm.sh/helm/v4/pkg/chart/common"
+	chart "helm.sh/helm/v4/pkg/chart/v2"
 )
 
 func MarshalChart(chart *chart.Chart) ([]byte, error) {
@@ -54,4 +56,28 @@ func chartFromTree(tree *ChartTree) *chart.Chart {
 	}
 
 	return ch
+}
+
+// stripModTimes zeroes out all ModTime fields in the chart recursively.
+// The omitzero json tag on these fields means non-zero times are serialised
+// but zero times are omitted, so after a JSON round-trip non-zero ModTimes
+// become zero. Zeroing them upfront makes fresh and cached charts consistent.
+func stripModTimes(ch *chart.Chart) {
+	ch.ModTime = time.Time{}
+	ch.SchemaModTime = time.Time{}
+	for _, f := range ch.Templates {
+		stripFileModTime(f)
+	}
+	for _, f := range ch.Files {
+		stripFileModTime(f)
+	}
+	for _, dep := range ch.Dependencies() {
+		stripModTimes(dep)
+	}
+}
+
+func stripFileModTime(f *common.File) {
+	if f != nil {
+		f.ModTime = time.Time{}
+	}
 }
