@@ -61,7 +61,12 @@ func GetChart(ctx context.Context,
 	}
 
 	if chartConfig.Archive != nil {
-		return getChartFromArchive(chartConfig.Archive)
+		ch, err := getChartFromArchive(chartConfig.Archive)
+		if err != nil {
+			return nil, err
+		}
+		stripModTimes(ch)
+		return ch, nil
 	}
 
 	var chart *chart.Chart

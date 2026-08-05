@@ -347,6 +347,8 @@ func (c *RealHelmDeployer) initActionConfig(ctx context.Context, handler slog.Ha
 		KubeClient:       kc,
 	}
 
+	actionConfig.SetLogger(handler)
+
 	return &actionConfig, nil
 }
 

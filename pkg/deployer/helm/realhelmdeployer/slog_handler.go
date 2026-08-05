@@ -68,10 +68,22 @@ type landscaperSlogHandler struct {
 func (h *landscaperSlogHandler) Enabled(_ context.Context, _ slog.Level) bool { return true }
 
 func (h *landscaperSlogHandler) Handle(_ context.Context, r slog.Record) error {
+	// Collect key-value pairs from two sources:
+	// - h.attrs: handler-level attributes for all records, for example the release name
+	// - r.Attrs: per-record attributes set at the individual log call
+	var keysAndValues []interface{}
+	for _, a := range h.attrs {
+		keysAndValues = append(keysAndValues, a.Key, a.Value.Any())
+	}
+	r.Attrs(func(a slog.Attr) bool {
+		keysAndValues = append(keysAndValues, a.Key, a.Value.Any())
+		return true
+	})
+
 	if h.buf != nil {
 		h.buf.add(r.Message)
 	}
-	h.logger.Info(r.Message)
+	h.logger.Info(r.Message, keysAndValues...)
 	return nil
 }
 

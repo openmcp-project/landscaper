@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"time"
 
-	chart "helm.sh/helm/v4/pkg/chart/v2"
 	"helm.sh/helm/v4/pkg/chart/common"
+	chart "helm.sh/helm/v4/pkg/chart/v2"
 )
 
 func MarshalChart(chart *chart.Chart) ([]byte, error) {
