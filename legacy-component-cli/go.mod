@@ -5,13 +5,13 @@ go 1.26.5
 require (
 	github.com/containerd/containerd v1.7.34
 	github.com/distribution/reference v0.6.0
-	github.com/docker/cli v29.7.1+incompatible
+	github.com/docker/cli v29.7.2+incompatible
 	github.com/drone/envsubst v1.0.3
 	github.com/ghodss/yaml v1.0.0
 	github.com/go-logr/logr v1.4.4
 	github.com/go-logr/zapr v1.3.0
 	github.com/golang/mock v1.7.0-rc.1
-	github.com/google/go-containerregistry v0.21.8
+	github.com/google/go-containerregistry v0.21.9
 	github.com/google/uuid v1.6.0
 	github.com/mandelsoft/vfs v0.4.5-0.20250514111339-d7b067920e91
 	github.com/onsi/ginkgo/v2 v2.32.0
