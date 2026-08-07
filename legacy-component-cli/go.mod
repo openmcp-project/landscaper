@@ -4,6 +4,7 @@ go 1.26.5
 
 require (
 	github.com/containerd/containerd v1.7.34
+	github.com/containerd/containerd/v2 v2.3.3
 	github.com/distribution/reference v0.6.0
 	github.com/docker/cli v29.7.2+incompatible
 	github.com/drone/envsubst v1.0.3
@@ -26,8 +27,8 @@ require (
 	github.com/spf13/pflag v1.0.10
 	go.uber.org/zap v1.28.0
 	golang.org/x/crypto v0.54.0
-	k8s.io/api v0.35.4
-	k8s.io/apimachinery v0.35.4
+	k8s.io/api v0.36.0
+	k8s.io/apimachinery v0.36.0
 	sigs.k8s.io/yaml v1.6.0
 )
 
@@ -36,14 +37,14 @@ replace github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go 
 require (
 	github.com/AdaLogics/go-fuzz-headers v0.0.0-20240806141605-e8a1dd7889d6 // indirect
 	github.com/Masterminds/semver/v3 v3.5.0 // indirect
-	github.com/Microsoft/hcsshim v0.14.1 // indirect
+	github.com/Microsoft/hcsshim v0.15.0-rc.1 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
-	github.com/containerd/cgroups/v3 v3.1.2 // indirect
-	github.com/containerd/continuity v0.4.5 // indirect
+	github.com/containerd/cgroups/v3 v3.1.3 // indirect
+	github.com/containerd/continuity v0.5.0 // indirect
 	github.com/containerd/errdefs v1.0.0 // indirect
 	github.com/containerd/log v0.1.0 // indirect
-	github.com/containerd/platforms v1.0.0-rc.2 // indirect
+	github.com/containerd/platforms v1.0.0-rc.4 // indirect
 	github.com/docker/docker-credential-helpers v0.9.5 // indirect
 	github.com/felixge/httpsnoop v1.0.4 // indirect
 	github.com/fxamacker/cbor/v2 v2.9.0 // indirect
