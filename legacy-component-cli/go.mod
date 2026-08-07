@@ -4,6 +4,7 @@ go 1.26.5
 
 require (
 	github.com/containerd/containerd v1.7.34
+	github.com/containerd/containerd/v2 v2.3.3
 	github.com/distribution/reference v0.6.0
 	github.com/docker/cli v29.7.2+incompatible
 	github.com/drone/envsubst v1.0.3
