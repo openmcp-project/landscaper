@@ -548,8 +548,8 @@ github.com/google/go-cmp v0.5.5/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/
 github.com/google/go-cmp v0.6.0/go.mod h1:17dUlkBOakJ0+DkrSSNjCkIjxS6bF9zb3elmeNGIjoY=
 github.com/google/go-cmp v0.7.0 h1:wk8382ETsv4JYUZwIsn6YpYiWiBsYLSJiTsyBybVuN8=
 github.com/google/go-cmp v0.7.0/go.mod h1:pXiqmnSA92OHEEa9HXL2W4E7lf9JzCmGVUdgjX3N/iU=
-github.com/google/go-containerregistry v0.21.8 h1:Ig/zIsnztdCUNaiNNczE+MoP5xcyUMfvpvfOr1xyMLE=
-github.com/google/go-containerregistry v0.21.8/go.mod h1:dP5XNKcL7kMFF/TB3LfvWmVhAcv7iqkHb3oDK8aauTo=
+github.com/google/go-containerregistry v0.21.9 h1:F+D4uZ3iA3DLMJLfhaqMdHJbzeqm/216WGQq2dokuLs=
+github.com/google/go-containerregistry v0.21.9/go.mod h1:dP5XNKcL7kMFF/TB3LfvWmVhAcv7iqkHb3oDK8aauTo=
 github.com/google/go-github/v45 v45.2.0 h1:5oRLszbrkvxDDqBCNj2hjDZMKmvexaZ1xw/FCD+K3FI=
 github.com/google/go-github/v45 v45.2.0/go.mod h1:FObaZJEDSTa/WGCzZ2Z3eoCDXWJKMenWWTrd8jrta28=
 github.com/google/go-github/v88 v88.0.0 h1:dZA9IKkPK1eXZj4ypngnpRj5FwdpTv4whix2PrQMP7M=
@@ -694,8 +694,8 @@ github.com/mandelsoft/goutils v0.0.0-20260802101738-162cd2928e3c h1:NJPKos5mEhVZ
 github.com/mandelsoft/goutils v0.0.0-20260802101738-162cd2928e3c/go.mod h1:gIPppG5TnRYaPSlo9/4mLG3EDmzHlip2TVoi5Yk2x5s=
 github.com/mandelsoft/logging v0.0.0-20240618075559-fdca28a87b0a h1:MAvh0gbP2uwKmf7wWCkYCzrYa6vPjBvYeGhoUlVHwtI=
 github.com/mandelsoft/logging v0.0.0-20240618075559-fdca28a87b0a/go.mod h1:uO460C1lIB3IOOgrbXhAlz3AKsOv4T2K6ALBn3PwuSg=
-github.com/mandelsoft/spiff v1.7.0-beta-8 h1:qfQOhorydo9aeRRNtywaDwSPqzvaNEIAXfgXV9ebTEU=
-github.com/mandelsoft/spiff v1.7.0-beta-8/go.mod h1:d+cV/H1YZSAJw9yAZ/8jT+0EX9Txvs5+2KXKjqI6ZwQ=
+github.com/mandelsoft/spiff v1.7.0-beta-9 h1:ADQi0XDehRUnzCiaEHg9eCU0zWV2Hzwv+6F5AfJiqkQ=
+github.com/mandelsoft/spiff v1.7.0-beta-9/go.mod h1:19DROdak37FL2/SBZ0xEyCDtQAhx0F8KnCQ4tN2cWAc=
 github.com/mandelsoft/vfs v0.4.5-0.20250514111339-d7b067920e91 h1:11lzvnGwbdzG9yURbVnBo6sLk1peCrZr4UlEQKYzb1g=
 github.com/mandelsoft/vfs v0.4.5-0.20250514111339-d7b067920e91/go.mod h1:3ODt1ze/dCdOJCbhHX8ARAw7l422fDZUhbt0wqplBRs=
 github.com/marstr/guid v1.1.0 h1:/M4H/1G4avsieL6BbUwCOBzulmoeKVP5ux/3mQNnbyI=
