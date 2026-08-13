@@ -1,32 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "git-submodules": {
-    "enabled": true
-  },
-  "stopUpdatingLabel": "take-a-break-renovate",
-  "schedule": [
-    "after 07:30am",
-    "before 07:15pm",
-    "every weekday"
-  ],
-  "prHourlyLimit": 1,
-  "prConcurrentLimit": 0,
-  "minimumReleaseAge": "0 days",
-  "timezone": "Europe/Berlin",
   "extends": [
-    "config:recommended",
-    "config:best-practices",
-    "default:automergeDigest",
-    "docker:pinDigests",
-    "group:kubernetesMonorepo",
-    "group:goOpenapi",
-    "helpers:pinGitHubActionDigests",
-    "security:openssf-scorecard",
-    ":dependencyDashboard",
-    ":rebaseStalePrs"
-  ],
-  "postUpdateOptions": [
-    "gomodTidy"
+    "github>openmcp-project/.github:renovate-config"
   ],
   "packageRules": [
     {
@@ -39,18 +14,6 @@
       "matchPackageNames": [
         "^ocm\\.software/ocm"
       ]
-    },
-    {
-      "matchManagers": [
-        "gomod"
-      ],
-      "matchDepNames": [
-        "go"
-      ],
-      "matchDepTypes": [
-        "golang"
-      ],
-      "rangeStrategy": "bump"
     },
     {
       "description": "Fixed version for component-cli v0.44.0",
