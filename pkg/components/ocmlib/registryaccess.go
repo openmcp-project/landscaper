@@ -48,9 +48,9 @@ func (r *RegistryAccess) NewComponentVersion(cv ocm.ComponentVersionAccess) (mod
 	// TODO: Remove this check
 	// this is only included for compatibility reasons as the legacy ocm spec mandated component descriptors to have a
 	// repository context
-	if len(cd.RepositoryContexts) == 0 {
-		return nil, fmt.Errorf("repository context is required")
-	}
+	//if len(cd.RepositoryContexts) == 0 {
+	//	return nil, fmt.Errorf("repository context is required")
+	//}
 	data, err := compdesc.Encode(cd, compdesc.SchemaVersion(v2.SchemaVersion))
 	if err != nil {
 		return nil, err
