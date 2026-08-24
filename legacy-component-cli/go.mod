@@ -1,6 +1,6 @@
 module github.com/openmcp-project/landscaper/legacy-component-cli
 
-go 1.26.6
+go 1.27.0
 
 require (
 	github.com/containerd/containerd v1.7.34

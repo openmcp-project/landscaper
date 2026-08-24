@@ -1,6 +1,6 @@
 module github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go
 
-go 1.26.6
+go 1.27.0
 
 require (
 	github.com/ghodss/yaml v1.0.0
