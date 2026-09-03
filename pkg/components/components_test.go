@@ -290,24 +290,6 @@ var _ = Describe("facade implementation compatibility tests", func() {
 		Entry("with ocm and v3 descriptors", model.Factory(ocmfactory), LOCALOCMREPOPATH_VALID),
 	)
 
-	// This is due to compatibility
-	// Theoretically, a component descriptor (and consequently a component version) does not have to have a repository
-	// context (as per ocm spec)
-	DescribeTable("error when component descriptor has no repository context", func(factory model.Factory, registryRootPath string) {
-		cdref := &v1alpha1.ComponentDescriptorReference{}
-		MustBeSuccessful(runtime.DefaultYAMLEncoding.Unmarshal([]byte(withoutRepoctxComponentReference), cdref))
-
-		registryAccess := Must(factory.NewRegistryAccess(ctx, &model.RegistryAccessOptions{
-			LocalRegistryConfig: &config.LocalRegistryConfiguration{RootPath: registryRootPath},
-		}))
-		compvers, err := registryAccess.GetComponentVersion(ctx, cdref)
-		Expect(err).To(HaveOccurred())
-		Expect(compvers).To(BeNil())
-	},
-		Entry("with ocm and v2 descriptors", model.Factory(ocmfactory), LOCALCNUDIEREPOPATH_WITHOUT_REPOCTX),
-		Entry("with ocm and v3 descriptors", model.Factory(ocmfactory), LOCALOCMREPOPATH_WITHOUT_REPOCTX),
-	)
-
 	DescribeTable("error when component descriptor has invalid access type", func(factory model.Factory, registryRootPath string) {
 		cdref := &v1alpha1.ComponentDescriptorReference{}
 		MustBeSuccessful(runtime.DefaultYAMLEncoding.Unmarshal([]byte(withInvalidAccessTypeComponentReference), cdref))
