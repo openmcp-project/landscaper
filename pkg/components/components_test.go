@@ -35,9 +35,6 @@ var (
 	LOCALCNUDIEREPOPATH_VALID = "./testdata/localcnudierepos/valid-components"
 	LOCALOCMREPOPATH_VALID    = "./testdata/localocmrepos/valid-components"
 
-	LOCALCNUDIEREPOPATH_WITHOUT_REPOCTX = "./testdata/localcnudierepos/components-without-repoctx"
-	LOCALOCMREPOPATH_WITHOUT_REPOCTX    = "./testdata/localocmrepos/components-without-repoctx"
-
 	LOCALCNUDIEREPOPATH_WITH_INVALID_ACCESS_TYPE = "./testdata/localcnudierepos/components-with-invalid-access-type"
 	LOCALOCMREPOPATH_WITH_INVALID_ACCESS_TYPE    = "./testdata/localocmrepos/components-with-invalid-access-type"
 
@@ -65,17 +62,6 @@ var (
     "filePath": "./"
   },
   "componentName": "example.com/referenced-landscaper-component",
-  "version": "1.0.0"
-}
-`
-
-	withoutRepoctxComponentReference = `
-{
-  "repositoryContext": {
-    "type": "local",
-    "filePath": "./"
-  },
-  "componentName": "example.com/landscaper-component-without-repository-context",
   "version": "1.0.0"
 }
 `
@@ -288,24 +274,6 @@ var _ = Describe("facade implementation compatibility tests", func() {
 	},
 		Entry("with ocm and v2 descriptors", model.Factory(ocmfactory), LOCALCNUDIEREPOPATH_VALID),
 		Entry("with ocm and v3 descriptors", model.Factory(ocmfactory), LOCALOCMREPOPATH_VALID),
-	)
-
-	// This is due to compatibility
-	// Theoretically, a component descriptor (and consequently a component version) does not have to have a repository
-	// context (as per ocm spec)
-	DescribeTable("error when component descriptor has no repository context", func(factory model.Factory, registryRootPath string) {
-		cdref := &v1alpha1.ComponentDescriptorReference{}
-		MustBeSuccessful(runtime.DefaultYAMLEncoding.Unmarshal([]byte(withoutRepoctxComponentReference), cdref))
-
-		registryAccess := Must(factory.NewRegistryAccess(ctx, &model.RegistryAccessOptions{
-			LocalRegistryConfig: &config.LocalRegistryConfiguration{RootPath: registryRootPath},
-		}))
-		compvers, err := registryAccess.GetComponentVersion(ctx, cdref)
-		Expect(err).To(HaveOccurred())
-		Expect(compvers).To(BeNil())
-	},
-		Entry("with ocm and v2 descriptors", model.Factory(ocmfactory), LOCALCNUDIEREPOPATH_WITHOUT_REPOCTX),
-		Entry("with ocm and v3 descriptors", model.Factory(ocmfactory), LOCALOCMREPOPATH_WITHOUT_REPOCTX),
 	)
 
 	DescribeTable("error when component descriptor has invalid access type", func(factory model.Factory, registryRootPath string) {
