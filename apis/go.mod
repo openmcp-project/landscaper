@@ -4,7 +4,7 @@ go 1.26.6
 
 require (
 	github.com/onsi/ginkgo/v2 v2.32.1
-	github.com/onsi/gomega v1.42.1
+	github.com/onsi/gomega v1.43.0
 	github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go v1.4.0
 	github.com/robfig/cron/v3 v3.0.1
 	k8s.io/api v0.36.3
