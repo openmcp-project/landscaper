@@ -16,8 +16,15 @@ import (
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 	. "github.com/onsi/gomega/gstruct"
+	"github.com/opencontainers/go-digest"
 	"ocm.software/ocm/api/datacontext"
+	"ocm.software/ocm/api/oci/artdesc"
 	"ocm.software/ocm/api/ocm"
+	"ocm.software/ocm/api/ocm/compdesc"
+	metav1 "ocm.software/ocm/api/ocm/compdesc/meta/v1"
+	"ocm.software/ocm/api/ocm/extensions/accessmethods/localblob"
+	"ocm.software/ocm/api/ocm/extensions/accessmethods/ociartifact"
+	"ocm.software/ocm/api/utils/blobaccess"
 	"ocm.software/ocm/api/utils/runtime"
 	"sigs.k8s.io/yaml"
 
@@ -897,6 +904,73 @@ func runTestSuiteGoTemplate(testdataDir string) {
 
 	BeforeEach(func() {
 		stateHandler = template.NewMemoryStateHandler()
+	})
+
+	Context("getImageReference", func() {
+		// The digest of the blob content is the localReference.
+		const blobContent = "{}"
+
+		newComponentVersion := func() (model.ComponentVersion, string) {
+			return newOCIComponentVersion(func(ocmCV ocm.ComponentVersionAccess) {
+				ociImage := compdesc.NewResourceMeta("ociimage", "ociImage", metav1.ExternalRelation)
+				ociImage.SetVersion(testComponentVersion)
+				// A given digest plus SkipVerify keeps the library from fetching the image.
+				ociImage.Digest = &metav1.DigestSpec{
+					HashAlgorithm:          "SHA-256",
+					NormalisationAlgorithm: "ociArtifactDigest/v1",
+					Value:                  "66371f17cc61bbbed2667b0285a10981deba5eb969df9bfd4cf273706044ddcb",
+				}
+				Expect(ocmCV.SetResource(ociImage, ociartifact.New("quay.io/example/myimage:1.0.0"), ocm.SkipVerify())).To(Succeed())
+
+				// Stored as a plain layer first, because a blob with the manifest media type would
+				// be unpacked as an OCI artifact on upload. The access is then pointed at that
+				// layer with the media type of an image manifest, the shape the OCM v2 CLI writes.
+				blobImage := compdesc.NewResourceMeta("blobimage", "ociImage", metav1.LocalRelation)
+				blobImage.SetVersion(testComponentVersion)
+				blob := blobaccess.ForString("application/octet-stream", blobContent)
+				Expect(ocmCV.SetResourceBlob(blobImage, blob, "", nil)).To(Succeed())
+				blobDigest := digest.FromString(blobContent)
+				blobImage.Digest = &metav1.DigestSpec{
+					HashAlgorithm:          "SHA-256",
+					NormalisationAlgorithm: "genericBlobDigest/v1",
+					Value:                  blobDigest.Encoded(),
+				}
+				manifest := localblob.New(blobDigest.String(), "", artdesc.MediaTypeImageManifest, nil)
+				Expect(ocmCV.SetResource(blobImage, manifest, ocm.SkipVerify())).To(Succeed())
+			})
+		}
+
+		It("should parse ociArtifact and localBlob accesses into image references", func() {
+			tmpl, err := os.ReadFile(filepath.Join(testdataDir, "template-14.yaml"))
+			Expect(err).ToNot(HaveOccurred())
+			exec := make([]lsv1alpha1.TemplateExecutor, 0)
+			Expect(yaml.Unmarshal(tmpl, &exec)).ToNot(HaveOccurred())
+
+			blue := &lsv1alpha1.Blueprint{}
+			blue.DeployExecutions = exec
+			op := template.New(gotemplate.New(stateHandler, nil), spiff.New(stateHandler, nil))
+
+			cv, host := newComponentVersion()
+			res, err := op.TemplateDeployExecutions(
+				template.NewDeployExecutionOptions(
+					template.NewBlueprintExecutionOptions(
+						nil,
+						&blueprints.Blueprint{Info: blue, Fs: nil},
+						cv,
+						nil,
+						nil)))
+			Expect(err).ToNot(HaveOccurred())
+			Expect(res).To(HaveLen(1))
+
+			config := make(map[string]interface{})
+			Expect(yaml.Unmarshal(res[0].Configuration.Raw, &config)).ToNot(HaveOccurred())
+			blobRef := host + "/internal/component-descriptors/" + testComponentName + "@" + digest.FromString(blobContent).String()
+			Expect(config).To(HaveKeyWithValue("image1", "quay.io/example/myimage:1.0.0"))
+			Expect(config).To(HaveKeyWithValue("image2", blobRef))
+			Expect(config).To(HaveKeyWithValue("reference2", blobRef))
+			Expect(config).To(HaveKeyWithValue("digest1", ""))
+			Expect(config).To(HaveKeyWithValue("tag2", ""))
+		})
 	})
 
 	Context("Error Messages", func() {
