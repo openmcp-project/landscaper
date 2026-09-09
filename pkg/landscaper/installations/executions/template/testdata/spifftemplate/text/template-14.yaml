@@ -1,0 +1,22 @@
+# SPDX-FileCopyrightText: Copyright OpenControlPlane contributors.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+- name: one
+  type: Spiff
+  template: |
+    deployItems:
+    - name: init
+      type: container
+      config:
+        apiVersion: example.test/v1
+        kind: Configuration
+        temp:
+          oci: (( &temporary( getImageReference(getResource(cd, "name", "ociimage")) ) ))
+          blob: (( &temporary( getImageReference(getResource(cd, "name", "blobimage")) ) ))
+        image1: (( temp.oci.repository ":" temp.oci.tag ))
+        image2: (( temp.blob.repository "@" temp.blob.digest ))
+        reference2: (( temp.blob.reference ))
+        # an unset tag or digest is an empty string, not a missing key
+        digest1: (( temp.oci.digest ))
+        tag2: (( temp.blob.tag ))

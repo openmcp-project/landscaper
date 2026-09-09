@@ -48,6 +48,7 @@ func LandscaperSpiffFuncs(blueprint *blueprints.Blueprint, functions spiffing.Fu
 	functions.RegisterFunction("getResource", spiffResolveResources(cd))
 	functions.RegisterFunction("getResourceKey", spiffGetResourceKey(componentVersion))
 	functions.RegisterFunction("getResourceContent", spiffGetResourceContent(componentVersion))
+	functions.RegisterFunction("getImageReference", spiffGetImageReference(componentVersion))
 	functions.RegisterFunction("getComponent", spiffResolveComponent(cd, cdList, ocmSchemaVersion))
 	functions.RegisterFunction("parseOCIRef", parseOCIReference)
 	functions.RegisterFunction("ociRefRepo", getOCIReferenceRepository)
@@ -280,6 +281,49 @@ func spiffResolveComponent(cd *types.ComponentDescriptor, cdList *types.Componen
 		if err != nil {
 			return info.Error(err.Error())
 		}
+		result, err := binding.Flow(node, false)
+		if err != nil {
+			return info.Error(err.Error())
+		}
+
+		return result.Value(), info, true
+	}
+}
+
+// spiffGetImageReference returns a function that turns the access of a resource, as
+// returned by getResource, into an OCI reference.
+func spiffGetImageReference(cv model.ComponentVersion) dynaml.Function {
+	return func(arguments []interface{}, binding dynaml.Binding) (interface{}, dynaml.EvaluationInfo, bool) {
+		info := dynaml.DefaultInfo()
+		if len(arguments) != 1 {
+			return info.Error("templating function getImageReference expects 1 argument, namely a resource")
+		}
+
+		data, err := spiffyaml.ValueToJSON(arguments[0])
+		if err != nil {
+			return info.Error("templating function getImageReference expects a resource as argument: %w", err)
+		}
+		resource := map[string]interface{}{}
+		if err := json.Unmarshal(data, &resource); err != nil {
+			return info.Error("templating function getImageReference expects a resource as argument: %w", err)
+		}
+
+		access, _ := resource["access"].(map[string]interface{})
+		ref, err := template.ResolveImageReference(cv, access)
+		if err != nil {
+			return info.Error("resource %q: %w", resource["name"], err)
+		}
+
+		data, err = yaml.Marshal(ref)
+		if err != nil {
+			return info.Error(err.Error())
+		}
+
+		node, err := spiffyaml.Parse("", data)
+		if err != nil {
+			return info.Error(err.Error())
+		}
+
 		result, err := binding.Flow(node, false)
 		if err != nil {
 			return info.Error(err.Error())
