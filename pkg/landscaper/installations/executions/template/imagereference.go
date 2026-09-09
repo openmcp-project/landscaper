@@ -8,13 +8,14 @@ import (
 	"errors"
 	"fmt"
 	"path"
-	"strings"
 
+	"github.com/opencontainers/go-digest"
 	"ocm.software/ocm/api/oci"
 	"ocm.software/ocm/api/oci/artdesc"
 	ocicpi "ocm.software/ocm/api/oci/cpi"
 	"ocm.software/ocm/api/oci/extensions/repositories/ocireg"
 	"ocm.software/ocm/api/ocm/cpi/repocpi"
+	ocihdlr "ocm.software/ocm/api/ocm/extensions/blobhandler/handlers/oci"
 	"ocm.software/ocm/api/ocm/extensions/repositories/genericocireg"
 
 	"github.com/openmcp-project/landscaper/pkg/components/model"
@@ -35,7 +36,7 @@ type ImageReference struct {
 	Digest string `json:"digest"`
 }
 
-// ResolveImageReference turns the access of a resource into an OCI reference.
+// ResolveImageReference turns the access of a resource of cv into an OCI reference.
 //
 // A localBlob is addressed inside the OCI repository that holds the component version itself:
 //
@@ -95,8 +96,7 @@ func ociImageReference(access map[string]interface{}) (string, error) {
 var ErrNotInOCIRegistry = errors.New("component version is not stored in an OCI registry")
 
 // localBlobImageReference addresses the blob inside the OCI repository that holds the
-// component version: <base URL>/<namespace of the component>@<localReference>. Base URL
-// and namespace come from the OCM library repository the version was loaded from.
+// component version: <registry>/<namespace of the version>@<localReference>.
 //
 // Only a blob stored as an OCI image manifest or index can be pulled by that reference.
 // Anything else, such as the artifact set archives OCM v1 writes, is a plain layer.
@@ -106,30 +106,38 @@ func localBlobImageReference(cv model.ComponentVersion, access map[string]interf
 		return "", fmt.Errorf("localBlob with media type %q is not an OCI image manifest or index and cannot be pulled by digest", mediaType)
 	}
 	localReference, _ := access["localReference"].(string)
-	if localReference == "" {
-		return "", errors.New("localBlob access has no localReference")
+	blobDigest, err := digest.Parse(localReference)
+	if err != nil {
+		return "", fmt.Errorf("localReference %q is not a digest: %w", localReference, err)
 	}
-	ocmCV, ok := cv.(*ocmlib.ComponentVersion)
-	if !ok {
-		return "", ErrNotInOCIRegistry
-	}
-	// A failed lookup leaves impl nil, so the type assertion below reports it.
-	impl, _ := repocpi.GetRepositoryImplementation(ocmCV.GetOCMObject().Repository())
-	ocmRepo, ok := impl.(*genericocireg.RepositoryImpl)
-	if !ok {
-		return "", ErrNotInOCIRegistry
-	}
-	ociImpl, _ := ocicpi.GetRepositoryImplementation(ocmRepo.GetOCIRepository())
-	ociRepo, ok := ociImpl.(*ocireg.RepositoryImpl) // a CTF is an OCI repository too, but not a registry
-	if !ok {
-		return "", ErrNotInOCIRegistry
-	}
-	namespace, err := ocmRepo.MapComponentNameToNamespace(cv.GetName())
+	registry, namespace, err := ociLocation(cv)
 	if err != nil {
 		return "", err
 	}
-	// not path.Join: it would collapse the "//" of a scheme in the base URL
-	return strings.TrimSuffix(ociRepo.GetBaseURL(), "/") + "/" + namespace + "@" + localReference, nil
+	return registry.GetRef(namespace, blobDigest.String()), nil
+}
+
+// ociLocation returns the registry and the namespace the component version was read from.
+func ociLocation(cv model.ComponentVersion) (*ocireg.RepositoryImpl, string, error) {
+	ocmCV, ok := cv.(*ocmlib.ComponentVersion)
+	if !ok {
+		return nil, "", ErrNotInOCIRegistry
+	}
+	container, err := repocpi.GetComponentVersionImpl[*genericocireg.ComponentVersionContainer](ocmCV.GetOCMObject())
+	if err != nil {
+		return nil, "", ErrNotInOCIRegistry
+	}
+	storage, ok := container.GetStorageContext().(*ocihdlr.StorageContext)
+	if !ok {
+		return nil, "", ErrNotInOCIRegistry
+	}
+	// A failed lookup leaves impl nil, so the type assertion below reports it.
+	impl, _ := ocicpi.GetRepositoryImplementation(storage.Repository)
+	registry, ok := impl.(*ocireg.RepositoryImpl) // a CTF is an OCI repository too, but not a registry
+	if !ok {
+		return nil, "", ErrNotInOCIRegistry
+	}
+	return registry, storage.Namespace.GetNamespace(), nil
 }
 
 func parseImageReference(ref string) (ImageReference, error) {

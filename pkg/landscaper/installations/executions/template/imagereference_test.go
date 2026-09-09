@@ -152,6 +152,12 @@ var _ = Describe("ResolveImageReference", func() {
 			}
 		})
 
+		It("fails for a localReference that is not a digest", func() {
+			cv, _ := ociCV()
+			_, err := template.ResolveImageReference(cv, localBlobAccess("LocalBlob/v1", map[string]interface{}{"localReference": "latest"}))
+			Expect(err).To(MatchError(ContainSubstring("localReference")))
+		})
+
 		It("fails without a localReference", func() {
 			_, err := template.ResolveImageReference(nil, map[string]interface{}{"type": "LocalBlob/v1", "mediaType": "application/vnd.oci.image.manifest.v1+json"})
 			Expect(err).To(MatchError(ContainSubstring("localReference")))
