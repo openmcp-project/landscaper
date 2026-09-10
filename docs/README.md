@@ -64,6 +64,7 @@
 - [Installations](usage/Installations.md)
 - [JSONSchema](usage/JSONSchema.md)
 - [Configuring the Landscaper Logs](usage/Logging.md)
+- [Deploying Resources Created with OCM v2](usage/OCMv2.md)
 - [Optimization](usage/Optimization.md)
 - [Repository Context](usage/RepositoryContext.md)
 - [Signature Verification](usage/SignatureVerification.md)
