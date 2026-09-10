@@ -6,16 +6,22 @@
   type: GoTemplate
   template: |
     deployItems:
-    - name: init
+    - name: oci
       type: container
       config:
         apiVersion: example.test/v1
         kind: Configuration
-        {{- $oci := getImageReference (getResource .cd "name" "ociimage") }}
-        {{- $blob := getImageReference (getResource .cd "name" "blobimage") }}
-        image1: "{{ $oci.repository }}:{{ $oci.tag }}"
-        image2: "{{ $blob.repository }}@{{ $blob.digest }}"
-        reference2: {{ $blob.reference }}
-        # an unset tag or digest is an empty string, not a missing key
-        digest1: "{{ $oci.digest }}"
-        tag2: "{{ $blob.tag }}"
+        {{- $ref := getImageReference (getResource .cd "name" "ociimage") }}
+        image: "{{ $ref.repository }}:{{ $ref.tag }}"
+        reference: {{ $ref.reference }}
+        # an unset digest is an empty string, not a missing key
+        digest: "{{ $ref.digest }}"
+    - name: blob
+      type: container
+      config:
+        apiVersion: example.test/v1
+        kind: Configuration
+        {{- $ref := getImageReference (getResource .cd "name" "blobimage") }}
+        image: "{{ $ref.repository }}@{{ $ref.digest }}"
+        reference: {{ $ref.reference }}
+        tag: "{{ $ref.tag }}"

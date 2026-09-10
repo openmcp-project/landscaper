@@ -8,6 +8,7 @@ import (
 	"errors"
 	"fmt"
 	"path"
+	"strings"
 
 	"github.com/opencontainers/go-digest"
 	"ocm.software/ocm/api/oci"
@@ -36,14 +37,18 @@ type ImageReference struct {
 	Digest string `json:"digest"`
 }
 
-// ResolveImageReference turns the access of a resource of cv into an OCI reference.
+// ResolveImageReference turns the access of resource, a resource of cv as returned by
+// getResource, into an OCI reference.
 //
-// A localBlob is addressed inside the OCI repository that holds the component version itself:
+// A localBlob is addressed inside the OCI repository that holds the component version
+// itself. Its localReference is the digest; the resource version serves as the tag, the
+// same tag OCM gives the blob when it hands it out as an OCI layout:
 //
-//	<OCI repository of cv>@<localReference>
+//	<OCI repository of cv>:<resource version>@<localReference>
 //
 // Every other access type must carry an imageReference, which is used as it is.
-func ResolveImageReference(cv model.ComponentVersion, access map[string]interface{}) (ImageReference, error) {
+func ResolveImageReference(cv model.ComponentVersion, resource map[string]interface{}) (ImageReference, error) {
+	access, _ := resource["access"].(map[string]interface{})
 	if access == nil {
 		return ImageReference{}, errors.New("resource has no access")
 	}
@@ -52,7 +57,8 @@ func ResolveImageReference(cv model.ComponentVersion, access map[string]interfac
 	var ref string
 	var err error
 	if isLocalBlob(accessType) {
-		ref, err = localBlobImageReference(cv, access)
+		version, _ := resource["version"].(string)
+		ref, err = localBlobImageReference(cv, version, access)
 	} else {
 		ref, err = ociImageReference(access)
 	}
@@ -96,11 +102,12 @@ func ociImageReference(access map[string]interface{}) (string, error) {
 var ErrNotInOCIRegistry = errors.New("component version is not stored in an OCI registry")
 
 // localBlobImageReference addresses the blob inside the OCI repository that holds the
-// component version: <registry>/<namespace of the version>@<localReference>.
+// component version: <registry>/<namespace of the version>:<version>@<localReference>.
+// The version is used as the tag as it is; the tag is left out when version is empty.
 //
 // Only a blob stored as an OCI image manifest or index can be pulled by that reference.
 // Anything else, such as the artifact set archives OCM v1 writes, is a plain layer.
-func localBlobImageReference(cv model.ComponentVersion, access map[string]interface{}) (string, error) {
+func localBlobImageReference(cv model.ComponentVersion, version string, access map[string]interface{}) (string, error) {
 	mediaType, _ := access["mediaType"].(string)
 	if mediaType != artdesc.MediaTypeImageManifest && mediaType != artdesc.MediaTypeImageIndex {
 		return "", fmt.Errorf("localBlob with media type %q is not an OCI image manifest or index and cannot be pulled by digest", mediaType)
@@ -110,34 +117,39 @@ func localBlobImageReference(cv model.ComponentVersion, access map[string]interf
 	if err != nil {
 		return "", fmt.Errorf("localReference %q is not a digest: %w", localReference, err)
 	}
-	registry, namespace, err := ociLocation(cv)
+	baseURL, namespace, err := ociLocation(cv)
 	if err != nil {
 		return "", err
 	}
-	return registry.GetRef(namespace, blobDigest.String()), nil
+	ref := fmt.Sprintf("%s/%s", strings.TrimSuffix(baseURL, "/"), namespace)
+	if version != "" {
+		ref = fmt.Sprintf("%s:%s", ref, version)
+	}
+	return fmt.Sprintf("%s@%s", ref, blobDigest), nil
 }
 
-// ociLocation returns the registry and the namespace the component version was read from.
-func ociLocation(cv model.ComponentVersion) (*ocireg.RepositoryImpl, string, error) {
+// ociLocation returns the base URL of the registry and the namespace the component
+// version was read from. The base URL may carry a scheme, e.g. "http://localhost:5000".
+func ociLocation(cv model.ComponentVersion) (string, string, error) {
 	ocmCV, ok := cv.(*ocmlib.ComponentVersion)
 	if !ok {
-		return nil, "", ErrNotInOCIRegistry
+		return "", "", ErrNotInOCIRegistry
 	}
 	container, err := repocpi.GetComponentVersionImpl[*genericocireg.ComponentVersionContainer](ocmCV.GetOCMObject())
 	if err != nil {
-		return nil, "", ErrNotInOCIRegistry
+		return "", "", ErrNotInOCIRegistry
 	}
 	storage, ok := container.GetStorageContext().(*ocihdlr.StorageContext)
 	if !ok {
-		return nil, "", ErrNotInOCIRegistry
+		return "", "", ErrNotInOCIRegistry
 	}
 	// A failed lookup leaves impl nil, so the type assertion below reports it.
 	impl, _ := ocicpi.GetRepositoryImplementation(storage.Repository)
 	registry, ok := impl.(*ocireg.RepositoryImpl) // a CTF is an OCI repository too, but not a registry
 	if !ok {
-		return nil, "", ErrNotInOCIRegistry
+		return "", "", ErrNotInOCIRegistry
 	}
-	return registry, storage.Namespace.GetNamespace(), nil
+	return registry.GetBaseURL(), storage.Namespace.GetNamespace(), nil
 }
 
 func parseImageReference(ref string) (ImageReference, error) {

@@ -308,8 +308,7 @@ func getResourceGoFunc(cd *types.ComponentDescriptor) func(args ...interface{}) 
 // returned by getResource, into an OCI reference.
 func getImageReferenceGoFunc(cv model.ComponentVersion) func(resource map[string]interface{}) (map[string]interface{}, error) {
 	return func(resource map[string]interface{}) (map[string]interface{}, error) {
-		access, _ := resource["access"].(map[string]interface{})
-		ref, err := lstmpl.ResolveImageReference(cv, access)
+		ref, err := lstmpl.ResolveImageReference(cv, resource)
 		if err != nil {
 			return nil, fmt.Errorf("resource %q: %w", resource["name"], err)
 		}
