@@ -16,12 +16,12 @@ require (
 	github.com/mandelsoft/vfs v0.4.5-0.20250514111339-d7b067920e91
 	github.com/onsi/ginkgo/v2 v2.32.1
 	github.com/onsi/gomega v1.42.1
-	github.com/opencontainers/distribution-spec/specs-go v0.0.0-20260730175803-fee21197eb94
+	github.com/opencontainers/distribution-spec/specs-go v0.0.0-20260831232431-97274622c111
 	github.com/opencontainers/go-digest v1.0.0
 	github.com/opencontainers/image-spec v1.1.1
 	github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go v1.4.0
 	github.com/prometheus/client_golang v1.24.1
-	github.com/sirupsen/logrus v1.10.0
+	github.com/sirupsen/logrus v1.10.2
 	github.com/spf13/cobra v1.10.2
 	github.com/spf13/pflag v1.0.10
 	go.uber.org/zap v1.28.0
