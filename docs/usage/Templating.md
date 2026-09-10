@@ -158,7 +158,8 @@ The following additional functions are available:
 - **`getImageReference(resource Resource): ImageReference`**
   resolves the OCI reference of a resource and returns it split into `reference`, `repository`, and `tag` or `digest`.
   Works for `ociArtifact` (uses `imageReference`) and for `localBlob` holding an OCI image manifest or index
-  (addressed as `<OCI repository of the component version>@<localReference>`, so the component version must live in an OCI registry).
+  (addressed as `<OCI repository of the component version>:<resource version>@<localReference>`, so the component version must live in an OCI registry;
+  the resource version is used as the tag as it is, so it must be a valid OCI tag).
   e.g.
   ```
   {{ $myResource := getImageReference (getResource .cd "name" "myResource") }}
@@ -314,7 +315,8 @@ or
 - **`getImageReference(resource Resource): ImageReference`**
   resolves the OCI reference of a resource and returns it split into `reference`, `repository`, and `tag` or `digest`.
   Works for `ociArtifact` (uses `imageReference`) and for `localBlob` holding an OCI image manifest or index
-  (addressed as `<OCI repository of the component version>@<localReference>`, so the component version must live in an OCI registry).
+  (addressed as `<OCI repository of the component version>:<resource version>@<localReference>`, so the component version must live in an OCI registry;
+  the resource version is used as the tag as it is, so it must be a valid OCI tag).
   e.g.
   ```
   temp:

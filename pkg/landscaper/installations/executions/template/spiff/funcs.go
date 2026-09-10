@@ -308,8 +308,7 @@ func spiffGetImageReference(cv model.ComponentVersion) dynaml.Function {
 			return info.Error("templating function getImageReference expects a resource as argument: %w", err)
 		}
 
-		access, _ := resource["access"].(map[string]interface{})
-		ref, err := template.ResolveImageReference(cv, access)
+		ref, err := template.ResolveImageReference(cv, resource)
 		if err != nil {
 			return info.Error("resource %q: %w", resource["name"], err)
 		}

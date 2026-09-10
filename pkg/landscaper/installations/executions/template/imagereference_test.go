@@ -26,11 +26,17 @@ const (
 	testDigest           = "sha256:66371f17cc61bbbed2667b0285a10981deba5eb969df9bfd4cf273706044ddcb"
 	testComponentName    = "example.com/mycomp"
 	testComponentVersion = "1.0.0"
+	testResourceVersion  = "6.14.1"
 )
 
 var _ = Describe("ResolveImageReference", func() {
 
-	localBlobAccess := func(accessType string, extra map[string]interface{}) map[string]interface{} {
+	// resource wraps an access into the shape getResource returns.
+	resource := func(version string, access map[string]interface{}) map[string]interface{} {
+		return map[string]interface{}{"name": "image", "version": version, "access": access}
+	}
+
+	localBlob := func(accessType string, extra map[string]interface{}) map[string]interface{} {
 		access := map[string]interface{}{
 			"type":           accessType,
 			"localReference": testDigest,
@@ -39,11 +45,11 @@ var _ = Describe("ResolveImageReference", func() {
 		for k, v := range extra {
 			access[k] = v
 		}
-		return access
+		return resource(testResourceVersion, access)
 	}
 
-	ociAccess := func(accessType, ref string) map[string]interface{} {
-		return map[string]interface{}{"type": accessType, "imageReference": ref}
+	ociArtifact := func(accessType, ref string) map[string]interface{} {
+		return resource(testResourceVersion, map[string]interface{}{"type": accessType, "imageReference": ref})
 	}
 
 	// ociCV returns a component version stored in an in-memory OCI registry and the
@@ -55,7 +61,7 @@ var _ = Describe("ResolveImageReference", func() {
 
 	Context("ociArtifact access", func() {
 		It("splits a tagged reference into repository and tag", func() {
-			ref, err := template.ResolveImageReference(nil, ociAccess("ociArtifact", "ghcr.io/example/myimage:1.0.0"))
+			ref, err := template.ResolveImageReference(nil, ociArtifact("ociArtifact", "ghcr.io/example/myimage:1.0.0"))
 			Expect(err).ToNot(HaveOccurred())
 			Expect(ref).To(Equal(template.ImageReference{
 				Reference:  "ghcr.io/example/myimage:1.0.0",
@@ -65,7 +71,7 @@ var _ = Describe("ResolveImageReference", func() {
 		})
 
 		It("splits a digest reference into repository and digest", func() {
-			ref, err := template.ResolveImageReference(nil, ociAccess("ociArtifact", "ghcr.io/example/myimage@"+testDigest))
+			ref, err := template.ResolveImageReference(nil, ociArtifact("ociArtifact", "ghcr.io/example/myimage@"+testDigest))
 			Expect(err).ToNot(HaveOccurred())
 			Expect(ref).To(Equal(template.ImageReference{
 				Reference:  "ghcr.io/example/myimage@" + testDigest,
@@ -75,7 +81,7 @@ var _ = Describe("ResolveImageReference", func() {
 		})
 
 		It("keeps both tag and digest of a pinned tagged reference", func() {
-			ref, err := template.ResolveImageReference(nil, ociAccess("ociArtifact", "ghcr.io/example/myimage:1.0.0@"+testDigest))
+			ref, err := template.ResolveImageReference(nil, ociArtifact("ociArtifact", "ghcr.io/example/myimage:1.0.0@"+testDigest))
 			Expect(err).ToNot(HaveOccurred())
 			Expect(ref).To(Equal(template.ImageReference{
 				Reference:  "ghcr.io/example/myimage:1.0.0@" + testDigest,
@@ -86,14 +92,20 @@ var _ = Describe("ResolveImageReference", func() {
 		})
 
 		It("accepts the legacy ociRegistry access type", func() {
-			ref, err := template.ResolveImageReference(nil, ociAccess("ociRegistry", "ghcr.io/example/myimage:1.0.0"))
+			ref, err := template.ResolveImageReference(nil, ociArtifact("ociRegistry", "ghcr.io/example/myimage:1.0.0"))
 			Expect(err).ToNot(HaveOccurred())
 			Expect(ref.Repository).To(Equal("ghcr.io/example/myimage"))
 			Expect(ref.Tag).To(Equal("1.0.0"))
 		})
 
+		It("does not take the resource version as tag", func() {
+			ref, err := template.ResolveImageReference(nil, ociArtifact("ociArtifact", "ghcr.io/example/myimage@"+testDigest))
+			Expect(err).ToNot(HaveOccurred())
+			Expect(ref.Tag).To(BeEmpty())
+		})
+
 		It("fails without an imageReference", func() {
-			_, err := template.ResolveImageReference(nil, map[string]interface{}{"type": "ociArtifact"})
+			_, err := template.ResolveImageReference(nil, resource(testResourceVersion, map[string]interface{}{"type": "ociArtifact"}))
 			Expect(err).To(MatchError(ContainSubstring("imageReference")))
 		})
 	})
@@ -101,7 +113,19 @@ var _ = Describe("ResolveImageReference", func() {
 	Context("localBlob access", func() {
 		It("builds the reference from the OCI repository of the component version, without scheme", func() {
 			cv, repo := ociCV()
-			ref, err := template.ResolveImageReference(cv, localBlobAccess("LocalBlob/v1", nil))
+			ref, err := template.ResolveImageReference(cv, localBlob("LocalBlob/v1", nil))
+			Expect(err).ToNot(HaveOccurred())
+			Expect(ref).To(Equal(template.ImageReference{
+				Reference:  repo + ":" + testResourceVersion + "@" + testDigest,
+				Repository: repo,
+				Tag:        testResourceVersion,
+				Digest:     testDigest,
+			}))
+		})
+
+		It("leaves the tag empty without a resource version", func() {
+			cv, repo := ociCV()
+			ref, err := template.ResolveImageReference(cv, resource("", localBlob("LocalBlob/v1", nil)["access"].(map[string]interface{})))
 			Expect(err).ToNot(HaveOccurred())
 			Expect(ref).To(Equal(template.ImageReference{
 				Reference:  repo + "@" + testDigest,
@@ -110,10 +134,16 @@ var _ = Describe("ResolveImageReference", func() {
 			}))
 		})
 
+		It("fails when the resource version is not a valid tag", func() {
+			cv, _ := ociCV()
+			_, err := template.ResolveImageReference(cv, resource("1.0.0+build.7", localBlob("LocalBlob/v1", nil)["access"].(map[string]interface{})))
+			Expect(err).To(MatchError(ContainSubstring("invalid image reference")))
+		})
+
 		It("accepts every spelling the OCM scheme registers for a local blob", func() {
 			cv, _ := ociCV()
 			for _, accessType := range []string{"LocalBlob/v1", "LocalBlob", "localBlob/v1", "localBlob"} {
-				ref, err := template.ResolveImageReference(cv, localBlobAccess(accessType, nil))
+				ref, err := template.ResolveImageReference(cv, localBlob(accessType, nil))
 				Expect(err).ToNot(HaveOccurred(), accessType)
 				Expect(ref.Digest).To(Equal(testDigest), accessType)
 			}
@@ -121,63 +151,68 @@ var _ = Describe("ResolveImageReference", func() {
 
 		It("does not treat other spellings as a local blob", func() {
 			for _, accessType := range []string{"localblob", "LocalBlob/v2", "LOCALBLOB"} {
-				_, err := template.ResolveImageReference(nil, localBlobAccess(accessType, nil))
+				_, err := template.ResolveImageReference(nil, localBlob(accessType, nil))
 				Expect(err).To(MatchError(ContainSubstring("imageReference")), accessType)
 			}
 		})
 
 		It("fails when the component version is not stored in an OCI registry", func() {
-			_, err := template.ResolveImageReference(newNonOCIComponentVersion(), localBlobAccess("LocalBlob/v1", nil))
+			_, err := template.ResolveImageReference(newNonOCIComponentVersion(), localBlob("LocalBlob/v1", nil))
 			Expect(err).To(MatchError(template.ErrNotInOCIRegistry))
 		})
 
 		It("fails without a component version", func() {
-			_, err := template.ResolveImageReference(nil, localBlobAccess("LocalBlob/v1", nil))
+			_, err := template.ResolveImageReference(nil, localBlob("LocalBlob/v1", nil))
 			Expect(err).To(MatchError(template.ErrNotInOCIRegistry))
 		})
 
 		It("accepts an image index", func() {
 			cv, repo := ociCV()
-			ref, err := template.ResolveImageReference(cv, localBlobAccess("LocalBlob/v1", map[string]interface{}{
+			ref, err := template.ResolveImageReference(cv, localBlob("LocalBlob/v1", map[string]interface{}{
 				"mediaType": "application/vnd.oci.image.index.v1+json",
 			}))
 			Expect(err).ToNot(HaveOccurred())
-			Expect(ref.Reference).To(Equal(repo + "@" + testDigest))
+			Expect(ref.Reference).To(Equal(repo + ":" + testResourceVersion + "@" + testDigest))
 		})
 
 		It("rejects a blob that is not an image manifest or index", func() {
 			for _, mediaType := range []string{"application/vnd.oci.image.manifest.v1+tar+gzip", "application/octet-stream", ""} {
-				_, err := template.ResolveImageReference(nil, localBlobAccess("LocalBlob/v1", map[string]interface{}{"mediaType": mediaType}))
+				_, err := template.ResolveImageReference(nil, localBlob("LocalBlob/v1", map[string]interface{}{"mediaType": mediaType}))
 				Expect(err).To(MatchError(ContainSubstring("media type")), mediaType)
 			}
 		})
 
 		It("fails for a localReference that is not a digest", func() {
 			cv, _ := ociCV()
-			_, err := template.ResolveImageReference(cv, localBlobAccess("LocalBlob/v1", map[string]interface{}{"localReference": "latest"}))
+			_, err := template.ResolveImageReference(cv, localBlob("LocalBlob/v1", map[string]interface{}{"localReference": "latest"}))
 			Expect(err).To(MatchError(ContainSubstring("localReference")))
 		})
 
 		It("fails without a localReference", func() {
-			_, err := template.ResolveImageReference(nil, map[string]interface{}{"type": "LocalBlob/v1", "mediaType": "application/vnd.oci.image.manifest.v1+json"})
+			_, err := template.ResolveImageReference(nil, resource(testResourceVersion, map[string]interface{}{"type": "LocalBlob/v1", "mediaType": "application/vnd.oci.image.manifest.v1+json"}))
 			Expect(err).To(MatchError(ContainSubstring("localReference")))
 		})
 	})
 
 	It("reads the imageReference of any other access type", func() {
-		ref, err := template.ResolveImageReference(nil, map[string]interface{}{"type": "custom/v2", "imageReference": "ghcr.io/example/myimage:1.0.0"})
+		ref, err := template.ResolveImageReference(nil, resource(testResourceVersion, map[string]interface{}{"type": "custom/v2", "imageReference": "ghcr.io/example/myimage:1.0.0"}))
 		Expect(err).ToNot(HaveOccurred())
 		Expect(ref.Repository).To(Equal("ghcr.io/example/myimage"))
 	})
 
 	It("fails for another access type without imageReference", func() {
-		_, err := template.ResolveImageReference(nil, map[string]interface{}{"type": "helm", "helmChart": "x"})
+		_, err := template.ResolveImageReference(nil, resource(testResourceVersion, map[string]interface{}{"type": "helm", "helmChart": "x"}))
 		Expect(err).To(MatchError(ContainSubstring("imageReference")))
 	})
 
 	It("fails for a missing access", func() {
+		_, err := template.ResolveImageReference(nil, resource(testResourceVersion, nil))
+		Expect(err).To(MatchError(ContainSubstring("access")))
+	})
+
+	It("fails for a missing resource", func() {
 		_, err := template.ResolveImageReference(nil, nil)
-		Expect(err).To(HaveOccurred())
+		Expect(err).To(MatchError(ContainSubstring("access")))
 	})
 })
 
