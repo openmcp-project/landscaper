@@ -155,7 +155,18 @@ The following additional functions are available:
 - **`ociRefVersion(ref string): string`**
   parses an oci reference and returns the version.
   e.g. `host:5000/myrepo/myimage:1.0.0` -> `"1.0.0"`
-  
+- **`toOCI(resource Resource): ImageReference`**
+  resolves the OCI reference of a resource and returns it split into `reference`, `repository`, and `tag` or `digest`.
+  Works for `ociArtifact` (uses `imageReference`) and for `localBlob` holding an OCI image manifest or index
+  (addressed as `<OCI repository of the component version>:<resource version>@<localReference>`, so the component version must live in an OCI registry;
+  the resource version is used as the tag as it is, so it must be a valid OCI tag).
+  e.g.
+  ```
+  {{ $myResource := toOCI (getResource .cd "name" "myResource") }}
+  image:
+    repository: {{ $myResource.repository }}
+    tag: {{ $myResource.tag | default $myResource.digest }}
+  ```
 - **`getShootAdminKubeconfig(shootName, shootNamespace string, expirationSeconds int, target Target): string`**  
   returns a temporary admin kubeconfig for a Gardener Shoot cluster as described 
   [here](https://github.com/gardener/gardener/blob/master/docs/usage/shoot_access.md#shootsadminkubeconfig-subresource). 
@@ -301,6 +312,19 @@ or
 - **`ociRefVersion(ref string): string`**
   parses an oci reference and returns the version.
   e.g. `host:5000/myrepo/myimage:1.0.0` -> `"1.0.0"`
+- **`toOCI(resource Resource): ImageReference`**
+  resolves the OCI reference of a resource and returns it split into `reference`, `repository`, and `tag` or `digest`.
+  Works for `ociArtifact` (uses `imageReference`) and for `localBlob` holding an OCI image manifest or index
+  (addressed as `<OCI repository of the component version>:<resource version>@<localReference>`, so the component version must live in an OCI registry;
+  the resource version is used as the tag as it is, so it must be a valid OCI tag).
+  e.g.
+  ```
+  temp:
+    myResource: (( &temporary( toOCI(getResource(cd, "name", "myResource")) ) ))
+  image:
+    repository: (( temp.myResource.repository ))
+    tag: (( temp.myResource.tag ))
+  ```
 
 - **`getShootAdminKubeconfig(shootName, shootNamespace string, expirationSeconds int, target Target): string`**  
   returns a temporary admin kubeconfig for a Gardener Shoot cluster as described 
