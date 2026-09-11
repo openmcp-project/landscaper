@@ -906,7 +906,7 @@ func runTestSuiteGoTemplate(testdataDir string) {
 		stateHandler = template.NewMemoryStateHandler()
 	})
 
-	Context("getImageReference", func() {
+	Context("toOCI", func() {
 		It("should resolve an ociArtifact access", func() {
 			configs, _ := renderImageReferences(testdataDir, stateHandler)
 			config := configs["oci"]
@@ -1095,7 +1095,7 @@ func runTestSuiteSpiff(testdataDir string) {
 		stateHandler = template.NewMemoryStateHandler()
 	})
 
-	Context("getImageReference", func() {
+	Context("toOCI", func() {
 		It("should resolve an ociArtifact access", func() {
 			configs, _ := renderImageReferences(testdataDir, stateHandler)
 			config := configs["oci"]

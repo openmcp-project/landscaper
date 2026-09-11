@@ -11,7 +11,7 @@
       config:
         apiVersion: example.test/v1
         kind: Configuration
-        ref: (( &temporary( getImageReference(getResource(cd, "name", "ociimage")) ) ))
+        ref: (( &temporary( toOCI(getResource(cd, "name", "ociimage")) ) ))
         image: (( ref.repository ":" ref.tag ))
         reference: (( ref.reference ))
         # an unset digest is an empty string, not a missing key
@@ -21,7 +21,7 @@
       config:
         apiVersion: example.test/v1
         kind: Configuration
-        ref: (( &temporary( getImageReference(getResource(cd, "name", "blobimage")) ) ))
+        ref: (( &temporary( toOCI(getResource(cd, "name", "blobimage")) ) ))
         image: (( ref.repository "@" ref.digest ))
         reference: (( ref.reference ))
         tag: (( ref.tag ))

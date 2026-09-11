@@ -76,7 +76,7 @@ func LandscaperTplFuncMap(blueprint *blueprints.Blueprint,
 		"getResourceContent":   getResourceContentGoFunc(componentVersion),
 		"getResource":          getResourceGoFunc(cd),
 		"getResources":         getResourcesGoFunc(cd),
-		"getImageReference":    getImageReferenceGoFunc(componentVersion),
+		"toOCI":                toOCIGoFunc(componentVersion),
 		"getComponent":         getComponentGoFunc(cd, cdList, ocmSchemaVersion),
 		"getRepositoryContext": getEffectiveRepositoryContextGoFunc,
 
@@ -304,9 +304,9 @@ func getResourceGoFunc(cd *types.ComponentDescriptor) func(args ...interface{}) 
 	}
 }
 
-// getImageReferenceGoFunc returns a function that turns the access of a resource, as
+// toOCIGoFunc returns a function that turns the access of a resource, as
 // returned by getResource, into an OCI reference.
-func getImageReferenceGoFunc(cv model.ComponentVersion) func(resource map[string]interface{}) (map[string]interface{}, error) {
+func toOCIGoFunc(cv model.ComponentVersion) func(resource map[string]interface{}) (map[string]interface{}, error) {
 	return func(resource map[string]interface{}) (map[string]interface{}, error) {
 		ref, err := lstmpl.ResolveImageReference(cv, resource)
 		if err != nil {

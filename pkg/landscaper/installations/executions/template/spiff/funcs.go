@@ -48,7 +48,7 @@ func LandscaperSpiffFuncs(blueprint *blueprints.Blueprint, functions spiffing.Fu
 	functions.RegisterFunction("getResource", spiffResolveResources(cd))
 	functions.RegisterFunction("getResourceKey", spiffGetResourceKey(componentVersion))
 	functions.RegisterFunction("getResourceContent", spiffGetResourceContent(componentVersion))
-	functions.RegisterFunction("getImageReference", spiffGetImageReference(componentVersion))
+	functions.RegisterFunction("toOCI", spiffToOCI(componentVersion))
 	functions.RegisterFunction("getComponent", spiffResolveComponent(cd, cdList, ocmSchemaVersion))
 	functions.RegisterFunction("parseOCIRef", parseOCIReference)
 	functions.RegisterFunction("ociRefRepo", getOCIReferenceRepository)
@@ -290,22 +290,22 @@ func spiffResolveComponent(cd *types.ComponentDescriptor, cdList *types.Componen
 	}
 }
 
-// spiffGetImageReference returns a function that turns the access of a resource, as
+// spiffToOCI returns a function that turns the access of a resource, as
 // returned by getResource, into an OCI reference.
-func spiffGetImageReference(cv model.ComponentVersion) dynaml.Function {
+func spiffToOCI(cv model.ComponentVersion) dynaml.Function {
 	return func(arguments []interface{}, binding dynaml.Binding) (interface{}, dynaml.EvaluationInfo, bool) {
 		info := dynaml.DefaultInfo()
 		if len(arguments) != 1 {
-			return info.Error("templating function getImageReference expects 1 argument, namely a resource")
+			return info.Error("templating function toOCI expects 1 argument, namely a resource")
 		}
 
 		data, err := spiffyaml.ValueToJSON(arguments[0])
 		if err != nil {
-			return info.Error("templating function getImageReference expects a resource as argument: %w", err)
+			return info.Error("templating function toOCI expects a resource as argument: %w", err)
 		}
 		resource := map[string]interface{}{}
 		if err := json.Unmarshal(data, &resource); err != nil {
-			return info.Error("templating function getImageReference expects a resource as argument: %w", err)
+			return info.Error("templating function toOCI expects a resource as argument: %w", err)
 		}
 
 		ref, err := template.ResolveImageReference(cv, resource)
