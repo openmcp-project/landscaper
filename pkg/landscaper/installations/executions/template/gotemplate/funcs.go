@@ -76,6 +76,7 @@ func LandscaperTplFuncMap(blueprint *blueprints.Blueprint,
 		"getResourceContent":   getResourceContentGoFunc(componentVersion),
 		"getResource":          getResourceGoFunc(cd),
 		"getResources":         getResourcesGoFunc(cd),
+		"toOCI":                toOCIGoFunc(componentVersion),
 		"getComponent":         getComponentGoFunc(cd, cdList, ocmSchemaVersion),
 		"getRepositoryContext": getEffectiveRepositoryContextGoFunc,
 
@@ -295,17 +296,38 @@ func getResourceGoFunc(cd *types.ComponentDescriptor) func(args ...interface{}) 
 		}
 
 		// resources must be at least one, otherwise an error will be thrown
-		data, err := json.Marshal(resources[0])
+		parsedResource, err := toMap(resources[0])
 		if err != nil {
-			panic(err)
-		}
-
-		parsedResource := map[string]interface{}{}
-		if err := json.Unmarshal(data, &parsedResource); err != nil {
 			panic(err)
 		}
 		return parsedResource
 	}
+}
+
+// toOCIGoFunc returns a function that turns the access of a resource, as
+// returned by getResource, into an OCI reference.
+func toOCIGoFunc(cv model.ComponentVersion) func(resource map[string]interface{}) (map[string]interface{}, error) {
+	return func(resource map[string]interface{}) (map[string]interface{}, error) {
+		ref, err := lstmpl.ResolveImageReference(cv, resource)
+		if err != nil {
+			return nil, fmt.Errorf("resource %q: %w", resource["name"], err)
+		}
+		return toMap(ref)
+	}
+}
+
+// toMap converts v to a generic map by a JSON round trip, so templates see the
+// JSON field names.
+func toMap(v interface{}) (map[string]interface{}, error) {
+	data, err := json.Marshal(v)
+	if err != nil {
+		return nil, err
+	}
+	out := map[string]interface{}{}
+	if err := json.Unmarshal(data, &out); err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func getEffectiveRepositoryContextGoFunc(arg interface{}) map[string]interface{} {
