@@ -650,7 +650,16 @@ func (c *client) getResolverForRef(ctx context.Context, ref string, scopes ...st
 	httpClient := c.getHttpClient()
 	httpClient.Transport = trp
 	return docker.NewResolver(docker.ResolverOptions{
-		Client: httpClient,
+		Hosts: func(host string) ([]docker.RegistryHost, error) {
+			hosts, err := c.getHostConfig(host)
+			if err != nil {
+				return nil, err
+			}
+			for i := range hosts {
+				hosts[i].Client = httpClient
+			}
+			return hosts, nil
+		},
 	}), nil
 }
 
