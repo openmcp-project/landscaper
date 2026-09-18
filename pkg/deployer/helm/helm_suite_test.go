@@ -813,7 +813,7 @@ var _ = Describe("Template", func() {
 
 			helmConfig := &helmv1alpha1.ProviderConfiguration{
 				Chart:           chartAccess,
-				Name:            "test",
+				Name:            "helm-timeout-real",
 				Namespace:       "some-namespace",
 				CreateNamespace: true,
 			}
