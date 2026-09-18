@@ -184,7 +184,19 @@ var _ = Describe("GetChart", func() {
 			// 5. fetch another one removing the first
 			time.Sleep(time.Duration(10) * time.Millisecond)
 
-			newMaxSize := int64(100000)
+			// Compute max size dynamically: allow 2 charts of the larger observed size but not 3.
+			// chart1 (v3.29.0) is the oldest (smaller version); chart4 (v4.0.17) is newer.
+			// We set max = 2 * largest_single_entry + a small buffer, so:
+			//   chart4 + chart5(≈chart4) <= max  →  both fit after evicting chart1
+			//   chart1 + chart4 + chart5 > max    →  chart1 is evicted (chart1 > 1000 bytes, asserted above)
+			var maxEntrySize int64
+			for _, entry := range cacheEntries4 {
+				b, _ := entry.GetEntries()
+				if int64(len(b)) > maxEntrySize {
+					maxEntrySize = int64(len(b))
+				}
+			}
+			newMaxSize := maxEntrySize*2 + 1000
 			helmChartCache.SetMaxSizeInByte(newMaxSize)
 			chartAccess5 := &helmv1alpha1.Chart{
 				Ref: "europe-docker.pkg.dev/sap-gcp-cp-k8s-stable-hub/landscaper-examples/tutorials/charts/ingress-nginx:4.0.18",
