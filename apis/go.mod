@@ -1,6 +1,6 @@
 module github.com/openmcp-project/landscaper/apis
 
-go 1.26.6
+go 1.27.0
 
 require (
 	github.com/onsi/ginkgo/v2 v2.32.2
@@ -11,7 +11,7 @@ require (
 	k8s.io/apiextensions-apiserver v0.37.0
 	k8s.io/apimachinery v0.37.0
 	k8s.io/client-go v0.37.0
-	k8s.io/kube-openapi v0.0.0-20260721132016-d427ff9ee9ad
+	k8s.io/kube-openapi v0.0.0-20260911184034-7970a1e230da
 	k8s.io/utils v0.0.0-20260707023825-cf1189d6abe3
 	sigs.k8s.io/yaml v1.6.0
 )
