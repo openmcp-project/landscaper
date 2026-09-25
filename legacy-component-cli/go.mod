@@ -3,7 +3,7 @@ module github.com/openmcp-project/landscaper/legacy-component-cli
 go 1.27.1
 
 require (
-	github.com/containerd/containerd v1.7.35
+	github.com/containerd/containerd v1.7.36
 	github.com/distribution/reference v0.6.0
 	github.com/docker/cli v29.7.2+incompatible
 	github.com/drone/envsubst v1.0.3
