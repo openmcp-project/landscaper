@@ -18,7 +18,7 @@ require (
 	github.com/mandelsoft/spiff v1.7.0-beta-9
 	github.com/mandelsoft/vfs v0.4.5-0.20250514111339-d7b067920e91
 	github.com/onsi/ginkgo/v2 v2.33.0
-	github.com/onsi/gomega v1.43.0
+	github.com/onsi/gomega v1.43.1
 	github.com/opencontainers/go-digest v1.0.0
 	github.com/openmcp-project/landscaper/apis v1.4.1
 	github.com/openmcp-project/landscaper/controller-utils v1.4.1
@@ -43,7 +43,7 @@ require (
 	k8s.io/code-generator v0.37.0
 	k8s.io/utils v0.0.0-20260707023825-cf1189d6abe3
 	ocm.software/ocm v0.50.0
-	sigs.k8s.io/controller-runtime v0.25.0
+	sigs.k8s.io/controller-runtime v0.25.1
 	sigs.k8s.io/yaml v1.6.0
 )
 
@@ -399,7 +399,7 @@ require (
 	k8s.io/component-base v0.37.0 // indirect
 	k8s.io/gengo/v2 v2.0.0-20260408192533-25e2208e0dc3 // indirect
 	k8s.io/klog/v2 v2.140.0 // indirect
-	k8s.io/kube-openapi v0.0.0-20260721132016-d427ff9ee9ad // indirect
+	k8s.io/kube-openapi v0.0.0-20260911184034-7970a1e230da // indirect
 	k8s.io/kubectl v0.37.0 // indirect
 	k8s.io/streaming v0.37.0 // indirect
 	oras.land/oras-go/v2 v2.6.2 // indirect
@@ -409,4 +409,5 @@ require (
 	sigs.k8s.io/randfill v1.0.0 // indirect
 	sigs.k8s.io/release-utils v0.12.4 // indirect
 	sigs.k8s.io/structured-merge-diff/v6 v6.4.2 // indirect
+	sigs.k8s.io/structured-merge-diff/v7 v7.0.0 // indirect
 )
