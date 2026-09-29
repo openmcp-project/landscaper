@@ -9,13 +9,13 @@ require (
 	// this old ginkgo v1 is imported by github.com/mandelsoft/vfs v0.4.4
 	github.com/onsi/ginkgo v1.16.5
 	github.com/onsi/ginkgo/v2 v2.33.0
-	github.com/onsi/gomega v1.43.0
+	github.com/onsi/gomega v1.43.1
 	github.com/opencontainers/go-digest v1.0.0
 	github.com/opencontainers/image-spec v1.1.1
 	github.com/xeipuuv/gojsonschema v1.2.0
 	golang.org/x/lint v0.0.0-20241112194109-818c5a804067
-	k8s.io/apimachinery v0.37.0
-	k8s.io/code-generator v0.37.0
+	k8s.io/apimachinery v0.37.1
+	k8s.io/code-generator v0.37.1
 	sigs.k8s.io/yaml v1.6.0
 )
 
