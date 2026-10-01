@@ -144,7 +144,7 @@ OCM_VERSION ?= v0.51.0
 # renovate: datasource=github-releases depName=golang/mock
 MOCKGEN_VERSION ?= v1.6.0
 # renovate: datasource=github-releases depName=distribution/distribution
-REGISTRY_VERSION ?= v3.1.1
+REGISTRY_VERSION ?= v3.1.2
 # This cannot be handled properly e.g. with renovate, because the controller-runtime maintainers refuse to tag the
 # setup-envtest module (https://github.com/kubernetes-sigs/controller-runtime/issues/2720)
 SETUP_ENVTEST_VERSION ?= release-0.21
