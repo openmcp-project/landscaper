@@ -5,7 +5,7 @@ go 1.27.2
 require (
 	github.com/containerd/containerd v1.7.36
 	github.com/distribution/reference v0.6.0
-	github.com/docker/cli v29.9.0+incompatible
+	github.com/docker/cli v29.9.1+incompatible
 	github.com/drone/envsubst v1.0.3
 	github.com/ghodss/yaml v1.0.0
 	github.com/go-logr/logr v1.4.4
