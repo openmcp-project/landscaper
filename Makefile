@@ -33,11 +33,11 @@ revendor: ## Runs 'go mod tidy' for all go modules in this repo.
 	@task generate:tidy
 
 .PHONY: format
-format: goimports ## Runs the formatter.
-	@@FORMATTER=$(FORMATTER) $(REPO_ROOT)/hack/format.sh $(CODE_DIRS)
+format: ## Runs the formatter.
+	@task generate:format
 
 .PHONY: check
-check: revendor golangci-lint jq goimports ## Runs linter, 'go vet', and checks if the formatter has been run.
+check: revendor jq ## Runs linter, 'go vet', and checks if the formatter has been run.
 	@test "$(SKIP_DOCS_INDEX_CHECK)" = "true" || \
 		JQ=$(JQ) $(REPO_ROOT)/hack/verify-docs-index.sh
 	@task validate:lint
@@ -119,8 +119,6 @@ LOCALBIN ?= $(REPO_ROOT)/bin
 CODE_GEN_SCRIPT ?= $(LOCALBIN)/kube_codegen.sh
 CONTROLLER_GEN ?= $(LOCALBIN)/controller-gen
 ENVTEST ?= $(LOCALBIN)/setup-envtest
-FORMATTER ?= $(LOCALBIN)/goimports
-LINTER ?= $(LOCALBIN)/golangci-lint
 OCM ?= $(LOCALBIN)/ocm
 API_REF_GEN ?= $(LOCALBIN)/crd-ref-docs
 MOCKGEN ?= $(LOCALBIN)/mockgen
@@ -131,10 +129,6 @@ REGISTRY_BINARY ?= $(LOCALBIN)/registry
 CODE_GEN_VERSION ?= $(shell  $(REPO_ROOT)/hack/extract-module-version.sh k8s.io/code-generator)
 # renovate: datasource=github-releases depName=kubernetes-sigs/controller-tools
 CONTROLLER_TOOLS_VERSION ?= v0.23.0
-# renovate: datasource=github-tags depName=golang/tools
-FORMATTER_VERSION ?= v0.52.0
-# renovate: datasource=github-releases depName=golangci/golangci-lint
-LINTER_VERSION ?= v2.15.0
 # renovate: datasource=github-releases depName=elastic/crd-ref-docs
 API_REF_GEN_VERSION ?= v0.3.0
 # renovate: datasource=github-releases depName=jqlang/jq
@@ -165,19 +159,6 @@ controller-gen: localbin ## Download controller-gen locally if necessary. If wro
 	@test -s $(CONTROLLER_GEN) && $(CONTROLLER_GEN) --version | grep -q $(CONTROLLER_TOOLS_VERSION) || \
 	( echo "Installing controller-gen $(CONTROLLER_TOOLS_VERSION) ..."; \
 	GOBIN=$(LOCALBIN) go install sigs.k8s.io/controller-tools/cmd/controller-gen@$(CONTROLLER_TOOLS_VERSION) )
-
-.PHONY: goimports
-goimports: localbin ## Download goimports locally if necessary. If wrong version is installed, it will be overwritten.
-	@test -s $(FORMATTER) && test -s $(LOCALBIN)/goimports_version && cat $(LOCALBIN)/goimports_version | grep -q $(FORMATTER_VERSION) || \
-	( echo "Installing goimports $(FORMATTER_VERSION) ..."; \
-	GOBIN=$(LOCALBIN) go install golang.org/x/tools/cmd/goimports@$(FORMATTER_VERSION) && \
-	echo $(FORMATTER_VERSION) > $(LOCALBIN)/goimports_version )
-
-.PHONY: golangci-lint
-golangci-lint: localbin ## Download golangci-lint locally if necessary. If wrong version is installed, it will be overwritten.
-	@test -s $(LINTER) && $(LINTER) --version | grep -q $(subst v,,$(LINTER_VERSION)) || \
-	( echo "Installing golangci-lint $(LINTER_VERSION) ..."; \
-	curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(LOCALBIN) $(LINTER_VERSION) )
 
 .PHONY: envtest
 envtest: localbin ## Download envtest-setup locally.
