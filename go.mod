@@ -20,10 +20,10 @@ require (
 	github.com/onsi/ginkgo/v2 v2.33.1
 	github.com/onsi/gomega v1.44.0
 	github.com/opencontainers/go-digest v1.0.0
-	github.com/openmcp-project/landscaper/apis v1.4.2
-	github.com/openmcp-project/landscaper/controller-utils v1.4.2
-	github.com/openmcp-project/landscaper/legacy-component-cli v1.4.2
-	github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go v1.4.2
+	github.com/openmcp-project/landscaper/apis v1.4.3
+	github.com/openmcp-project/landscaper/controller-utils v1.4.3
+	github.com/openmcp-project/landscaper/legacy-component-cli v1.4.3
+	github.com/openmcp-project/landscaper/legacy-component-spec/bindings-go v1.4.3
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus/client_golang v1.25.0
 	github.com/robfig/cron/v3 v3.0.1
