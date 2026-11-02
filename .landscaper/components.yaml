@@ -3,14 +3,6 @@ components:
     version: ${VERSION}
     provider:
       name: ${PROVIDER}
-    sources:
-      - name: main
-        type: git
-        version: ${VERSION}
-        access:
-          type: github
-          commit: ${COMMIT_SHA}
-          repoUrl: github.com/openmcp-project/landscaper
     resources:
       - name: helm-deployer-blueprint
         type: landscaper.gardener.cloud/blueprint
@@ -38,14 +30,6 @@ components:
     version: ${VERSION}
     provider:
       name: ${PROVIDER}
-    sources:
-      - name: main
-        type: git
-        version: ${VERSION}
-        access:
-          type: github
-          commit: ${COMMIT_SHA}
-          repoUrl: github.com/openmcp-project/landscaper
     resources:
       - name: manifest-deployer-blueprint
         type: landscaper.gardener.cloud/blueprint
@@ -73,14 +57,6 @@ components:
     version: ${VERSION}
     provider:
       name: ${PROVIDER}
-    sources:
-      - name: main
-        type: git
-        version: ${VERSION}
-        access:
-          type: github
-          commit: ${COMMIT_SHA}
-          repoUrl: github.com/openmcp-project/landscaper
     resources:
       - name: container-deployer-blueprint
         type: landscaper.gardener.cloud/blueprint
@@ -124,14 +100,6 @@ components:
     version: ${VERSION}
     provider:
       name: ${PROVIDER}
-    sources:
-      - name: main
-        type: git
-        version: ${VERSION}
-        access:
-          type: github
-          commit: ${COMMIT_SHA}
-          repoUrl: github.com/openmcp-project/landscaper
     resources:
       - name: mock-deployer-blueprint
         type: landscaper.gardener.cloud/blueprint
@@ -159,13 +127,6 @@ components:
     version: ${VERSION}
     provider:
       name: ${PROVIDER}
-    sources:
-      - name: main
-        type: git
-        access:
-          type: github
-          commit: ${COMMIT_SHA}
-          repoUrl: github.com/openmcp-project/landscaper
     componentReferences:
       - name: helm-deployer
         componentName: github.com/openmcp-project/landscaper/helm-deployer

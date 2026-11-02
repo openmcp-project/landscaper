@@ -28,7 +28,6 @@ echo "> Create Component Version ${EFFECTIVE_VERSION}"
 
 PROVIDER=$1
 COMPONENT_ARCHIVE_PATH="$(mktemp -d)/ctf"
-COMMIT_SHA=$(git rev-parse HEAD)
 
 LANDSCAPER_CHART_PATH="${PROJECT_ROOT}/charts/landscaper"
 LANDSCAPER_CONTROLLER_RBAC_CHART_PATH="${PROJECT_ROOT}/charts/landscaper/charts/rbac"
@@ -41,7 +40,6 @@ MOCK_DEPLOYER_CHART_PATH="${PROJECT_ROOT}/charts/mock-deployer"
 
 "$OCM" add componentversions --create --file ${COMPONENT_ARCHIVE_PATH} ${PROJECT_ROOT}/.landscaper/components.yaml \
   -- VERSION=${EFFECTIVE_VERSION} \
-     COMMIT_SHA=${COMMIT_SHA} \
      PROVIDER=landscaper.gardener.cloud \
      LANDSCAPER_CHART_PATH=${LANDSCAPER_CHART_PATH} \
      LANDSCAPER_CONTROLLER_RBAC_CHART_PATH=${LANDSCAPER_CONTROLLER_RBAC_CHART_PATH} \
