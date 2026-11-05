@@ -26,8 +26,8 @@ require (
 	github.com/spf13/pflag v1.0.10
 	go.uber.org/zap v1.28.0
 	golang.org/x/crypto v0.58.0
-	k8s.io/api v0.37.1
-	k8s.io/apimachinery v0.37.1
+	k8s.io/api v0.37.2
+	k8s.io/apimachinery v0.37.2
 	sigs.k8s.io/yaml v1.6.0
 )
 
