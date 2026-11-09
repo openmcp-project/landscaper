@@ -7,7 +7,7 @@ require (
 	github.com/Masterminds/sprig/v3 v3.3.0
 	github.com/cloudflare/cfssl v1.7.1
 	github.com/distribution/reference v0.6.0
-	github.com/docker/cli v29.9.2+incompatible
+	github.com/docker/cli v29.9.3+incompatible
 	github.com/go-logr/logr v1.4.4
 	github.com/golang/mock v1.7.0-rc.1
 	github.com/google/go-containerregistry v0.22.1
