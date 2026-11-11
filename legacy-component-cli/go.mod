@@ -23,7 +23,7 @@ require (
 	github.com/prometheus/client_golang v1.25.0
 	github.com/sirupsen/logrus v1.10.2
 	github.com/spf13/cobra v1.10.2
-	github.com/spf13/pflag v1.0.10
+	github.com/spf13/pflag v1.1.0
 	go.uber.org/zap v1.28.0
 	golang.org/x/crypto v0.58.0
 	k8s.io/api v0.37.2
