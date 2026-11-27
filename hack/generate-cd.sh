@@ -4,7 +4,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
-# Builds and publishes the component versions of landscaper and its deployers.
+# Builds, signs and publishes the component versions of landscaper and its deployers.
 #
 # Environment:
 #   OCM                   OCM CLI binary
@@ -19,6 +19,7 @@ if [[ -z ${1:-} ]]; then
 fi
 
 PROJECT_ROOT="$(realpath "$(dirname "$0")/..")"
+OCM_CONFIG="$PROJECT_ROOT/.landscaper/ocm-config.yaml"
 TARGET="$1"
 COMPONENTS=(
   github.com/openmcp-project/landscaper
@@ -57,14 +58,18 @@ echo "> Create Component Version ${VERSION}"
 
 COMPONENT_ARCHIVE_PATH="$(mktemp -d)/ctf"
 
-"$OCM" add cv \
+"$OCM" add cv --config "$OCM_CONFIG" \
   --constructor "$PROJECT_ROOT/.landscaper/components.yaml" \
   --working-directory "$PROJECT_ROOT" \
   --repository "ctf::$COMPONENT_ARCHIVE_PATH"
 
+for component in "${COMPONENTS[@]}"; do
+  "$OCM" sign cv --config "$OCM_CONFIG" "ctf::$COMPONENT_ARCHIVE_PATH//$component:$VERSION"
+done
+
 echo "> Transfer Component version ${VERSION} to ${TARGET}"
 for component in "${COMPONENTS[@]}"; do
-  "$OCM" transfer cv "ctf::$COMPONENT_ARCHIVE_PATH//$component:$VERSION" "$TARGET"
+  "$OCM" transfer cv --config "$OCM_CONFIG" "ctf::$COMPONENT_ARCHIVE_PATH//$component:$VERSION" "$TARGET"
 done
 
 echo "> Remote Component Version Landscaper"

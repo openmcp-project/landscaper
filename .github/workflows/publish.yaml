@@ -8,6 +8,7 @@ on:
 
 permissions:
   packages: write
+  id-token: write # sign the images and component versions with the workflow identity
 
 jobs:
   release_tag:
@@ -79,7 +80,12 @@ jobs:
         with:
           version: 3.x
 
-      - name: Build and Push Images
+      - name: Install cosign
+        uses: sigstore/cosign-installer@881c63bd87e38389154debd8331404ce7ca8a3ab # v4.1.4
+        with:
+          cosign-release: v3.1.4
+
+      - name: Build, Push and Sign Images
         run: |
           # TODO: when code generation is fixed, use task build:all
           # creates go and docker builds
@@ -89,6 +95,6 @@ jobs:
           # creates only docker images, needs go build in advance
           # task build:img:build-raw
 
-      - name: Build and Push OCM Component
+      - name: Build, Sign and Push OCM Component
         run: |
           make component

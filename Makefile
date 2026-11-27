@@ -88,11 +88,11 @@ docker-images: build ## Builds images for all controllers locally. The images ar
 	@PLATFORMS=$(PLATFORMS) $(REPO_ROOT)/hack/docker-build-multi.sh
 
 .PHONY: push-images
-push-images: build ## Builds multi-platform images for all controllers, and pushes them.
+push-images: build ## Builds multi-platform images for all controllers, pushes them and signs them with cosign.
 	@PLATFORMS=$(PLATFORMS) PUSH_IMAGES=true $(REPO_ROOT)/hack/docker-build-multi.sh
 
 .PHONY: component
-component: ocm ## Builds and publishes the component versions. Requires push-images to have run before.
+component: ocm ## Builds, signs and publishes the component versions. Requires push-images to have run before.
 	@OCM=$(OCM) $(REPO_ROOT)/hack/generate-cd.sh $(OCM_REGISTRY)
 
 .PHONY: build-resources ## Wrapper for 'make docker-images component'.

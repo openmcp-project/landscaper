@@ -6,6 +6,7 @@ on:
 permissions:
   contents: read
   packages: write
+  id-token: write # sign the images and component versions with the workflow identity
 
 jobs:
   build:
@@ -57,12 +58,17 @@ jobs:
           # make verify
           task validate:vet
 
-      - name: Build and Push Images
+      - name: Install cosign
+        uses: sigstore/cosign-installer@881c63bd87e38389154debd8331404ce7ca8a3ab # v4.1.4
+        with:
+          cosign-release: v3.1.4
+
+      - name: Build, Push and Sign Images
         run: make push-images
         env:
           OVERWRITE_COMPONENTS: "true" # dev versions are rebuilt on the same tag
 
-      - name: Build and Push OCM Component
+      - name: Build, Sign and Push OCM Component
         run: make component
         env:
           OVERWRITE_COMPONENTS: "true" # dev versions are rebuilt on the same tag

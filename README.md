@@ -12,7 +12,7 @@ _Landscaper_ provides the means to describe, install and maintain cloud-native l
 you to express an order of building blocks, connect output with input data and ultimately, bring your landscape to live.
 
 What does a 'landscape' consist of? In this context it refers not only to application bundles but also includes
-infrastructure components in public, private and hybrid environments. 
+infrastructure components in public, private and hybrid environments.
 
 While tools like Terraform, Helm or native Kubernetes resources work well in their specific problem space, it has been a
 manual task to connect them so far. Landscaper solves this specific problem and offers a fully-automated installation
@@ -34,6 +34,39 @@ This repository is a fork of https://github.com/gardener/landscaper. The support
 Maintainenance and development of the Landscaper project will continue in the https://github.com/openmcp-project/landscaper repository.
 This doesn't affect any feature or functionality of the Landscaper project.
 OCI images and OCM components can be consumed directly from within this repository GitHub Container Registry.
+
+## Verifying a Release
+
+The images and the component versions are signed keyless with [Sigstore](https://www.sigstore.dev/) by the publish workflow, for the release tag `<version>`.
+
+Verify an image with [cosign](https://docs.sigstore.dev/cosign/system_config/installation/). Replace `<image>` with one of `landscaper-controller`, `landscaper-webhooks-server`, `container-deployer-controller`, `container-deployer-init`, `container-deployer-wait`, `helm-deployer-controller`, `manifest-deployer-controller` or `mock-deployer-controller`:
+
+```bash
+cosign verify \
+  --certificate-identity https://github.com/openmcp-project/landscaper/.github/workflows/publish.yaml@refs/tags/<version> \
+  --certificate-oidc-issuer https://token.actions.githubusercontent.com \
+  ghcr.io/openmcp-project/images/<image>:<version>
+```
+
+Verify a component version with the [OCM CLI](https://ocm.software). The expected signer goes into an OCM configuration file:
+
+```yaml
+# verify.yaml
+type: generic.config.ocm.software/v1
+configurations:
+  - type: signing.config.ocm.software/v1alpha1
+    signature: default
+    verifier:
+      type: SigstoreVerificationConfiguration/v1alpha1
+      certificateIdentity: https://github.com/openmcp-project/landscaper/.github/workflows/publish.yaml@refs/tags/<version>
+      certificateOIDCIssuer: https://token.actions.githubusercontent.com
+```
+
+```bash
+ocm verify cv --config verify.yaml ghcr.io/openmcp-project/components//github.com/openmcp-project/landscaper:<version>
+```
+
+The commands fail if the artifact is unsigned or was signed by anything other than that workflow for the tag `<version>`. The deployer component versions are signed the same way, replace the component name to verify one of them.
 
 ## Support, Feedback, Contributing
 

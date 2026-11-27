@@ -8,7 +8,7 @@ set -euo pipefail
 
 # Call with PLATFORMS="os/arch,os/arch" to specify target platforms, for example: linux/amd64,linux/arm64
 # Call optionally with NO_LATEST_TAG=1 to skip tagging the images with "latest"
-# Call with PUSH_IMAGES=true to push one multi-platform image per controller
+# Call with PUSH_IMAGES=true to push one multi-platform image per controller and sign it with cosign
 
 echo "PLATFORMS=${PLATFORMS}"
 echo "NO_LATEST_TAG=${NO_LATEST_TAG:-not set}"
@@ -24,7 +24,7 @@ if ! docker buildx ls | grep "$DOCKER_BUILDER_NAME" >/dev/null; then
 fi
 
 if [[ "${PUSH_IMAGES:-false}" == "true" ]]; then
-  # Local builds must not push, so this is opt-in.
+  # Local builds must not push or sign, so this is opt-in.
   for img in landscaper-controller landscaper-webhooks-server container-deployer-controller container-deployer-init container-deployer-wait helm-deployer-controller manifest-deployer-controller mock-deployer-controller; do
     ref="${IMAGE_REGISTRY:-ghcr.io/openmcp-project/images}/${img}:${EFFECTIVE_VERSION}"
     if [[ "${OVERWRITE_COMPONENTS:-false}" != "true" ]] && docker buildx imagetools inspect "$ref" >/dev/null 2>&1; then
@@ -32,6 +32,8 @@ if [[ "${PUSH_IMAGES:-false}" == "true" ]]; then
       exit 1
     fi
     docker buildx build --builder ${DOCKER_BUILDER_NAME} --push --build-arg EFFECTIVE_VERSION=${EFFECTIVE_VERSION} --platform ${PLATFORMS} -t "$ref" -f Dockerfile --target ${img} "${PROJECT_ROOT}"
+    digest=$(docker buildx imagetools inspect "$ref" --format '{{.Manifest.Digest}}')
+    cosign sign --yes "${ref%:*}@${digest}"
   done
   docker buildx rm "$DOCKER_BUILDER_NAME"
   exit 0
