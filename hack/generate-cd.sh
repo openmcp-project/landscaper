@@ -4,66 +4,68 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+# Builds and publishes the component versions of landscaper and its deployers.
+#
+# Environment:
+#   OCM                   OCM CLI binary
+#   OVERWRITE_COMPONENTS  "true" replaces existing component versions
+
 set -euo pipefail
 
-PROJECT_ROOT="$(realpath $(dirname $0)/..)"
-if [[ -z ${LOCALBIN:-} ]]; then
-  LOCALBIN="$PROJECT_ROOT/bin"
-fi
-if [[ -z ${OCM:-} ]]; then
-  OCM="$LOCALBIN/ocm"
+die() { echo "$@" >&2; exit 1; }
+
+if [[ -z ${1:-} ]]; then
+  die "provider argument is required"
 fi
 
-if [ -z $1 ]; then
-  echo "provider argument is required"
-  exit 1
-fi
+PROJECT_ROOT="$(realpath "$(dirname "$0")/..")"
+TARGET="$1"
+COMPONENTS=(
+  github.com/openmcp-project/landscaper
+  github.com/openmcp-project/landscaper/helm-deployer
+  github.com/openmcp-project/landscaper/manifest-deployer
+  github.com/openmcp-project/landscaper/container-deployer
+  github.com/openmcp-project/landscaper/mock-deployer
+)
 
-EFFECTIVE_VERSION="$(${PROJECT_ROOT}/hack/get-version.sh)"
+export VERSION="$("$PROJECT_ROOT/hack/get-version.sh")"
+export PROVIDER="${PROVIDER:-$TARGET}"
+export IMAGE_REGISTRY="${IMAGE_REGISTRY:-ghcr.io/openmcp-project/images}"
+export HELM_DEPLOYER_CHART_PATH=./charts/helm-deployer
+export MANIFEST_DEPLOYER_CHART_PATH=./charts/manifest-deployer
+export CONTAINER_DEPLOYER_CHART_PATH=./charts/container-deployer
+export MOCK_DEPLOYER_CHART_PATH=./charts/mock-deployer
+export LANDSCAPER_CHART_PATH=./charts/landscaper
+export LANDSCAPER_CONTROLLER_RBAC_CHART_PATH=./charts/landscaper/charts/rbac
+export LANDSCAPER_CONTROLLER_DEPLOYMENT_CHART_PATH=./charts/landscaper/charts/landscaper
+
+# ocm replaces existing versions and has no flag to prevent it.
+for component in "${COMPONENTS[@]}"; do
+  target="$TARGET//$component:$VERSION"
+  if output="$("$OCM" get cv "$target" 2>&1)"; then
+    [[ "${OVERWRITE_COMPONENTS:-false}" == "true" ]] || die "$target already exists. Set OVERWRITE_COMPONENTS to 'true' to overwrite it."
+  elif [[ "$output" != *"not found"* ]]; then
+    echo "$output" >&2
+    die "Cannot check whether $target exists."
+  fi
+done
 
 echo -n "> Updating helm chart version"
-${PROJECT_ROOT}/hack/update-helm-chart-version.sh
+"$PROJECT_ROOT/hack/update-helm-chart-version.sh"
 
-echo "> Create Component Version ${EFFECTIVE_VERSION}"
+echo "> Create Component Version ${VERSION}"
 
-PROVIDER=$1
 COMPONENT_ARCHIVE_PATH="$(mktemp -d)/ctf"
 
-LANDSCAPER_CHART_PATH="${PROJECT_ROOT}/charts/landscaper"
-LANDSCAPER_CONTROLLER_RBAC_CHART_PATH="${PROJECT_ROOT}/charts/landscaper/charts/rbac"
-LANDSCAPER_CONTROLLER_DEPLOYMENT_CHART_PATH="${PROJECT_ROOT}/charts/landscaper/charts/landscaper"
-LANDSCAPER_AGENT_CHART_PATH="${PROJECT_ROOT}/charts/landscaper-agent"
-HELM_DEPLOYER_CHART_PATH="${PROJECT_ROOT}/charts/helm-deployer"
-MANIFEST_DEPLOYER_CHART_PATH="${PROJECT_ROOT}/charts/manifest-deployer"
-CONTAINER_DEPLOYER_CHART_PATH="${PROJECT_ROOT}/charts/container-deployer"
-MOCK_DEPLOYER_CHART_PATH="${PROJECT_ROOT}/charts/mock-deployer"
+"$OCM" add cv \
+  --constructor "$PROJECT_ROOT/.landscaper/components.yaml" \
+  --working-directory "$PROJECT_ROOT" \
+  --repository "ctf::$COMPONENT_ARCHIVE_PATH"
 
-"$OCM" add componentversions --create --file ${COMPONENT_ARCHIVE_PATH} ${PROJECT_ROOT}/.landscaper/components.yaml \
-  -- VERSION=${EFFECTIVE_VERSION} \
-     PROVIDER=landscaper.gardener.cloud \
-     LANDSCAPER_CHART_PATH=${LANDSCAPER_CHART_PATH} \
-     LANDSCAPER_CONTROLLER_RBAC_CHART_PATH=${LANDSCAPER_CONTROLLER_RBAC_CHART_PATH} \
-     LANDSCAPER_CONTROLLER_DEPLOYMENT_CHART_PATH=${LANDSCAPER_CONTROLLER_DEPLOYMENT_CHART_PATH} \
-     LANDSCAPER_AGENT_CHART_PATH=${LANDSCAPER_AGENT_CHART_PATH} \
-     HELM_DEPLOYER_CHART_PATH=${HELM_DEPLOYER_CHART_PATH} \
-     MANIFEST_DEPLOYER_CHART_PATH=${MANIFEST_DEPLOYER_CHART_PATH} \
-     CONTAINER_DEPLOYER_CHART_PATH=${CONTAINER_DEPLOYER_CHART_PATH} \
-     MOCK_DEPLOYER_CHART_PATH=${MOCK_DEPLOYER_CHART_PATH}
-
-echo "> Transfer Component version ${EFFECTIVE_VERSION} to ${PROVIDER}"
-"$OCM" transfer ctf --copy-resources --recursive --overwrite ${COMPONENT_ARCHIVE_PATH} ${PROVIDER}
+echo "> Transfer Component version ${VERSION} to ${TARGET}"
+for component in "${COMPONENTS[@]}"; do
+  "$OCM" transfer cv "ctf::$COMPONENT_ARCHIVE_PATH//$component:$VERSION" "$TARGET"
+done
 
 echo "> Remote Component Version Landscaper"
-"$OCM" get componentversion --repo OCIRegistry::${PROVIDER} "github.com/openmcp-project/landscaper:${EFFECTIVE_VERSION}" -o yaml
-
-echo "> Remote Component Version Helm Deployer"
-"$OCM" get componentversion --repo OCIRegistry::${PROVIDER} "github.com/openmcp-project/landscaper/helm-deployer:${EFFECTIVE_VERSION}" -o yaml
-
-echo "> Remote Component Version Manifest Deployer"
-"$OCM" get componentversion --repo OCIRegistry::${PROVIDER} "github.com/openmcp-project/landscaper/manifest-deployer:${EFFECTIVE_VERSION}" -o yaml
-
-echo "> Remote Component Version Container Deployer"
-"$OCM" get componentversion --repo OCIRegistry::${PROVIDER} "github.com/openmcp-project/landscaper/container-deployer:${EFFECTIVE_VERSION}" -o yaml
-
-echo "> Remote Component Version Mock Deployer"
-"$OCM" get componentversion --repo OCIRegistry::${PROVIDER} "github.com/openmcp-project/landscaper/mock-deployer:${EFFECTIVE_VERSION}" -o yaml
+"$OCM" get cv "$TARGET//github.com/openmcp-project/landscaper:$VERSION" -o yaml

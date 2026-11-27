@@ -79,15 +79,11 @@ jobs:
         with:
           version: 3.x
 
-      - name: Setup OCM
-        id: setup_ocm
-        uses: open-component-model/ocm-setup-action@5755dc5c01c939f7dbba3bb07f9fb9b019a7a2a0 # v1.1.0
-
       - name: Build and Push Images
         run: |
           # TODO: when code generation is fixed, use task build:all
           # creates go and docker builds
-          make docker-images
+          make push-images
           # creates only go builds
           # task build:bin:build-raw
           # creates only docker images, needs go build in advance

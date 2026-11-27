@@ -60,10 +60,14 @@ jobs:
 
       - name: Build and Push Images
         run: |
-          NO_LATEST_TAG=1 make docker-images
+          make push-images
+        env:
+          OVERWRITE_COMPONENTS: "true" # dev versions are rebuilt on the same tag
 
       - name: Build and Push OCM Component
         run: make component
+        env:
+          OVERWRITE_COMPONENTS: "true" # dev versions are rebuilt on the same tag
 
       - name: run integration test
         env:

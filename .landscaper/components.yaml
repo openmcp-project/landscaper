@@ -7,24 +7,21 @@ components:
       - name: helm-deployer-blueprint
         type: landscaper.gardener.cloud/blueprint
         input:
-          type: dir
-          path: ./helm-deployer/blueprint
+          type: Dir/v1
+          path: ./.landscaper/helm-deployer/blueprint
           compress: true
           mediaType: application/vnd.gardener.landscaper.blueprint.v1+tar+gzip
       - name: helm-deployer-chart
         type: helmChart
         input:
-          type: helm
+          type: Helm/v1
           path: ${HELM_DEPLOYER_CHART_PATH}
-          repository: charts/helm-deployer
       - name: helm-deployer-image
         type: ociImage
-        input:
-          type: dockermulti
-          variants:
-            - helm-deployer-controller:${VERSION}-linux-amd64
-            - helm-deployer-controller:${VERSION}-linux-arm64
-          repository: images/helm-deployer-controller
+        version: ${VERSION}
+        access:
+          type: OCIImage/v1
+          imageReference: "${IMAGE_REGISTRY}/helm-deployer-controller:${VERSION}"
 
   - name: github.com/openmcp-project/landscaper/manifest-deployer
     version: ${VERSION}
@@ -34,24 +31,21 @@ components:
       - name: manifest-deployer-blueprint
         type: landscaper.gardener.cloud/blueprint
         input:
-          type: dir
-          path: ./manifest-deployer/blueprint
+          type: Dir/v1
+          path: ./.landscaper/manifest-deployer/blueprint
           compress: true
           mediaType: application/vnd.gardener.landscaper.blueprint.v1+tar+gzip
       - name: manifest-deployer-chart
         type: helmChart
         input:
-          type: helm
+          type: Helm/v1
           path: ${MANIFEST_DEPLOYER_CHART_PATH}
-          repository: charts/manifest-deployer
       - name: manifest-deployer-image
         type: ociImage
-        input:
-          type: dockermulti
-          variants:
-            - manifest-deployer-controller:${VERSION}-linux-amd64
-            - manifest-deployer-controller:${VERSION}-linux-arm64
-          repository: images/manifest-deployer-controller
+        version: ${VERSION}
+        access:
+          type: OCIImage/v1
+          imageReference: "${IMAGE_REGISTRY}/manifest-deployer-controller:${VERSION}"
 
   - name: github.com/openmcp-project/landscaper/container-deployer
     version: ${VERSION}
@@ -61,40 +55,33 @@ components:
       - name: container-deployer-blueprint
         type: landscaper.gardener.cloud/blueprint
         input:
-          type: dir
-          path: ./container-deployer/blueprint
+          type: Dir/v1
+          path: ./.landscaper/container-deployer/blueprint
           compress: true
           mediaType: application/vnd.gardener.landscaper.blueprint.v1+tar+gzip
       - name: container-deployer-chart
         type: helmChart
         input:
-          type: helm
+          type: Helm/v1
           path: ${CONTAINER_DEPLOYER_CHART_PATH}
-          repository: charts/container-deployer
       - name: container-deployer-image
         type: ociImage
-        input:
-          type: dockermulti
-          variants:
-            - container-deployer-controller:${VERSION}-linux-amd64
-            - container-deployer-controller:${VERSION}-linux-arm64
-          repository: images/container-deployer-controller
+        version: ${VERSION}
+        access:
+          type: OCIImage/v1
+          imageReference: "${IMAGE_REGISTRY}/container-deployer-controller:${VERSION}"
       - name: container-init-image
         type: ociImage
-        input:
-          type: dockermulti
-          variants:
-            - container-deployer-init:${VERSION}-linux-amd64
-            - container-deployer-init:${VERSION}-linux-arm64
-          repository: images/container-deployer-init
+        version: ${VERSION}
+        access:
+          type: OCIImage/v1
+          imageReference: "${IMAGE_REGISTRY}/container-deployer-init:${VERSION}"
       - name: container-wait-image
         type: ociImage
-        input:
-          type: dockermulti
-          variants:
-            - container-deployer-wait:${VERSION}-linux-amd64
-            - container-deployer-wait:${VERSION}-linux-arm64
-          repository: images/container-deployer-wait
+        version: ${VERSION}
+        access:
+          type: OCIImage/v1
+          imageReference: "${IMAGE_REGISTRY}/container-deployer-wait:${VERSION}"
 
   - name: github.com/openmcp-project/landscaper/mock-deployer
     version: ${VERSION}
@@ -104,24 +91,21 @@ components:
       - name: mock-deployer-blueprint
         type: landscaper.gardener.cloud/blueprint
         input:
-          type: dir
-          path: ./mock-deployer/blueprint
+          type: Dir/v1
+          path: ./.landscaper/mock-deployer/blueprint
           compress: true
           mediaType: application/vnd.gardener.landscaper.blueprint.v1+tar+gzip
       - name: mock-deployer-chart
         type: helmChart
         input:
-          type: helm
+          type: Helm/v1
           path: ${MOCK_DEPLOYER_CHART_PATH}
-          repository: charts/mock-deployer
       - name: mock-deployer-image
         type: ociImage
-        input:
-          type: dockermulti
-          variants:
-            - mock-deployer-controller:${VERSION}-linux-amd64
-            - mock-deployer-controller:${VERSION}-linux-arm64
-          repository: images/mock-deployer-controller
+        version: ${VERSION}
+        access:
+          type: OCIImage/v1
+          imageReference: "${IMAGE_REGISTRY}/mock-deployer-controller:${VERSION}"
 
   - name: github.com/openmcp-project/landscaper
     version: ${VERSION}
@@ -144,34 +128,27 @@ components:
       - name: landscaper-chart
         type: helmChart
         input:
-          type: helm
+          type: Helm/v1
           path: ${LANDSCAPER_CHART_PATH}
-          repository: charts/landscaper
       - name: landscaper-controller-rbac-chart
         type: helmChart
         input:
-          type: helm
+          type: Helm/v1
           path: ${LANDSCAPER_CONTROLLER_RBAC_CHART_PATH}
-          repository: charts/landscaper-controller-rbac
       - name: landscaper-controller-deployment-chart
         type: helmChart
         input:
-          type: helm
+          type: Helm/v1
           path: ${LANDSCAPER_CONTROLLER_DEPLOYMENT_CHART_PATH}
-          repository: charts/landscaper-controller-deployment
       - name: landscaper-controller
         type: ociImage
-        input:
-          type: dockermulti
-          variants:
-            - landscaper-controller:${VERSION}-linux-amd64
-            - landscaper-controller:${VERSION}-linux-arm64
-          repository: images/landscaper-controller
+        version: ${VERSION}
+        access:
+          type: OCIImage/v1
+          imageReference: "${IMAGE_REGISTRY}/landscaper-controller:${VERSION}"
       - name: landscaper-webhooks-server
         type: ociImage
-        input:
-          type: dockermulti
-          variants:
-            - landscaper-webhooks-server:${VERSION}-linux-amd64
-            - landscaper-webhooks-server:${VERSION}-linux-arm64
-          repository: images/landscaper-webhooks-server
+        version: ${VERSION}
+        access:
+          type: OCIImage/v1
+          imageReference: "${IMAGE_REGISTRY}/landscaper-webhooks-server:${VERSION}"
