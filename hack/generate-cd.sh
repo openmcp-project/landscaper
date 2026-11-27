@@ -69,7 +69,7 @@ done
 
 echo "> Transfer Component version ${VERSION} to ${TARGET}"
 for component in "${COMPONENTS[@]}"; do
-  "$OCM" transfer cv --config "$OCM_CONFIG" "ctf::$COMPONENT_ARCHIVE_PATH//$component:$VERSION" "$TARGET"
+  "$OCM" transfer cv "ctf::$COMPONENT_ARCHIVE_PATH//$component:$VERSION" "$TARGET"
 done
 
 echo "> Remote Component Version Landscaper"
